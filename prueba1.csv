@@ -1,0 +1,7 @@
+Columna1,Columna2,Columna3,Columna4
+True,1,"Prueba1",PruebaA
+True,2,"Prueba2",True
+False,3,"Prueba3",PruebaC
+False,4,"Prueba4",False
+False,5,"Prueba5",False
+True,4,"Prueba4",true
