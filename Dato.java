@@ -1,12 +1,11 @@
 package TP_Integrador_tmp;
 
-
 public class Dato 
 {
    public Object valor;    
 
 
-   
+//Constructor   
 public Dato()
 {
     this.valor = new Object();
