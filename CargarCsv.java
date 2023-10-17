@@ -10,7 +10,7 @@ public class CargarCsv {
 
 public static void cargarDatosDesdeCsvConHead(List<String> header, List<String[]> data, String csvFile, String csvDelimiter) 
 {
-    System.out.println("hola");
+ 
     String line;
 
     try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
