@@ -51,7 +51,7 @@ public class DataFrame {
 
     }
 
-//----------------------------------------------------
+    //----------------------------------------------------
     // CUENTA COLUMNAS
     private void contarColumnas() 
     {
