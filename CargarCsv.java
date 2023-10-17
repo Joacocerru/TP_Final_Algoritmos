@@ -1,6 +1,5 @@
 package TP_Integrador_tmp;
 
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -11,7 +10,7 @@ public class CargarCsv {
 
 public static void cargarDatosDesdeCsvConHead(List<String> header, List<String[]> data, String csvFile, String csvDelimiter) 
 {
-    
+    System.out.println("hola");
     String line;
 
     try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
@@ -128,7 +127,10 @@ public static void cargarDatosDesdeCsvConHead(List<String> header, List<String[]
         }
      
         return counter;
+
     }
+    
+
 }
         
     
