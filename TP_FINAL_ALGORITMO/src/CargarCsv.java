@@ -1,4 +1,4 @@
-package TP_Integrador_tmp;
+package TP_FINAL_ALGORITMO;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
