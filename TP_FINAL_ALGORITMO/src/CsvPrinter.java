@@ -1,4 +1,4 @@
-package TP_Integrador_tmp;
+package TP_FINAL_ALGORITMO;
 
 
 // IMPRESION DF POR FILAS ---------------------------------------------------------------------------    
