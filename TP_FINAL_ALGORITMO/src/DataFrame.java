@@ -10,12 +10,13 @@ import java.util.Map;
 
 public class DataFrame {
     private List<Columna> dataColumnar = new ArrayList<>(); // ArrayList para los datos - Registros
+    protected List<Fila> dataFilas = new ArrayList<>();
     
     // HashMap llamado columnMap para mapear 
     // las etiquetas de las columnas a las instancias de Columna
     //********************************************************************
     private Map<String, Columna> columnMap = new HashMap<>(); 
-    
+    protected Map<Integer, Fila> rowMap = new HashMap<>(); // HashMap Fila Integer
     //********************************************************************
 
     private Integer _nroColumnas; // VAR CON CANT. DE COLUMNAS DS
@@ -34,6 +35,16 @@ public class DataFrame {
         { CargarCsv.cargarDatosDesdeCsvConHead(header, data, csvFile, csvDelimiter);}
         else
         { CargarCsv.cargarDatosDesdeCsvSinHead(header, data, csvFile, csvDelimiter);}
+
+        // Genera Instancias de filas y las mapea con el HASHMAP de FILAS ------------------------
+
+        for (int rowIndex = 0; rowIndex < data.size(); rowIndex++) {
+            Object[] rowData = data.get(rowIndex);
+            Integer etiqueta = (rowIndex); // Establece una etiqueta para la fila
+            Fila fila = new Fila(etiqueta, rowData); 
+            dataFilas.add(fila);
+            rowMap.put(rowIndex, fila);
+        }
 
         //*********************************************************************************************
         
@@ -130,6 +141,26 @@ public class DataFrame {
     }
 
 
+    // METODO PARA ACCEDER A FILA POR ETIQUETA ----------------------------------
+
+    public Fila getFilaPorEtiqueta(Integer etiqueta) 
+    {
+        return rowMap.get(etiqueta);
+    }
+
+// METODO PARA ACCEDER A FILA POR LISTA DE ETIQUETAS -------------------------------------------------------------
+
+    public List<Fila> getFilaListaEtiquetas(Integer[] etiquetas) 
+    {
+        int total = etiquetas.length;
+        List<Fila> listaFilas = new ArrayList<>();
+
+        for (int i=0; i < total; i++)
+        {
+            listaFilas.add( this.rowMap.get(etiquetas[i]));
+        }
+        return listaFilas;
+    }
 
 //----------------------------------------------------
 
@@ -194,6 +225,16 @@ public Boolean isEmpty() {
         {return true;}
     else
         {return false;}
+}
+
+// Método para imprimir etiquetas de las filas ---------------------------
+
+public void imprimirEtiquetasFilas() {
+    System.out.print("Etiquetas de las filas: ");
+    for (Integer etiqueta : rowMap.keySet()) {
+        System.out.print(etiqueta + " ");
+    }
+    System.out.println(" ");
 }
 
 
