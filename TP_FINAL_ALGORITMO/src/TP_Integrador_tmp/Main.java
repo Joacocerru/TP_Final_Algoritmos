@@ -7,10 +7,20 @@ public class Main {
         
     //DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba1.csv", ",", "S");
     //DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba2.csv", ",", "N");
-    DataFrame df =  new DataFrame("C:\\Users\\Hernan\\Desktop\\UNSAM\\6-Algoritmos I\\TP_INTEGRADOR2\\prueba2.csv", ",", "S");
-    DataFrame df2 = new DataFrame("C:\\Users\\Hernan\\Desktop\\UNSAM\\6-Algoritmos I\\TP_INTEGRADOR2\\prueba2.csv", ",", "N");
     
+    //DataFrame df =  new DataFrame("C:\\Users\\Hernan\\Desktop\\UNSAM\\6-Algoritmos I\\TP_INTEGRADOR2\\prueba2.csv", ",", "S");
+    //DataFrame df2 = new DataFrame("C:\\Users\\Hernan\\Desktop\\UNSAM\\6-Algoritmos I\\TP_INTEGRADOR2\\prueba2.csv", ",", "N");
+    
+    // VALEN //
+    DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
+    DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
+    
+
+
     Object[][] matriz = { {"Marta","Luis","Nacho",1},{1,"Anabel","Julio",true},{"Maria","David",null,0} };
+
+// Imprime: Cantidad de Filas, Cantidad de Columnas, Etiqueta a las Filas 
+//          y columnas y muestra el tipo de datos de las columnas. 
 
     String xx = df.getHeader(1);
 
@@ -48,7 +58,7 @@ public class Main {
     } else {
         System.out.println("Índices fuera de rango.");
     } 
-// Imprime Info del DataFrame -----------------------------------------------------------------------------------------------------------------
+// Imprime Info del DataFrame 2 -----------------------------------------------------------------------------------------------------------------
 System.out.println("#--------------------------------------------------------------------------");  
 CsvPrinter.info(df2);
 System.out.println("#--------------------------------------------------------------------------");
