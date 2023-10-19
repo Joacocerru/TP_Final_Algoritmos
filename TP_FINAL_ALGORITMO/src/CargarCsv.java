@@ -1,4 +1,4 @@
-//package TP_FINAL_ALGORITMO;
+
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -100,15 +100,10 @@ public static void cargarDatosDesdeCsvConHead(List<String> header, List<String[]
            
             data.add(fieldsCompleto); // Agregar los campos a la lista de datos
         }
-
-        String[] nombColumna = {"A"	,"B" ,"C" ,"D" ,"E" ,"F" ,"G" ,"H" ,
-        "I" ,"J" ,"K" ,"L" ,"LL","M" ,"N" ,"O" ,
-        "P" ,"Q" ,"R" ,"S" ,"T" ,"U" ,"V" ,"W" ,
-        "X" ,"Y" ,"Z"};
         
         for (int i=0; i < (data.get(0).length); i++)
         {   
-            String field = nombColumna[i];
+            String field = Integer.toString(i) ;
             header.add(field); // Agregar cada campo al encabezado
         }
         

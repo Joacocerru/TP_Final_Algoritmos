@@ -91,34 +91,20 @@ public class DataFrame {
 
 //----------------------------------------------------
 // METODO GETTER DE UNA COLUMNA
+// Eliminamos por lo que dijo el profesor de no usar la posicion
+//    public List<Columna> getColumnaPorRangoIndice(int desde, int hasta) 
+//    {
+//        int i = 0;
+//        List<Columna> listaColumnas = new ArrayList<>();
 
-    public Columna getColumnaPorIndice(int indice) 
-    {
-        int i = 0;
-
-        for (String clave: this.columnMap.keySet()) 
-        {
-            if (i == indice)
-            { return this.columnMap.get(clave); }
-            i++;
-        }
-        
-        return null ;
-    }
-
-    public List<Columna> getColumnaPorRangoIndice(int desde, int hasta) 
-    {
-        int i = 0;
-        List<Columna> listaColumnas = new ArrayList<>();
-
-        for (String clave: this.columnMap.keySet()) 
-        {
-            if (i >= desde && i <= hasta)
-            { listaColumnas.add( this.columnMap.get(clave) ); }
-            i++;
-        }
-        return listaColumnas ;
-    }
+//        for (String clave: this.columnMap.keySet()) 
+//        {
+//            if (i >= desde && i <= hasta)
+//            { listaColumnas.add( this.columnMap.get(clave) ); }
+//            i++;
+//        }
+//        return listaColumnas ;
+//    }
 
     //******* METODO PARA ACCEDER A COLUMNA POR ETIQUETA *********************
 
@@ -163,28 +149,21 @@ public class DataFrame {
     }
 
 //----------------------------------------------------
-
-    public Dato[] getFila(int indice) 
-    {
-        Dato[] fila = new Dato[this._nroColumnas];
+// Eliminamos por pedido del profesor
+//    public Dato[] getFila(int indice) 
+//    {
+//        Dato[] fila = new Dato[this._nroColumnas];
         
-        for (int i=0; i<this.getNroColumnas(); i++)
-        {   
-            Columna tmpCol = this.getColumnaPorIndice(i);
-            fila[i] = tmpCol.getDato(indice);
-        }
-        return fila;
-    }
+//        for (int i=0; i<this.getNroColumnas(); i++)
+//        {   
+//            Columna tmpCol = this.getColumnaPorIndice(i);
+//            fila[i] = tmpCol.getDato(indice);
+//        }
+//        return fila;
+//    }
 // METODO GETVALOR-----------------------------
 
-    public Dato getValor(int fila, int columna) 
-    {
-            Columna tmp = getColumnaPorIndice(columna);
-        return tmp.getDato(fila);
-    }
-// METODO GETVALOR-----------------------------
-
-    public Dato getValor(int fila, String columna) 
+public Dato getValor(int fila, String columna) 
     {
             Columna tmp = getColumnaPorEtiqueta(columna);
         return tmp.getDato(fila);
@@ -256,12 +235,7 @@ public void imprimirEtiquetasFilas() {
 
     Dato[] Fila1 = df.getFila(2);
 
-    Dato dato = df.getValor(2,2);
-    Dato dato2 = df.getValor(0,2);  
-
-    Columna Col1 = df2.getColumnaPorIndice(2);
     Columna Col2 = df2.getColumnaPorEtiqueta("C");
-    List<Columna> lista = df2.getColumnaPorRangoIndice(2, 4);
     String[] Listita = {"A","D"};
     List<Columna> lista2 = df2.getColumnaListaEtiquetas( Listita);
 
