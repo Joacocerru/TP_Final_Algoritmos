@@ -1,4 +1,4 @@
-package TP_FINAL_ALGORITMO;
+//package TP_FINAL_ALGORITMO;
 
 
 public class Dato_Numerico extends Dato {
