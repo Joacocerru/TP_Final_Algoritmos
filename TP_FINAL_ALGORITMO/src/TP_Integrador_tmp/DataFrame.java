@@ -17,6 +17,7 @@ public class DataFrame {
     //********************************************************************
     private Map<String, Columna> columnMap = new HashMap<>(); 
     protected Map<Integer, Fila> rowMap = new HashMap<>(); // HashMap Fila Integer
+
     //********************************************************************
 
     private Integer _nroColumnas; // VAR CON CANT. DE COLUMNAS DS
@@ -226,14 +227,14 @@ public void imprimirEtiquetasFilas() {
         
     //DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba1.csv", ",", "S");
     //DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba2.csv", ",", "N");
-    DataFrame df =  new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\TP_Final\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "S");
+    DataFrame df =  new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\TP_Final\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\TP_Final\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
     
     Object[][] matriz = { {"Marta","Luis","Nacho",1},{1,"Anabel","Julio",true},{"Maria","David",null,0} };
 
     String xx = df.getHeader(1);
 
-    Dato[] Fila1 = df.getFila(2);
+    //Dato[] Fila1 = df.getFila(2);
 
     Columna Col2 = df2.getColumnaPorEtiqueta("C");
     String[] Listita = {"A","D"};
