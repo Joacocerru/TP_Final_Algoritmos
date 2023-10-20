@@ -194,14 +194,26 @@ public class DataFrame {
         }
         return salida;
     }
+
+    public Integer getPosicionFilaEtiqueta (int etiquetaFila) 
+    {
+        Integer posicion = null;
+
+        for (int i=0; i<this.getNroRegistros(); i++)
+        {   
+            if ( ( (Fila) this.rowMap.get(i) ).getEtiqueta().equals(etiquetaFila) )
+                posicion = i;
+        }
+        return posicion;
+    }
 // METODO GETVALOR-----------------------------
 
-public Dato getValor(int etiquetaFila, String etiquetaColumna) 
-{
-        Columna this.getColumnaPorEtiqueta(etiquetaColumna);
-        
-        return tmp.getDato(fila);
-}
+    public Dato getValor(Integer fila, String etiquetaColumna) 
+    {
+        Columna tmp = getColumnaPorEtiqueta(etiquetaColumna);
+        Integer posFila = this.getPosicionFilaEtiqueta(fila);
+        return tmp.getDato(posFila);
+    }
 //----------------------------------------------------
 // METODO GETTER DEL HEADER
 
