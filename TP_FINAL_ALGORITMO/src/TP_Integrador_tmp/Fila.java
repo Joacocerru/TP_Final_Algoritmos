@@ -1,8 +1,8 @@
-//package TP_Integrador_tmp;
+package TP_Integrador_tmp;
 
 public class Fila {
     private Object[] rowData; // Almacena los datos de la fila
-    private Integer etiqueta;
+    private Integer etiqueta; // Etiqueta de la fila
 
     public Fila(Integer etiqueta, Object[] rowData) {
         this.rowData = rowData;

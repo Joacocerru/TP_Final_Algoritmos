@@ -9,14 +9,14 @@ import java.util.Map;
 
 
 public class DataFrame {
-    private List<Columna> dataColumnar = new ArrayList<>(); // ArrayList para los datos - Registros
-    protected List<Fila> dataFilas = new ArrayList<>();
+    private List<Columna> dataColumnar = new ArrayList<>(); // ArrayList para los datos - Array de columnas
+    protected List<Fila> dataFilas = new ArrayList<>();     // Array de filas
     
     // HashMap llamado columnMap para mapear 
     // las etiquetas de las columnas a las instancias de Columna
     //********************************************************************
-    private Map<String, Columna> columnMap = new HashMap<>(); 
-    protected Map<Integer, Fila> rowMap = new HashMap<>(); // HashMap Fila Integer
+    private Map<Integer, Columna> columnMap = new HashMap<>();   // Indice para las columnas
+    protected Map<Integer, Fila> rowMap = new HashMap<>();      // HashMap Fila Integer
 
     //********************************************************************
 
@@ -56,7 +56,9 @@ public class DataFrame {
         {
             String etiqueta = header.get(i);
             Columna columna = dataColumnar.get(i) ;
-            columnMap.put(etiqueta, columna);
+            columna.setEtiqueta(etiqueta);
+
+            columnMap.put(i, columna);
         }
 
         this.contarColumnas();
@@ -176,9 +178,10 @@ public Dato getValor(int fila, String columna)
     {
         List<String> claves = new ArrayList<>();
 
-        for (String clave:this.columnMap.keySet()) 
+        for (int i=0; i< this.getNroColumnas(); i++)
         {
-            claves.add(clave);
+            Columna col = this.columnMap.get(i);
+            claves.add(col.getEtiqueta());
         }
         
         return claves;

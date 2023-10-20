@@ -2,11 +2,11 @@ package TP_Integrador_tmp;
 
 public class Columna 
 {
-    private String tipoDato;
-    private Integer _cantDatos;
-    public Dato[] listaDatos;
+    private String tipoDato; // Tipo de dato de la columna
+    private Integer _cantDatos; // Cantidad Datos
+    public Dato[] listaDatos;   //Array de datos de la columna
 
-    private String etiqueta; 
+    private String etiqueta; //Etiqueta de la columna
 
 public Columna()
 {
