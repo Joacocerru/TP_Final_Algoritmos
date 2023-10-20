@@ -9,6 +9,7 @@ import java.util.Map;
 
 
 public class DataFrame {
+
     private List<Columna> dataColumnar = new ArrayList<>(); // ArrayList para los datos - Array de columnas
     protected List<Fila> dataFilas = new ArrayList<>();     // Array de filas
     
@@ -113,7 +114,44 @@ public class DataFrame {
 
     public Columna getColumnaPorEtiqueta(String etiqueta) 
     {
-        return columnMap.get(etiqueta);
+        Columna salida = new Columna();
+        Boolean encontrado = false;
+
+        for (int i=0; i<this.getNroColumnas();i++)
+        {
+            Columna col = this.columnMap.get(i);
+            if (col.getEtiqueta().equals(etiqueta))
+            {
+                salida = col;
+                encontrado = true;
+            }    
+        }
+
+        if (encontrado == true)
+            return salida;
+        else
+            return null; // armar exception
+    }
+
+    public Integer getPosicicionColumnaEtiqueta(String etiqueta)
+    {
+        Integer posicion = -1;
+        Boolean encontrado = false;
+
+        for (int i=0; i<this.getNroColumnas();i++)
+        {
+            Columna col = this.columnMap.get(i);
+            if (col.getEtiqueta().equals(etiqueta))
+            {
+                posicion = i;
+                encontrado = true;
+            }    
+        }
+
+        if (encontrado == true)
+            return posicion;
+        else
+            return null; // armar exception
     }
 
     public List<Columna> getColumnaListaEtiquetas(String[] etiquetas) 
@@ -123,18 +161,11 @@ public class DataFrame {
 
         for (int i=0; i < total; i++)
         {
-            listaColumnas.add( this.columnMap.get(etiquetas[i]));
+            
+            listaColumnas.add( this.getColumnaPorEtiqueta( etiquetas[i]) );
         }
 
         return listaColumnas;
-    }
-
-
-    // METODO PARA ACCEDER A FILA POR ETIQUETA ----------------------------------
-
-    public Fila getFilaPorEtiqueta(Integer etiqueta) 
-    {
-        return rowMap.get(etiqueta);
     }
 
 // METODO PARA ACCEDER A FILA POR LISTA DE ETIQUETAS -------------------------------------------------------------
@@ -152,25 +183,25 @@ public class DataFrame {
     }
 
 //----------------------------------------------------
-// Eliminamos por pedido del profesor
-//    public Dato[] getFila(int indice) 
-//    {
-//        Dato[] fila = new Dato[this._nroColumnas];
-        
-//        for (int i=0; i<this.getNroColumnas(); i++)
-//        {   
-//            Columna tmpCol = this.getColumnaPorIndice(i);
-//            fila[i] = tmpCol.getDato(indice);
-//        }
-//        return fila;
-//    }
+    public Fila getFila(int etiquetaFila) 
+    {
+        Fila salida = null;
+
+        for (int i=0; i<this.getNroRegistros(); i++)
+        {   
+            if ( ( (Fila) this.rowMap.get(i) ).getEtiqueta().equals(etiquetaFila) )
+                salida = this.rowMap.get(i);
+        }
+        return salida;
+    }
 // METODO GETVALOR-----------------------------
 
-public Dato getValor(int fila, String columna) 
-    {
-            Columna tmp = getColumnaPorEtiqueta(columna);
+public Dato getValor(int etiquetaFila, String etiquetaColumna) 
+{
+        Columna this.getColumnaPorEtiqueta(etiquetaColumna);
+        
         return tmp.getDato(fila);
-    }
+}
 //----------------------------------------------------
 // METODO GETTER DEL HEADER
 
@@ -187,18 +218,11 @@ public Dato getValor(int fila, String columna)
         return claves;
     }
 
-    public String getHeader(int Columna) 
+    public String getHeader(int indice) 
     {
-        int i=0;
         String headerSalida = new String("");
-
-        for (String clave:this.columnMap.keySet()) 
-        {
-            if (i == Columna)
-            { headerSalida = clave; }
-            i++;
-        }
-            return headerSalida;
+        headerSalida = ((Columna) this.columnMap.get(indice)).getEtiqueta();
+        return headerSalida;
     }
 //----------------------------------------------------
 // METODO 
@@ -233,14 +257,14 @@ public void imprimirEtiquetasFilas() {
     DataFrame df =  new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\TP_Final\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\TP_Final\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
     
-    Object[][] matriz = { {"Marta","Luis","Nacho",1},{1,"Anabel","Julio",true},{"Maria","David",null,0} };
+    //Object[][] matriz = { {"Marta","Luis","Nacho",1},{1,"Anabel","Julio",true},{"Maria","David",null,0} };
 
     String xx = df.getHeader(1);
 
     //Dato[] Fila1 = df.getFila(2);
 
-    Columna Col2 = df2.getColumnaPorEtiqueta("C");
-    String[] Listita = {"A","D"};
+    Columna Col2 = df2.getColumnaPorEtiqueta("3");
+    String[] Listita = {"1","4"};
     List<Columna> lista2 = df2.getColumnaListaEtiquetas( Listita);
 
     CsvPrinter.info(df2);
@@ -256,13 +280,13 @@ public void imprimirEtiquetasFilas() {
         Integer fila = 3; // 
         String columna = "D"; // DEBE PODER PONERSE LA ETIQUETA (STRING)
 
-        Dato valor = df2.getValor(fila, columna);
+        //Dato valor = df2.getValor(fila, columna);
         
-        if (valor != null) {
-        System.out.println("Valor en la fila " + (fila+1) + " y columna " + (columna) + ": " + valor.getDato());
-    } else {
-        System.out.println("Índices fuera de rango.");
-    } 
+   //     if (valor != null) {
+   //     System.out.println("Valor en la fila " + (fila+1) + " y columna " + (columna) + ": " + valor.getDato());
+   // } else {
+   //     System.out.println("Índices fuera de rango.");
+   // } 
 
     // **********************************************************************************************
     
