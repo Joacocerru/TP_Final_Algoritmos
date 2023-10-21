@@ -168,35 +168,34 @@ public class DataFrame {
         return this.rowMap.get(etiquetaFila);
     }
 
-    public List<Fila> getFilaListaEtiquetas(Integer[] etiquetas) 
+    public List<Fila> getFilaListaEtiquetas(String[] etiquetas) 
     {
         int total = etiquetas.length;
         List<Fila> listaFilas = new ArrayList<>();
 
         for (int i=0; i < total; i++)
         {
-            Fila tmp = this.getFila(etiquetas[i]);
-            
-            listaFilas.add( );
+            listaFilas.add( this.getFila(etiquetas[i]) );
         }
+        
         return listaFilas;
     }
 
 
-    public Integer getPosicionFilaEtiqueta (int etiquetaFila) 
+    public Integer getPosicionFilaEtiqueta (String etiquetaFila) 
     {
         Integer posicion = null;
 
         for (int i=0; i<this.getNroRegistros(); i++)
         {   
-            if ( ( (Fila) this.rowMap.get(i) ).getEtiqueta().equals(etiquetaFila) )
+            if ( this.RowArray.get(i).equals(etiquetaFila))
                 posicion = i;
         }
         return posicion;
     }
 // METODO GETVALOR-----------------------------
 
-    public Dato getValor(Integer fila, String etiquetaColumna) 
+    public Dato getValor(String fila, String etiquetaColumna) 
     {
         Columna tmp = getColumnaPorEtiqueta(etiquetaColumna);
         Integer posFila = this.getPosicionFilaEtiqueta(fila);
@@ -211,8 +210,7 @@ public class DataFrame {
 
         for (int i=0; i< this.getNroColumnas(); i++)
         {
-            Columna col = this.columnMap.get(i);
-            claves.add(col.getEtiqueta());
+            claves.add( this.ColumnArray.get(i) );
         }
         
         return claves;
@@ -220,9 +218,7 @@ public class DataFrame {
 
     public String getHeader(int indice) 
     {
-        String headerSalida = new String("");
-        headerSalida = ((Columna) this.columnMap.get(indice)).getEtiqueta();
-        return headerSalida;
+        return this.ColumnArray.get(indice);
     }
 //----------------------------------------------------
 // METODO 
@@ -238,7 +234,8 @@ public Boolean isEmpty() {
 
 public void imprimirEtiquetasFilas() {
     System.out.print("Etiquetas de las filas: ");
-    for (Integer etiqueta : rowMap.keySet()) {
+
+    for (String etiqueta : rowMap.keySet()) {
         System.out.print(etiqueta + " ");
     }
     System.out.println(" ");
