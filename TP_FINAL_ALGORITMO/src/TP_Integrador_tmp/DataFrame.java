@@ -17,7 +17,8 @@ public class DataFrame {
     // las etiquetas de las columnas a las instancias de Columna
     //********************************************************************
     private List<String> ColumnArray = new ArrayList<>(); // Array de Etiquetas de columnas
-    
+    private List<String> RowArray = new ArrayList<>(); // Array de Etiquetas de columnas
+
     private Map<String, Columna> columnMap = new HashMap<>();   // Indice para las columnas
     private Map<Integer, Fila> rowMap = new HashMap<>();      // HashMap Fila Integer
 
