@@ -79,7 +79,7 @@ public class CsvPrinter {
 
             for (int c = 0; c < df.getNroColumnas() ; c++) 
             {   
-                System.out.print( df.getValor(f, c).printValor() );
+                System.out.print( df.getValorPosicion(f, c).printValor() );
                 System.out.print("\t");
             }   
             System.out.println();

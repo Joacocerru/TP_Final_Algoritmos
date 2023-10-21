@@ -22,16 +22,16 @@ public class Main {
 // Imprime: Cantidad de Filas, Cantidad de Columnas, Etiqueta a las Filas 
 //          y columnas y muestra el tipo de datos de las columnas. 
 
-    String xx = df.getHeader(1);
+    String xx = df.getHeaderColumn(1);
 
-    Dato[] Fila1 = df2.getFila(2);
+    //Dato[] Fila1 = df2.getFila(2);
 
-    Dato dato = df.getValor(2,2);
-    Dato dato2 = df.getValor(0,2);  
+    Dato dato = df.getValorPosicion(2,2);
+    Dato dato2 = df.getValorPosicion(0,2);  
 
-    Columna Col1 = df2.getColumnaPorIndice(2);
+    Columna Col1 = df2.getColumna(2);
     Columna Col2 = df2.getColumnaPorEtiqueta("C");
-    List<Columna> lista = df2.getColumnaPorRangoIndice(2, 4);
+ 
     String[] Listita = {"A","D"};
     List<Columna> lista2 = df2.getColumnaListaEtiquetas( Listita);
 
@@ -48,7 +48,7 @@ public class Main {
         System.out.println("# Información de la Celda obtenida por etiqueta de Fila y Columna"); 
         System.out.println(" "); 
 
-        Integer fila = 3; // (3 es la Key del HashMap de Fila (df2 - rowMap - 3 - integer@47))
+        String fila = "3"; // (3 es la Key del HashMap de Fila (df2 - rowMap - 3 - integer@47))
         String columna = "D"; // ("D" es la Key del HashMap de Columna (df2 - columnMap - 3 - etiqueta "D"))
 
         Dato valor = df2.getValor(fila, columna);
@@ -88,7 +88,7 @@ Columna columnaNombre = df2.getColumnaPorEtiqueta("D");
             System.out.println(dato3.getDato());
         }
     } else {
-        String nombreColumna = df.getHeader(1);
+        String nombreColumna = df.getHeaderColumn(1);
         System.out.println("La columna "+ nombreColumna + " no existe en el DataFrame.");
     }
 
@@ -101,7 +101,7 @@ df2.imprimirEtiquetasFilas();
 
 //  Acceder a las Filas utilizando las etiquetas del encabezado --------------------------------
     
-    Integer etiquetaFila = 2;
+    String etiquetaFila = "2";
     
     Fila FilaNombre = df2.getFilaPorEtiqueta(etiquetaFila);
 
