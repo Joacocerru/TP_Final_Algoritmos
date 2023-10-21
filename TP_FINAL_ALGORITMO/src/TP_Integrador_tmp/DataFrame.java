@@ -20,7 +20,7 @@ public class DataFrame {
     private List<String> RowArray = new ArrayList<>(); // Array de Etiquetas de columnas
 
     private Map<String, Columna> columnMap = new HashMap<>();   // Indice para las columnas
-    private Map<Integer, Fila> rowMap = new HashMap<>();      // HashMap Fila Integer
+    private Map<String, Fila> rowMap = new HashMap<>();      // HashMap Fila Integer
 
     //********************************************************************
 
@@ -49,10 +49,12 @@ public class DataFrame {
         // Genera Instancias de filas y las mapea con el HASHMAP de FILAS -
         for (int rowIndex = 0; rowIndex < data.size(); rowIndex++) {
             Object[] rowData = data.get(rowIndex);
-            Integer etiqueta = (rowIndex); // Establece una etiqueta para la fila
+            String etiqueta = Integer.toString(rowIndex); // Establece una etiqueta para la fila
             Fila fila = new Fila(etiqueta, rowData); 
             dataFilas.add(fila);
-            rowMap.put(rowIndex, fila);
+
+            rowMap.put(etiqueta, fila);
+            this.RowArray.add(etiqueta);
         }
         
         //***** crea instancias de Columna y las mapea utilizando las etiquetas *******************
@@ -65,6 +67,7 @@ public class DataFrame {
 
             columna.setEtiqueta(etiqueta);
             columnMap.put(etiqueta, columna);
+            this.ColumnArray.add(etiqueta);
         }
 
         this.contarColumnas();
