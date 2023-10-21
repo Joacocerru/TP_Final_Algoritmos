@@ -1,4 +1,4 @@
-//package TP_Integrador_tmp;
+package TP_Integrador_tmp;
 
 import java.util.List;
 
@@ -126,4 +126,11 @@ df2.imprimirEtiquetasFilas();
     System.out.println("#--------------------------------------------------------------------------");
     }
 }
-//--------------------------------------------------------------------------------
+    // EXPORTAR DF -----------------------------------------------------------------------------------
+//    try {
+//        CsvExport.exportarComoCSV(data = df2, rutaArchivo = "C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\archivo.csv");
+//        System.out.println("Tu nuevo DataFrame" + data + "se guardó correctamente en la ruta de archivo " + rutaArchivo);
+//    } catch (Exception e) {
+//        System.out.println("Ocurrió un error al exportar el archivo CSV: " + e.getMessage());
+//}
+    //--------------------------------------------------------------------------------
