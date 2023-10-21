@@ -24,7 +24,7 @@ public static void cargarDatosDesdeCsvConHead(List<String> header, List<String[]
             header.clear(); // Limpia el encabezado actual
             for (String field : headerFields) 
             {
-                header.add(field); // Agregar cada campo al encabezado
+                header.add(field.trim()); // Agregar cada campo al encabezado
             }
         }
         
@@ -44,7 +44,7 @@ public static void cargarDatosDesdeCsvConHead(List<String> header, List<String[]
             {
                 for (int i=0; i < fields.length; i++)
                 {
-                    fieldsCompleto[i] = fields[i];
+                    fieldsCompleto[i] = fields[i].trim();
                 }
 
                 for (int x=fields.length; x < (cantComas+1); x++)
@@ -87,7 +87,7 @@ public static void cargarDatosDesdeCsvConHead(List<String> header, List<String[]
             {
                 for (int i=0; i < fields.length; i++)
                 {
-                    fieldsCompleto[i] = fields[i];
+                    fieldsCompleto[i] = fields[i].trim();
                 }
 
                 for (int x=fields.length; x < (cantComas+1); x++)
