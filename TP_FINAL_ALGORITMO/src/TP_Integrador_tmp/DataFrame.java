@@ -162,6 +162,12 @@ public class DataFrame {
     //****************************************************************************
     // METODO PARA ACCEDER A FILA POR LISTA DE ETIQUETAS ------------------------
 
+    //----------------------------------------------------
+    public Fila getFila(String etiquetaFila) 
+    {
+        return this.rowMap.get(etiquetaFila);
+    }
+
     public List<Fila> getFilaListaEtiquetas(Integer[] etiquetas) 
     {
         int total = etiquetas.length;
@@ -169,23 +175,13 @@ public class DataFrame {
 
         for (int i=0; i < total; i++)
         {
-            listaFilas.add( this.rowMap.get(etiquetas[i]));
+            Fila tmp = this.getFila(etiquetas[i]);
+            
+            listaFilas.add( );
         }
         return listaFilas;
     }
 
-//----------------------------------------------------
-    public Fila getFila(int etiquetaFila) 
-    {
-        Fila salida = null;
-
-        for (int i=0; i<this.getNroRegistros(); i++)
-        {   
-            if ( ( (Fila) this.rowMap.get(i) ).getEtiqueta().equals(etiquetaFila) )
-                salida = this.rowMap.get(i);
-        }
-        return salida;
-    }
 
     public Integer getPosicionFilaEtiqueta (int etiquetaFila) 
     {
