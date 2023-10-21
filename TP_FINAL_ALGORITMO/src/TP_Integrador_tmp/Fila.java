@@ -2,9 +2,9 @@ package TP_Integrador_tmp;
 
 public class Fila {
     private Object[] rowData; // Almacena los datos de la fila
-    private Integer etiqueta; // Etiqueta de la fila
+    private String etiqueta; // Etiqueta de la fila
 
-    public Fila(Integer etiqueta, Object[] rowData) {
+    public Fila(String etiqueta, Object[] rowData) {
         this.rowData = rowData;
         this.etiqueta = etiqueta;
     }
@@ -19,7 +19,7 @@ public class Fila {
     public int getCantDatos() {
         return rowData.length; // Devuelve la cantidad de datos en la fila
     }
-    public Integer getEtiqueta() {
+    public String getEtiqueta() {
         return etiqueta;
     }
 }
