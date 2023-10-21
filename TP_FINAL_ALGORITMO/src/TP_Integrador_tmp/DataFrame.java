@@ -4,7 +4,7 @@ package TP_Integrador_tmp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ListIterator;
+//import java.util.ListIterator;
 import java.util.Map;
 
 
@@ -16,8 +16,10 @@ public class DataFrame {
     // HashMap llamado columnMap para mapear 
     // las etiquetas de las columnas a las instancias de Columna
     //********************************************************************
-    private Map<Integer, Columna> columnMap = new HashMap<>();   // Indice para las columnas
-    protected Map<Integer, Fila> rowMap = new HashMap<>();      // HashMap Fila Integer
+    private List<String> ColumnArray = new ArrayList<>(); // Array de Etiquetas de columnas
+    
+    private Map<String, Columna> columnMap = new HashMap<>();   // Indice para las columnas
+    private Map<Integer, Fila> rowMap = new HashMap<>();      // HashMap Fila Integer
 
     //********************************************************************
 
@@ -33,13 +35,17 @@ public class DataFrame {
         this._nroColumnas = 0;
         this._nroRegistros = 0;
 
+        // Carga la informacion de CSV en Data y genera los Headers
         if (headerSN.equals("S") )
         { CargarCsv.cargarDatosDesdeCsvConHead(header, data, csvFile, csvDelimiter);}
         else
         { CargarCsv.cargarDatosDesdeCsvSinHead(header, data, csvFile, csvDelimiter);}
 
-        // Genera Instancias de filas y las mapea con el HASHMAP de FILAS ------------------------
-
+        // Arma la estructura columnar en dataColumnar
+        ArmaColumnar.armaDataColumnar(header, data, this.dataColumnar);
+        
+        
+        // Genera Instancias de filas y las mapea con el HASHMAP de FILAS -
         for (int rowIndex = 0; rowIndex < data.size(); rowIndex++) {
             Object[] rowData = data.get(rowIndex);
             Integer etiqueta = (rowIndex); // Establece una etiqueta para la fila
@@ -47,24 +53,21 @@ public class DataFrame {
             dataFilas.add(fila);
             rowMap.put(rowIndex, fila);
         }
-
-        //*********************************************************************************************
         
-        ArmaColumnar.armaDataColumnar(header, data, data.get(0).length, data.size(), this.dataColumnar);
+        //***** crea instancias de Columna y las mapea utilizando las etiquetas *******************
+        // Crea el array de etiquetas y el maps de columnas 
 
-        //***** crea instancias de Columna y las mapea utilizando las etiquetas ***********************
         for (int i = 0; i < header.size(); i++) 
         {
             String etiqueta = header.get(i);
             Columna columna = dataColumnar.get(i) ;
-            columna.setEtiqueta(etiqueta);
 
-            columnMap.put(i, columna);
+            columna.setEtiqueta(etiqueta);
+            columnMap.put(etiqueta, columna);
         }
 
         this.contarColumnas();
         this.contarRegistros();
-
     }
 
     //----------------------------------------------------
@@ -110,38 +113,22 @@ public class DataFrame {
 //        return listaColumnas ;
 //    }
 
+    //****************************************************************************
     //******* METODO PARA ACCEDER A COLUMNA POR ETIQUETA *********************
 
     public Columna getColumnaPorEtiqueta(String etiqueta) 
     {
-        Columna salida = new Columna();
-        Boolean encontrado = false;
-
-        for (int i=0; i<this.getNroColumnas();i++)
-        {
-            Columna col = this.columnMap.get(i);
-            if (col.getEtiqueta().equals(etiqueta))
-            {
-                salida = col;
-                encontrado = true;
-            }    
-        }
-
-        if (encontrado == true)
-            return salida;
-        else
-            return null; // armar exception
+        return this.columnMap.get(etiqueta);
     }
 
-    public Integer getPosicicionColumnaEtiqueta(String etiqueta)
+    public Integer getPosicicionColumnaEtiqueta (String etiqueta)
     {
         Integer posicion = -1;
         Boolean encontrado = false;
 
         for (int i=0; i<this.getNroColumnas();i++)
         {
-            Columna col = this.columnMap.get(i);
-            if (col.getEtiqueta().equals(etiqueta))
+            if ( this.ColumnArray.get(i).equals(etiqueta) )
             {
                 posicion = i;
                 encontrado = true;
@@ -168,7 +155,8 @@ public class DataFrame {
         return listaColumnas;
     }
 
-// METODO PARA ACCEDER A FILA POR LISTA DE ETIQUETAS -------------------------------------------------------------
+    //****************************************************************************
+    // METODO PARA ACCEDER A FILA POR LISTA DE ETIQUETAS ------------------------
 
     public List<Fila> getFilaListaEtiquetas(Integer[] etiquetas) 
     {

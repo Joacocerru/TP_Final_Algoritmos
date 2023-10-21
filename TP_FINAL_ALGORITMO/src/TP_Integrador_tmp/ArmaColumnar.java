@@ -6,7 +6,10 @@ import java.util.List;
 
 public class ArmaColumnar {
 
-    public static void armaDataColumnar (List<String> header, List<String[]> data, int _nroColumnas, int _nroRegistros, List<Columna> dataColumnar) {
+    public static void armaDataColumnar (List<String> header, List<String[]> data,  List<Columna> dataColumnar) 
+    {
+    int _nroColumnas = data.get(0).length;  
+    int _nroRegistros = data.size();
 
     dataColumnar.clear();
 
@@ -18,6 +21,7 @@ public class ArmaColumnar {
         boolean esNumerica = true;
         boolean esBoolean = true;
 
+        // Recorre las filas y arma las columnas
         for (int f=0; f< _nroRegistros; f++)
         {
             String[] rowData = new String [_nroColumnas];
