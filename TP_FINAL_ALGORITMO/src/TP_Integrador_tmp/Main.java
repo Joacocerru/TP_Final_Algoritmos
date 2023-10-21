@@ -128,8 +128,8 @@ df2.imprimirEtiquetasFilas();
 }
     // EXPORTAR DF -----------------------------------------------------------------------------------
 //    try {
-//        CsvExport.exportarComoCSV(data = df2, rutaArchivo = "C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\archivo.csv");
-//        System.out.println("Tu nuevo DataFrame" + data + "se guardó correctamente en la ruta de archivo " + rutaArchivo);
+//        CsvExport.exportarComoCSV(df2, "C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\archivo.csv");
+//        System.out.println("Tu nuevo DataFrame se guardó correctamente en la ruta de archivo seleccionada");
 //    } catch (Exception e) {
 //        System.out.println("Ocurrió un error al exportar el archivo CSV: " + e.getMessage());
 //}
