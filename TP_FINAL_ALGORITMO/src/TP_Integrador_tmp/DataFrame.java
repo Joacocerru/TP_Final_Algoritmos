@@ -159,13 +159,25 @@ public class DataFrame {
         return listaColumnas;
     }
 
+    public Columna getColumna(Integer posicion)
+    {
+        String clave = this.ColumnArray.get(posicion);
+        return this.getColumnaPorEtiqueta(clave);
+    } 
+
     //****************************************************************************
     // METODO PARA ACCEDER A FILA POR LISTA DE ETIQUETAS ------------------------
 
     //----------------------------------------------------
-    public Fila getFila(String etiquetaFila) 
+    public Fila getFilaPorEtiqueta(String etiquetaFila) 
     {
         return this.rowMap.get(etiquetaFila);
+    }
+
+    public Fila getFila(Integer posicion) 
+    {
+        String clave = this.RowArray.get(posicion);
+        return this.rowMap.get(clave) ;
     }
 
     public List<Fila> getFilaListaEtiquetas(String[] etiquetas) 
@@ -204,7 +216,7 @@ public class DataFrame {
 //----------------------------------------------------
 // METODO GETTER DEL HEADER
 
-    public List<String> getHeader() 
+    public List<String> getAllHeaderColumn() 
     {
         List<String> claves = new ArrayList<>();
 
@@ -216,10 +228,28 @@ public class DataFrame {
         return claves;
     }
 
-    public String getHeader(int indice) 
+    public String getHeaderColumn(int indice) 
     {
         return this.ColumnArray.get(indice);
     }
+
+    public List<String> getAllHeaderRows() 
+    {
+        List<String> claves = new ArrayList<>();
+
+        for (int i=0; i< this.getNroColumnas(); i++)
+        {
+            claves.add( this.RowArray.get(i) );
+        }
+        
+        return claves;
+    }
+
+    public String getHeaderRows(int indice) 
+    {
+        return this.RowArray.get(indice);
+    }
+
 //----------------------------------------------------
 // METODO 
 

@@ -16,7 +16,7 @@ public class CsvPrinter {
             System.out.println("# Impresión por Filas");
             System.out.println("#-----------------------------------------------------------------------------");
 
-            for (String fieldName: df.getHeader()) {
+            for (String fieldName: df.getAllHeaderColumn()) {
                 System.out.print("\t");
                 System.out.print(fieldName);
             }
@@ -26,10 +26,10 @@ public class CsvPrinter {
             // Imprimir los datos
             //for (int i=0; i < df.getNroRegistros(); i++){
 
-            for (String etiqueta : df.rowMap.keySet()) {
+            for (String etiqueta : df.getAllHeaderRows()) {
                 System.out.print(etiqueta +" |"+"\t"); // Imprimir etiqueta de fila    
                 
-                Fila fila = df.rowMap.get(etiqueta); // Obtener la fila correspondiente
+                Fila fila = df.getFila(etiqueta); // Obtener la fila correspondiente
                 
                 for (int c = 0; c < df.getNroColumnas(); c++) {
 
@@ -74,15 +74,14 @@ public class CsvPrinter {
             }  
 
                 Fila fila = df.dataFilas.get(f); // Accede a la fila directamente
-                Integer etiqueta = fila.getEtiqueta();
+                String etiqueta = fila.getEtiqueta();
                 System.out.print(etiqueta + " |"+"\t"); // Imprimir el índice de fila y la etiqueta
 
-            for (int c = 0; c < df.getNroColumnas() ; c++) {   
-
-                //Object[] columna = dataColumnar.get(c);
+            for (int c = 0; c < df.getNroColumnas() ; c++) 
+            {   
                 System.out.print( df.getValor(f, c).printValor() );
                 System.out.print("\t");
-                }   
+            }   
             System.out.println();
         }
         System.out.println("#--------------------------------------------------------------------------");
@@ -99,7 +98,7 @@ public class CsvPrinter {
         System.out.println();
         
         System.out.print("Etiquetas de las columnas: " );
-        for (String fieldName : df.getHeader()) {
+        for (String fieldName : df.getAllHeaderColumn()) {
             System.out.print(fieldName + "\t");
         }
         System.out.println();
@@ -108,7 +107,7 @@ public class CsvPrinter {
         
         for (int i= 0; i < df.getNroColumnas(); i++)
         {
-            System.out.print(df.getColumnaPorIndice(i).getTipoDato() + "\t");
+            System.out.print(df.getColumna(i).getTipoDato() + "\t");
         }
         System.out.println();
 
