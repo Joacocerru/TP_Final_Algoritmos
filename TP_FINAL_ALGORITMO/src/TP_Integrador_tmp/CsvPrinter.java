@@ -26,7 +26,7 @@ public class CsvPrinter {
             // Imprimir los datos
             //for (int i=0; i < df.getNroRegistros(); i++){
 
-            for (Integer etiqueta : df.rowMap.keySet()) {
+            for (String etiqueta : df.rowMap.keySet()) {
                 System.out.print(etiqueta +" |"+"\t"); // Imprimir etiqueta de fila    
                 
                 Fila fila = df.rowMap.get(etiqueta); // Obtener la fila correspondiente
