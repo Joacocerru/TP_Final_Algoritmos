@@ -29,7 +29,7 @@ public class CsvPrinter {
             for (String etiqueta : df.getAllHeaderRows()) {
                 System.out.print(etiqueta +" |"+"\t"); // Imprimir etiqueta de fila    
                 
-                Fila fila = df.getFila(etiqueta); // Obtener la fila correspondiente
+                Fila fila = df.getFilaPorEtiqueta(etiqueta); // Obtener la fila correspondiente
                 
                 for (int c = 0; c < df.getNroColumnas(); c++) {
 

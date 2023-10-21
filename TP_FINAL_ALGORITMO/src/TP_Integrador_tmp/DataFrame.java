@@ -187,7 +187,7 @@ public class DataFrame {
 
         for (int i=0; i < total; i++)
         {
-            listaFilas.add( this.getFila(etiquetas[i]) );
+            listaFilas.add( this.getFilaPorEtiqueta(etiquetas[i]) );
         }
         
         return listaFilas;
@@ -207,12 +207,21 @@ public class DataFrame {
     }
 // METODO GETVALOR-----------------------------
 
-    public Dato getValor(String fila, String etiquetaColumna) 
+    public Dato getValor(String etiquetafila, String etiquetaColumna) 
     {
-        Columna tmp = getColumnaPorEtiqueta(etiquetaColumna);
-        Integer posFila = this.getPosicionFilaEtiqueta(fila);
-        return tmp.getDato(posFila);
+        Columna tmpColumna = getColumnaPorEtiqueta(etiquetaColumna);
+        Integer posFila = this.getPosicionFilaEtiqueta(etiquetafila);
+        return tmpColumna.getDato(posFila);
     }
+
+    public Dato getValorPosicion(Integer posFila, Integer posColumna) 
+    {
+        String tmpEtiquetaColumna = this.getColumna(posColumna).getEtiqueta();
+        String tmpEtiquetaFila = this.getFila(posFila).getEtiqueta();
+        
+        return this.getValor(tmpEtiquetaFila, tmpEtiquetaColumna);
+    }
+
 //----------------------------------------------------
 // METODO GETTER DEL HEADER
 
