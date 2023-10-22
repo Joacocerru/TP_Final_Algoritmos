@@ -5,8 +5,8 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         
-    DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba1.csv", ",", "S");
-    DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba2.csv", ",", "N");
+    //DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba1.csv", ",", "S");
+    //DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba2.csv", ",", "N");
     
     DataFrame df =  new DataFrame("C:\\Users\\Hernan\\Desktop\\UNSAM\\6-Algoritmos I\\TP_INTEGRADOR2\\prueba2.csv", ",", "S");
     DataFrame df2 = new DataFrame("C:\\Users\\Hernan\\Desktop\\UNSAM\\6-Algoritmos I\\TP_INTEGRADOR2\\prueba2.csv", ",", "N");
@@ -48,13 +48,8 @@ public class Main {
         System.out.println("# Información de la Celda obtenida por etiqueta de Fila y Columna"); 
         System.out.println(" "); 
 
-<<<<<<< HEAD
-        String fila = "3"; // (3 es la Key del HashMap de Fila (df2 - rowMap - 3 - integer@47))
-        String columna = "4"; // ("D" es la Key del HashMap de Columna (df2 - columnMap - 3 - etiqueta "D"))
-=======
         String fila = "3"; // 
         String columna = "4"; // 
->>>>>>> c4af8a53e606df891c085a91faead9e8e4e4f485
 
         Dato valor = df2.getValor(fila, columna);
         
@@ -129,8 +124,7 @@ df2.imprimirEtiquetasFilas();
     }
     System.out.println(" ");
     System.out.println("#--------------------------------------------------------------------------");
-}
-}
+
 
    /* // EXPORTAR DF -----------------------------------------------------------------------------------
     try {
