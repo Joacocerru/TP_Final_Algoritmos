@@ -124,13 +124,16 @@ df2.imprimirEtiquetasFilas();
     }
     System.out.println(" ");
     System.out.println("#--------------------------------------------------------------------------");
+    
+
+   /* // EXPORTAR DF -----------------------------------------------------------------------------------
+    try {
+        CsvExport.exportarComoCSV(df2, "C:\\Users\\Hernan\\Desktop\\UNSAM\\6-Algoritmos I\\TP_INTEGRADOR2\\archivo.csv");
+        System.out.println("Tu nuevo DataFrame se guardó correctamente en la ruta de archivo seleccionada");
+    } catch (Exception e) {
+        System.out.println("Ocurrió un error al exportar el archivo CSV: " + e.getMessage());
     }
+   */ //----------------------------------------------------------------------------------------------------------------------------
 }
-    // EXPORTAR DF -----------------------------------------------------------------------------------
-//    try {
-//        CsvExport.exportarComoCSV(df2, "C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\archivo.csv");
-//        System.out.println("Tu nuevo DataFrame se guardó correctamente en la ruta de archivo seleccionada");
-//    } catch (Exception e) {
-//        System.out.println("Ocurrió un error al exportar el archivo CSV: " + e.getMessage());
-//}
+}
     //--------------------------------------------------------------------------------

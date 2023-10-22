@@ -20,7 +20,7 @@ public class DataFrame {
     private List<String> RowArray = new ArrayList<>(); // Array de Etiquetas de columnas
 
     private Map<String, Columna> columnMap = new HashMap<>();   // Indice para las columnas
-    private Map<String, Fila> rowMap = new HashMap<>();      // HashMap Fila Integer
+    protected Map<String, Fila> rowMap = new HashMap<>();      // HashMap Fila Integer
 
     //********************************************************************
 
