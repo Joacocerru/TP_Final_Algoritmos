@@ -5,11 +5,11 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         
-    //DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba1.csv", ",", "S");
-    //DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba2.csv", ",", "N");
+    DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba1.csv", ",", "S");
+    DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba2.csv", ",", "N");
     
-    DataFrame df =  new DataFrame("C:\\Users\\Hernan\\Desktop\\UNSAM\\6-Algoritmos I\\TP_INTEGRADOR2\\prueba2.csv", ",", "S");
-    DataFrame df2 = new DataFrame("C:\\Users\\Hernan\\Desktop\\UNSAM\\6-Algoritmos I\\TP_INTEGRADOR2\\prueba2.csv", ",", "N");
+    //DataFrame df =  new DataFrame("C:\\Users\\Hernan\\Desktop\\UNSAM\\6-Algoritmos I\\TP_INTEGRADOR2\\prueba2.csv", ",", "S");
+    //DataFrame df2 = new DataFrame("C:\\Users\\Hernan\\Desktop\\UNSAM\\6-Algoritmos I\\TP_INTEGRADOR2\\prueba2.csv", ",", "N");
     
     // VALEN //
     //DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
@@ -30,7 +30,7 @@ public class Main {
     Dato dato2 = df.getValorPosicion(0,2);  
 
     Columna Col1 = df2.getColumna(2);
-    Columna Col2 = df2.getColumnaPorEtiqueta("C");
+    Columna Col2 = df2.getColumnaPorEtiqueta("2");
  
     String[] Listita = {"1","4"};
     List<Columna> lista2 = df2.getColumnaListaEtiquetas( Listita);
@@ -62,6 +62,15 @@ public class Main {
 System.out.println("#--------------------------------------------------------------------------");  
 CsvPrinter.info(df2);
 System.out.println("#--------------------------------------------------------------------------");
+
+System.out.println("#--------------------------------------------------------------------------");  
+CsvPrinter.head(df2, 4);
+System.out.println("#--------------------------------------------------------------------------");
+
+System.out.println("#--------------------------------------------------------------------------");  
+CsvPrinter.tail(df2, 4);
+System.out.println("#--------------------------------------------------------------------------");
+
 
 // Acceder a las columnas utilizando las etiquetas del encabezado -------------------------------
 System.out.println("#--------------------------------------------------------------------------");

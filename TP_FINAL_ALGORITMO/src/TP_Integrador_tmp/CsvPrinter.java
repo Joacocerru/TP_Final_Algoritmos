@@ -57,10 +57,10 @@ public class CsvPrinter {
             }
             else
             {
-                for (int i=limite; i > 0; i++)
+                for (int i=limite; i > 0; i--)
                 //for (String etiqueta : df.getAllHeaderRows()) 
                 {
-                    String etiqueta = df.getHeaderRows(i); 
+                    String etiqueta = df.getHeaderRows( df.getNroRegistros() -  i); 
                     System.out.print(etiqueta +" |"+"\t"); // Imprimir etiqueta de fila    
                     
                     Fila fila = df.getFilaPorEtiqueta(etiqueta); // Obtener la fila correspondiente
