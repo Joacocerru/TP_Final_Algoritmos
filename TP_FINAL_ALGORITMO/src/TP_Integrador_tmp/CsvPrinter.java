@@ -5,7 +5,13 @@ package TP_Integrador_tmp;
 
 public class CsvPrinter {
     
-    public static void imprimirPorFilas(DataFrame df) {
+    public static void imprimirPorFilas (DataFrame df)
+    {
+        imprimirPorFilasGral(df, df.getNroRegistros(), "A");
+    }
+
+    private static void imprimirPorFilasGral(DataFrame df, Integer tope, String Orden) // Orden -> A (Ascend) D (Desc)
+    {
         if (df.isEmpty()) {
             System.out.println("No hay datos para imprimir en la visión por filas.");
             return;
@@ -24,33 +30,52 @@ public class CsvPrinter {
             System.out.println("--------------------------------------------------------------------------------");
     
             // Imprimir los datos
-            //for (int i=0; i < df.getNroRegistros(); i++){
-
-            for (String etiqueta : df.getAllHeaderRows()) {
-                System.out.print(etiqueta +" |"+"\t"); // Imprimir etiqueta de fila    
-                
-                Fila fila = df.getFilaPorEtiqueta(etiqueta); // Obtener la fila correspondiente
-                
-                for (int c = 0; c < df.getNroColumnas(); c++) {
-
-                    System.out.print(fila.getDato(c) +"\t");
-                }
-                System.out.println();
-                
-                /* 
-                Dato[] fila = df.getFila(i);
             
-                for (Dato dato : fila) 
+            Integer limite = 0;
+            if (tope > df.getNroRegistros())
+                limite = df.getNroRegistros();
+            else
+                limite = tope;
+
+            if (Orden == "A")
+            {
+                for (int i=0; i < limite; i++)
+                //for (String etiqueta : df.getAllHeaderRows()) 
                 {
-                    System.out.print(dato.printValor() + "\t");
+                    String etiqueta = df.getHeaderRows(i); 
+                    System.out.print(etiqueta +" |"+"\t"); // Imprimir etiqueta de fila    
+                    
+                    Fila fila = df.getFilaPorEtiqueta(etiqueta); // Obtener la fila correspondiente
+                    
+                    for (int c = 0; c < df.getNroColumnas(); c++) {
+
+                        System.out.print(fila.getDato(c) +"\t");
+                    }
+                    System.out.println();
+                }          
+                System.out.println("#-------------------------------------------------------------------------------");
+            }
+            else
+            {
+                for (int i=limite; i > 0; i++)
+                //for (String etiqueta : df.getAllHeaderRows()) 
+                {
+                    String etiqueta = df.getHeaderRows(i); 
+                    System.out.print(etiqueta +" |"+"\t"); // Imprimir etiqueta de fila    
+                    
+                    Fila fila = df.getFilaPorEtiqueta(etiqueta); // Obtener la fila correspondiente
+                    
+                    for (int c = 0; c < df.getNroColumnas(); c++) {
+
+                        System.out.print(fila.getDato(c) +"\t");
+                    }
+                    System.out.println();
                 }
-                System.out.println();
-                */
-            }          
-            System.out.println("#-------------------------------------------------------------------------------");
+            }
        }
 
     // IMPRESION DF POR COLUMNAS -  Método para imprimir la visión columna --------------------
+
 
     public static void imprimirColumnar(DataFrame df) {
         if (df.isEmpty()) {
@@ -130,6 +155,16 @@ public class CsvPrinter {
             System.out.print("\t");
             }
         System.out.println("");
+    }
+
+    public static void head (DataFrame df, Integer cant)
+    {
+        imprimirPorFilasGral(df, cant,"A");
+    }
+
+    public static void tail (DataFrame df, Integer cant)
+    {
+        imprimirPorFilasGral(df, cant,"D");
     }
 }
 
