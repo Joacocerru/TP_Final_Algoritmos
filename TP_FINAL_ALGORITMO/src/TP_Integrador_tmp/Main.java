@@ -5,24 +5,24 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         
-    DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba1.csv", ",", "S");
-    DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba2.csv", ",", "N");
+    //DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba1.csv", ",", "S");
+    //DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba2.csv", ",", "N");
     
     //DataFrame df =  new DataFrame("C:\\Users\\Hernan\\Desktop\\UNSAM\\6-Algoritmos I\\TP_INTEGRADOR2\\prueba2.csv", ",", "S");
     //DataFrame df2 = new DataFrame("C:\\Users\\Hernan\\Desktop\\UNSAM\\6-Algoritmos I\\TP_INTEGRADOR2\\prueba2.csv", ",", "N");
     
     // VALEN //
-    //DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
-    //DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
+    DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
+    DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
     
 
 
     //Object[][] matriz = { {"Marta","Luis","Nacho",1},{1,"Anabel","Julio",true},{"Maria","David",null,0} };
 
-// Imprime: Cantidad de Filas, Cantidad de Columnas, Etiqueta a las Filas 
-//          y columnas y muestra el tipo de datos de las columnas. 
+    // Imprime: Cantidad de Filas, Cantidad de Columnas, Etiqueta a las Filas 
+    //          y columnas y muestra el tipo de datos de las columnas. 
 
-    String xx = df.getHeaderColumn(1);
+    String xx = df.getHeaderColumn(2);
 
     //Dato[] Fila1 = df2.getFila(2);
 
@@ -34,52 +34,52 @@ public class Main {
  
     String[] Listita = {"1","4"};
     List<Columna> lista2 = df2.getColumnaListaEtiquetas( Listita);
-
+    
     CsvPrinter.info(df2);
 
-// Imprimir por filas utilizando CsvPrinter
+    // Imprimir por filas utilizando CsvPrinter
     CsvPrinter.imprimirPorFilas(df2);
 
-// Imprimir columnar utilizando CsvPrinter
+    // Imprimir columnar utilizando CsvPrinter
     CsvPrinter.imprimirColumnar(df2);
         
-// Acceder a un valor específico por Etiqueta de fila y columna ----------------------------------------------------
-        System.out.println("--------------------------------------------------------------------------------------"); 
-        System.out.println("# Información de la Celda obtenida por etiqueta de Fila y Columna"); 
-        System.out.println(" "); 
+    // Acceder a un valor específico por Etiqueta de fila y columna ----------------------------------------------------
+    System.out.println("--------------------------------------------------------------------------------------"); 
+    System.out.println("# Información de la Celda obtenida por etiqueta de Fila y Columna"); 
+    System.out.println(" "); 
 
-        String fila = "3"; // 
-        String columna = "4"; // 
+    String fila = "3"; // 
+    String columna = "4"; // 
 
-        Dato valor = df2.getValor(fila, columna);
+    Dato valor = df2.getValor(fila, columna);
         
-        if (valor != null) {
-        System.out.println("Valor en la fila " + (fila) + " y columna " + (columna) + ": " + valor.getDato());
+    if (valor != null) {
+    System.out.println("Valor en la fila " + (fila) + " y columna " + (columna) + ": " + valor.getDato());
     } else {
         System.out.println("Índices fuera de rango.");
     } 
-// Imprime Info del DataFrame 2 -----------------------------------------------------------------------------------------------------------------
-System.out.println("#--------------------------------------------------------------------------");  
-CsvPrinter.info(df2);
-System.out.println("#--------------------------------------------------------------------------");
+    // Imprime Info del DataFrame 2 -----------------------------------------------------------------------------------------------------------------
+    System.out.println("#--------------------------------------------------------------------------");  
+    CsvPrinter.info(df2);
+    System.out.println("#--------------------------------------------------------------------------");
 
-System.out.println("#--------------------------------------------------------------------------");  
-CsvPrinter.head(df2, 4);
-System.out.println("#--------------------------------------------------------------------------");
+    System.out.println("#--------------------------------------------------------------------------");  
+    CsvPrinter.head(df2, 4);
+    System.out.println("#--------------------------------------------------------------------------");
 
-System.out.println("#--------------------------------------------------------------------------");  
-CsvPrinter.tail(df2, 4);
-System.out.println("#--------------------------------------------------------------------------");
+    System.out.println("#--------------------------------------------------------------------------");  
+    CsvPrinter.tail(df2, 4);
+    System.out.println("#--------------------------------------------------------------------------");
 
 
-// Acceder a las columnas utilizando las etiquetas del encabezado -------------------------------
-System.out.println("#--------------------------------------------------------------------------");
-System.out.println("# Información de las Columnas"); 
-System.out.println(" "); 
+    // Acceder a las columnas utilizando las etiquetas del encabezado -------------------------------
+    System.out.println("#--------------------------------------------------------------------------");
+    System.out.println("# Información de las Columnas"); 
+    System.out.println(" "); 
 
-Columna columnaNombre = df2.getColumnaPorEtiqueta("3");
+    Columna columnaNombre = df2.getColumnaPorEtiqueta("3");
     
-// Imprimo la columna segun la etiqueta elegida --------------------------------------------------
+    // Imprimo la columna segun la etiqueta elegida --------------------------------------------------
 
     if (columnaNombre != null) {
 
@@ -101,20 +101,20 @@ Columna columnaNombre = df2.getColumnaPorEtiqueta("3");
         System.out.println("La columna "+ nombreColumna + " no existe en el DataFrame.");
     }
 
-//  Imprimo Etiquetas de las Filas -------------------------------------
-System.out.println("#--------------------------------------------------------------------------");
-System.out.println("# Información de las Filas");    
-System.out.println(" ");
+    //  Imprimo Etiquetas de las Filas -------------------------------------
+    System.out.println("#--------------------------------------------------------------------------");
+    System.out.println("# Información de las Filas");    
+    System.out.println(" ");
 
-df2.imprimirEtiquetasFilas();
+    df2.imprimirEtiquetasFilas();
 
-//  Acceder a las Filas utilizando las etiquetas del encabezado --------------------------------
+    //  Acceder a las Filas utilizando las etiquetas del encabezado --------------------------------
     
     String etiquetaFila = "2";
     
     Fila FilaNombre = df2.getFilaPorEtiqueta(etiquetaFila);
 
-// imprimo la columna segun la etiqueta elegida ------------------------------------------------
+    // imprimo la columna segun la etiqueta elegida ------------------------------------------------
 
     if (FilaNombre != null) {
 
@@ -131,18 +131,25 @@ df2.imprimirEtiquetasFilas();
     } else {
         System.out.println("La fila con etiqueta " + etiquetaFila + " no existe en el DataFrame.");
     }
+    
     System.out.println(" ");
     System.out.println("#--------------------------------------------------------------------------");
 
-
-   /* // EXPORTAR DF -----------------------------------------------------------------------------------
+    /*
+   // EXPORTAR DF -----------------------------------------------------------------------------------
     try {
-        CsvExport.exportarComoCSV(df2, "C:\\Users\\Hernan\\Desktop\\UNSAM\\6-Algoritmos I\\TP_INTEGRADOR2\\archivo.csv");
-        System.out.println("Tu nuevo DataFrame se guardó correctamente en la ruta de archivo seleccionada");
+
+        String rutaArchivo = "C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO";
+        String nombreArchivo = "archivoPrueba2";
+        
+        CsvExport.exportarComoCSV(df2, rutaArchivo + "\\" + nombreArchivo + ".csv");
+        System.out.println("El archivo '" + nombreArchivo + "' se guardó correctamente en la siguiente ruta: " + rutaArchivo);
     } catch (Exception e) {
         System.out.println("Ocurrió un error al exportar el archivo CSV: " + e.getMessage());
     }
-   */ //----------------------------------------------------------------------------------------------------------------------------
+     */
+
+    //----------------------------------------------------------------------------------------------------------------------------
 }
 }
-    //--------------------------------------------------------------------------------
+    
