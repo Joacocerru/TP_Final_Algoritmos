@@ -281,6 +281,21 @@ public void imprimirEtiquetasFilas() {
 }
 
 
+// METODOS SET DE VALOR -----
+public void setValorPorEtiqueta (String etiquetaFila, String etiquetaColumna, Object nuevoValor)
+{
+    Columna tmpColumna = getColumnaPorEtiqueta(etiquetaColumna);
+    Integer posFila = this.getPosicionFilaEtiqueta(etiquetaFila);
+    tmpColumna.setDato (posFila, nuevoValor);
+
+    Dato tmp_dato = tmpColumna.getDato(posFila);
+    if (nuevoValor instanceof java.lang.String )
+    {
+
+    }
+}
+
+
 }
 
 //--------------------------------------------------------------------------------------------------------------

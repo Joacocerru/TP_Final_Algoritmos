@@ -1,5 +1,7 @@
 package TP_Integrador_tmp;
 
+import javax.lang.model.util.ElementScanner6;
+
 public class Columna 
 {
     private String tipoDato; // Tipo de dato de la columna
@@ -57,4 +59,42 @@ public Dato getDato (Integer indice)
 public String getEtiqueta() {
     return etiqueta;
 }
+
+public void setDato (Integer posicion, Object nuevoValor)
+{
+    if ( nuevoValor instanceof java.lang.String )
+    {
+        if ( this.tipoDato == "Boolean" && nuevoValor.toString().toUpperCase().equals("TRUE") )
+        {
+            this.listaDatos[posicion].setValor(nuevoValor);
+        }
+        if ( this.tipoDato == "Boolean" && nuevoValor.toString().toUpperCase().equals("FALSE") )
+        {
+            this.listaDatos[posicion].setValor(nuevoValor);
+        }
+
+
+        if ( this.tipoDato == "String" && nuevoValor.toString().equals("") )
+        {
+            // crear un nuevo dato NA y asignarlo
+        }
+        
+        if ( this.tipoDato == "String" && this.listaDatos[posicion].isNA())
+        {
+            // crear un nuevo dato String y asignar
+        }
+        else if ( this.tipoDato == "String" && !this.listaDatos[posicion].isNA())
+        {
+            // setear el nuevo valor
+        }
+        else 
+        {
+            // EXCEPCION
+        }
+    }
+}
+
+
+}
+
 }
