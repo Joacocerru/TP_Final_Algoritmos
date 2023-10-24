@@ -16,6 +16,11 @@ public Object getDato()
     return this.valor;
 }
 
+public String getDatoToString()
+{
+    return this.valor.toString();
+}
+
 public boolean isNA ()
 {
     return false;

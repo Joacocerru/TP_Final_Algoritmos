@@ -22,6 +22,4 @@ public class Dato_Numerico extends Dato {
     {
         this.valor = Long.parseLong(x.toString());
     }
-
-
 }
