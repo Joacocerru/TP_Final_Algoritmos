@@ -43,6 +43,11 @@ public class Main {
 
     df.setValorPorEtiqueta("1", "ColumnaPruebas", "Cambio1");
 
+    CsvPrinter.imprimirPorFilas(df);
+
+
+    
+
     // Imprimir columnar utilizando CsvPrinter
     CsvPrinter.imprimirColumnar(df2);
         
@@ -79,6 +84,9 @@ public class Main {
     System.out.println("#--------------------------------------------------------------------------");
 
     // Pruebo se setear un nuevo dato
+
+
+
 
     // Acceder a las columnas utilizando las etiquetas del encabezado -------------------------------
     System.out.println("#--------------------------------------------------------------------------");

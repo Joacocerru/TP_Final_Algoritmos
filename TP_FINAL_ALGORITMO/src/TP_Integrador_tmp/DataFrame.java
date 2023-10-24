@@ -292,10 +292,11 @@ public void setValorPorEtiqueta (String etiquetaFila, String etiquetaColumna, Ob
    
     for (int col=0; col< this._nroColumnas; col++)
     {
-        tmpDato [col] = (this.getValorPosicion(posFila, posFila)).getDatoToString();
+        tmpDato [col] = (this.getValorPosicion(posFila, col)).getDatoToString();
     }
     Fila fila = new Fila(etiquetaFila, tmpDato); 
-    dataFilas.add(fila);
+
+    dataFilas.add(posFila, fila);
     rowMap.remove(etiquetaFila);
     rowMap.put(etiquetaFila, fila);
     this.RowArray.add(etiquetaFila);
