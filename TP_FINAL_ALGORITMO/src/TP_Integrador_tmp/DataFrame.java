@@ -287,12 +287,6 @@ public void setValorPorEtiqueta (String etiquetaFila, String etiquetaColumna, Ob
     Columna tmpColumna = getColumnaPorEtiqueta(etiquetaColumna);
     Integer posFila = this.getPosicionFilaEtiqueta(etiquetaFila);
     tmpColumna.setDato (posFila, nuevoValor);
-
-    Dato tmp_dato = tmpColumna.getDato(posFila);
-    if (nuevoValor instanceof java.lang.String )
-    {
-
-    }
 }
 
 

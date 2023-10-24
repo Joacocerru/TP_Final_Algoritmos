@@ -81,20 +81,17 @@ public void setDato (Integer posicion, Object nuevoValor)
         
         if ( this.tipoDato == "String" && this.listaDatos[posicion].isNA())
         {
-            // crear un nuevo dato String y asignar
+            this.listaDatos[posicion] = new Dato_String(nuevoValor.toString().trim());
         }
         else if ( this.tipoDato == "String" && !this.listaDatos[posicion].isNA())
         {
-            // setear el nuevo valor
+            this.listaDatos[posicion].setValor(nuevoValor);
         }
         else 
         {
             // EXCEPCION
         }
     }
-}
-
-
 }
 
 }

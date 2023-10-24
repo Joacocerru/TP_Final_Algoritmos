@@ -5,15 +5,15 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         
-    //DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba1.csv", ",", "S");
-    //DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba2.csv", ",", "N");
+    DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba1.csv", ",", "S");
+    DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba2.csv", ",", "N");
     
     //DataFrame df =  new DataFrame("C:\\Users\\Hernan\\Desktop\\UNSAM\\6-Algoritmos I\\TP_INTEGRADOR2\\prueba2.csv", ",", "S");
     //DataFrame df2 = new DataFrame("C:\\Users\\Hernan\\Desktop\\UNSAM\\6-Algoritmos I\\TP_INTEGRADOR2\\prueba2.csv", ",", "N");
     
     // VALEN //
-    DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
-    DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
+    //DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
+    //DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
     
 
 
@@ -39,6 +39,9 @@ public class Main {
 
     // Imprimir por filas utilizando CsvPrinter
     CsvPrinter.imprimirPorFilas(df2);
+    CsvPrinter.imprimirPorFilas(df);
+
+    df.setValorPorEtiqueta("1", "ColumnaPruebas", "Cambio1");
 
     // Imprimir columnar utilizando CsvPrinter
     CsvPrinter.imprimirColumnar(df2);
@@ -71,6 +74,11 @@ public class Main {
     CsvPrinter.tail(df2, 4);
     System.out.println("#--------------------------------------------------------------------------");
 
+    System.out.println("#--------------------------------------------------------------------------");  
+    CsvPrinter.info(df);
+    System.out.println("#--------------------------------------------------------------------------");
+
+    // Pruebo se setear un nuevo dato
 
     // Acceder a las columnas utilizando las etiquetas del encabezado -------------------------------
     System.out.println("#--------------------------------------------------------------------------");
