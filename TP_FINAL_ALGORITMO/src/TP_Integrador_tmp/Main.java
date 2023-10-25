@@ -42,6 +42,9 @@ public class Main {
     CsvPrinter.imprimirPorFilas(df);
 
     df.setValorPorEtiqueta("1", "ColumnaPruebas", "Cambio1");
+    df.setValorPorEtiqueta("3", "ColumnaNum", 9);
+    df.setValorPorEtiqueta("1", "ColumnaBoolean", "false");
+    df.setValorPorEtiqueta("4", "ColumnaBoolean", 1);
 
     CsvPrinter.imprimirPorFilas(df);
 

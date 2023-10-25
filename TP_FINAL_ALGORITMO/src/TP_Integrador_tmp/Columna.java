@@ -1,8 +1,8 @@
 package TP_Integrador_tmp;
 
-import javax.lang.model.util.ElementScanner6;
+import java.lang.Cloneable;
 
-public class Columna 
+public class Columna implements Cloneable
 {
     private String tipoDato; // Tipo de dato de la columna
     private Integer _cantDatos; // Cantidad Datos
@@ -105,20 +105,38 @@ public void setDato (Integer posicion, Object nuevoValor) throws IndiceFueraDeRa
 
     if (nuevoValor instanceof java.lang.Number)
     {
-        if ( this.tipoDato == "long" )
+        if ( this.tipoDato == "Numerica" )
         {
             this.listaDatos[posicion].setValor(nuevoValor);
         }else if ( this.tipoDato == "String" )
         {
             this.listaDatos[posicion].setValor(nuevoValor);
-        }else if ( this.tipoDato == "Boolean" && (Long) nuevoValor == 0 )
+        }else if ( this.tipoDato == "Boolean" && ((Integer) nuevoValor) == 0 )
         {
             this.listaDatos[posicion].setValor("FALSE");
-        }else if ( this.tipoDato == "Boolean" && (Long) nuevoValor == 1 )
+        }else if ( this.tipoDato == "Boolean" && ((Integer) nuevoValor) == 1 )
         {
             this.listaDatos[posicion].setValor("TRUE");
         }
     }
+}
+
+@Override
+public Columna clone() throws CloneNotSupportedException {
+   // try {
+        Columna columnaCopia = (Columna) super.clone();
+
+        columnaCopia.datos = new ArrayList<>(this.datos);
+        
+     // Realiza una copia profunda de los objetos tipo Dato en la lista
+     for (Dato dato : this.datos) {
+         columnaCopia.datos.add((Dato)dato.clone());
+    }    
+        return columnaCopia;
+
+    //} catch (CloneNotSupportedException e) {
+       // throw new AssertionError(); // 
+    //}
 }
 
 }

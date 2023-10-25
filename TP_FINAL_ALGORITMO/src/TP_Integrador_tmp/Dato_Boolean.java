@@ -10,7 +10,7 @@ public class Dato_Boolean extends Dato {
 
     public Dato_Boolean(Object s)
     {
-        this.valor = Boolean.parseBoolean(s.toString());
+        this.valor = Boolean.parseBoolean(s.toString().toUpperCase());
     }
 
     public Object getDato()
