@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 //import java.util.ListIterator;
 import java.util.Map;
+import TP_Integrador_tmp.Columna.IndiceFueraDeRangoException;
 
 
 public class DataFrame {
@@ -286,9 +287,12 @@ public void setValorPorEtiqueta (String etiquetaFila, String etiquetaColumna, Ob
 {
     Columna tmpColumna = getColumnaPorEtiqueta(etiquetaColumna);
     Integer posFila = this.getPosicionFilaEtiqueta(etiquetaFila);
-    tmpColumna.setDato (posFila, nuevoValor);
+    try {
+            tmpColumna.setDato (posFila, nuevoValor);
+        } catch (IndiceFueraDeRangoException e) {
+            System.err.println("Error al establecer el valor: " + e.getMessage()); }
     
-    String[] tmpDato = new String [this._nroColumnas];
+        String[] tmpDato = new String [this._nroColumnas];
    
     for (int col=0; col< this._nroColumnas; col++)
     {

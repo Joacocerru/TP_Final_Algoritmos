@@ -20,7 +20,7 @@ public class Dato_Boolean extends Dato {
 
     public void setValor (Object x)
     {
-        this.valor = Boolean.parseBoolean(x.toString()); 
+        this.valor = Boolean.parseBoolean(x.toString().toUpperCase()); 
     }
 
     

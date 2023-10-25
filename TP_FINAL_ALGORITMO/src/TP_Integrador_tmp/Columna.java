@@ -60,8 +60,18 @@ public String getEtiqueta() {
     return etiqueta;
 }
 
-public void setDato (Integer posicion, Object nuevoValor)
+
+public class IndiceFueraDeRangoException extends Exception {
+    public IndiceFueraDeRangoException(String mensaje) {
+        super(mensaje);
+    }
+}
+
+public void setDato (Integer posicion, Object nuevoValor) throws IndiceFueraDeRangoException
 {
+    if (posicion < 0 || posicion > this.listaDatos.length)
+        throw new IndiceFueraDeRangoException("Índice fuera de rango: " + posicion);
+
     if ( nuevoValor instanceof java.lang.String )
     {
         if ( this.tipoDato == "Boolean" && nuevoValor.toString().toUpperCase().equals("TRUE") )
@@ -90,6 +100,23 @@ public void setDato (Integer posicion, Object nuevoValor)
         else 
         {
             // EXCEPCION
+        }
+    }
+
+    if (nuevoValor instanceof java.lang.Number)
+    {
+        if ( this.tipoDato == "long" )
+        {
+            this.listaDatos[posicion].setValor(nuevoValor);
+        }else if ( this.tipoDato == "String" )
+        {
+            this.listaDatos[posicion].setValor(nuevoValor);
+        }else if ( this.tipoDato == "Boolean" && (Long) nuevoValor == 0 )
+        {
+            this.listaDatos[posicion].setValor("FALSE");
+        }else if ( this.tipoDato == "Boolean" && (Long) nuevoValor == 1 )
+        {
+            this.listaDatos[posicion].setValor("TRUE");
         }
     }
 }
