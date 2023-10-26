@@ -125,12 +125,14 @@ public void setDato (Integer posicion, Object nuevoValor) throws IndiceFueraDeRa
 public Columna clone() throws CloneNotSupportedException {
    // try {
         Columna columnaCopia = (Columna) super.clone();
-
-        columnaCopia.datos = new ArrayList<>(this.datos);
+        columnaCopia.etiqueta = this.etiqueta;
+        columnaCopia.tipoDato = this.tipoDato;
+        columnaCopia.listaDatos = new Dato[this._cantDatos];
         
-     // Realiza una copia profunda de los objetos tipo Dato en la lista
-     for (Dato dato : this.datos) {
-         columnaCopia.datos.add((Dato)dato.clone());
+    // Realiza una copia profunda de los objetos tipo Dato en la lista
+    for (int i=0; i < this._cantDatos; i++)
+    {
+        columnaCopia.listaDatos[i] = (Dato) ((Dato) this.listaDatos[i]).clone() ;
     }    
         return columnaCopia;
 

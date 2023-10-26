@@ -46,8 +46,12 @@ public class Main {
     df.setValorPorEtiqueta("1", "ColumnaBoolean", "false");
     df.setValorPorEtiqueta("4", "ColumnaBoolean", 1);
 
-    CsvPrinter.imprimirPorFilas(df);
+    df.setValorPorEtiqueta("0", "ColumnaPruebas", "NEW PRUEBA");
+    df.setValorPorEtiqueta("2", "ColumnaBoolean", "true");
 
+
+    CsvPrinter.imprimirPorFilas(df);
+    CsvExport.exportarComoCSV(df, "C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\Salida_Csv_prueba.csv");
 
     
 
@@ -86,8 +90,7 @@ public class Main {
     CsvPrinter.info(df);
     System.out.println("#--------------------------------------------------------------------------");
 
-    // Pruebo se setear un nuevo dato
-
+    // Pruebo se setear un nuevo dat
 
 
 
