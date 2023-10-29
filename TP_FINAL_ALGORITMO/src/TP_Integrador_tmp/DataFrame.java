@@ -46,10 +46,20 @@ public class DataFrame {
         // Arma la estructura columnar en dataColumnar
         ArmaColumnar.armaDataColumnar(header, data, this.dataColumnar);
         
+        this.contarColumnas();
+        this.contarRegistros();
         
         // Genera Instancias de filas y las mapea con el HASHMAP de FILAS -
-        for (int rowIndex = 0; rowIndex < data.size(); rowIndex++) {
-            Object[] rowData = data.get(rowIndex);
+        Dato[] rowData = new Dato[ this.getNroColumnas()];
+
+        for (int rowIndex = 0; rowIndex < this.getNroRegistros(); rowIndex++) 
+        {
+            for ( int colIndex = 0; colIndex < this.getNroColumnas(); colIndex++)
+            {
+                //Object[] rowData = data.get(rowIndex);
+                rowData[colIndex] = this.dataColumnar.get(colIndex).listaDatos[rowIndex];
+            }
+        
             String etiqueta = Integer.toString(rowIndex); // Establece una etiqueta para la fila
             Fila fila = new Fila(etiqueta, rowData); 
             dataFilas.add(fila);
@@ -71,8 +81,7 @@ public class DataFrame {
             this.ColumnArray.add(etiqueta);
         }
 
-        this.contarColumnas();
-        this.contarRegistros();
+        
     }
 
     //----------------------------------------------------
@@ -287,16 +296,18 @@ public void setValorPorEtiqueta (String etiquetaFila, String etiquetaColumna, Ob
 {
     Columna tmpColumna = getColumnaPorEtiqueta(etiquetaColumna);
     Integer posFila = this.getPosicionFilaEtiqueta(etiquetaFila);
+
     try {
             tmpColumna.setDato (posFila, nuevoValor);
+    
         } catch (IndiceFueraDeRangoException e) {
             System.err.println("Error al establecer el valor: " + e.getMessage()); }
     
-        String[] tmpDato = new String [this._nroColumnas];
+    Dato[] tmpDato = new Dato [this._nroColumnas];
    
     for (int col=0; col< this._nroColumnas; col++)
     {
-        tmpDato [col] = (this.getValorPosicion(posFila, col)).getDatoToString();
+        tmpDato [col] = (this.getValorPosicion(posFila, col));
     }
     Fila fila = new Fila(etiquetaFila, tmpDato); 
 

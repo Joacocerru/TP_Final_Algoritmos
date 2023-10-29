@@ -40,6 +40,7 @@ public static void cargarDatosDesdeCsvConHead(List<String> header, List<String[]
         data.clear(); // Limpia los datos actuales
         while ((line = br.readLine()) != null) 
         {
+            int cantComas = countOccurrences (line, ',');
             
             // Dividir la línea en campos utilizando el delimitador
             String[] fields = line.split(csvDelimiter);
