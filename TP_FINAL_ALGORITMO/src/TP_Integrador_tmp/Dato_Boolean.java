@@ -23,5 +23,12 @@ public class Dato_Boolean extends Dato {
         this.valor = Boolean.parseBoolean(x.toString().toUpperCase()); 
     }
 
+    public int compareTo(Dato o) 
+    { 
+        Boolean ori = (Boolean) this.valor;
+        Boolean des = (Boolean) this.valor;
+ 
+        return ori.compareTo(des);
+    }
     
 }

@@ -1,7 +1,7 @@
 package TP_Integrador_tmp;
 import java.lang.Cloneable;
 
-public class Dato  implements Cloneable
+public class Dato  implements Cloneable, Comparable<Dato>
 {
    public Object valor;    
 
@@ -68,5 +68,10 @@ public Object clone() throws CloneNotSupportedException
     //}
 }
 
+@Override
+public int compareTo(Dato o) 
+{ 
+    return this.valor.toString().compareTo(o.valor.toString());
+}
 
 }

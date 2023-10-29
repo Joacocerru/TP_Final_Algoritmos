@@ -24,4 +24,12 @@ public class Dato_NA extends Dato {
         this.valor = null;
     }
 
+    public int compareTo(Dato o) 
+    {
+        if (o instanceof Dato_NA)
+            return 1;
+        else
+            return -1;
+    }
+
 }

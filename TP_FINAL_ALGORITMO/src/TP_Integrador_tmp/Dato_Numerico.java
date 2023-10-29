@@ -1,5 +1,6 @@
 package TP_Integrador_tmp;
 
+import javafx.geometry.Orientation;
 
 public class Dato_Numerico extends Dato {
     
@@ -22,4 +23,14 @@ public class Dato_Numerico extends Dato {
     {
         this.valor = Long.parseLong(x.toString());
     }
+
+    @Override
+    public int compareTo(Dato o) 
+    { 
+        Long ori = (Long) this.valor;
+        Long des = (Long) this.valor;
+ 
+        return ori.compareTo(des);
+    }
+
 }
