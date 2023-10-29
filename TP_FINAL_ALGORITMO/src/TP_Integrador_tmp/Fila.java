@@ -2,6 +2,7 @@ package TP_Integrador_tmp;
 
 public class Fila {
     private Object[] rowData; // Almacena los datos de la fila
+    //private Dato[] rowData; // Almacena los datos de la fila
     private String etiqueta; // Etiqueta de la fila
 
     public Fila(String etiqueta, Object[] rowData) {

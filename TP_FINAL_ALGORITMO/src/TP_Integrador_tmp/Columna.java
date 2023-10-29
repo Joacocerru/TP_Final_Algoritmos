@@ -124,9 +124,12 @@ public void setDato (Integer posicion, Object nuevoValor) throws IndiceFueraDeRa
 @Override
 public Columna clone() throws CloneNotSupportedException {
    // try {
+        String tmpEtiqueta = new String(this.etiqueta);
+        String tmpTipoDato = new String(this.tipoDato);
+
         Columna columnaCopia = (Columna) super.clone();
-        columnaCopia.etiqueta = this.etiqueta;
-        columnaCopia.tipoDato = this.tipoDato;
+        columnaCopia.etiqueta = tmpEtiqueta;
+        columnaCopia.tipoDato = tmpTipoDato;
         columnaCopia.listaDatos = new Dato[this._cantDatos];
         
     // Realiza una copia profunda de los objetos tipo Dato en la lista

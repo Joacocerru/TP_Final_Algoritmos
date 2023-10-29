@@ -17,14 +17,21 @@ public static void cargarDatosDesdeCsvConHead(List<String> header, List<String[]
 
     try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
         // Leer el encabezado (primera línea)
+
         if ((line = br.readLine()) != null) 
-        {    
+        {   
+            int cantComas = countOccurrences (line, ',');
+
             // Dividir el encabezado en campos utilizando el delimitador
             String[] headerFields = line.split(csvDelimiter);
             header.clear(); // Limpia el encabezado actual
             for (String field : headerFields) 
             {
                 header.add(field.trim()); // Agregar cada campo al encabezado
+            }
+            for (int x=headerFields.length; x < (cantComas+1); x++)
+            {
+                header.add("Columna");
             }
         }
         
@@ -33,8 +40,6 @@ public static void cargarDatosDesdeCsvConHead(List<String> header, List<String[]
         data.clear(); // Limpia los datos actuales
         while ((line = br.readLine()) != null) 
         {
-            
-            int cantComas = countOccurrences (line, ',');
             
             // Dividir la línea en campos utilizando el delimitador
             String[] fields = line.split(csvDelimiter);
