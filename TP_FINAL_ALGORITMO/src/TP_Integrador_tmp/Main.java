@@ -9,6 +9,13 @@ public class Main {
     DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba2.csv", ",", "N");
     DataFrame df3 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\Salida_Csv_prueba.csv", ",", "N");
     
+    String[] etiFilas = {"1","2"};
+    String[] etiColumnas = {"ColumnaPruebas","ColumnaNum"};
+    
+    CsvPrinter.imprimirPorFilas(df);
+    
+    List <Fila> newFila = df.getFilasColumnasListaEtiquetas (etiFilas, etiColumnas) ;    
+
     //DataFrame df =  new DataFrame("C:\\Users\\Hernan\\Desktop\\UNSAM\\6-Algoritmos I\\TP_INTEGRADOR2\\prueba2.csv", ",", "S");
     //DataFrame df2 = new DataFrame("C:\\Users\\Hernan\\Desktop\\UNSAM\\6-Algoritmos I\\TP_INTEGRADOR2\\prueba2.csv", ",", "N");
     
@@ -34,7 +41,7 @@ public class Main {
     Columna Col2 = df2.getColumnaPorEtiqueta("2");
  
     String[] Listita = {"1","4"};
-    List<Columna> lista2 = df2.getColumnaListaEtiquetas( Listita);
+    List<Columna> lista2 = df2.getColumnasListaEtiquetas( Listita);
     
     CsvPrinter.info(df2);
 

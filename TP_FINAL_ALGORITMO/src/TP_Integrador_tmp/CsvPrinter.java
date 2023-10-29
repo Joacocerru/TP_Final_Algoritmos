@@ -47,9 +47,10 @@ public class CsvPrinter {
                     
                     Fila fila = df.getFilaPorEtiqueta(etiqueta); // Obtener la fila correspondiente
                     
-                    for (int c = 0; c < df.getNroColumnas(); c++) {
-
-                        System.out.print(fila.getDato(c) +"\t");
+                    for (int c = 0; c < df.getNroColumnas(); c++) 
+                    {
+                        Dato tmpDato = fila.getDato(c);
+                        System.out.print(tmpDato.valor.toString() +"\t");
                     }
                     System.out.println();
                 }          
@@ -67,7 +68,7 @@ public class CsvPrinter {
                     
                     for (int c = 0; c < df.getNroColumnas(); c++) {
 
-                        System.out.print(fila.getDato(c) +"\t");
+                        System.out.print(fila.getDato(c).valor.toString() +"\t");
                     }
                     System.out.println();
                 }

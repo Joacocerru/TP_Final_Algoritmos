@@ -50,10 +50,11 @@ public class DataFrame {
         this.contarRegistros();
         
         // Genera Instancias de filas y las mapea con el HASHMAP de FILAS -
-        Dato[] rowData = new Dato[ this.getNroColumnas()];
-
+        
         for (int rowIndex = 0; rowIndex < this.getNroRegistros(); rowIndex++) 
         {
+            Dato[] rowData = new Dato[ this.getNroColumnas()];
+            
             for ( int colIndex = 0; colIndex < this.getNroColumnas(); colIndex++)
             {
                 //Object[] rowData = data.get(rowIndex);
@@ -155,7 +156,7 @@ public class DataFrame {
             return null; // armar exception
     }
 
-    public List<Columna> getColumnaListaEtiquetas(String[] etiquetas) 
+    public List<Columna> getColumnasListaEtiquetas(String[] etiquetas) 
     {
         int total = etiquetas.length;
         List<Columna> listaColumnas = new ArrayList<>();
@@ -190,7 +191,7 @@ public class DataFrame {
         return this.rowMap.get(clave) ;
     }
 
-    public List<Fila> getFilaListaEtiquetas(String[] etiquetas) 
+    public List<Fila> getFilasListaEtiquetas(String[] etiquetas) 
     {
         int total = etiquetas.length;
         List<Fila> listaFilas = new ArrayList<>();
@@ -214,6 +215,29 @@ public class DataFrame {
                 posicion = i;
         }
         return posicion;
+    }
+
+    public List<Fila> getFilasColumnasListaEtiquetas(String[] etiquetasFila, String[] etiquetasColumna) 
+    {
+        int totalFilas = etiquetasFila.length;
+        int totalColumnas = etiquetasColumna.length;
+
+         List<Fila> listaFilas = new ArrayList<>();
+
+        for (int i=0; i < totalFilas; i++)
+        {
+            Dato[] newDato = new Dato[totalColumnas];
+
+            for (int x=0; x < totalColumnas; x++)
+            {
+                int posCol = this.getPosicicionColumnaEtiqueta(etiquetasColumna[x]);
+                newDato[x] = (this.getFilaPorEtiqueta(etiquetasFila[i])).getDato(posCol) ;
+            }
+            Fila newFila = new Fila(Integer.toString(i), newDato);
+            listaFilas.add(newFila);
+        }
+        
+        return listaFilas;
     }
 // METODO GETVALOR-----------------------------
 
@@ -314,9 +338,25 @@ public void setValorPorEtiqueta (String etiquetaFila, String etiquetaColumna, Ob
     dataFilas.add(posFila, fila);
     rowMap.remove(etiquetaFila);
     rowMap.put(etiquetaFila, fila);
-    this.RowArray.add(etiquetaFila);
+   this.RowArray.add(etiquetaFila);
+}
+
+public void orderPorColumnas (String [] ColumnasOrden)
+{
+    int n = this.RowArray.size();
+    boolean huboCambio;
+
+    do {
+        huboCambio = false;
+        for (int i=1; i<n;i++)
+        {
+            String etiquetaPrevia = this.RowArray.get(i-1);
+            String etiquetaActual = this.RowArray.get(i);
+
+            Fila filaPrevia = this.getFilaPorEtiqueta(etiquetaActual);
+        }
+    } while (huboCambio == true);
 }
 
 }
-
 //--------------------------------------------------------------------------------------------------------------
