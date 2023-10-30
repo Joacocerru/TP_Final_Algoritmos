@@ -28,7 +28,7 @@ public class Dato_Numerico extends Dato {
     public int compareTo(Dato o) 
     { 
         Long ori = (Long) this.valor;
-        Long des = (Long) this.valor;
+        Long des = (Long) o.valor;
  
         return ori.compareTo(des);
     }

@@ -26,17 +26,22 @@ public class Fila implements Comparable
         return etiqueta;
     }
 
-    public int compareTo(Fila o) 
+    public int compareTo(Object o) 
     {
        int total = this.rowData.length;
        int i = 0;
+       Fila x = (Fila) o;
 
         do 
         {
-            if ( this.rowData[0].compareTo( o.rowData[0] ) == 0)
+            Dato datoX = this.rowData[0];
+            Dato datoY = x.rowData[0];
+            int tmpCompare = datoX.compareTo(datoY);
+
+            if ( tmpCompare == 0)
                 i++;
             else
-                return this.rowData[0].compareTo( o.rowData[0] );
+                return this.rowData[0].compareTo( x.rowData[0] );
         } while (i < total);
 
         return 0;

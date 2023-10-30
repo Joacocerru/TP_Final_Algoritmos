@@ -237,6 +237,23 @@ public class DataFrame {
         
         return listaFilas;
     }
+
+    public Fila getFilasColumnasListaEtiquetas(String etiquetasFila, String[] etiquetasColumna) 
+    {
+        int totalColumnas = etiquetasColumna.length;
+
+            Dato[] newDato = new Dato[totalColumnas];
+
+            for (int x=0; x < totalColumnas; x++)
+            {
+                int posCol = this.getPosicicionColumnaEtiqueta(etiquetasColumna[x]);
+                newDato[x] = (this.getFilaPorEtiqueta(etiquetasFila)).getDato(posCol) ;
+            }
+            Fila newFila = new Fila("0", newDato);
+     
+        return newFila;
+    }
+
 // METODO GETVALOR-----------------------------
 
     public Dato getValor(String etiquetafila, String etiquetaColumna) 
@@ -352,10 +369,12 @@ public void orderPorColumnas (String [] ColumnasOrden)
             String etiquetaPrevia = this.RowArray.get(i-1);
             String etiquetaActual = this.RowArray.get(i);
 
-            Fila filaPrevia = this.getFilaPorEtiqueta(etiquetaPrevia);
-            Fila filaActual = this.getFilaPorEtiqueta(etiquetaActual);
+            Fila filaPrevia = this.getFilasColumnasListaEtiquetas(etiquetaPrevia, ColumnasOrden);
+            Fila filaActual = this.getFilasColumnasListaEtiquetas(etiquetaActual, ColumnasOrden);
 
-            if ( (filaPrevia.compareTo(filaActual)) > 0 )
+            int valorCompare = filaPrevia.compareTo(filaActual);
+
+            if ( (valorCompare) > 0 )
             {
                 this.RowArray.add(i-1, this.RowArray.get(i));
                 this.RowArray.add(i, etiquetaPrevia);
