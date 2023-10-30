@@ -1,6 +1,7 @@
 package TP_Integrador_tmp;
 
-public class Fila {
+public class Fila implements Comparable
+{
     //private Object[] rowData; // Almacena los datos de la fila
     private Dato[] rowData; // Almacena los datos de la fila
     private String etiqueta; // Etiqueta de la fila
@@ -23,6 +24,22 @@ public class Fila {
     }
     public String getEtiqueta() {
         return etiqueta;
+    }
+
+    public int compareTo(Fila o) 
+    {
+       int total = this.rowData.length;
+       int i = 0;
+
+        do 
+        {
+            if ( this.rowData[0].compareTo( o.rowData[0] ) == 0)
+                i++;
+            else
+                return this.rowData[0].compareTo( o.rowData[0] );
+        } while (i < total);
+
+        return 0;
     }
 }
 //-----------------------------------------------------------------------

@@ -81,8 +81,6 @@ public class DataFrame {
             columnMap.put(etiqueta, columna);
             this.ColumnArray.add(etiqueta);
         }
-
-        
     }
 
     //----------------------------------------------------
@@ -348,13 +346,24 @@ public void orderPorColumnas (String [] ColumnasOrden)
 
     do {
         huboCambio = false;
+
         for (int i=1; i<n;i++)
         {
             String etiquetaPrevia = this.RowArray.get(i-1);
             String etiquetaActual = this.RowArray.get(i);
 
-            Fila filaPrevia = this.getFilaPorEtiqueta(etiquetaActual);
+            Fila filaPrevia = this.getFilaPorEtiqueta(etiquetaPrevia);
+            Fila filaActual = this.getFilaPorEtiqueta(etiquetaActual);
+
+            if ( (filaPrevia.compareTo(filaActual)) > 0 )
+            {
+                this.RowArray.add(i-1, this.RowArray.get(i));
+                this.RowArray.add(i, etiquetaPrevia);
+                huboCambio = true;
+            }
+
         }
+        n--;
     } while (huboCambio == true);
 }
 
