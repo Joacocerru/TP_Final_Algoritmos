@@ -386,5 +386,69 @@ public void orderPorColumnas (String [] ColumnasOrden)
     } while (huboCambio == true);
 }
 
+
+//--------------------------------------------------------------------------------------------------------------
+// METODO PARA DADO UN VALOR BUSCARLO EN LA ESTRUCTURA Y DEVOLVER 
+//SU POSICION (DANDO SUS ETIQUETAS)
+
+public String buscarValor(Object valorBuscado) 
+{
+    for (String etiquetaColumna : ColumnArray) 
+    {
+        for (int indiceColumna = 0; indiceColumna < this.getNroColumnas(); indiceColumna++) 
+        {
+            Columna columna = this.getColumna(indiceColumna);
+            for (int indiceFila = 0; indiceFila < this.getNroRegistros(); indiceFila++) 
+            {
+                Dato dato = columna.getDato(indiceFila);
+
+                if (valorBuscado.getClass() == dato.getClass()) 
+                {
+                    if (valorBuscado instanceof Dato) 
+                    {
+                        Dato valorDatoBuscado = (Dato) valorBuscado;
+                        if (dato.compareTo(valorDatoBuscado) == 0) 
+                        {
+                            String etiquetaCol = columna.getEtiqueta();
+                            String etiquetaFila = this.getFila(indiceFila).getEtiqueta();
+                            return "El elemento " + valorDatoBuscado.getDato() + " fue encontrado en fila: " + etiquetaFila + ", columna: " + etiquetaCol;
+                        }
+                    } 
+                }
+            }
+        }
+    }
+    
+    return "Elemento no encontrado en el DataFrame.";
 }
+
+public int buscarEnColumna(Columna columna, Object valor) 
+{
+    // Realiza una bÃºsqueda binaria en la columna
+    // Supongamos que los datos en la columna estÃ¡n ordenados
+
+    int izquierda = 0;
+    int derecha = columna.getCantDatos() - 1;
+
+    while (izquierda <= derecha) 
+    {
+        int medio = izquierda + (derecha - izquierda) / 2;
+
+        Dato datoMedio = columna.getDato(medio);
+
+        if (datoMedio.equals(valor))
+            return medio;
+
+        if (datoMedio.compareTo((Dato) valor) < 0)
+            izquierda = medio + 1;
+        else
+            derecha = medio - 1;
+    }
+
+    return -1; // Elemento no encontrado en la columna
+}
+
+
+}
+
 //--------------------------------------------------------------------------------------------------------------

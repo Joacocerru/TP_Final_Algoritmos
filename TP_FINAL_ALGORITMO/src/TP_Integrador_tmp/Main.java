@@ -13,10 +13,17 @@ public class Main {
     //CsvPrinter.imprimirPorFilas(df);
     CsvPrinter.imprimirPorFilas(df);
 
-    String[] x = {"0","1"};
+    //String[] x = {"0","1"};
+    String[] x = {"ColumnaBoolean","ColumnaNum", "ColumnaPruebas"};
     df.orderPorColumnas(x);
 
     CsvPrinter.imprimirPorFilas(df);
+
+
+    CsvPrinter.imprimirPorFilas(df2);
+    String[] xxx = {"0","1","2"};
+    df2.orderPorColumnas(xxx);
+    CsvPrinter.imprimirPorFilas(df2);
 
 
     String[] etiFilas = {"1","2"};

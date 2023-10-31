@@ -1,5 +1,7 @@
 package TP_Integrador_tmp;
 
+import javax.lang.model.util.ElementScanner6;
+
 import javafx.geometry.Orientation;
 
 public class Dato_Numerico extends Dato {
@@ -28,6 +30,10 @@ public class Dato_Numerico extends Dato {
     public int compareTo(Dato o) 
     { 
         Long ori = (Long) this.valor;
+
+        if (o.isNA())
+            return 1;
+        
         Long des = (Long) o.valor;
  
         return ori.compareTo(des);
