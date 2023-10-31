@@ -376,8 +376,8 @@ public void orderPorColumnas (String [] ColumnasOrden)
 
             if ( (valorCompare) > 0 )
             {
-                this.RowArray.add(i-1, this.RowArray.get(i));
-                this.RowArray.add(i, etiquetaPrevia);
+                this.RowArray.set(i-1, etiquetaActual);
+                this.RowArray.set(i, etiquetaPrevia);
                 huboCambio = true;
             }
 

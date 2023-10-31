@@ -34,14 +34,14 @@ public class Fila implements Comparable
 
         do 
         {
-            Dato datoX = this.rowData[0];
-            Dato datoY = x.rowData[0];
+            Dato datoX = this.rowData[i];
+            Dato datoY = x.rowData[i];
             int tmpCompare = datoX.compareTo(datoY);
 
             if ( tmpCompare == 0)
                 i++;
             else
-                return this.rowData[0].compareTo( x.rowData[0] );
+                return tmpCompare ;
         } while (i < total);
 
         return 0;
