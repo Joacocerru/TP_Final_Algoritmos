@@ -1,31 +1,29 @@
 package TP_Integrador_tmp;
+
 import java.lang.Cloneable;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
-public class Dato  implements Cloneable, Comparable<Dato>
-{
-   public Object valor;    
+public class Dato implements Cloneable, Comparable<Dato>{
 
+protected Object valor;    
 
-//Constructor   
+//-----------------------------------------------------------------
+//Constructor 
 public Dato()
 {
     this.valor = new Object();
 }
 
-public Dato(Object x)
+public Dato(Object valor)
 {
-    this.valor = new Object();
-    this.valor = x;
+    this.valor = valor;
 }
+//------------------------------------------------------------
 
 public Object getDato()
 {
     return this.valor;
-}
-
-public String getDatoToString()
-{
-    return this.valor.toString();
 }
 
 public boolean isNA ()
@@ -47,75 +45,63 @@ public String printValor()
 {
     return this.valor.toString();
 }
-
+//------------------------------------------------------------ 
 @Override
-public Object clone() throws CloneNotSupportedException
-{
-    Dato newDato = new Dato(this.valor);
-    return newDato;
-}
+public Object clone() {
+    try {
+        // Realiza una copia profunda del objeto Dato
+        Dato copia = (Dato) super.clone();
 
-@Override
-public int compareTo(Dato otroDato) 
-{ 
-    //return this.valor.toString().compareTo(o.valor.toString());
-    if (this.isNA() )
-        return -1;
-    
-    if (this.valor instanceof Number && (otroDato.valor instanceof Number || otroDato instanceof Dato_NA) ) 
-    {
-        if (otroDato.isNA() )
-            return 1; // comparamos un Nro y un NA
-        else
-            {
-                // Ambos valores son números
-                double valorThis = ((Number) this.valor).doubleValue();
-                double valorOtro = ((Number) otroDato.valor).doubleValue();
+        // Si el valor es clonable, se clona
+        if (this.valor instanceof Cloneable) {
+            copia.valor = ((Object) this.valor).clone();
+        }
 
-                if (valorThis < valorOtro)
-                    return -1; // this < otroDato
-                else if (valorThis > valorOtro)
-                    return 1; // this > otroDato
-                else
-                    return 0; // this == otroDato
-            }
-    } 
-    
-    if (this instanceof Dato_String && (otroDato instanceof Dato_String || otroDato instanceof Dato_NA) ) 
-    {
-        if (otroDato.isNA() )
-            return 1; // comparamos un Nro y un NA
-        else
-            {
-                // Ambos valores son instancias de Dato_String
-                String valorThis = (String) this.valor;
-                String valorOtro = (String) otroDato.valor;
-                return valorThis.compareTo(valorOtro);
-            }
-    } 
+        return copia;
 
-    if (this instanceof Dato_Boolean && (otroDato instanceof Dato_Boolean || otroDato instanceof Dato_NA) ) 
-    {
-        if (otroDato.isNA() )
-            return 1; // comparamos un Nro y un NA
-        else
-            {
-                // Maneja la comparación específica de Dato_Boolean
-                boolean valorThis = (Boolean) this.valor;
-                boolean valorOtro = (Boolean) otroDato.valor;
-
-                if (valorThis == valorOtro)
-                    return 0; // this == otroDato
-                else if (valorThis)
-                    return 1; // this == true y otroDato == false
-                else
-                    return -1; // this == false y otroDato == true
-            }
+    } catch (CloneNotSupportedException e) {
+        throw new AssertionError("La clonación no es compatible");
     }
-    else 
-    {
+}
+//------------------------------------------------------------
+@Override
+public int compareTo(Dato otroDato) {
+    if (this.valor instanceof Number && otroDato.valor instanceof Number) {
+        // Ambos valores son números
+        double valorThis = ((Number) this.valor).doubleValue();
+        double valorOtro = ((Number) otroDato.valor).doubleValue();
+
+        if (valorThis < valorOtro) {
+            return -1; // this < otroDato
+        } else if (valorThis > valorOtro) {
+            return 1; // this > otroDato
+        } else {
+            return 0; // this == otroDato
+        }
+    } 
+    if (this instanceof Dato_String && otroDato instanceof Dato_String) {
+        // Ambos valores son instancias de Dato_String
+        String valorThis = (String) this.valor;
+        String valorOtro = (String) otroDato.valor;
+        return valorThis.compareTo(valorOtro);
+       } 
+    if (this instanceof Dato_Boolean && otroDato instanceof Dato_Boolean) {
+        // Maneja la comparación específica de Dato_Boolean
+        boolean valorThis = (Boolean) this.valor;
+        boolean valorOtro = (Boolean) otroDato.valor;
+
+        if (valorThis == valorOtro) {
+            return 0; // this == otroDato
+        } else if (valorThis) {
+            return 1; // this == true y otroDato == false
+        } else {
+            return -1; // this == false y otroDato == true
+        }
+        }
+    else {
         throw new UnsupportedOperationException("Los valores no son comparables");
     }
 }
-
+//------------------------------------------------------------
 }
+//------------------------------------------------------------

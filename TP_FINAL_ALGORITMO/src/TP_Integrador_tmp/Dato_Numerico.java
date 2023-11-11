@@ -1,8 +1,5 @@
 package TP_Integrador_tmp;
 
-import javax.lang.model.util.ElementScanner6;
-
-import javafx.geometry.Orientation;
 
 public class Dato_Numerico extends Dato {
     
@@ -25,18 +22,27 @@ public class Dato_Numerico extends Dato {
     {
         this.valor = Long.parseLong(x.toString());
     }
-
+    
     @Override
-    public int compareTo(Dato o) 
-    { 
-        Long ori = (Long) this.valor;
-
-        if (o.isNA())
-            return 1;
-        
-        Long des = (Long) o.valor;
- 
-        return ori.compareTo(des);
+public String toString() {
+    if (valor != null) {
+        return valor.toString();  // Convierte el número a una cadena
+    } else {
+        return "NA";  // O cualquier otra representación que desees para valores nulos
+    }
     }
 
+    @Override
+    public Object clone() {
+    if (valor instanceof String) {
+        return new Dato_Numerico((String) valor);
+    } else if (valor instanceof Integer) {
+        return new Dato_Numerico((int) valor);
+    } else if (valor instanceof Long) {
+        // Convierte el valor Long a int y luego crea un nuevo Dato_Numerico
+        return new Dato_Numerico(((Long) valor).intValue());
+    } else {
+        throw new UnsupportedOperationException("Tipo de dato no compatible en Dato_Numerico.");
+    }
+}
 }

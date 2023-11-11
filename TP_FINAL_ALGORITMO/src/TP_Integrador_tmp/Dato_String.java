@@ -37,7 +37,19 @@ public class Dato_String extends Dato {
     public boolean isNA ()
     {
         return false;
+    } 
+    @Override
+    public String toString() {
+        if (valor != null) {
+            return ((String) valor).toString();    // Devuelve simplemente el valor de tipo String
+    } else {
+        return "NA";  // O cualquier otra representación que desees para valores nulos
     }
-
+    }
+        @Override
+        public Object clone() {
+        return new Dato_String((String) valor); // Clona la instancia de Dato_String
+        }
+    
 
 }

@@ -2,6 +2,8 @@ package TP_Integrador_tmp;
 
 
 public class Dato_Boolean extends Dato {
+
+    private boolean valor1;
     
     public Dato_Boolean(Boolean s)
     {
@@ -10,7 +12,7 @@ public class Dato_Boolean extends Dato {
 
     public Dato_Boolean(Object s)
     {
-        this.valor = Boolean.parseBoolean(s.toString().toUpperCase());
+        this.valor = Boolean.parseBoolean(s.toString());
     }
 
     public Object getDato()
@@ -20,15 +22,17 @@ public class Dato_Boolean extends Dato {
 
     public void setValor (Object x)
     {
-        this.valor = Boolean.parseBoolean(x.toString().toUpperCase()); 
+        this.valor = Boolean.parseBoolean(x.toString()); 
     }
 
-    public int compareTo(Dato o) 
-    { 
-        Boolean ori = (Boolean) this.valor;
-        Boolean des = (Boolean) o.valor;
-        int resultado = ori.compareTo(des) ;
-        return resultado;
-    }
+    // Constructor y otros métodos
     
+    @Override
+    public String toString() {
+        return Boolean.toString(valor1);  // Convierte el booleano a una cadena
+    }
+    @Override
+    public Object clone() {
+    return new Dato_Boolean((boolean) valor); // Clona la instancia de Dato_Boolean
+    }
 }

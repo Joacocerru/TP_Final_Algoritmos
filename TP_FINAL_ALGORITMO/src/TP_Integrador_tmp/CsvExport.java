@@ -20,10 +20,8 @@ public class CsvExport extends CsvPrinter {
             writer.append("\n");
 
             // Escribir los datos
-            //for (Integer etiqueta : df.rowMap.keySet()) 
-            for (int i=0; i< df.getNroRegistros(); i++)
-            {
-                Fila fila = df.getFila(i); // Obtener la fila correspondiente
+            for (String etiqueta : df.rowMap.keySet()) {
+                Fila fila = df.rowMap.get(etiqueta); // Obtener la fila correspondiente
 
                 for (int c = 0; c < df.getNroColumnas(); c++) {
                     writer.append(fila.getDato(c).toString());

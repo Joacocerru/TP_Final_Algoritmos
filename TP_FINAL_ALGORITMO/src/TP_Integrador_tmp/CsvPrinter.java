@@ -1,5 +1,7 @@
 package TP_Integrador_tmp;
 
+import java.util.List;
+
 // IMPRESION DF POR FILAS ---------------------------------------------------------------------------    
 // 'header' contiene el encabezado y 'data' contiene los datos del archivo CSV
 
@@ -47,10 +49,9 @@ public class CsvPrinter {
                     
                     Fila fila = df.getFilaPorEtiqueta(etiqueta); // Obtener la fila correspondiente
                     
-                    for (int c = 0; c < df.getNroColumnas(); c++) 
-                    {
-                        Dato tmpDato = fila.getDato(c);
-                        System.out.print(tmpDato.valor.toString() +"\t");
+                    for (int c = 0; c < df.getNroColumnas(); c++) {
+
+                        System.out.print(fila.getDato(c) +"\t");
                     }
                     System.out.println();
                 }          
@@ -58,17 +59,17 @@ public class CsvPrinter {
             }
             else
             {
-                for (int i=limite; i > 0; i--)
+                for (int i=limite; i > 0; i++)
                 //for (String etiqueta : df.getAllHeaderRows()) 
                 {
-                    String etiqueta = df.getHeaderRows( df.getNroRegistros() -  i); 
+                    String etiqueta = df.getHeaderRows(i); 
                     System.out.print(etiqueta +" |"+"\t"); // Imprimir etiqueta de fila    
                     
                     Fila fila = df.getFilaPorEtiqueta(etiqueta); // Obtener la fila correspondiente
                     
                     for (int c = 0; c < df.getNroColumnas(); c++) {
 
-                        System.out.print(fila.getDato(c).valor.toString() +"\t");
+                        System.out.print(fila.getDato(c) +"\t");
                     }
                     System.out.println();
                 }
@@ -94,7 +95,7 @@ public class CsvPrinter {
             if (f == 0) {
                 for (int c = 0; c < df.getNroColumnas(); c++) {
                     System.out.print(""+"\t");
-                    System.out.print("Col " + (c+1) + ":");
+                    System.out.print("Col " + (c) + ":");
                 }
                 System.out.println(""); 
             }  
@@ -167,6 +168,26 @@ public class CsvPrinter {
     {
         imprimirPorFilasGral(df, cant,"D");
     }
+//--------------------------------------------------------------
+// METODO PARA IMPRIMIR VISUALIZACION REDUCIDA    
+public static void imprimirVistaReducida(DataFrame df, List<String> etiquetasFilas, List<String> etiquetasColumnas) {
+        // Imprimir encabezados de columnas
+        for (String etiquetaColumna : etiquetasColumnas) {
+            System.out.print("\t"+etiquetaColumna + " ");
+        }
+        System.out.println();
+
+        // Imprimir filas
+        for (String etiquetaFila : etiquetasFilas) {
+            System.out.print(etiquetaFila + " |"+"\t");
+            for (String etiquetaColumna : etiquetasColumnas) {
+                Dato valor = df.getValor(etiquetaFila, etiquetaColumna);
+                System.out.print(valor + "\t"+ "\t");
+            }
+            System.out.println();
+        }
+    }
+//---------------------------------------------------------------
 }
 
 

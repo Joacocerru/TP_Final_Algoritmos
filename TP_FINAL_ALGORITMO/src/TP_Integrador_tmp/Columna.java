@@ -1,20 +1,22 @@
 package TP_Integrador_tmp;
 
 import java.lang.Cloneable;
-
-public class Columna implements Cloneable
-{
+import java.util.ArrayList;
+import java.util.List;
+public class Columna implements Cloneable{
     private String tipoDato; // Tipo de dato de la columna
     private Integer _cantDatos; // Cantidad Datos
     public Dato[] listaDatos;   //Array de datos de la columna
 
-    private String etiqueta; //Etiqueta de la columna
+    protected String etiqueta; //Etiqueta de la columna
+    protected List<Dato> datos;
 
 public Columna()
 {
         this.listaDatos = null;
         this.tipoDato = "Vacia";
         this._cantDatos = 0;
+        this.datos = new ArrayList<>();
 }
 
 // ******* Nuevo constructor ************************
@@ -24,6 +26,7 @@ public Columna(String etiqueta) {
     this.listaDatos = null;
     this.tipoDato = "Vacia";
     this._cantDatos = 0;
+    this.datos = new ArrayList<>(); // Inicializa la lista de datos
 }
 
 //**************************************************** 
@@ -55,11 +58,8 @@ public Dato getDato (Integer indice)
 {
     return this.listaDatos[indice];
 }
-
-public String getEtiqueta() {
-    return etiqueta;
-}
-
+//--------------------------------------------------------------------------
+// METODO PARA SETEAR DATO DE LA COLUMNA POR POSICION FILA
 
 public class IndiceFueraDeRangoException extends Exception {
     public IndiceFueraDeRangoException(String mensaje) {
@@ -67,81 +67,41 @@ public class IndiceFueraDeRangoException extends Exception {
     }
 }
 
-public void setDato (Integer posicion, Object nuevoValor) throws IndiceFueraDeRangoException
-{
-    if (posicion < 0 || posicion > this.listaDatos.length)
-        throw new IndiceFueraDeRangoException("Índice fuera de rango: " + posicion);
-
-    if ( nuevoValor instanceof java.lang.String )
-    {
-        if ( this.tipoDato == "Boolean" && nuevoValor.toString().toUpperCase().equals("TRUE") )
-        {
-            this.listaDatos[posicion].setValor(nuevoValor);
-        }
-        if ( this.tipoDato == "Boolean" && nuevoValor.toString().toUpperCase().equals("FALSE") )
-        {
-            this.listaDatos[posicion].setValor(nuevoValor);
-        }
-
-
-        if ( this.tipoDato == "String" && nuevoValor.toString().equals("") )
-        {
-            // crear un nuevo dato NA y asignarlo
-        }
-        
-        if ( this.tipoDato == "String" && this.listaDatos[posicion].isNA())
-        {
-            this.listaDatos[posicion] = new Dato_String(nuevoValor.toString().trim());
-        }
-        else if ( this.tipoDato == "String" && !this.listaDatos[posicion].isNA())
-        {
-            this.listaDatos[posicion].setValor(nuevoValor);
-        }
-        else 
-        {
-            // EXCEPCION
-        }
-    }
-
-    if (nuevoValor instanceof java.lang.Number)
-    {
-        if ( this.tipoDato == "Numerica" )
-        {
-            this.listaDatos[posicion].setValor(nuevoValor);
-        }else if ( this.tipoDato == "String" )
-        {
-            this.listaDatos[posicion].setValor(nuevoValor);
-        }else if ( this.tipoDato == "Boolean" && ((Integer) nuevoValor) == 0 )
-        {
-            this.listaDatos[posicion].setValor("FALSE");
-        }else if ( this.tipoDato == "Boolean" && ((Integer) nuevoValor) == 1 )
-        {
-            this.listaDatos[posicion].setValor("TRUE");
-        }
+public void setDato (Integer indice, Object Valor) throws IndiceFueraDeRangoException{
+    if (indice >= 0 && indice < listaDatos.length) {
+        listaDatos[indice].setValor(Valor);
+    } else {
+        // Lanza una excepción con un mensaje personalizado.
+        throw new IndiceFueraDeRangoException("Índice fuera de rango: " + indice);
     }
 }
-
-@Override
-public Columna clone() throws CloneNotSupportedException {
-   // try {
-        String tmpEtiqueta = new String(this.etiqueta);
-        String tmpTipoDato = new String(this.tipoDato);
-
-        Columna columnaCopia = (Columna) super.clone();
-        columnaCopia.etiqueta = tmpEtiqueta;
-        columnaCopia.tipoDato = tmpTipoDato;
-        columnaCopia.listaDatos = new Dato[this._cantDatos];
-        
-    // Realiza una copia profunda de los objetos tipo Dato en la lista
-    for (int i=0; i < this._cantDatos; i++)
-    {
-        columnaCopia.listaDatos[i] = (Dato) ((Dato) this.listaDatos[i]).clone() ;
-    }    
-        return columnaCopia;
-
-    //} catch (CloneNotSupportedException e) {
-       // throw new AssertionError(); // 
-    //}
+//--------------------------------------------------------------------------
+public String getEtiqueta() {
+    return etiqueta;
 }
-
+// Implementación del método clone -------------------------------------------------
+    @Override
+    public Columna clone() {
+        try {
+            //-----------------------------------------------
+        // Clona la estructura principal (Columna)
+        Columna copia = (Columna) super.clone();
+        // Realiza una copia profunda de la lista de datos (arreglo)
+        if (listaDatos != null) {
+            copia.listaDatos = new Dato[listaDatos.length];
+            for (int i = 0; i < listaDatos.length; i++) {
+                if (listaDatos[i] instanceof Cloneable) {
+                    copia.listaDatos[i] = (Dato) listaDatos[i].clone();
+                } else {
+                    // Maneja el caso en el que el dato no es clonable (ajusta esto según tus necesidades)
+                    copia.listaDatos[i] = listaDatos[i]; // Si no es clonable, agrega la referencia directa
+                }
+            }
+        }
+        return copia;
+    } catch (CloneNotSupportedException e) {
+        throw new AssertionError("La clonación no es compatible");
+    }   
+}
+//----------------------------------------------------------------------------------
 }

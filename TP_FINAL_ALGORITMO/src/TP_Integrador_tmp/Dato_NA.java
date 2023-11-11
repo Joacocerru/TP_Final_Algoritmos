@@ -23,13 +23,12 @@ public class Dato_NA extends Dato {
     {
         this.valor = null;
     }
-
-    public int compareTo(Dato o) 
-    {
-        if (o instanceof Dato_NA)
-            return 1;
-        else
-            return -1;
+    @Override
+    public String toString() {
+        return "NA";  // Devuelve una cadena que indica la ausencia de datos
     }
-
+    @Override
+    public Object clone() {
+        return new Dato_NA(); // Clona la instancia de Dato_NA
+    }
 }

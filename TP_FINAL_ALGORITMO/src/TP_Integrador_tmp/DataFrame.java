@@ -4,63 +4,65 @@ package TP_Integrador_tmp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-//import java.util.ListIterator;
 import java.util.Map;
+
 import TP_Integrador_tmp.Columna.IndiceFueraDeRangoException;
 
+import java.lang.Cloneable;
 
-public class DataFrame {
+public class DataFrame implements Cloneable{
 
-    private List<Columna> dataColumnar = new ArrayList<>(); // ArrayList para los datos - Array de columnas
+    protected List<Columna> dataColumnar = new ArrayList<>(); // ArrayList para los datos - Array de columnas
     protected List<Fila> dataFilas = new ArrayList<>();     // Array de filas
-    
-    // HashMap llamado columnMap para mapear 
-    // las etiquetas de las columnas a las instancias de Columna
-    //********************************************************************
-    private List<String> ColumnArray = new ArrayList<>(); // Array de Etiquetas de columnas
-    private List<String> RowArray = new ArrayList<>(); // Array de Etiquetas de columnas
-
-    private Map<String, Columna> columnMap = new HashMap<>();   // Indice para las columnas
+     
+    protected List<String> ColumnArray = new ArrayList<>(); // Array de Etiquetas de columnas
+    protected List<String> RowArray = new ArrayList<>(); // Array de Etiquetas de columnas
+    //------------------------------------------------------------------------------------------
+    // HashMap llamado columnMap y rowMap para mapear 
+    // las etiquetas de las columnas y Filas a las instancias de Columna y Fila
+    protected Map<String, Columna> columnMap = new HashMap<>();   // Indice para las columnas
     protected Map<String, Fila> rowMap = new HashMap<>();      // HashMap Fila Integer
 
-    //********************************************************************
-
+    //------------------------------------------------------------------------------------------
     private Integer _nroColumnas; // VAR CON CANT. DE COLUMNAS DS
+    
     private Integer _nroRegistros; // VAR CON CANT FILAS DEL DS
-
-// CONSTRUCTOR - CON LECTURA CSV
-    public DataFrame(String csvFile, String csvDelimiter, String headerSN) 
-    {
+    //-----------------------------------------------------------------------------------------
+    // Constructor sin parámetros
+    public DataFrame() {
+        this.dataColumnar = new ArrayList<>();
+        this.dataFilas = new ArrayList<>();
+        this.ColumnArray = new ArrayList<>();
+        this.RowArray = new ArrayList<>();
+        this.columnMap = new HashMap<>();
+        this.rowMap = new HashMap<>();
+        this._nroColumnas = 0;
+        this._nroRegistros = 0;
+    }
+    //-------------------------------------------------------------------------------
+    // CONSTRUCTOR - CON LECTURA CSV
+    public DataFrame(String csvFile, String csvDelimiter, String headerSN) {
         List<String[]> data = new ArrayList<>(); // ArrayList para los datos - Registros
         List<String> header = new ArrayList<>(); // ArrayList para el encabezado
 
         this._nroColumnas = 0;
         this._nroRegistros = 0;
-
+    
+        //-------------------------------------------------------------------------------------
         // Carga la informacion de CSV en Data y genera los Headers
         if (headerSN.equals("S") )
         { CargarCsv.cargarDatosDesdeCsvConHead(header, data, csvFile, csvDelimiter);}
         else
         { CargarCsv.cargarDatosDesdeCsvSinHead(header, data, csvFile, csvDelimiter);}
-
+        
+        //------------------------------------------------------------------------------------
         // Arma la estructura columnar en dataColumnar
         ArmaColumnar.armaDataColumnar(header, data, this.dataColumnar);
         
-        this.contarColumnas();
-        this.contarRegistros();
-        
+        //------------------------------------------------------------------------------------
         // Genera Instancias de filas y las mapea con el HASHMAP de FILAS -
-        
-        for (int rowIndex = 0; rowIndex < this.getNroRegistros(); rowIndex++) 
-        {
-            Dato[] rowData = new Dato[ this.getNroColumnas()];
-            
-            for ( int colIndex = 0; colIndex < this.getNroColumnas(); colIndex++)
-            {
-                //Object[] rowData = data.get(rowIndex);
-                rowData[colIndex] = this.dataColumnar.get(colIndex).listaDatos[rowIndex];
-            }
-        
+        for (int rowIndex = 0; rowIndex < data.size(); rowIndex++) {
+            Object[] rowData = data.get(rowIndex);
             String etiqueta = Integer.toString(rowIndex); // Establece una etiqueta para la fila
             Fila fila = new Fila(etiqueta, rowData); 
             dataFilas.add(fila);
@@ -68,8 +70,8 @@ public class DataFrame {
             rowMap.put(etiqueta, fila);
             this.RowArray.add(etiqueta);
         }
-        
-        //***** crea instancias de Columna y las mapea utilizando las etiquetas *******************
+        //------------------------------------------------------------------------------------
+        // crea instancias de Columna y las mapea utilizando las etiquetas 
         // Crea el array de etiquetas y el maps de columnas 
 
         for (int i = 0; i < header.size(); i++) 
@@ -81,35 +83,40 @@ public class DataFrame {
             columnMap.put(etiqueta, columna);
             this.ColumnArray.add(etiqueta);
         }
+
+        this.contarColumnas();
+        this.contarRegistros();
     }
 
-    //----------------------------------------------------
+    //--------------------------------------------------------------
     // CUENTA COLUMNAS
     private void contarColumnas() 
     {
         this._nroColumnas = this.dataColumnar.size();    
     }
 
+    //--------------------------------------------------------------
     // CUENTA REGISTROS
     private void contarRegistros() 
     {
         this._nroRegistros = this.dataColumnar.get(0).getCantDatos();
     }
 
-//----------------------------------------------------
+    //-------------------------------------------------------------
     // METODO GETTER NRO COLUMNAS
 
     public int getNroColumnas() {
         return this._nroColumnas;
     }
 
+    //-------------------------------------------------------------
     // METODO GETTER NRO COLUMNAS
 
     public int getNroRegistros() {
     return this._nroRegistros;
     }
 
-//----------------------------------------------------
+//----------------------------------------------------------------
 // METODO GETTER DE UNA COLUMNA
 // Eliminamos por lo que dijo el profesor de no usar la posicion
 //    public List<Columna> getColumnaPorRangoIndice(int desde, int hasta) 
@@ -126,8 +133,9 @@ public class DataFrame {
 //        return listaColumnas ;
 //    }
 
-    //****************************************************************************
-    //******* METODO PARA ACCEDER A COLUMNA POR ETIQUETA *********************
+    //-------------------------------------------------------------------------------
+    //METODO PARA ACCEDER A COLUMNA POR ETIQUETA 
+    //------------------------------------------------------------------------------
 
     public Columna getColumnaPorEtiqueta(String etiqueta) 
     {
@@ -154,7 +162,7 @@ public class DataFrame {
             return null; // armar exception
     }
 
-    public List<Columna> getColumnasListaEtiquetas(String[] etiquetas) 
+    public List<Columna> getColumnaListaEtiquetas(String[] etiquetas) 
     {
         int total = etiquetas.length;
         List<Columna> listaColumnas = new ArrayList<>();
@@ -174,10 +182,9 @@ public class DataFrame {
         return this.getColumnaPorEtiqueta(clave);
     } 
 
-    //****************************************************************************
-    // METODO PARA ACCEDER A FILA POR LISTA DE ETIQUETAS ------------------------
-
-    //----------------------------------------------------
+    //-----------------------------------------------------------------------
+    // METODO PARA ACCEDER A FILA POR LISTA DE ETIQUETAS 
+    //-----------------------------------------------------------------------
     public Fila getFilaPorEtiqueta(String etiquetaFila) 
     {
         return this.rowMap.get(etiquetaFila);
@@ -189,7 +196,7 @@ public class DataFrame {
         return this.rowMap.get(clave) ;
     }
 
-    public List<Fila> getFilasListaEtiquetas(String[] etiquetas) 
+    public List<Fila> getFilaListaEtiquetas(String[] etiquetas) 
     {
         int total = etiquetas.length;
         List<Fila> listaFilas = new ArrayList<>();
@@ -214,47 +221,8 @@ public class DataFrame {
         }
         return posicion;
     }
-
-    public List<Fila> getFilasColumnasListaEtiquetas(String[] etiquetasFila, String[] etiquetasColumna) 
-    {
-        int totalFilas = etiquetasFila.length;
-        int totalColumnas = etiquetasColumna.length;
-
-         List<Fila> listaFilas = new ArrayList<>();
-
-        for (int i=0; i < totalFilas; i++)
-        {
-            Dato[] newDato = new Dato[totalColumnas];
-
-            for (int x=0; x < totalColumnas; x++)
-            {
-                int posCol = this.getPosicicionColumnaEtiqueta(etiquetasColumna[x]);
-                newDato[x] = (this.getFilaPorEtiqueta(etiquetasFila[i])).getDato(posCol) ;
-            }
-            Fila newFila = new Fila(Integer.toString(i), newDato);
-            listaFilas.add(newFila);
-        }
-        
-        return listaFilas;
-    }
-
-    public Fila getFilasColumnasListaEtiquetas(String etiquetasFila, String[] etiquetasColumna) 
-    {
-        int totalColumnas = etiquetasColumna.length;
-
-            Dato[] newDato = new Dato[totalColumnas];
-
-            for (int x=0; x < totalColumnas; x++)
-            {
-                int posCol = this.getPosicicionColumnaEtiqueta(etiquetasColumna[x]);
-                newDato[x] = (this.getFilaPorEtiqueta(etiquetasFila)).getDato(posCol) ;
-            }
-            Fila newFila = new Fila("0", newDato);
-     
-        return newFila;
-    }
-
-// METODO GETVALOR-----------------------------
+//----------------------------------------------------------------------    
+// METODO GETVALOR
 
     public Dato getValor(String etiquetafila, String etiquetaColumna) 
     {
@@ -270,8 +238,20 @@ public class DataFrame {
         
         return this.getValor(tmpEtiquetaFila, tmpEtiquetaColumna);
     }
+//-------------------------------------------------------------------------------------
+// METODO SETVALOR
 
-//----------------------------------------------------
+    public void setValorDataFrame(String etiquetafila, String etiquetaColumna, Object Valor) 
+    {
+        Columna tmpColumna = getColumnaPorEtiqueta(etiquetaColumna);
+        Integer posFila = this.getPosicionFilaEtiqueta(etiquetafila);
+      try {
+        tmpColumna.setDato(posFila, Valor);
+    } catch (IndiceFueraDeRangoException e) {
+        System.err.println("Error al establecer el valor: " + e.getMessage());
+    }
+    }
+//-----------------------------------------------------------------------------
 // METODO GETTER DEL HEADER
 
     public List<String> getAllHeaderColumn() 
@@ -308,8 +288,8 @@ public class DataFrame {
         return this.RowArray.get(indice);
     }
 
-//----------------------------------------------------
-// METODO 
+//-------------------------------------------------------------------------
+// METODO PARA VERIFICAR SI EL REGISTRO ESTA VACIO
 
 public Boolean isEmpty() {
     if (this._nroRegistros == 0 )
@@ -318,7 +298,8 @@ public Boolean isEmpty() {
         {return false;}
 }
 
-// Método para imprimir etiquetas de las filas ---------------------------
+//-----------------------------------------------------------------------------
+// Método para imprimir etiquetas de las filas 
 
 public void imprimirEtiquetasFilas() {
     System.out.print("Etiquetas de las filas: ");
@@ -329,126 +310,91 @@ public void imprimirEtiquetasFilas() {
     System.out.println(" ");
 }
 
-
-// METODOS SET DE VALOR -----
-public void setValorPorEtiqueta (String etiquetaFila, String etiquetaColumna, Object nuevoValor)
-{
-    Columna tmpColumna = getColumnaPorEtiqueta(etiquetaColumna);
-    Integer posFila = this.getPosicionFilaEtiqueta(etiquetaFila);
-
+//--------------------------------------------------------------------------------
+@Override
+public DataFrame clone() throws CloneNotSupportedException {
     try {
-            tmpColumna.setDato (posFila, nuevoValor);
-    
-        } catch (IndiceFueraDeRangoException e) {
-            System.err.println("Error al establecer el valor: " + e.getMessage()); }
-    
-    Dato[] tmpDato = new Dato [this._nroColumnas];
-   
-    for (int col=0; col< this._nroColumnas; col++)
-    {
-        tmpDato [col] = (this.getValorPosicion(posFila, col));
+    // Clonar el objeto en sí
+    DataFrame copiaEstructura = (DataFrame) super.clone();
+
+    // Realizar una copia profunda de las columnas
+    copiaEstructura.dataColumnar = new ArrayList<>();
+
+    for (Columna columna : this.dataColumnar) {
+        Columna columnaCopia = columna.clone();
+        copiaEstructura.dataColumnar.add(columnaCopia);
     }
-    Fila fila = new Fila(etiquetaFila, tmpDato); 
 
-    dataFilas.add(posFila, fila);
-    rowMap.remove(etiquetaFila);
-    rowMap.put(etiquetaFila, fila);
-   this.RowArray.add(etiquetaFila);
+    // Clonar el columnMap y los arrays de etiquetas
+    
+    copiaEstructura.columnMap = new HashMap<>(this.columnMap);
+    copiaEstructura.rowMap = new HashMap<>(this.rowMap);
+    copiaEstructura.ColumnArray = new ArrayList<>(this.ColumnArray);
+    copiaEstructura.RowArray = new ArrayList<>(this.RowArray);
+ 
+    return copiaEstructura;
+
+    } catch (CloneNotSupportedException e) {
+    throw new AssertionError();
+    }
 }
-
-public void orderPorColumnas (String [] ColumnasOrden)
-{
-    int n = this.RowArray.size();
-    boolean huboCambio;
-
-    do {
-        huboCambio = false;
-
-        for (int i=1; i<n;i++)
-        {
-            String etiquetaPrevia = this.RowArray.get(i-1);
-            String etiquetaActual = this.RowArray.get(i);
-
-            Fila filaPrevia = this.getFilasColumnasListaEtiquetas(etiquetaPrevia, ColumnasOrden);
-            Fila filaActual = this.getFilasColumnasListaEtiquetas(etiquetaActual, ColumnasOrden);
-
-            int valorCompare = filaPrevia.compareTo(filaActual);
-
-            if ( (valorCompare) > 0 )
-            {
-                this.RowArray.set(i-1, etiquetaActual);
-                this.RowArray.set(i, etiquetaPrevia);
-                huboCambio = true;
-            }
-
-        }
-        n--;
-    } while (huboCambio == true);
-}
-
-
 //--------------------------------------------------------------------------------------------------------------
 // METODO PARA DADO UN VALOR BUSCARLO EN LA ESTRUCTURA Y DEVOLVER 
-//SU POSICION (DANDO SUS ETIQUETAS)
+// SU POSICION (DANDO SUS ETIQUETAS)
 
-public String buscarValor(Object valorBuscado) 
-{
-    for (String etiquetaColumna : ColumnArray) 
-    {
-        for (int indiceColumna = 0; indiceColumna < this.getNroColumnas(); indiceColumna++) 
-        {
+public String buscarValor(Object valorBuscado) {
+    for (String etiquetaColumna : ColumnArray) {
+        for (int indiceColumna = 0; indiceColumna < this.getNroColumnas(); indiceColumna++) {
             Columna columna = this.getColumna(indiceColumna);
-            for (int indiceFila = 0; indiceFila < this.getNroRegistros(); indiceFila++) 
-            {
+            for (int indiceFila = 0; indiceFila < this.getNroRegistros(); indiceFila++) {
                 Dato dato = columna.getDato(indiceFila);
 
-                if (valorBuscado.getClass() == dato.getClass()) 
-                {
-                    if (valorBuscado instanceof Dato) 
-                    {
-                        Dato valorDatoBuscado = (Dato) valorBuscado;
-                        if (dato.compareTo(valorDatoBuscado) == 0) 
-                        {
-                            String etiquetaCol = columna.getEtiqueta();
-                            String etiquetaFila = this.getFila(indiceFila).getEtiqueta();
-                            return "El elemento " + valorDatoBuscado.getDato() + " fue encontrado en fila: " + etiquetaFila + ", columna: " + etiquetaCol;
+            if (valorBuscado.getClass() == dato.getClass()) {
+
+                if (valorBuscado instanceof Dato) {
+                    Dato valorDatoBuscado = (Dato) valorBuscado;
+                    if (dato.compareTo(valorDatoBuscado) == 0) {
+                        String etiquetaCol = columna.getEtiqueta();
+                        String etiquetaFila = this.getFila(indiceFila).getEtiqueta();
+                        return "El elemento " + valorDatoBuscado.getDato() + " fue encontrado en fila: " + etiquetaFila + ", columna: " + etiquetaCol;
                         }
                     } 
                 }
             }
         }
     }
-    
     return "Elemento no encontrado en el DataFrame.";
 }
 
-public int buscarEnColumna(Columna columna, Object valor) 
-{
-    // Realiza una bÃºsqueda binaria en la columna
-    // Supongamos que los datos en la columna estÃ¡n ordenados
+public int buscarEnColumna(Columna columna, Object valor) {
+    // Realiza una búsqueda binaria en la columna
+    // (los datos en la columna deber estar ordenados)
 
     int izquierda = 0;
     int derecha = columna.getCantDatos() - 1;
 
-    while (izquierda <= derecha) 
-    {
+    while (izquierda <= derecha) {
         int medio = izquierda + (derecha - izquierda) / 2;
 
         Dato datoMedio = columna.getDato(medio);
 
-        if (datoMedio.equals(valor))
+        if (datoMedio.equals(valor)) {
             return medio;
+        }
 
-        if (datoMedio.compareTo((Dato) valor) < 0)
+        if (datoMedio.compareTo((Dato) valor) < 0) {
             izquierda = medio + 1;
-        else
+        } else {
             derecha = medio - 1;
+        }
     }
 
     return -1; // Elemento no encontrado en la columna
 }
+//----------------------------------------------------------------------------------------------------------------
 
+//-----------------------------------------------------------------------------------------------------------------------
 
+//----------------------------------------------------------------------------------------------------------------
 }
-
 //--------------------------------------------------------------------------------------------------------------
