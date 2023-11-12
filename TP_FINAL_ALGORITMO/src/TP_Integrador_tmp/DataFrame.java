@@ -324,6 +324,155 @@ public void imprimirEtiquetasFilas() {
     System.out.println(" ");
 }
 
+//-------------------------------------------------------------------------------
+// METODOS SET DE VALOR DE FILAS Y COLUMNAS
+public void setValorPorEtiqueta (String etiquetaFila, String etiquetaColumna, Object nuevoValor)
+{
+    Columna tmpColumna = getColumnaPorEtiqueta(etiquetaColumna);
+    Integer posFila = this.getPosicionFilaEtiqueta(etiquetaFila);
+
+    try {
+            tmpColumna.setDato (posFila, nuevoValor);
+    
+        } catch (IndiceFueraDeRangoException e) {
+            System.err.println("Error al establecer el valor: " + e.getMessage()); }
+    
+    Dato[] tmpDato = new Dato [this._nroColumnas];
+   
+    for (int col=0; col< this._nroColumnas; col++)
+    {
+        tmpDato [col] = (this.getValorPosicion(posFila, col));
+    }
+    Fila fila = new Fila(etiquetaFila, tmpDato); 
+
+    dataFilas.add(posFila, fila);
+    rowMap.remove(etiquetaFila);
+    rowMap.put(etiquetaFila, fila);
+   this.RowArray.add(etiquetaFila);
+}
+//---------------------------------------------------------------------------------
+
+
+public void eliminarColumna(String etiquetaColumna) {
+    int cantidadColumnas = getNroColumnas();
+    // Verificar si la columna existe
+    if (!columnMap.containsKey(etiquetaColumna)) {
+        System.out.println("La columna con etiqueta " + etiquetaColumna + " no existe.");
+        return;
+    }
+
+    // Obtener la posición de la columna
+    int posicion = getPosicicionColumnaEtiqueta(etiquetaColumna);
+
+    // Eliminar la columna de dataColumnar y ColumnArray
+    dataColumnar.remove(posicion);
+    ColumnArray.remove(etiquetaColumna);
+
+    // Actualizar el columnMap
+    columnMap.remove(etiquetaColumna);
+
+    // Actualizar la posición de las columnas restantes en columnMap
+    for (int i = 0; i < cantidadColumnas-1; i++) {
+        String etiquetaActual = ColumnArray.get(i);
+        columnMap.put(etiquetaActual, dataColumnar.get(i));
+    }
+
+    // Actualizar el número de columnas
+    contarColumnas();
+}
+//----------------------------------------------------------------------------------------------------------------
+// METODO PARA ELIMINAR UNA FILA DADA SU ETIQUETA
+public void eliminarFila(String etiquetaFila) {
+
+    int cantidadFilas = getNroRegistros();
+    // Verificar si la fila existe
+    if (!rowMap.containsKey(etiquetaFila)) {
+        System.out.println("La fila con etiqueta " + etiquetaFila + " no existe.");
+        return;
+    }
+
+    // Obtener la posición de la fila
+    int posicion = getPosicionFilaEtiqueta(etiquetaFila);
+
+    // Eliminar la fila de dataFilas y RowArray
+    dataFilas.remove(posicion);
+    RowArray.remove(etiquetaFila);
+
+    // Actualizar el rowMap
+    rowMap.remove(etiquetaFila);
+
+    // Actualizar la posición de las filas restantes en rowMap
+    for (int i = 0; i < cantidadFilas-1; i++) {
+        String etiquetaActual = RowArray.get(i);
+        rowMap.put(etiquetaActual, dataFilas.get(i));
+    }
+
+    // Actualizar el número de filas
+    contarRegistros();
+}
+
+//------------------------------------------------------------------------------------------------------------------
+/* 
+// METODO PARA CONCATENAR DOS DATAFRAME
+// Método para concatenar dos DataFrames verticalmente
+public DataFrame concatenar(DataFrame otroDataFrame) {
+    // Verificar que ambos DataFrames tengan las mismas columnas
+    if (!this.getAllHeaderColumn().equals(otroDataFrame.getAllHeaderColumn())) {
+        throw new IllegalArgumentException("Los DataFrames tienen columnas diferentes y no se pueden concatenar.");
+    }
+
+    // Crear una nueva instancia de DataFrame para almacenar la concatenación
+    DataFrame nuevaEstructura = new DataFrame();
+
+    if (this.getNroRegistros() == 0 && otroDataFrame.getNroRegistros() == 0) {
+        System.out.println("Ambas estructuras están vacías.");
+    } else {
+        // Copiar las columnas y etiquetas
+        for (String etiqueta : this.getAllHeaderColumn()) {
+            nuevaEstructura.dataColumnar.add(this.getColumnaPorEtiqueta(etiqueta).clone());
+            nuevaEstructura.ColumnArray.add(etiqueta);
+        }
+
+        // Concatenar las filas del primer DataFrame
+        for (int i = 0; i < this.getNroRegistros(); i++) {
+            Object[] datosFila = new Object[this.getNroColumnas()];
+
+            for (int j = 0; j < this.getNroColumnas(); j++) {
+                datosFila[j] = this.getValorPosicion(i, j).clone();
+            }
+
+            nuevaEstructura.dataFilas.add(new Fila(Integer.toString(nuevaEstructura.getNroRegistros()), datosFila));
+            nuevaEstructura.rowMap.put(Integer.toString(nuevaEstructura.getNroRegistros() - 1),
+            nuevaEstructura.dataFilas.get(nuevaEstructura.getNroRegistros()-1));
+            nuevaEstructura.RowArray.add(Integer.toString(nuevaEstructura.getNroRegistros() - 1));
+        }
+
+        // Concatenar las filas del segundo DataFrame
+        for (int i = 0; i < otroDataFrame.getNroRegistros(); i++) {
+            Object[] datosFila = new Object[otroDataFrame.getNroColumnas()];
+
+            for (int j = 0; j < otroDataFrame.getNroColumnas(); j++) {
+                datosFila[j] = otroDataFrame.getValorPosicion(i, j).clone();
+            }
+
+            nuevaEstructura.dataFilas.add(new Fila(Integer.toString(nuevaEstructura.getNroRegistros()), datosFila));
+            nuevaEstructura.rowMap.put(Integer.toString(nuevaEstructura.getNroRegistros() - 1),
+            nuevaEstructura.dataFilas.get(nuevaEstructura.getNroRegistros() - 1));
+            nuevaEstructura.RowArray.add(Integer.toString(nuevaEstructura.getNroRegistros() - 1));
+        }
+
+        // Actualizar el contador de registros
+        nuevaEstructura.contarRegistros();
+    }
+
+    return nuevaEstructura;
+} */
+//-----------------------------------------------------------------------------------------------------------------------
+
+//----------------------------------------------------------------------------------------------------------------
+}
+//--------------------------------------------------------------------------------------------------------------
+
 //--------------------------------------------------------------------------------
 @Override
 public DataFrame clone()  

@@ -56,14 +56,8 @@ CsvPrinter.imprimirPorFilas(df);
 
 DataFrame copiadf = null;
 
-try 
-{
-    //copiaDataFrame2 = df2.clone();
-    copiadf = df.clone();
-} catch (CloneNotSupportedException e) 
-    {
-        e.printStackTrace(); // Maneja la excepción de clonación 
-    }
+   //copiaDataFrame2 = df2.clone();
+copiadf = df.clone();
 
 
 
@@ -281,6 +275,93 @@ df.imprimirEtiquetasFilas();
 //--------------------------------------------------------------------------------
     
 //--------------------------------------------------------------------------------    
+}    
+//--------------------------------------------------------------------------------
+}
+//--------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
+// CASOS ESPECIALES DE VISTA REDUCIDA DEL DF - 
+// METODO PARA IMPRIMIR LAS PRIMERAS Y ULTIMAS FILAS
+
+    System.out.println("Informacion de las primeras filas del DataFrame (head)");
+    CsvPrinter.head(df, 2);
+
+    System.out.println("Informacion de las ultimas filas del DataFrame (tail)");
+    CsvPrinter.tail(df, 2);
+
+//-----------------------------------------------------------------------------------------------
+// METODO PARA ELIMINAR UNA FILA DEL DATAFRAME
+
+    System.out.println("eliminar una Fila del DataFrame");
+
+    df1.eliminarFila("3");
+
+    CsvPrinter.imprimirPorFilas(df1);
+
+//-----------------------------------------------------------------------------------------------
+// METODO PARA ELIMINAR UNA COLUMNA DEL DATAFRAME 
+
+    System.out.println("eliminar una columna del DataFrame");
+    
+    df2.eliminarColumna("Columna2");
+
+    CsvPrinter.imprimirColumnar(df2);
+//------------------------------------------------------------------------------------------------
+// METODO PARA AGREGAR UNA COLUMNA DEL DATAFRAME
+/*
+System.out.println("Agragar una columna del DataFrame");
+
+ // Supongamos que tienes una columna llamada "ColumnaExistente" en tu DataFrame
+ String etiquetaNuevaColumna = "Columna5";
+ String etiquetaColumnaExistente = "Columna2";
+
+ // Verificar si la columna existente realmente existe
+ if (df3.getColumnaPorEtiqueta(etiquetaColumnaExistente) != null) {
+     // Obtener la columna existente
+     Columna columnaExistente = df3.getColumnaPorEtiqueta(etiquetaColumnaExistente);
+
+     // Crear la nueva columna y copiar los datos de la columna existente
+     Columna nuevaColumna = new Columna();
+     nuevaColumna.setEtiqueta(etiquetaNuevaColumna);
+
+    // Supongamos que la clase Columna tiene un método para obtener los datos internos
+    // Reemplaza esto con el método real que obtenga los datos internos de la columna
+    Dato[] datosColumnaExistente = columnaExistente.obtenerDatosInternos();
+
+    // Configurar los datos en la nueva columna
+    nuevaColumna.configurarDatosInternos(datosColumnaExistente);
+
+     // Agregar la nueva columna al DataFrame
+     df3.dataColumnar.add(nuevaColumna);
+     df3.ColumnArray.add(etiquetaNuevaColumna);
+     df3.columnMap.put(etiquetaNuevaColumna, nuevaColumna);
+ } else {
+     System.out.println("Error: La columna '" + etiquetaColumnaExistente + "' no existe en el DataFrame.");
+ }
+
+CsvPrinter.imprimirColumnar(df3); */
+//-----------------------------------------------------------------------------------------------
+/* 
+    //CsvPrinter.imprimirColumnar(df3);
+    //CsvPrinter.imprimirColumnar(df4);
+
+    System.out.println("Concatenación de dos DataFrames");
+    System.out.println("---------------------------------------------------------------------");
+
+    try {
+        // Verificar que ambos DataFrames tengan las mismas columnas
+        if (df3.getAllHeaderColumn().equals(df4.getAllHeaderColumn())) {
+        // Concatenar los DataFrames verticalmente
+        DataFrame resultado = df3.concatenar(df4);
+        // Imprimir el DataFrame resultante
+        CsvPrinter.imprimirColumnar(resultado);
+        } else {
+        System.out.println("Error: Los DataFrames tienen columnas diferentes y no se pueden concatenar.");
+        }
+    } catch (IllegalArgumentException e) {
+        System.out.println("Error al concatenar: " + e.getMessage());
+    } */
+//--------------------------------------------------------------------------------
 }    
 //--------------------------------------------------------------------------------
 }

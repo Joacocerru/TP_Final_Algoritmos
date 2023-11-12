@@ -9,7 +9,7 @@ public class CsvPrinter {
     
     public static void imprimirPorFilas (DataFrame df)
     {
-        imprimirPorFilasGral(df, df.getNroRegistros(), "A");
+        imprimirPorFilasGral(df, df.getNroRegistros()-1, "A");
     }
 
     private static void imprimirPorFilasGral(DataFrame df, Integer tope, String Orden) // Orden -> A (Ascend) D (Desc)
@@ -17,6 +17,11 @@ public class CsvPrinter {
         if (df.isEmpty()) {
             System.out.println("No hay datos para imprimir en la visión por filas.");
             return;
+            }
+
+            if (tope > df.getNroRegistros()) {
+                System.out.println("Error: La cantidad de filas a imprimir es mayor que la cantidad total de filas en el DataFrame.");
+                return;
             }
             
             // Imprimir el encabezado
@@ -51,7 +56,7 @@ public class CsvPrinter {
                     
                     for (int c = 0; c < df.getNroColumnas(); c++) {
 
-                        System.out.print(fila.getDato(c) +"\t");
+                        System.out.print(fila.getDato(c) +"\t"+"\t");
                     }
                     System.out.println();
                 }          
@@ -59,7 +64,9 @@ public class CsvPrinter {
             }
             else
             {
-                for (int i=limite; i > 0; i++)
+                    limite = df.getNroRegistros()-tope;
+                
+                for (int i=limite; i < df.getNroRegistros(); i++)
                 //for (String etiqueta : df.getAllHeaderRows()) 
                 {
                     String etiqueta = df.getHeaderRows(i); 
@@ -73,6 +80,7 @@ public class CsvPrinter {
                     }
                     System.out.println();
                 }
+                System.out.println("#-------------------------------------------------------------------------------");
             }
        }
 
@@ -89,16 +97,23 @@ public class CsvPrinter {
         System.out.println("#-----------------------------------------------------------------------------");
         System.out.println("# Impresión por Columnas");
         System.out.println("#-----------------------------------------------------------------------------");
-
+        
+        for (String fieldName: df.getAllHeaderColumn()) {
+                System.out.print("\t");
+                System.out.print(fieldName);
+            }
+            System.out.println();
+            System.out.println("--------------------------------------------------------------------------------");
+        
         for (int f = 0; f < numRows; f++) {
             
             if (f == 0) {
                 for (int c = 0; c < df.getNroColumnas(); c++) {
                     System.out.print(""+"\t");
-                    System.out.print("Col " + (c) + ":");
+                    //System.out.print("Col " + (c) + ":");
                 }
                 System.out.println(""); 
-            }  
+            } 
 
                 Fila fila = df.dataFilas.get(f); // Accede a la fila directamente
                 String etiqueta = fila.getEtiqueta();
@@ -107,7 +122,7 @@ public class CsvPrinter {
             for (int c = 0; c < df.getNroColumnas() ; c++) 
             {   
                 System.out.print( df.getValorPosicion(f, c).printValor() );
-                System.out.print("\t");
+                System.out.print("\t"+"\t");
             }   
             System.out.println();
         }
@@ -115,9 +130,6 @@ public class CsvPrinter {
     }
 
     public static void info(DataFrame df) {
-        System.out.println("#--------------------------------------------------------------------------");
-        System.out.println("# Informacion del dataframe");
-        System.out.println(" ");
         System.out.print("Cantidad de filas: " + (df.getNroRegistros()) );
         System.out.println();
 
@@ -166,6 +178,7 @@ public class CsvPrinter {
 
     public static void tail (DataFrame df, Integer cant)
     {
+        
         imprimirPorFilasGral(df, cant,"D");
     }
 //--------------------------------------------------------------

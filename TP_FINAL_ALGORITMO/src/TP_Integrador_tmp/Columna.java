@@ -3,6 +3,7 @@ package TP_Integrador_tmp;
 import java.lang.Cloneable;
 import java.util.ArrayList;
 import java.util.List;
+
 public class Columna implements Cloneable{
     private String tipoDato; // Tipo de dato de la columna
     private Integer _cantDatos; // Cantidad Datos
@@ -10,6 +11,7 @@ public class Columna implements Cloneable{
 
     protected String etiqueta; //Etiqueta de la columna
     protected List<Dato> datos;
+    protected List<Dato> Nuevodato = new ArrayList<>();
 
 public Columna()
 {
@@ -18,8 +20,8 @@ public Columna()
         this._cantDatos = 0;
         this.datos = new ArrayList<>();
 }
-
-// ******* Nuevo constructor ************************
+//--------------------------------------------------------------------
+// Nuevo constructor con parametro etiqueta
 
 public Columna(String etiqueta) {
     this.etiqueta = etiqueta;
@@ -29,31 +31,37 @@ public Columna(String etiqueta) {
     this.datos = new ArrayList<>(); // Inicializa la lista de datos
 }
 
-//**************************************************** 
-
+//-------------------------------------------------------------------- 
+// METODO PARA SETEAR UN ARRAY DE DATOS DE LA COLUMNA
 public void setColumna (Dato[] datos, String tipo)
 {
     this.listaDatos = datos;
     this.tipoDato = tipo;
     this._cantDatos = datos.length;
 }
-
+//--------------------------------------------------------------------
+// METODO PARA SETEAR LA ETIQUETA
 public void setEtiqueta(String etiqueta)
 {
     this.etiqueta = etiqueta;
 }
 
-
+//------------------------------------------------------------------------
+// METODO PARA OBTENER CANTIDAD DE DATOS
 public Integer getCantDatos()
 {
     return this._cantDatos;
 }
 
+//--------------------------------------------------------------------------
+// METODO PARA OBTENER TIPO DE DATO
 public String getTipoDato()
 {
     return this.tipoDato;
 }
-   
+
+//---------------------------------------------------------------------
+// METODO PARA OBTENER DATO DE LA COLUMNA POR POSICION
 public Dato getDato (Integer indice)
 {
     return this.listaDatos[indice];
@@ -67,6 +75,8 @@ public class IndiceFueraDeRangoException extends Exception {
     }
 }
 
+//------------------------------------------------------------------------
+// METODO PARA SETEAR DATO DE LA COLUMNA POR POSICION
 public void setDato (Integer indice, Object Valor) throws IndiceFueraDeRangoException{
     if (indice >= 0 && indice < listaDatos.length) {
         listaDatos[indice].setValor(Valor);
@@ -75,15 +85,18 @@ public void setDato (Integer indice, Object Valor) throws IndiceFueraDeRangoExce
         throw new IndiceFueraDeRangoException("Índice fuera de rango: " + indice);
     }
 }
-//--------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------
+// METODO PARA OBTENER ETIQUETA
 public String getEtiqueta() {
     return etiqueta;
 }
-// Implementación del método clone -------------------------------------------------
+
+//----------------------------------------------------------------------------------------------
+// Implementación del método clone 
     @Override
     public Columna clone() {
         try {
-            //-----------------------------------------------
+            
         // Clona la estructura principal (Columna)
         Columna copia = (Columna) super.clone();
         // Realiza una copia profunda de la lista de datos (arreglo)
@@ -104,4 +117,26 @@ public String getEtiqueta() {
     }   
 }
 //----------------------------------------------------------------------------------
+public void agregarDato(Dato nuevoDato) {
+    datos.add(nuevoDato);
 }
+//-------------------------------------------------------------------
+/* 
+public Dato[] obtenerDatosInternos() {
+    List<Dato> datosClonados = new ArrayList<>(datos.size());
+    for (Dato dato : datos) {
+        datosClonados.add(dato.clone());
+    }
+    return datosClonados.toArray(new Dato[0]);
+}
+
+public void configurarDatosInternos(List<Dato> nuevosDatos) {
+    // Configura los datos internos de la columna con los nuevos datos proporcionados
+    datos.clear(); // Limpia los datos existentes
+
+    // Agrega los nuevos datos a la columna
+    datos.addAll(nuevosDatos);
+}*/
+//----------------------------------------------------------------------------------
+}
+//----------------------------------------------------------------------------------
