@@ -7,7 +7,8 @@ import java.util.List;
 //import TP_Integrador_tmp.Dato_Numerico;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
         
     DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba1.csv", ",", "S");
     DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba2.csv", ",", "N");
@@ -46,7 +47,7 @@ public class Main {
 //    CsvPrinter.info(df2);
 //----------------------------------------------------------------------
 // Imprimir por filas utilizando CsvPrinter
-CsvPrinter.imprimirPorFilas(df);
+//CsvPrinter.imprimirPorFilas(df);
 
 // Imprimir columnar utilizando CsvPrinter
 //    CsvPrinter.imprimirColumnar(df2);
@@ -60,6 +61,15 @@ DataFrame copiadf = null;
 copiadf = df.clone();
 
 
+// METODO PARA ELIMINAR UNA COLUMNA DEL DATAFRAME 
+
+System.out.println("eliminar una columna del DataFrame");
+
+CsvPrinter.imprimirColumnar(df);
+
+df.eliminarColumna("ColumnaPruebas");
+
+CsvPrinter.imprimirColumnar(df);
 
 
 //--------------------------------------------------------------------------------
@@ -90,7 +100,7 @@ System.out.println("#-----------------------------------------------------------
 
 
 Dato_Numerico valor1 = new Dato_Numerico(4); 
-List<Fila> filtro = df.FiltroPorColumna("ColumnaNum", -1, valor1);
+//List<Fila> filtro = df.FiltroPorColumna("ColumnaNum", -1, valor1);
 
 
 
@@ -275,9 +285,7 @@ df.imprimirEtiquetasFilas();
 //--------------------------------------------------------------------------------
     
 //--------------------------------------------------------------------------------    
-}    
-//--------------------------------------------------------------------------------
-}
+//------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------
 // CASOS ESPECIALES DE VISTA REDUCIDA DEL DF - 
@@ -294,9 +302,9 @@ df.imprimirEtiquetasFilas();
 
     System.out.println("eliminar una Fila del DataFrame");
 
-    df1.eliminarFila("3");
+    //df1.eliminarFila("3");
 
-    CsvPrinter.imprimirPorFilas(df1);
+    //CsvPrinter.imprimirPorFilas(df1);
 
 //-----------------------------------------------------------------------------------------------
 // METODO PARA ELIMINAR UNA COLUMNA DEL DATAFRAME 
@@ -306,6 +314,8 @@ df.imprimirEtiquetasFilas();
     df2.eliminarColumna("Columna2");
 
     CsvPrinter.imprimirColumnar(df2);
+}
+}
 //------------------------------------------------------------------------------------------------
 // METODO PARA AGREGAR UNA COLUMNA DEL DATAFRAME
 /*
@@ -362,7 +372,5 @@ CsvPrinter.imprimirColumnar(df3); */
         System.out.println("Error al concatenar: " + e.getMessage());
     } */
 //--------------------------------------------------------------------------------
-}    
 //--------------------------------------------------------------------------------
-}
 //--------------------------------------------------------------------------------

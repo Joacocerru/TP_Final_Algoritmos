@@ -46,5 +46,20 @@ public class Fila implements Comparable
 
         return 0;
     }
+
+    public void removeColumna (int columna)
+    {   
+        Dato[] tmpRowData = new Dato[ this.getCantDatos()-1];
+
+        for(int i=0, k=0; i<this.getCantDatos(); i++)
+        {
+            if(i!= columna)
+            {
+                tmpRowData[k] = this.rowData[i];
+                k++;
+            }
+        }
+        this.rowData = tmpRowData;
+    }
 }
 //-----------------------------------------------------------------------

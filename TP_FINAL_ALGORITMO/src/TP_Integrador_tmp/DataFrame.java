@@ -326,6 +326,7 @@ public void imprimirEtiquetasFilas() {
 
 //-------------------------------------------------------------------------------
 // METODOS SET DE VALOR DE FILAS Y COLUMNAS
+
 public void setValorPorEtiqueta (String etiquetaFila, String etiquetaColumna, Object nuevoValor)
 {
     Columna tmpColumna = getColumnaPorEtiqueta(etiquetaColumna);
@@ -348,13 +349,15 @@ public void setValorPorEtiqueta (String etiquetaFila, String etiquetaColumna, Ob
     dataFilas.add(posFila, fila);
     rowMap.remove(etiquetaFila);
     rowMap.put(etiquetaFila, fila);
-   this.RowArray.add(etiquetaFila);
+    this.RowArray.add(etiquetaFila);
 }
 //---------------------------------------------------------------------------------
 
 
-public void eliminarColumna(String etiquetaColumna) {
+public void eliminarColumna(String etiquetaColumna) 
+{
     int cantidadColumnas = getNroColumnas();
+    
     // Verificar si la columna existe
     if (!columnMap.containsKey(etiquetaColumna)) {
         System.out.println("La columna con etiqueta " + etiquetaColumna + " no existe.");
@@ -372,19 +375,30 @@ public void eliminarColumna(String etiquetaColumna) {
     columnMap.remove(etiquetaColumna);
 
     // Actualizar la posición de las columnas restantes en columnMap
-    for (int i = 0; i < cantidadColumnas-1; i++) {
+    columnMap.clear();
+    for (int i = 0; i < cantidadColumnas-1; i++) 
+    {
         String etiquetaActual = ColumnArray.get(i);
         columnMap.put(etiquetaActual, dataColumnar.get(i));
     }
 
     // Actualizar el número de columnas
-    contarColumnas();
+    this.contarColumnas();
+
+    // Actualiza los datos de fila eliminando la columna
+    
+    for (int i=0; i < this.getNroRegistros(); i++)
+    {
+        this.dataFilas.get(i).removeColumna(posicion);
+    }
 }
+
 //----------------------------------------------------------------------------------------------------------------
 // METODO PARA ELIMINAR UNA FILA DADA SU ETIQUETA
 public void eliminarFila(String etiquetaFila) {
 
     int cantidadFilas = getNroRegistros();
+
     // Verificar si la fila existe
     if (!rowMap.containsKey(etiquetaFila)) {
         System.out.println("La fila con etiqueta " + etiquetaFila + " no existe.");
@@ -402,6 +416,7 @@ public void eliminarFila(String etiquetaFila) {
     rowMap.remove(etiquetaFila);
 
     // Actualizar la posición de las filas restantes en rowMap
+    rowMap.clear();
     for (int i = 0; i < cantidadFilas-1; i++) {
         String etiquetaActual = RowArray.get(i);
         rowMap.put(etiquetaActual, dataFilas.get(i));
@@ -409,7 +424,142 @@ public void eliminarFila(String etiquetaFila) {
 
     // Actualizar el número de filas
     contarRegistros();
+
+    // Actualiza los datos de columna de las filas
+    
+    for (int i=0; i < this.getNroRegistros(); i++)
+    {
+        this.dataColumnar.get(i).removeFila(posicion);
+    }
+
 }
+
+//--------------------------------------------------------------------------------
+@Override
+public DataFrame clone()  
+{
+    try {
+    // Clonar el objeto en sí
+    DataFrame copiaEstructura = (DataFrame) super.clone();
+
+    // Realizar una copia profunda de las columnas
+    copiaEstructura.dataColumnar = new ArrayList<>();
+
+    for (Columna columna : this.dataColumnar) {
+        Columna columnaCopia = columna.clone();
+        copiaEstructura.dataColumnar.add(columnaCopia);
+    }
+
+    // Clonar el columnMap y los arrays de etiquetas
+    
+    copiaEstructura.columnMap = new HashMap<>(this.columnMap);
+    copiaEstructura.rowMap = new HashMap<>(this.rowMap);
+    copiaEstructura.ColumnArray = new ArrayList<>(this.ColumnArray);
+    copiaEstructura.RowArray = new ArrayList<>(this.RowArray);
+    copiaEstructura.contarColumnas();
+    copiaEstructura.contarRegistros();
+    return copiaEstructura;
+
+    } catch (CloneNotSupportedException e) {
+    throw new AssertionError();
+    }
+}
+
+//--------------------------------------------------------------------------------------------------------------
+// METODO PARA DADO UN VALOR BUSCARLO EN LA ESTRUCTURA Y DEVOLVER 
+// SU POSICION (DANDO SUS ETIQUETAS)
+
+public String buscarValor(Object valorBuscado) 
+{
+//    for (String etiquetaColumna : ColumnArray) 
+//    {
+        for (int indiceColumna = 0; indiceColumna < this.getNroColumnas(); indiceColumna++) 
+        {
+            Columna columna = this.getColumna(indiceColumna);
+            for (int indiceFila = 0; indiceFila < this.getNroRegistros(); indiceFila++) 
+            {
+                Dato dato = columna.getDato(indiceFila);
+
+                if (valorBuscado.getClass() == dato.getClass()) 
+                {
+                    if (valorBuscado instanceof Dato) 
+                    {
+                        Dato valorDatoBuscado = (Dato) valorBuscado;
+                        if (dato.compareTo(valorDatoBuscado) == 0) 
+                        {
+                            String etiquetaCol = columna.getEtiqueta();
+                            String etiquetaFila = this.getFila(indiceFila).getEtiqueta();
+                            return "El elemento " + valorDatoBuscado.getDato() + " fue encontrado en fila: " + etiquetaFila + ", columna: " + etiquetaCol;
+                        }
+                    } 
+                }
+            }
+        }
+//    }
+    return "Elemento no encontrado en el DataFrame.";
+}
+
+public void FiltroPorColumna(String Etiquetacolumna, int operacion, Object valorBuscado)// -1 Menor que , 0 igual que, 1 Mayor que 
+{
+    if (operacion !=0 && operacion !=-1 && operacion !=1)
+    {   
+        // exception
+    }
+
+    DataFrame copiaDF = this.clone();
+
+    int tmpColumna = this.getPosicicionColumnaEtiqueta(Etiquetacolumna);
+
+    for (int i = 0; i < this.getNroRegistros(); i++)
+    {
+        Dato valorEncontrado = this.getValorPosicion(i, tmpColumna);
+
+        if (valorBuscado.getClass() == valorEncontrado.getClass()) 
+        {
+            if (valorBuscado instanceof Dato) 
+            {
+                Dato valorDatoBuscado = (Dato) valorBuscado;
+                int comparacion = valorEncontrado.compareTo(valorDatoBuscado);
+
+               // if ( comparacion == operacion) 
+            } 
+        }
+    }
+}
+
+public int buscarBinariaEnColumna(String Etiquetacolumna, Object valor) 
+{
+    Columna tmpColumna = this.getColumnaPorEtiqueta(Etiquetacolumna);
+    return this.buscarNBinariaEnColumna(tmpColumna, valor);
+}
+
+public int buscarNBinariaEnColumna(Columna columna, Object valor) {
+    // Realiza una búsqueda binaria en la columna
+    // (los datos en la columna deber estar ordenados)
+
+    int izquierda = 0;
+    int derecha = columna.getCantDatos() - 1;
+
+    while (izquierda <= derecha) {
+        int medio = izquierda + (derecha - izquierda) / 2;
+
+        Dato datoMedio = columna.getDato(medio);
+
+        if (datoMedio.equals(valor)) {
+            return medio;
+        }
+
+        if (datoMedio.compareTo((Dato) valor) < 0) {
+            izquierda = medio + 1;
+        } else {
+            derecha = medio - 1;
+        }
+    }
+
+    return -1; // Elemento no encontrado en la columna
+}
+
+//----------------------------------------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------------------------------------------
 /* 
@@ -471,136 +621,3 @@ public DataFrame concatenar(DataFrame otroDataFrame) {
 
 //----------------------------------------------------------------------------------------------------------------
 }
-//--------------------------------------------------------------------------------------------------------------
-
-//--------------------------------------------------------------------------------
-@Override
-public DataFrame clone()  
-{
-    try {
-    // Clonar el objeto en sí
-    DataFrame copiaEstructura = (DataFrame) super.clone();
-
-    // Realizar una copia profunda de las columnas
-    copiaEstructura.dataColumnar = new ArrayList<>();
-
-    for (Columna columna : this.dataColumnar) {
-        Columna columnaCopia = columna.clone();
-        copiaEstructura.dataColumnar.add(columnaCopia);
-    }
-
-    // Clonar el columnMap y los arrays de etiquetas
-    
-    copiaEstructura.columnMap = new HashMap<>(this.columnMap);
-    copiaEstructura.rowMap = new HashMap<>(this.rowMap);
-    copiaEstructura.ColumnArray = new ArrayList<>(this.ColumnArray);
-    copiaEstructura.RowArray = new ArrayList<>(this.RowArray);
-    copiaEstructura.contarColumnas();
-    copiaEstructura.contarRegistros();
-    return copiaEstructura;
-
-    } catch (CloneNotSupportedException e) {
-    throw new AssertionError();
-    }
-}
-//--------------------------------------------------------------------------------------------------------------
-// METODO PARA DADO UN VALOR BUSCARLO EN LA ESTRUCTURA Y DEVOLVER 
-// SU POSICION (DANDO SUS ETIQUETAS)
-
-public String buscarValor(Object valorBuscado) 
-{
-//    for (String etiquetaColumna : ColumnArray) 
-//    {
-        for (int indiceColumna = 0; indiceColumna < this.getNroColumnas(); indiceColumna++) 
-        {
-            Columna columna = this.getColumna(indiceColumna);
-            for (int indiceFila = 0; indiceFila < this.getNroRegistros(); indiceFila++) 
-            {
-                Dato dato = columna.getDato(indiceFila);
-
-                if (valorBuscado.getClass() == dato.getClass()) 
-                {
-                    if (valorBuscado instanceof Dato) 
-                    {
-                        Dato valorDatoBuscado = (Dato) valorBuscado;
-                        if (dato.compareTo(valorDatoBuscado) == 0) 
-                        {
-                            String etiquetaCol = columna.getEtiqueta();
-                            String etiquetaFila = this.getFila(indiceFila).getEtiqueta();
-                            return "El elemento " + valorDatoBuscado.getDato() + " fue encontrado en fila: " + etiquetaFila + ", columna: " + etiquetaCol;
-                        }
-                    } 
-                }
-            }
-        }
-//    }
-    return "Elemento no encontrado en el DataFrame.";
-}
-
-public List<Fila> FiltroPorColumna(String Etiquetacolumna, int operacion, Object valorBuscado)// -1 Menor que , 0 igual que, 1 Mayor que 
-{
-    if (operacion !=0 && operacion !=-1 && operacion !=1)
-    {   
-        // exception
-    }
-
-    DataFrame copiaDF = this.clone();
-
-    int tmpColumna = this.getPosicicionColumnaEtiqueta(Etiquetacolumna);
-
-    for (int i = 0; i < this.getNroRegistros(); i++)
-    {
-        Dato valorEncontrado = this.getValorPosicion(i, tmpColumna);
-
-        if (valorBuscado.getClass() == valorEncontrado.getClass()) 
-        {
-            if (valorBuscado instanceof Dato) 
-            {
-                Dato valorDatoBuscado = (Dato) valorBuscado;
-                int comparacion = valorEncontrado.compareTo(valorDatoBuscado);
-
-                if ( comparacion == operacion) 
-            } 
-        }
-    }
-}
-
-public int buscarBinariaEnColumna(String Etiquetacolumna, Object valor) 
-{
-    Columna tmpColumna = this.getColumnaPorEtiqueta(Etiquetacolumna);
-    return this.buscarNBinariaEnColumna(tmpColumna, valor);
-}
-
-public int buscarNBinariaEnColumna(Columna columna, Object valor) {
-    // Realiza una búsqueda binaria en la columna
-    // (los datos en la columna deber estar ordenados)
-
-    int izquierda = 0;
-    int derecha = columna.getCantDatos() - 1;
-
-    while (izquierda <= derecha) {
-        int medio = izquierda + (derecha - izquierda) / 2;
-
-        Dato datoMedio = columna.getDato(medio);
-
-        if (datoMedio.equals(valor)) {
-            return medio;
-        }
-
-        if (datoMedio.compareTo((Dato) valor) < 0) {
-            izquierda = medio + 1;
-        } else {
-            derecha = medio - 1;
-        }
-    }
-
-    return -1; // Elemento no encontrado en la columna
-}
-
-//----------------------------------------------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------------------------------------------------
-
-//----------------------------------------------------------------------------------------------------------------
-}
-//--------------------------------------------------------------------------------------------------------------

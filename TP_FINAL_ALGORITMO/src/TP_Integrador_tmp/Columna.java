@@ -120,6 +120,23 @@ public String getEtiqueta() {
 public void agregarDato(Dato nuevoDato) {
     datos.add(nuevoDato);
 }
+
+public void removeFila (int fila)
+{   
+    //listaDatos
+
+    Dato[] tmpColData = new Dato[ this.getCantDatos()];
+
+    for(int i=0, k=0; i<this.getCantDatos(); i++)
+    {
+        if(i!= fila)
+        {
+            tmpColData[k] = this.listaDatos[i];
+            k++;
+        }
+    }
+    this.listaDatos = tmpColData;
+}
 //-------------------------------------------------------------------
 /* 
 public Dato[] obtenerDatosInternos() {
