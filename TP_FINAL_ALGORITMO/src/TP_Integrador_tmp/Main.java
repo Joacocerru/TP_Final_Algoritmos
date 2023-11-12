@@ -9,12 +9,12 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         
-    //DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba1.csv", ",", "S");
-    //DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba2.csv", ",", "N");
+    DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba1.csv", ",", "S");
+    DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba2.csv", ",", "N");
     
-    DataFrame df =  new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_5\\prueba1.csv", ",", "S");
+    //DataFrame df =  new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_5\\prueba1.csv", ",", "S");
     //DataFrame df1 =  new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_5\\prueba1.csv", ",", "S");
-    DataFrame df2 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_5\\prueba1.csv", ",", "N");
+    //DataFrame df2 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_5\\prueba1.csv", ",", "N");
     
     //DataFrame df3 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_3 (BuscarValor - anda)\\prueba2.csv", ",", "S");
     //DataFrame df4 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_3 (BuscarValor - anda)\\prueba2.csv", ",", "N");
@@ -46,10 +46,60 @@ public class Main {
 //    CsvPrinter.info(df2);
 //----------------------------------------------------------------------
 // Imprimir por filas utilizando CsvPrinter
-    //CsvPrinter.imprimirPorFilas(df2);
+CsvPrinter.imprimirPorFilas(df);
 
 // Imprimir columnar utilizando CsvPrinter
 //    CsvPrinter.imprimirColumnar(df2);
+
+//---------------------------------------------------------------------
+// COPIA PROFUNDA DE LA ESTRUCTURA COLUMNAR
+
+DataFrame copiadf = null;
+
+try 
+{
+    //copiaDataFrame2 = df2.clone();
+    copiadf = df.clone();
+} catch (CloneNotSupportedException e) 
+    {
+        e.printStackTrace(); // Maneja la excepción de clonación 
+    }
+
+
+
+
+//--------------------------------------------------------------------------------
+// Llamo al método buscarValor y le paso el valor a buscar
+System.out.println("Busqueda de un elemento dentro del DataFrame");
+System.out.println("---------------------------------------------------------------------");
+
+Dato_Numerico valorABuscar = new Dato_Numerico(88); 
+String resultadoBusqueda = df.buscarValor(valorABuscar);
+System.out.println(resultadoBusqueda);
+System.out.println("#--------------------------------------------------------------------------");
+
+Dato_Numerico valorABuscarNumerico = new Dato_Numerico(5); 
+String resultadoBusquedaNumerica = df.buscarValor(valorABuscarNumerico);
+System.out.println(resultadoBusquedaNumerica);
+System.out.println("#--------------------------------------------------------------------------");
+
+Dato_Boolean valorABuscarBoolean = new Dato_Boolean(true); 
+String resultadoBusquedaBoolean = df.buscarValor(valorABuscarBoolean);
+System.out.println(resultadoBusquedaBoolean);
+System.out.println("#--------------------------------------------------------------------------");
+
+
+Dato_String valorABuscarString = new Dato_String("Prueba2"); 
+String resultadoBusquedaString = df.buscarValor(valorABuscarString);
+System.out.println(resultadoBusquedaString);
+System.out.println("#--------------------------------------------------------------------------");
+
+
+Dato_Numerico valor1 = new Dato_Numerico(4); 
+List<Fila> filtro = df.FiltroPorColumna("ColumnaNum", -1, valor1);
+
+
+
 //--------------------------------------------------------------------------        
 // Acceder a un valor específico por Etiqueta de fila y columna 
         System.out.println("--------------------------------------------------------------------------------------"); 
@@ -60,14 +110,22 @@ public class Main {
         //String columna = "4"; // 
         String columna = "Columna4"; //
 
-        //Dato valor = df2.getValor(fila, columna);
-        Dato valor = df.getValor(fila, columna);
-        
-        if (valor != null) {
-        System.out.println("Valor en la fila " + (fila) + " y columna " + (columna) + ": " + valor.getDato());
-    } else {
-        System.out.println("Índices fuera de rango.");
-    } 
+        try 
+        {
+            //Dato valor = df2.getValor(fila, columna);
+            Dato valor = df.getValor(fila, columna);
+            
+
+            if (valor != null) 
+                System.out.println("Valor en la fila " + (fila) + " y columna " + (columna) + ": " + valor.getDato());
+            else 
+                System.out.println("Índices fuera de rango.");
+        }
+        catch (NullPointerException e) 
+        {
+            System.out.println("Fila/Columna Inexistente"); 
+        }
+
 // Imprime Info del DataFrame 2 -----------------------------------------------------------------------------------------------------------------
 //System.out.println("#--------------------------------------------------------------------------");  
 //CsvPrinter.info(df2);
@@ -168,17 +226,6 @@ df.imprimirEtiquetasFilas();
 
     CsvPrinter.imprimirPorFilas(copiaDataFrame1);
 */
-//---------------------------------------------------------------------
-// COPIA PROFUNDA DE LA ESTRUCTURA COLUMNAR
-
-    DataFrame copiadf = null;
-
-   try {
-       //copiaDataFrame2 = df2.clone();
-       copiadf = df.clone();
-   } catch (CloneNotSupportedException e) {
-       e.printStackTrace(); // Maneja la excepción de clonación 
-   }
 //-----------------------------------------------------------
 // IMPRIMO EL DF ORIGINAL Y LA COPIA PROFUNDA
 
@@ -219,30 +266,6 @@ df.imprimirEtiquetasFilas();
     System.out.println("Impresión de la copia profunda del DataFrame");
     
     CsvPrinter.imprimirColumnar(copiadf);
-//--------------------------------------------------------------------------------
-// Llamo al método buscarValor y le paso el valor a buscar
-   System.out.println("Busqueda de un elemento dentro del DataFrame");
-   System.out.println("---------------------------------------------------------------------");
-
-   Dato_Numerico valorABuscar = new Dato_Numerico(88); 
-   String resultadoBusqueda = df.buscarValor(valorABuscar);
-   System.out.println(resultadoBusqueda);
-   System.out.println("#--------------------------------------------------------------------------");
-
-   Dato_Numerico valorABuscarNumerico = new Dato_Numerico(5); 
-   String resultadoBusquedaNumerica = df.buscarValor(valorABuscarNumerico);
-   System.out.println(resultadoBusquedaNumerica);
-   System.out.println("#--------------------------------------------------------------------------");
-
-   Dato_Boolean valorABuscarBoolean = new Dato_Boolean(true); 
-   String resultadoBusquedaBoolean = df.buscarValor(valorABuscarBoolean);
-   System.out.println(resultadoBusquedaBoolean);
-   System.out.println("#--------------------------------------------------------------------------");
-   
-   Dato_String valorABuscarString = new Dato_String("Prueba2"); 
-   String resultadoBusquedaString = df.buscarValor(valorABuscarString);
-   System.out.println(resultadoBusquedaString);
-   System.out.println("#--------------------------------------------------------------------------");
 //-----------------------------------------------------------------
 // GENERAR UNA VISTA REDUCIDA (SLICING)
 //-----------------------------------------------------------------

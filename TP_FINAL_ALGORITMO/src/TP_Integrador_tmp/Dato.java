@@ -47,7 +47,8 @@ public String printValor()
 }
 //------------------------------------------------------------ 
 @Override
-public Object clone() {
+public Object clone()
+{
     try {
         // Realiza una copia profunda del objeto Dato
         Dato copia = (Dato) super.clone();
@@ -65,7 +66,11 @@ public Object clone() {
 }
 //------------------------------------------------------------
 @Override
-public int compareTo(Dato otroDato) {
+public int compareTo(Dato otroDato) 
+{
+    if (otroDato instanceof Dato_NA)
+        return 1;
+        
     if (this.valor instanceof Number && otroDato.valor instanceof Number) {
         // Ambos valores son números
         double valorThis = ((Number) this.valor).doubleValue();

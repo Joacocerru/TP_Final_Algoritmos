@@ -10,7 +10,8 @@ import TP_Integrador_tmp.Columna.IndiceFueraDeRangoException;
 
 import java.lang.Cloneable;
 
-public class DataFrame implements Cloneable{
+public class DataFrame implements Cloneable
+{
 
     protected List<Columna> dataColumnar = new ArrayList<>(); // ArrayList para los datos - Array de columnas
     protected List<Fila> dataFilas = new ArrayList<>();     // Array de filas
@@ -58,11 +59,22 @@ public class DataFrame implements Cloneable{
         //------------------------------------------------------------------------------------
         // Arma la estructura columnar en dataColumnar
         ArmaColumnar.armaDataColumnar(header, data, this.dataColumnar);
-        
+
+        this.contarColumnas();
+        this.contarRegistros();
+
         //------------------------------------------------------------------------------------
         // Genera Instancias de filas y las mapea con el HASHMAP de FILAS -
-        for (int rowIndex = 0; rowIndex < data.size(); rowIndex++) {
-            Object[] rowData = data.get(rowIndex);
+        for (int rowIndex = 0; rowIndex < this.getNroRegistros(); rowIndex++) 
+        {
+            Dato[] rowData = new Dato[ this.getNroColumnas()];
+            
+            for ( int colIndex = 0; colIndex < this.getNroColumnas(); colIndex++)
+            {
+                //Object[] rowData = data.get(rowIndex);
+                rowData[colIndex] = this.dataColumnar.get(colIndex).listaDatos[rowIndex];
+            }
+        
             String etiqueta = Integer.toString(rowIndex); // Establece una etiqueta para la fila
             Fila fila = new Fila(etiqueta, rowData); 
             dataFilas.add(fila);
@@ -70,6 +82,7 @@ public class DataFrame implements Cloneable{
             rowMap.put(etiqueta, fila);
             this.RowArray.add(etiqueta);
         }
+
         //------------------------------------------------------------------------------------
         // crea instancias de Columna y las mapea utilizando las etiquetas 
         // Crea el array de etiquetas y el maps de columnas 
@@ -84,8 +97,6 @@ public class DataFrame implements Cloneable{
             this.ColumnArray.add(etiqueta);
         }
 
-        this.contarColumnas();
-        this.contarRegistros();
     }
 
     //--------------------------------------------------------------
@@ -226,8 +237,11 @@ public class DataFrame implements Cloneable{
 
     public Dato getValor(String etiquetafila, String etiquetaColumna) 
     {
+    
         Columna tmpColumna = getColumnaPorEtiqueta(etiquetaColumna);
         Integer posFila = this.getPosicionFilaEtiqueta(etiquetafila);
+        if ( tmpColumna == null || posFila == null)
+            throw new NullPointerException ("Fila/Columna inexistente");
         return tmpColumna.getDato(posFila);
     }
 
@@ -312,7 +326,8 @@ public void imprimirEtiquetasFilas() {
 
 //--------------------------------------------------------------------------------
 @Override
-public DataFrame clone() throws CloneNotSupportedException {
+public DataFrame clone()  
+{
     try {
     // Clonar el objeto en sí
     DataFrame copiaEstructura = (DataFrame) super.clone();
@@ -331,7 +346,8 @@ public DataFrame clone() throws CloneNotSupportedException {
     copiaEstructura.rowMap = new HashMap<>(this.rowMap);
     copiaEstructura.ColumnArray = new ArrayList<>(this.ColumnArray);
     copiaEstructura.RowArray = new ArrayList<>(this.RowArray);
- 
+    copiaEstructura.contarColumnas();
+    copiaEstructura.contarRegistros();
     return copiaEstructura;
 
     } catch (CloneNotSupportedException e) {
@@ -342,31 +358,71 @@ public DataFrame clone() throws CloneNotSupportedException {
 // METODO PARA DADO UN VALOR BUSCARLO EN LA ESTRUCTURA Y DEVOLVER 
 // SU POSICION (DANDO SUS ETIQUETAS)
 
-public String buscarValor(Object valorBuscado) {
-    for (String etiquetaColumna : ColumnArray) {
-        for (int indiceColumna = 0; indiceColumna < this.getNroColumnas(); indiceColumna++) {
+public String buscarValor(Object valorBuscado) 
+{
+//    for (String etiquetaColumna : ColumnArray) 
+//    {
+        for (int indiceColumna = 0; indiceColumna < this.getNroColumnas(); indiceColumna++) 
+        {
             Columna columna = this.getColumna(indiceColumna);
-            for (int indiceFila = 0; indiceFila < this.getNroRegistros(); indiceFila++) {
+            for (int indiceFila = 0; indiceFila < this.getNroRegistros(); indiceFila++) 
+            {
                 Dato dato = columna.getDato(indiceFila);
 
-            if (valorBuscado.getClass() == dato.getClass()) {
-
-                if (valorBuscado instanceof Dato) {
-                    Dato valorDatoBuscado = (Dato) valorBuscado;
-                    if (dato.compareTo(valorDatoBuscado) == 0) {
-                        String etiquetaCol = columna.getEtiqueta();
-                        String etiquetaFila = this.getFila(indiceFila).getEtiqueta();
-                        return "El elemento " + valorDatoBuscado.getDato() + " fue encontrado en fila: " + etiquetaFila + ", columna: " + etiquetaCol;
+                if (valorBuscado.getClass() == dato.getClass()) 
+                {
+                    if (valorBuscado instanceof Dato) 
+                    {
+                        Dato valorDatoBuscado = (Dato) valorBuscado;
+                        if (dato.compareTo(valorDatoBuscado) == 0) 
+                        {
+                            String etiquetaCol = columna.getEtiqueta();
+                            String etiquetaFila = this.getFila(indiceFila).getEtiqueta();
+                            return "El elemento " + valorDatoBuscado.getDato() + " fue encontrado en fila: " + etiquetaFila + ", columna: " + etiquetaCol;
                         }
                     } 
                 }
             }
         }
-    }
+//    }
     return "Elemento no encontrado en el DataFrame.";
 }
 
-public int buscarEnColumna(Columna columna, Object valor) {
+public List<Fila> FiltroPorColumna(String Etiquetacolumna, int operacion, Object valorBuscado)// -1 Menor que , 0 igual que, 1 Mayor que 
+{
+    if (operacion !=0 && operacion !=-1 && operacion !=1)
+    {   
+        // exception
+    }
+
+    DataFrame copiaDF = this.clone();
+
+    int tmpColumna = this.getPosicicionColumnaEtiqueta(Etiquetacolumna);
+
+    for (int i = 0; i < this.getNroRegistros(); i++)
+    {
+        Dato valorEncontrado = this.getValorPosicion(i, tmpColumna);
+
+        if (valorBuscado.getClass() == valorEncontrado.getClass()) 
+        {
+            if (valorBuscado instanceof Dato) 
+            {
+                Dato valorDatoBuscado = (Dato) valorBuscado;
+                int comparacion = valorEncontrado.compareTo(valorDatoBuscado);
+
+                if ( comparacion == operacion) 
+            } 
+        }
+    }
+}
+
+public int buscarBinariaEnColumna(String Etiquetacolumna, Object valor) 
+{
+    Columna tmpColumna = this.getColumnaPorEtiqueta(Etiquetacolumna);
+    return this.buscarNBinariaEnColumna(tmpColumna, valor);
+}
+
+public int buscarNBinariaEnColumna(Columna columna, Object valor) {
     // Realiza una búsqueda binaria en la columna
     // (los datos en la columna deber estar ordenados)
 
@@ -391,6 +447,7 @@ public int buscarEnColumna(Columna columna, Object valor) {
 
     return -1; // Elemento no encontrado en la columna
 }
+
 //----------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------------------------------------
