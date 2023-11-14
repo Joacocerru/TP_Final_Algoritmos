@@ -1,7 +1,7 @@
 package TP_Integrador_tmp;
 
-public class Fila implements Comparable
-{
+public class Fila implements Comparable{
+
     //private Object[] rowData; // Almacena los datos de la fila
     private Dato[] rowData; // Almacena los datos de la fila
     private String etiqueta; // Etiqueta de la fila
@@ -74,4 +74,3 @@ public class Fila implements Comparable
         this.rowData = tmpRowData;
     }
 }
-//-----------------------------------------------------------------------
