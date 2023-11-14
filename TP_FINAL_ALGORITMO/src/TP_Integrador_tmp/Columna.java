@@ -2,6 +2,7 @@ package TP_Integrador_tmp;
 
 import java.lang.Cloneable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Columna implements Cloneable{
@@ -11,7 +12,7 @@ public class Columna implements Cloneable{
 
     protected String etiqueta; //Etiqueta de la columna
     protected List<Dato> datos;
-    protected List<Dato> Nuevodato = new ArrayList<>();
+    //protected List<Dato> Nuevodato = new ArrayList<>();
 
 public Columna()
 {
@@ -41,6 +42,11 @@ public void setColumna (Dato[] datos, String tipo)
 }
 //--------------------------------------------------------------------
 // METODO PARA SETEAR LA ETIQUETA
+public void calcularCantDatos()
+{
+    this._cantDatos = listaDatos.length;
+}
+
 public void setEtiqueta(String etiqueta)
 {
     this.etiqueta = etiqueta;
@@ -117,9 +123,10 @@ public String getEtiqueta() {
     }   
 }
 //----------------------------------------------------------------------------------
-public void agregarDato(Dato nuevoDato) {
+/*public void agregarDato(Dato nuevoDato) 
+{
     datos.add(nuevoDato);
-}
+}*/
 
 public void removeFila (int fila)
 {   
@@ -138,22 +145,18 @@ public void removeFila (int fila)
     this.listaDatos = tmpColData;
 }
 //-------------------------------------------------------------------
-/* 
-public Dato[] obtenerDatosInternos() {
-    List<Dato> datosClonados = new ArrayList<>(datos.size());
-    for (Dato dato : datos) {
-        datosClonados.add(dato.clone());
-    }
-    return datosClonados.toArray(new Dato[0]);
+
+public void sumarCantRegistro()
+{
+    this._cantDatos++;
 }
 
-public void configurarDatosInternos(List<Dato> nuevosDatos) {
-    // Configura los datos internos de la columna con los nuevos datos proporcionados
-    datos.clear(); // Limpia los datos existentes
+public void restarCantRegistro()
+{
+    this._cantDatos--;
+}
 
-    // Agrega los nuevos datos a la columna
-    datos.addAll(nuevosDatos);
-}*/
+
 //----------------------------------------------------------------------------------
 }
 //----------------------------------------------------------------------------------

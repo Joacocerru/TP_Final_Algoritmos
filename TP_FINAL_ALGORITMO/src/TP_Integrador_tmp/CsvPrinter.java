@@ -46,7 +46,7 @@ public class CsvPrinter {
 
             if (Orden == "A")
             {
-                for (int i=0; i < limite; i++)
+                for (int i=0; i <= limite; i++)
                 //for (String etiqueta : df.getAllHeaderRows()) 
                 {
                     String etiqueta = df.getHeaderRows(i); 

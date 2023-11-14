@@ -2,8 +2,6 @@ package TP_Integrador_tmp;
 
 
 public class Dato_Boolean extends Dato {
-
-    private boolean valor1;
     
     public Dato_Boolean(Boolean s)
     {
@@ -29,7 +27,7 @@ public class Dato_Boolean extends Dato {
     
     @Override
     public String toString() {
-        return Boolean.toString(valor1);  // Convierte el booleano a una cadena
+        return Boolean.toString((Boolean) this.valor);  // Convierte el booleano a una cadena
     }
     @Override
     public Object clone() {

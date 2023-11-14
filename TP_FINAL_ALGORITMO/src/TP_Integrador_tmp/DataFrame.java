@@ -353,7 +353,6 @@ public void setValorPorEtiqueta (String etiquetaFila, String etiquetaColumna, Ob
 }
 //---------------------------------------------------------------------------------
 
-
 public void eliminarColumna(String etiquetaColumna) 
 {
     int cantidadColumnas = getNroColumnas();
@@ -417,20 +416,24 @@ public void eliminarFila(String etiquetaFila) {
 
     // Actualizar la posición de las filas restantes en rowMap
     rowMap.clear();
-    for (int i = 0; i < cantidadFilas-1; i++) {
+
+    for (int i = 0; i < cantidadFilas-1; i++) {   
         String etiquetaActual = RowArray.get(i);
         rowMap.put(etiquetaActual, dataFilas.get(i));
     }
 
     // Actualizar el número de filas
-    contarRegistros();
+    this.contarRegistros();
 
     // Actualiza los datos de columna de las filas
-    
-    for (int i=0; i < this.getNroRegistros(); i++)
+     
+    for (int i=0; i < this.getNroColumnas(); i++)
     {
         this.dataColumnar.get(i).removeFila(posicion);
+        this.dataColumnar.get(i).restarCantRegistro();
     }
+
+    this.contarRegistros();
 
 }
 
@@ -496,7 +499,7 @@ public String buscarValor(Object valorBuscado)
             }
         }
 //    }
-    return "Elemento no encontrado en el DataFrame.";
+    return "Elemento " + valorBuscado + " no encontrado en el DataFrame.";
 }
 
 public void FiltroPorColumna(String Etiquetacolumna, int operacion, Object valorBuscado)// -1 Menor que , 0 igual que, 1 Mayor que 
@@ -558,11 +561,73 @@ public int buscarNBinariaEnColumna(Columna columna, Object valor) {
 
     return -1; // Elemento no encontrado en la columna
 }
+//------------------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------------------------------------------
+// METODO PARA AGREGAR UNA COLUMNA DEL DATAFRAME
+public void clonarYAgregarColumna(String etiquetaColumnaExistente, String etiquetaNuevaColumna, DataFrame df) {
+    // Verificar si la columna existente realmente existe
+    
+    Columna columnaExistente = getColumnaPorEtiqueta(etiquetaColumnaExistente);
+    int posicion = this.getPosicicionColumnaEtiqueta(etiquetaColumnaExistente);
 
+    if (columnaExistente != null) {
+        // Clonar la columna existente
+        Columna nuevaColumna = columnaExistente.clone();
+        
+        // Establecer la etiqueta para la nueva columna
+        nuevaColumna.setEtiqueta(etiquetaNuevaColumna);
+
+        // Agregar la nueva columna al DataFrame
+        dataColumnar.add(nuevaColumna);
+        // Actualizar ColumnArray
+        ColumnArray.add(etiquetaNuevaColumna);
+        // Actualizar columnMap
+        columnMap.put(etiquetaNuevaColumna, nuevaColumna);
+        
+        this.contarColumnas();
+
+        for (int i=0; i<this.getNroRegistros(); i++)
+        {
+            Dato newDato = this.dataFilas.get(i).getDato(posicion);
+            Dato DatoClonado = (Dato) newDato.clone();
+            this.dataFilas.get(i).setDato(DatoClonado);
+        }    
+        
+
+    } else {
+        System.out.println("Error: La columna '" + etiquetaColumnaExistente + "' no existe en el DataFrame.");
+    }
+}
+//-----------------------------------------------------------------------------------
+// METODO PARA AGREGAR UNA COLUMNA NUEVA AL DATAFRAME
+public void AgregarColumnaNueva(String etiquetaNuevaColumna, DataFrame df, Columna columnaNueva) {
+    // Verificar si la columna existente realmente existe
+    
+    //Columna columnaExistente = columnaNueva;
+
+    if (columnaNueva != null) {
+        // Clonar la columna existente
+        //Columna nuevaColumna = columnaExistente.clone();
+        
+        // Establecer la etiqueta para la nueva columna
+        columnaNueva.setEtiqueta(etiquetaNuevaColumna);
+
+        // Agregar la nueva columna al DataFrame
+        dataColumnar.add(columnaNueva);
+        // Actualizar ColumnArray
+        ColumnArray.add(etiquetaNuevaColumna);
+        // Actualizar columnMap
+        columnMap.put(etiquetaNuevaColumna, columnaNueva);
+        
+        this.contarColumnas();
+
+    } else {
+        System.out.println("Error: La columna '" + etiquetaNuevaColumna + "' no existe en el DataFrame.");
+    }
+}
 //------------------------------------------------------------------------------------------------------------------
-/* 
+ /* 
 // METODO PARA CONCATENAR DOS DATAFRAME
 // Método para concatenar dos DataFrames verticalmente
 public DataFrame concatenar(DataFrame otroDataFrame) {
@@ -576,44 +641,48 @@ public DataFrame concatenar(DataFrame otroDataFrame) {
 
     if (this.getNroRegistros() == 0 && otroDataFrame.getNroRegistros() == 0) {
         System.out.println("Ambas estructuras están vacías.");
-    } else {
-        // Copiar las columnas y etiquetas
-        for (String etiqueta : this.getAllHeaderColumn()) {
-            nuevaEstructura.dataColumnar.add(this.getColumnaPorEtiqueta(etiqueta).clone());
-            nuevaEstructura.ColumnArray.add(etiqueta);
-        }
-
-        // Concatenar las filas del primer DataFrame
-        for (int i = 0; i < this.getNroRegistros(); i++) {
-            Object[] datosFila = new Object[this.getNroColumnas()];
-
-            for (int j = 0; j < this.getNroColumnas(); j++) {
-                datosFila[j] = this.getValorPosicion(i, j).clone();
-            }
-
-            nuevaEstructura.dataFilas.add(new Fila(Integer.toString(nuevaEstructura.getNroRegistros()), datosFila));
-            nuevaEstructura.rowMap.put(Integer.toString(nuevaEstructura.getNroRegistros() - 1),
-            nuevaEstructura.dataFilas.get(nuevaEstructura.getNroRegistros()-1));
-            nuevaEstructura.RowArray.add(Integer.toString(nuevaEstructura.getNroRegistros() - 1));
-        }
-
-        // Concatenar las filas del segundo DataFrame
-        for (int i = 0; i < otroDataFrame.getNroRegistros(); i++) {
-            Object[] datosFila = new Object[otroDataFrame.getNroColumnas()];
-
-            for (int j = 0; j < otroDataFrame.getNroColumnas(); j++) {
-                datosFila[j] = otroDataFrame.getValorPosicion(i, j).clone();
-            }
-
-            nuevaEstructura.dataFilas.add(new Fila(Integer.toString(nuevaEstructura.getNroRegistros()), datosFila));
-            nuevaEstructura.rowMap.put(Integer.toString(nuevaEstructura.getNroRegistros() - 1),
-            nuevaEstructura.dataFilas.get(nuevaEstructura.getNroRegistros() - 1));
-            nuevaEstructura.RowArray.add(Integer.toString(nuevaEstructura.getNroRegistros() - 1));
-        }
-
-        // Actualizar el contador de registros
-        nuevaEstructura.contarRegistros();
+        return nuevaEstructura;  // Retorna una estructura vacía si ambos DataFrames están vacíos
     }
+
+    // Copiar las columnas y etiquetas
+    for (String etiqueta : this.getAllHeaderColumn()) {
+        nuevaEstructura.dataColumnar.add(this.getColumnaPorEtiqueta(etiqueta));
+        nuevaEstructura.ColumnArray.add(etiqueta);
+        nuevaEstructura.columnMap.put(etiqueta, this.getColumnaPorEtiqueta(etiqueta));
+    }
+    // Actualizar el contador de columnas
+    nuevaEstructura.contarColumnas();
+
+    // Concatenar las filas del primer DataFrame
+    for (int i = 0; i < this.getNroRegistros(); i++) {
+        Object[] datosFila = new Object[this.getNroColumnas()];
+
+        for (int j = 0; j < this.getNroColumnas(); j++) {
+            datosFila[j] = this.getValorPosicion(i, j);  // No es necesario clonar los valores
+        }
+
+        nuevaEstructura.dataFilas.add(new Fila(Integer.toString(nuevaEstructura.getNroRegistros()), datosFila));
+        nuevaEstructura.rowMap.put(Integer.toString(nuevaEstructura.getNroRegistros() - 1),
+                nuevaEstructura.dataFilas.get(nuevaEstructura.getNroRegistros() - 1));
+        nuevaEstructura.RowArray.add(Integer.toString(nuevaEstructura.getNroRegistros() - 1));
+    }
+
+    // Concatenar las filas del segundo DataFrame
+    for (int i = 0; i < otroDataFrame.getNroRegistros(); i++) {
+        Object[] datosFila = new Object[otroDataFrame.getNroColumnas()];
+
+        for (int j = 0; j < otroDataFrame.getNroColumnas(); j++) {
+            datosFila[j] = otroDataFrame.getValorPosicion(i, j);  // No es necesario clonar los valores
+        }
+
+        nuevaEstructura.dataFilas.add(new Fila(Integer.toString(nuevaEstructura.getNroRegistros()), datosFila));
+        nuevaEstructura.rowMap.put(Integer.toString(nuevaEstructura.getNroRegistros() - 1),
+                nuevaEstructura.dataFilas.get(nuevaEstructura.getNroRegistros() - 1));
+        nuevaEstructura.RowArray.add(Integer.toString(nuevaEstructura.getNroRegistros() - 1));
+    }
+
+    // Actualizar el contador de registros
+    nuevaEstructura.contarRegistros();
 
     return nuevaEstructura;
 } */
@@ -621,3 +690,4 @@ public DataFrame concatenar(DataFrame otroDataFrame) {
 
 //----------------------------------------------------------------------------------------------------------------
 }
+//-------------------------------------------------------------------------------------------------------

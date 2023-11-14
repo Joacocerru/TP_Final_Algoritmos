@@ -6,6 +6,18 @@ public class Fila implements Comparable
     private Dato[] rowData; // Almacena los datos de la fila
     private String etiqueta; // Etiqueta de la fila
 
+    public void setDato (Dato nuevoDato)
+    {
+        Dato[] NewrowData = new Dato[this.rowData.length+1];
+
+        for (int i=0; i< this.rowData.length; i++)
+            NewrowData[i] = this.rowData[i];
+        
+        NewrowData[this.rowData.length] = nuevoDato;
+        
+        this.rowData = NewrowData;
+    }
+
     public Fila(String etiqueta, Dato[] rowData) {
         this.rowData = rowData;
         this.etiqueta = etiqueta;

@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) 
     {
         
-    DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba1.csv", ",", "S");
+    DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba9.csv", ",", "S");
     DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba2.csv", ",", "N");
     
     //DataFrame df =  new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_5\\prueba1.csv", ",", "S");
@@ -22,6 +22,50 @@ public class Main {
     //DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
     
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//------------------------------------------------------------------------------------------------
+// METODO PARA AGREGAR UNA COLUMNA DEL DATAFRAME
+
+    System.out.println("Agragar una columna ya existente del DataFrame");
+
+    CsvPrinter.imprimirPorFilas(df);
+
+    // Supongamos que tienes una columna llamada "ColumnaExistente" en tu DataFrame
+    String etiquetaColumnaExistente = "ColumnaBoolean";
+    String etiquetaNuevaColumna = "Columna_Nueva";
+    
+    //DataFrame df = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_8\\prueba1.csv", ",", "S");
+    
+    df.clonarYAgregarColumna(etiquetaColumnaExistente, etiquetaNuevaColumna, df);
+    
+    // Imprimir el DataFrame
+    CsvPrinter.imprimirColumnar(df);
+    
+    // Supongamos que tienes una columna llamada "ColumnaExistente" en tu DataFrame
+    String etiquetaColumnaExistente2 = "ColumnaNum";
+    String etiquetaNuevaColumna2 = "Columna_Nueva_2";
+    
+    df.clonarYAgregarColumna(etiquetaColumnaExistente2, etiquetaNuevaColumna2, df);
+    
+    // Imprimir el DataFrame
+    CsvPrinter.imprimirColumnar(df);
+
+
+
+ CsvPrinter.imprimirPorFilas(df);
+
+// METODO PARA ELIMINAR UNA FILA DEL DATAFRAME
+System.out.println("eliminar una Fila del DataFrame");
+
+//df.eliminarColumna("ColumnaNum");
+
+df.eliminarFila("4");
+
+CsvPrinter.imprimirPorFilas(df);
+
+
+CsvPrinter.imprimirPorFilas(df);
+//CsvPrinter.imprimirColumnar(df);
 
 
 
@@ -43,7 +87,7 @@ public class Main {
     Dato dato2 = df.getValorPosicion(0,2);  
 
     Columna Col1 = df2.getColumna(2);
-    Columna Col2 = df2.getColumnaPorEtiqueta("C");
+    Columna Col2 = df2.getColumnaPorEtiqueta("3");
  
     String[] Listita = {"1","4"};
     List<Columna> lista2 = df2.getColumnaListaEtiquetas( Listita);
