@@ -23,6 +23,23 @@ public class Main {
     
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    DataFrame copiadf = null;
+
+    copiadf = df.clone();
+
+    System.out.println("Copia profunda del DataFrame sin header.");
+    
+    CsvPrinter.imprimirColumnar(copiadf);
+    CsvPrinter.imprimirColumnar(df);
+
+    df.eliminarFila("4");
+    //copiadf.eliminarFila("2");
+
+    CsvPrinter.imprimirColumnar(copiadf);
+    CsvPrinter.imprimirColumnar(df);
+
+
+
 //------------------------------------------------------------------------------------------------
 // METODO PARA AGREGAR UNA COLUMNA DEL DATAFRAME
 
@@ -236,17 +253,17 @@ CsvPrinter.imprimirPorFilas(df);
 //-----------------------------------------------------------------------
 // COPIA PROFUNDA DE LA ESTRUCTURA COLUMNAR
 
-	DataFrame copiadf = null;
+	DataFrame copiadf1 = null;
 
-	copiadf = df.clone();
+	copiadf1 = df.clone();
 
  	System.out.println("Copia profunda del DataFrame sin header.");
     
-	CsvPrinter.imprimirColumnar(copiadf);
+	CsvPrinter.imprimirColumnar(copiadf1);
 
   System.out.println("Copia profunda del DataFrame sin header.");
 
-  CsvPrinter.imprimirPorFilas(copiadf);
+  CsvPrinter.imprimirPorFilas(copiadf1);
 
 //---------------------------------------------------------------------
 // IMPRIMO EL DF ORIGINAL CON VALOR SETEADO Y LA COPIA PROFUNDA
@@ -258,7 +275,7 @@ CsvPrinter.imprimirColumnar(df);
 
 System.out.println("Impresión de la copia profunda del DataFrame");
 
-CsvPrinter.imprimirColumnar(copiadf);
+CsvPrinter.imprimirColumnar(copiadf1);
 
 //-----------------------------------------------------------------------
 // METODO PARA ELIMINAR UNA COLUMNA DEL DATAFRAME DE LA COPIA COLUMNA
