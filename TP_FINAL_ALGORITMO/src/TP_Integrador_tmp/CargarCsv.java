@@ -1,12 +1,9 @@
-
-
 package TP_Integrador_tmp;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-//import java.util.ArrayList;
 import java.util.List;
+//import java.util.ArrayList;
 
 public class CargarCsv {
 
@@ -15,13 +12,13 @@ public class CargarCsv {
         String line;
 
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+            
             // Leer el encabezado (primera línea)
-
             if ((line = br.readLine()) != null) {   
 
-                int cantComas = countOccurrences (line, ',');
+                int cantComas = countOccurrences (line, ','); // cuenta la cantidad de comas
                 // Dividir el encabezado en campos utilizando el delimitador
-                String[] headerFields = line.split(csvDelimiter);
+                String[] headerFields = line.split(csvDelimiter); 
                 header.clear(); // Limpia el encabezado actual
                 
                 for (String field : headerFields) {
@@ -33,10 +30,9 @@ public class CargarCsv {
                 }
             }
             
-
             // Leer el resto de las líneas de datos
-            data.clear(); // Limpia los datos actuales
 
+            data.clear(); // Limpia los datos actuales
 
             while ((line = br.readLine()) != null) {
                 

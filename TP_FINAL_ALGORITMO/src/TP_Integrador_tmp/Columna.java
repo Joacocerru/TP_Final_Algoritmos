@@ -2,7 +2,7 @@ package TP_Integrador_tmp;
 
 import java.lang.Cloneable;
 import java.util.ArrayList;
-import java.util.Arrays;
+//import java.util.Arrays;
 import java.util.List;
 
 public class Columna implements Cloneable
