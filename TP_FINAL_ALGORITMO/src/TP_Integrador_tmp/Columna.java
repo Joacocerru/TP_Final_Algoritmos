@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Columna implements Cloneable{
+public class Columna implements Cloneable
+{
 
     private String tipoDato; // Tipo de dato de la columna
     private Integer _cantDatos; // Cantidad Datos

@@ -258,7 +258,8 @@ public class DataFrame implements Cloneable{
         
         if ( tmpColumna == null || posFila == null)
             throw new NullPointerException ("Fila/Columna inexistente");
-            return tmpColumna.getDato(posFila);
+        
+        return tmpColumna.getDato(posFila);
     }
 
 
@@ -489,12 +490,23 @@ public class DataFrame implements Cloneable{
                 copiaEstructura.dataColumnar.add(columnaCopia);
             }
 
+            
+            // Realizar una copia profunda de las columnas
+            copiaEstructura.dataFilas = new ArrayList<>();
+
+            for (Fila filas : this.dataFilas) {
+                Fila filaCopia = filas.clone();
+                copiaEstructura.dataFilas.add(filaCopia);
+            }
+
             // Clonar el columnMap y los arrays de etiquetas
         
             copiaEstructura.columnMap = new HashMap<>(this.columnMap);
             copiaEstructura.rowMap = new HashMap<>(this.rowMap);
+
             copiaEstructura.ColumnArray = new ArrayList<>(this.ColumnArray);
             copiaEstructura.RowArray = new ArrayList<>(this.RowArray);
+            
             copiaEstructura.contarColumnas();
             copiaEstructura.contarRegistros();
             return copiaEstructura;
