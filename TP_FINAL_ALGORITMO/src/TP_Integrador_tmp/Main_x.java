@@ -7,8 +7,8 @@ import java.util.List;
 //import TP_Integrador_tmp.Dato_Numerico;
 
 public class Main {
-    public static void main(String[] args) 
-    {
+    
+    public static void main(String[] args) {
         
     DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba1.csv", ",", "S");
     DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba2.csv", ",", "N");
