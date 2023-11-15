@@ -37,13 +37,19 @@ public class Main {
 
     ////  USER STORIE 11: Imprimir datos en formato tabla  \\\\
 
-    // Imprime por columnas
-    CsvPrinter.imprimirColumnar(df);
-    CsvPrinter.imprimirColumnar(df2);
+    DataFrame copiadf = null;
 
-    // Imprime por filas
-    //CsvPrinter.imprimirPorFilas(df);
-    //CsvPrinter.imprimirPorFilas(df2);
+    copiadf = df.clone();
+
+    CsvPrinter.imprimirColumnar(copiadf);
+    CsvPrinter.imprimirColumnar(df);
+
+    df.eliminarFila("4");
+
+    CsvPrinter.imprimirColumnar(copiadf);
+    
+    CsvPrinter.imprimirColumnar(df);
+    
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -81,19 +87,19 @@ public class Main {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     
-    DataFrame copiadf = null;
+    DataFrame copiadf1 = null;
 
-    copiadf = df.clone();
+    copiadf1 = df.clone();
 
     System.out.println("Copia profunda del DataFrame sin header.");
     
-    CsvPrinter.imprimirColumnar(copiadf);
+    CsvPrinter.imprimirColumnar(copiadf1);
     CsvPrinter.imprimirColumnar(df);
 
     df.eliminarFila("4");
     //copiadf.eliminarFila("2");
 
-    CsvPrinter.imprimirColumnar(copiadf);
+    CsvPrinter.imprimirColumnar(copiadf1);
     CsvPrinter.imprimirColumnar(df);
     
 
@@ -329,12 +335,12 @@ public class Main {
 
     // COPIA PROFUNDA DE LA ESTRUCTURA COLUMNAR
 
-	DataFrame copiadf1 = null;
-	copiadf1 = df.clone();
+	DataFrame copiadf2 = null;
+	copiadf2 = df.clone();
  	System.out.println("Copia profunda del DataFrame sin header.");
-	CsvPrinter.imprimirColumnar(copiadf1);
+	CsvPrinter.imprimirColumnar(copiadf2);
     System.out.println("Copia profunda del DataFrame sin header.");
-    CsvPrinter.imprimirPorFilas(copiadf1);
+    CsvPrinter.imprimirPorFilas(copiadf2);
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
