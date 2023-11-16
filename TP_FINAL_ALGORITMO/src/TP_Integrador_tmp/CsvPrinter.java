@@ -27,7 +27,7 @@ public class CsvPrinter {
 
         // Imprimir el encabezado
         System.out.println("#-----------------------------------------------------------------------------");
-        System.out.println("# Impresión por Filas");
+        System.out.println("   IMPRESIÓN DF POR FILAS");
         System.out.println("#-----------------------------------------------------------------------------");
 
 
@@ -106,7 +106,7 @@ public class CsvPrinter {
         int numRows = df.isEmpty() ? 0 : df.getNroRegistros(); // Número de filas
     
         System.out.println("#-----------------------------------------------------------------------------");
-        System.out.println("# Impresión por Columnas");
+        System.out.println("   IMPRESIÓN POR COLUMNAS");
         System.out.println("#-----------------------------------------------------------------------------");
         
 
@@ -174,7 +174,7 @@ public class CsvPrinter {
             System.out.print(df.getColumna(i).getTipoDato() + "\t");
         }
 
-        System.out.println();
+        System.out.println(" ");
 
     }
 

@@ -7,8 +7,7 @@ public class Main {
     public static void main(String[] args) {
         
     
-    
-    ////  USER STORIE 1: Lectura CSV   \\\\
+    ////  USER STORIE 1: LECTURA CSV   \\\\
 
     // Pre: Dataframe(ruta_archivo, delimitado, Header o no)
     // Pos: Solo se carga el dataset. 
@@ -33,7 +32,7 @@ public class Main {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
 
-    ////  USER STORIE 11: Imprimir datos en formato tabla  \\\\
+    ////  USER STORIE 11: IMPRIMIR DATOS EN FORMATO TABLA  \\\\
 
     // Imprime por columnas
     CsvPrinter.imprimirColumnar(df);
@@ -46,11 +45,61 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    ////  USER STORIE 4 + 5 + 6 : CANTIDAD DE FILAS Y COLUMNAS + ETIQUETAS DE FILA Y COLUMNAS + TIPO DE DATOS COLUMNA  \\\\ 
+
+    System.out.println("--------------------------------------------------------------------------------------"); 
+    System.out.println("   INFORMACIÓN SOBRE DATAFRAME"); 
+    System.out.println(" "); 
+
+    
+    CsvPrinter.info(df); 
+    CsvPrinter.info(df2);
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    ////  USER STORIE 6: DATOS DE LAS COLUMNAS  \\\\
+
+    System.out.println("--------------------------------------------------------------------------------------"); 
+    System.out.println("   TIPO DE DATO DE LA COLUMNA"); 
+    System.out.println(" "); 
+    
+
+    // Tipo de dato por la posición de columnas
+    String TipoColumna = df.getColumna(0).getTipoDato();
+    String TipoColumna2 = df.getColumna(1).getTipoDato();
+
+    System.out.println("El tipo de dato de la columna seleccionada es: " + TipoColumna);
+    System.out.println("El tipo de dato de la columna seleccionada es: " + TipoColumna2);
+
+
+    // Tipo de dato por etiqueta de Columnas
+    Columna columnaNombre = df.getColumnaPorEtiqueta("Columna4");
+    System.out.println("El tipo de dato de la columna seleccionada es: " + columnaNombre.getTipoDato());
+
+
+    // Tipo de dato a partir de una lista de Columnas
+
+    String[] Listita = {"1","4"};
+    List<Columna> lista2 = df2.getColumnaListaEtiquetas(Listita);
+    System.out.println(lista2);
+
+
+	
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     
-    ////  USER STORIE 7:  Buscar dato por etiqueta de Fila Y Columna \\\\
+    ////  USER STORIE 7:  Buscar dato según Fila Y Columna \\\\
     
+    // Busqueda por Etiqueta
     System.out.println("--------------------------------------------------------------------------------------"); 
     System.out.println("# Información de la Celda obtenida por Etiqueta de Fila y Columna"); 
     System.out.println(" "); 
@@ -61,9 +110,8 @@ public class Main {
 
 
     try {
-        //Dato valor = df2.getValor(fila, columna);
         Dato valor = df.getValor(Fila, Columna);
-            
+        //Dato valor = df2.getValor(fila, columna);
 
         if (valor != null) 
             System.out.println("Valor en la fila " + (Fila) + " y columna " + (Columna) + ": " + valor.getDato());
@@ -74,6 +122,28 @@ public class Main {
         System.out.println("Fila/Columna Inexistente"); 
     }
     
+
+    // Busqueda por posición
+    System.out.println("--------------------------------------------------------------------------------------"); 
+    System.out.println("# Información de la Celda obtenida por posición en Fila y Columna"); 
+    System.out.println(" "); 
+
+    Integer PosFila = 2; 
+    Integer PosColumna = 2; 
+
+    
+    try {
+        Dato dato = df.getValorPosicion( PosFila, PosColumna); // df.getValorPosicion(posFila,posColumna)
+
+        if (dato != null) 
+            System.out.println("Valor en la fila " + (PosFila) + " y columna " + (PosColumna) + ": " + dato);
+        else 
+            System.out.println("Índices fuera de rango.");
+        }
+    catch (NullPointerException e) {
+        System.out.println("Fila/Columna Inexistente"); 
+    }
+
 
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -145,45 +215,8 @@ public class Main {
     CsvPrinter.imprimirPorFilas(df);
     //CsvPrinter.imprimirColumnar(df);
 
+
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-   	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // Imprime: Cantidad de Filas, Cantidad de Columnas, Etiqueta a las Filas 
-    // y columnas y muestra el tipo de datos de las columnas. 
- 
-    String xx = df.getHeaderColumn(1);
-
-    Dato dato = df.getValorPosicion(2,2);
-    Dato dato2 = df.getValorPosicion(0,2);  
-
-    Columna Col1 = df2.getColumna(2);
-    Columna Col2 = df2.getColumnaPorEtiqueta("3");
- 
-    String[] Listita = {"1","4"};
-    List<Columna> lista2 = df2.getColumnaListaEtiquetas( Listita);
-
-    String fila = "3"; // 
-    String columna = "Columna4"; //
-
-    try {
-        //Dato valor = df2.getValor(fila, columna);
-        Dato valor = df.getValor(fila, columna);
-      
-        if (valor != null) 
-        System.out.println("Valor en la fila " + (fila) + " y columna " + (columna) + ": " + valor.getDato());
-        else 
-        System.out.println("Índices fuera de rango.");
-    }
-    catch (NullPointerException e) {
-        System.out.println("Fila/Columna Inexistente"); 
-    }
-
-	Columna columnaNombre = df.getColumnaPorEtiqueta("Columna3");
-    
-	
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
