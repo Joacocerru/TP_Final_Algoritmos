@@ -1,11 +1,30 @@
 package TP_Integrador_tmp;
 import java.lang.Cloneable;
+
 public class Fila implements Comparable,Cloneable
 {
 
     //private Object[] rowData; // Almacena los datos de la fila
     private Dato[] rowData; // Almacena los datos de la fila
     private String etiqueta; // Etiqueta de la fila
+
+    public Fila(String etiqueta, Dato[] rowData) {
+        this.rowData = rowData;
+        this.etiqueta = etiqueta;
+    }
+
+    // Constructor de la clase Fila que acepta solo la etiqueta
+    public Fila(String etiqueta) {
+        this.etiqueta = etiqueta;
+        this.rowData = new Dato[0];  
+    }
+
+    public Fila(String etiqueta, Dato[] rowData, DataFrame dataFrame) {
+        this.etiqueta = etiqueta;
+        this.rowData = rowData;
+        this.dataFrame = dataFrame;
+    }
+
 
     public void setDato (Dato nuevoDato)
     {
@@ -19,10 +38,6 @@ public class Fila implements Comparable,Cloneable
         this.rowData = NewrowData;
     }
 
-    public Fila(String etiqueta, Dato[] rowData) {
-        this.rowData = rowData;
-        this.etiqueta = etiqueta;
-    }
 
     public Dato getDato(int columna) 
     {
@@ -113,6 +128,81 @@ public Fila clone()
             throw new AssertionError("La clonación no es compatible");
         }   
 
+    }
+
+    public int compareTo(Object o) 
+    {
+       int total = this.rowData.length;
+       int i = 0;
+       Fila x = (Fila) o;
+
+        do 
+        {
+            Dato datoX = this.rowData[i];
+            Dato datoY = x.rowData[i];
+            int tmpCompare = datoX.compareTo(datoY);
+
+            if ( tmpCompare == 0)
+                i++;
+            else
+                return tmpCompare ;
+        } while (i < total);
+
+        return 0;
+    }
+    
+    
+    public void agregarDatoAlFinal(Dato nuevoDato) 
+    {
+    	// Crear una nueva lista que contenga los datos existentes
+    	List<Dato> nuevosDatos = new ArrayList<>(Arrays.asList(this.rowData));
+    	
+    	// Agregar el nuevo dato al final de la lista
+    	nuevosDatos.add(nuevoDato);
+    	
+    	// Actualizar el arreglo de datos de la fila
+    	this.rowData = nuevosDatos.toArray(new Dato[0]);
+    }
+
+    public void agregarDatoNuevaFila(Dato nuevoDato) 
+    {
+    	     // Clonar el nuevo dato
+    	Dato datoClonado = (Dato) nuevoDato.clone();
+    	
+    	// Crear un nuevo arreglo con un tamaño mayor
+    	Dato[] nuevoRowData = new Dato[rowData.length + 1];
+    	
+    	// Copiar los datos existentes al nuevo arreglo
+    	System.arraycopy(rowData, 0, nuevoRowData, 0, rowData.length);
+    	
+    	// Agregar el nuevo dato clonado al final
+    	nuevoRowData[nuevoRowData.length - 1] = datoClonado;
+    	
+    	// Actualizar el arreglo de datos en la fila
+    	rowData = nuevoRowData;
+		}
+		
+		public Dato getDato(String etiquetaColumna, DataFrame dataframe) 
+		{
+        int indiceColumna = getPosicionColumnaEtiqueta(etiquetaColumna,dataframe);
+        if (indiceColumna != -1) {
+            return rowData[indiceColumna];
+        } else {
+            // Manejo de error, puedes lanzar una excepción o devolver un valor por defecto
+            throw new IllegalArgumentException("La etiqueta de columna proporcionada no existe en la fila.");
+        }
+    }
+    
+    private int getPosicionColumnaEtiqueta(String etiquetaColumna, DataFrame dataframe) 
+    {
+        for (int i = 0; i < rowData.length; i++) 
+        {
+            if (dataframe.getColumna(i).getEtiqueta().equals(etiquetaColumna)) 
+            {
+                return i;
+            }
+        }
+        return -1;  // Devolver -1 si la etiqueta no se encuentra
     }
 
 

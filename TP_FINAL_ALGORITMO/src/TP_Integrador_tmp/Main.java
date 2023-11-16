@@ -448,7 +448,76 @@ public class Main {
         System.out.println("Ocurrió un error al exportar el archivo CSV: " + e.getMessage());
         }
     }
-    }
+
+//-----------------------------------------------------------------------------------------------
+// METODO PARA ELIMINAR UNA COLUMNA DEL DATAFRAME 
+
+    System.out.println("eliminar una columna del DataFrame");
+    
+    df2.eliminarColumna("Columna2");
+
+    CsvPrinter.imprimirColumnar(df2);
+
+
+
+//---------------------------------------------------------------
+// METODO PARA AGREGAR UNA NUEVA COLUMNA DEL DATAFRAME
+
+	System.out.println("Agregar una columna Nueva al DataFrame");
+	
+	String etiquetaColumnaNueva = "Columna5";
+	 
+	DataFrame df5 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_9\\prueba1.csv", ",", "S");
+	
+	String[] datosNuevaColumna = {"Nueva1", "Nueva2","Nueva3", "Nueva4", "Nueva5", "Nueva6"};
+	
+	// Crear un array de Dato
+	Dato[] datosArray = new Dato[datosNuevaColumna.length];
+	for (int i = 0; i < datosNuevaColumna.length; i++) {
+	    datosArray[i] = new Dato(datosNuevaColumna[i]);
+	}
+	
+	// Crear la nueva columna
+	Columna nuevaColumna = new Columna();
+	
+	nuevaColumna.setColumna(datosArray, "S");
+	
+	df5.AgregarColumnaNueva(etiquetaColumnaNueva, nuevaColumna);
+	
+	// Imprimir el DataFrame
+	CsvPrinter.imprimirColumnar(df5);
+	
+
+
+//------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------
+// GENERAR UNA VISTA REDUCIDA (SLICING)
+//-----------------------------------------------------------------
+    System.out.println("Impresión de una vista reducida del DataFrame (slicing)");
+    System.out.println("---------------------------------------------------------------------");
+    
+    DataFrame df6 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_9\\prueba1.csv", ",", "S");
+    
+    // Lista de etiquetas de filas a seleccionar
+    List<String> etiquetasFilas = Arrays.asList("1", "3", "5");
+
+    // Lista de etiquetas de columnas a seleccionar
+    List<String> etiquetasColumnas = Arrays.asList("Columna1", "Columna4");
+
+    // Llamada al método para seleccionar la vista reducida
+    DataFrame vistaRed = df6.seleccionarVista(etiquetasFilas, etiquetasColumnas);
+
+    // Imprimir el DataFrame resultante (vista reducida)
+    CsvPrinter.imprimirPorFilas(vistaRed);
+    CsvPrinter.imprimirColumnar(vistaRed);
+
+    System.out.println("---------------------------------------------------------------------");
+
+//-------------------------------------------------------------------------------------------------
+
+
+
+}
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
