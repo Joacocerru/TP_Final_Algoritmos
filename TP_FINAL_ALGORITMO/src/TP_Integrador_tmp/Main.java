@@ -47,9 +47,14 @@ public class Main {
     df.eliminarFila("4");
 
     CsvPrinter.imprimirColumnar(copiadf);
-    
+
     CsvPrinter.imprimirColumnar(df);
-    
+
+    df.eliminarColumna("ColumnaPruebas");
+
+    CsvPrinter.imprimirColumnar(copiadf);
+
+    CsvPrinter.imprimirColumnar(df);
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

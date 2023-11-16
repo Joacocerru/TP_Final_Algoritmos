@@ -147,7 +147,8 @@ public class CsvPrinter {
         }
 
         System.out.println("#--------------------------------------------------------------------------");
-
+        System.out.println("");
+        System.out.println("");
     }
 
     public static void info(DataFrame df) {
