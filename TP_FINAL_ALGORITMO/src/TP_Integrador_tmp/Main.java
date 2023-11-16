@@ -268,9 +268,9 @@ public class Main {
 
     // Acceder una fila completa si se selecciona la etiqueta de la fila
 
-    String etiquetaFila = "3";
+    String etiquetaFila1 = "3";
 
-    Fila fila = df.getFilaPorEtiqueta(etiquetaFila);
+    Fila fila = df.getFilaPorEtiqueta(etiquetaFila1);
 
     System.out.println("Las fila indexada por la etiqueta :" + etiquetaFila + "contiene los datos" + fila);
 
@@ -281,7 +281,7 @@ public class Main {
 
     String etiquetaColumna = "Columna3";
 
-    Fila columna = df.getColumnaPorEtiqueta(etiquetaColumna);
+    Columna columna = df.getColumnaPorEtiqueta(etiquetaColumna);
 
     System.out.println("Las fila indexada por la etiqueta :" + etiquetaColumna + "contiene los datos" + columna);
 
@@ -376,11 +376,11 @@ public class Main {
     
     // Lista de etiquetas de filas y columnas a incluir en la vista reducida
 
-    List<String> etiquetasFilas = Arrays.asList("1", "2", "3");
+    List<String> etiquetasFilas2 = Arrays.asList("1", "2", "3");
 
-    List<String> etiquetasColumnas = Arrays.asList("Columna2","Columna3");
+    List<String> etiquetasColumnas2 = Arrays.asList("Columna2","Columna3");
 
-    CsvPrinter.imprimirVistaReducida(df, etiquetasFilas, etiquetasColumnas);
+    CsvPrinter.imprimirVistaReducida(df, etiquetasFilas2, etiquetasColumnas2);
 
     //------------------------------------------------------------------------------------------------
     // CASOS ESPECIALES DE VISTA REDUCIDA DEL DF - 
@@ -433,7 +433,6 @@ public class Main {
         System.out.println("Ocurrió un error al exportar el archivo CSV: " + e.getMessage());
 
         }
-    }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -685,5 +684,7 @@ public class Main {
     // METODO A IMPLEMENTAR
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    }
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+}
+}
