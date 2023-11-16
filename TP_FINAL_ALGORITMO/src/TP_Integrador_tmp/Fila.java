@@ -1,6 +1,7 @@
 package TP_Integrador_tmp;
-
-public class Fila implements Comparable{
+import java.lang.Cloneable;
+public class Fila implements Comparable,Cloneable
+{
 
     //private Object[] rowData; // Almacena los datos de la fila
     private Dato[] rowData; // Almacena los datos de la fila
@@ -73,4 +74,46 @@ public class Fila implements Comparable{
         }
         this.rowData = tmpRowData;
     }
+//----------------------------------------------------------------------------------------------
+// Implementación del método clone 
+@Override
+public Fila clone() 
+{        
+    //private Dato[] rowData; // Almacena los datos de la fila
+    //private String etiqueta; // Etiqueta de la fila
+    
+    try {  
+        // Clona la estructura principal (Columna)
+        Fila copia = (Fila) super.clone();
+        
+        // Realiza una copia profunda de la lista de datos (arreglo)
+        if (rowData != null) 
+        {
+            copia.rowData = new Dato[rowData.length];
+
+            for (int i = 0; i < rowData.length; i++)
+            {
+                if (rowData[i] instanceof Cloneable) 
+                {
+                    copia.rowData[i] = (Dato) rowData[i].clone();
+
+                } else 
+                {
+                    // Maneja el caso en el que el dato no es clonable (ajusta esto según tus necesidades)
+                    copia.rowData[i] = rowData[i]; // Si no es clonable, agrega la referencia directa
+                }
+            }
+        }
+           
+        return copia;
+
+        } 
+        catch (CloneNotSupportedException e) 
+        {    
+            throw new AssertionError("La clonación no es compatible");
+        }   
+
+    }
+
+
 }

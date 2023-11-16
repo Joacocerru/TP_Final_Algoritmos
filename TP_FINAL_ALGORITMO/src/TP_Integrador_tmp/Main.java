@@ -4,10 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+{
         
     
-    ////  USER STORIE 1: LECTURA CSV   \\\\
+    
+    ////  USER STORIE 1: Lectura CSV   \\\\
 
     // Pre: Dataframe(ruta_archivo, delimitado, Header o no)
     // Pos: Solo se carga el dataset. 
@@ -23,8 +25,8 @@ public class Main {
     //DataFrame df4 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_3 (BuscarValor - anda)\\prueba2.csv", ",", "N");
     
     // VALEN //
-    DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
-    DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
+    //DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
+    //DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
     
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -34,13 +36,24 @@ public class Main {
 
     ////  USER STORIE 11: IMPRIMIR DATOS EN FORMATO TABLA  \\\\
 
-    // Imprime por columnas
-    CsvPrinter.imprimirColumnar(df);
-    CsvPrinter.imprimirColumnar(df2);
+    DataFrame copiadf = null;
 
-    // Imprime por filas
-    //CsvPrinter.imprimirPorFilas(df);
-    //CsvPrinter.imprimirPorFilas(df2);
+    copiadf = df.clone();
+
+    CsvPrinter.imprimirColumnar(copiadf);
+    CsvPrinter.imprimirColumnar(df);
+
+    df.eliminarFila("4");
+
+    CsvPrinter.imprimirColumnar(copiadf);
+
+    CsvPrinter.imprimirColumnar(df);
+
+    df.eliminarColumna("ColumnaPruebas");
+
+    CsvPrinter.imprimirColumnar(copiadf);
+
+    CsvPrinter.imprimirColumnar(df);
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -149,19 +162,19 @@ public class Main {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     
-    DataFrame copiadf = null;
+    DataFrame copiadf1 = null;
 
-    copiadf = df.clone();
+    copiadf1 = df.clone();
 
     System.out.println("Copia profunda del DataFrame sin header.");
     
-    CsvPrinter.imprimirColumnar(copiadf);
+    CsvPrinter.imprimirColumnar(copiadf1);
     CsvPrinter.imprimirColumnar(df);
 
     df.eliminarFila("4");
     //copiadf.eliminarFila("2");
 
-    CsvPrinter.imprimirColumnar(copiadf);
+    CsvPrinter.imprimirColumnar(copiadf1);
     CsvPrinter.imprimirColumnar(df);
     
 
@@ -360,12 +373,12 @@ public class Main {
 
     // COPIA PROFUNDA DE LA ESTRUCTURA COLUMNAR
 
-	DataFrame copiadf1 = null;
-	copiadf1 = df.clone();
+	DataFrame copiadf2 = null;
+	copiadf2 = df.clone();
  	System.out.println("Copia profunda del DataFrame sin header.");
-	CsvPrinter.imprimirColumnar(copiadf1);
+	CsvPrinter.imprimirColumnar(copiadf2);
     System.out.println("Copia profunda del DataFrame sin header.");
-    CsvPrinter.imprimirPorFilas(copiadf1);
+    CsvPrinter.imprimirPorFilas(copiadf2);
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

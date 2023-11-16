@@ -258,7 +258,8 @@ public class DataFrame implements Cloneable{
         
         if ( tmpColumna == null || posFila == null)
             throw new NullPointerException ("Fila/Columna inexistente");
-            return tmpColumna.getDato(posFila);
+        
+        return tmpColumna.getDato(posFila);
     }
 
 
@@ -481,20 +482,46 @@ public class DataFrame implements Cloneable{
             // Clonar el objeto en sí
             DataFrame copiaEstructura = (DataFrame) super.clone();
 
+
             // Realizar una copia profunda de las columnas
             copiaEstructura.dataColumnar = new ArrayList<>();
 
-            for (Columna columna : this.dataColumnar) {
+            for (Columna columna : this.dataColumnar) 
+            {
                 Columna columnaCopia = columna.clone();
                 copiaEstructura.dataColumnar.add(columnaCopia);
             }
 
-            // Clonar el columnMap y los arrays de etiquetas
-        
             copiaEstructura.columnMap = new HashMap<>(this.columnMap);
-            copiaEstructura.rowMap = new HashMap<>(this.rowMap);
+            
+            for (String keys: this.columnMap.keySet())
+            {
+                Columna columnacopia = this.columnMap.get(keys).clone();
+                copiaEstructura.columnMap.put(keys, columnacopia);
+            }
+            
+
+            // Realizar una copia profunda de las columnas
+            copiaEstructura.dataFilas = new ArrayList<>();
+
+            for (Fila filas : this.dataFilas) {
+                Fila filaCopia = filas.clone();
+                copiaEstructura.dataFilas.add(filaCopia);
+            }
+
+            copiaEstructura.rowMap = new HashMap<>();
+            
+            for (String keys: this.rowMap.keySet())
+            {
+                Fila filaCopia = this.rowMap.get(keys).clone();
+                copiaEstructura.rowMap.put(keys, filaCopia);
+            }
+
+
+            // Clonar el columnMap y los arrays de etiquetas
             copiaEstructura.ColumnArray = new ArrayList<>(this.ColumnArray);
             copiaEstructura.RowArray = new ArrayList<>(this.RowArray);
+            
             copiaEstructura.contarColumnas();
             copiaEstructura.contarRegistros();
             return copiaEstructura;
