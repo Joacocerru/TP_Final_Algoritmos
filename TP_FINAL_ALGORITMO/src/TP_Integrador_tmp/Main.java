@@ -11,9 +11,6 @@ public class Main {
     
     ////  USER STORIE 1: Lectura CSV   \\\\
 
-    // Pre: Dataframe(ruta_archivo, delimitado, Header o no)
-    // Pos: Solo se carga el dataset. 
-
     //DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba9.csv", ",", "S");
     //DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba2.csv", ",", "N");
     
@@ -25,8 +22,8 @@ public class Main {
     //DataFrame df4 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_3 (BuscarValor - anda)\\prueba2.csv", ",", "N");
     
     // VALEN //
-    //DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
-    //DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
+    DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
+    DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
     
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,6 +33,8 @@ public class Main {
 
     ////  USER STORIE 11: IMPRIMIR DATOS EN FORMATO TABLA  \\\\
 
+
+    
     DataFrame copiadf = null;
 
     copiadf = df.clone();
@@ -54,6 +53,12 @@ public class Main {
     CsvPrinter.imprimirColumnar(copiadf);
 
     CsvPrinter.imprimirColumnar(df);
+    CsvPrinter.imprimirColumnar(df2);
+
+
+    // Imprime por filas
+    //CsvPrinter.imprimirPorFilas(df);
+    //CsvPrinter.imprimirPorFilas(df2);
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -69,6 +74,7 @@ public class Main {
 
     
     CsvPrinter.info(df); 
+    System.out.println(" "); 
     CsvPrinter.info(df2);
 
 
@@ -97,14 +103,13 @@ public class Main {
     System.out.println("El tipo de dato de la columna seleccionada es: " + columnaNombre.getTipoDato());
 
 
-    // Tipo de dato a partir de una lista de Columnas
+    // Tipo de dato a partir de una lista de Columnas (FALTA HACER ESTE)
 
     String[] Listita = {"1","4"};
     List<Columna> lista2 = df2.getColumnaListaEtiquetas(Listita);
     System.out.println(lista2);
 
 
-	
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -114,7 +119,7 @@ public class Main {
     
     // Busqueda por Etiqueta
     System.out.println("--------------------------------------------------------------------------------------"); 
-    System.out.println("# Información de la Celda obtenida por Etiqueta de Fila y Columna"); 
+    System.out.println("   DATO DE CELDA POR ETIQUETA DE FILA Y COLUMNA"); 
     System.out.println(" "); 
 
     String Fila = "3"; //  
@@ -138,7 +143,7 @@ public class Main {
 
     // Busqueda por posición
     System.out.println("--------------------------------------------------------------------------------------"); 
-    System.out.println("# Información de la Celda obtenida por posición en Fila y Columna"); 
+    System.out.println("   DATO DE CELDA POR POSICIÓN DE FILA Y COLUMNA"); 
     System.out.println(" "); 
 
     Integer PosFila = 2; 
@@ -160,25 +165,6 @@ public class Main {
 
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    
-    DataFrame copiadf1 = null;
-
-    copiadf1 = df.clone();
-
-    System.out.println("Copia profunda del DataFrame sin header.");
-    
-    CsvPrinter.imprimirColumnar(copiadf1);
-    CsvPrinter.imprimirColumnar(df);
-
-    df.eliminarFila("4");
-    //copiadf.eliminarFila("2");
-
-    CsvPrinter.imprimirColumnar(copiadf1);
-    CsvPrinter.imprimirColumnar(df);
-    
-
-
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
@@ -381,21 +367,7 @@ public class Main {
     CsvPrinter.imprimirPorFilas(copiadf2);
 
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    // IMPRIMO EL DF ORIGINAL CON VALOR SETEADO Y LA COPIA PROFUNDA
-
-    System.out.println("Impresión del DataFrame con valor seteado");
-
-    //CsvPrinter.imprimirColumnar(df2);
-    CsvPrinter.imprimirColumnar(df);
-
-    System.out.println("Impresión de la copia profunda del DataFrame");
-
-    CsvPrinter.imprimirColumnar(copiadf1);
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
