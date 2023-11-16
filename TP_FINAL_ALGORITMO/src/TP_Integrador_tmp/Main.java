@@ -3,44 +3,68 @@ package TP_Integrador_tmp;
 import java.util.Arrays;
 import java.util.List;
 
-public class Main 
+public class Main {
+    public static void main(String[] args) 
 {
-public static void main(String[] args) 
-{
-        
     
-    
-    ////  USER STORIE 1: Lectura CSV   \\\\
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba9.csv", ",", "S");
-    //DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba2.csv", ",", "N");
+    // **************************************************************** CONSTRUCTORES *************************************************************************************
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // USER STORY 1: cargar datos desde un archivo .CSV
+
+    // Como usuario, quiero poder cargar datos desde un archivo .CSV en el software para crear una estructura tabular
+
+
+    DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba9.csv", ",", "S");
+    DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba2.csv", ",", "N");
     
-    //DataFrame df =  new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_5\\prueba1.csv", ",", "S");
-    //DataFrame df1 =  new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_5\\prueba1.csv", ",", "S");
-    //DataFrame df2 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_5\\prueba1.csv", ",", "N");
+    //DataFrame df =  new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
+    //DataFrame df1 =  new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
+    //DataFrame df2 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "N");
     
-    //DataFrame df3 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_3 (BuscarValor - anda)\\prueba2.csv", ",", "S");
-    //DataFrame df4 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_3 (BuscarValor - anda)\\prueba2.csv", ",", "N");
+    //DataFrame df3 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "S");
+    //DataFrame df4 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
     
     // VALEN //
-    DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
-    DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
+
+    //DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
+    //DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    ////  USER STORY 2: Copia profunda de los elementos de la estructura tabular
+
+    // Como usuario, quiero poder realizar una copia profunda de los elementos de la estructura tabular para generar una nueva 
+    // estructura con los mismos valores, pero independiente de la estructura original en memoria
+
+
+    DataFrame copiadf1 = null;
+
+    copiadf1 = df.clone();
+
+    System.out.println("Copia profunda del DataFrame sin header.");
     
+    CsvPrinter.imprimirColumnar(copiadf1);
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    CsvPrinter.imprimirColumnar(df);
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+    df.eliminarFila("4");
+    //copiadf.eliminarFila("2");
 
-    ////  USER STORIE 11: IMPRIMIR DATOS EN FORMATO TABLA  \\\\
+    CsvPrinter.imprimirColumnar(copiadf1);
 
+    CsvPrinter.imprimirColumnar(df);
 
-    
+    /* -----------------------------------------------------
     DataFrame copiadf = null;
 
     copiadf = df.clone();
 
     CsvPrinter.imprimirColumnar(copiadf);
+
     CsvPrinter.imprimirColumnar(df);
 
     df.eliminarFila("4");
@@ -54,85 +78,247 @@ public static void main(String[] args)
     CsvPrinter.imprimirColumnar(copiadf);
 
     CsvPrinter.imprimirColumnar(df);
-    CsvPrinter.imprimirColumnar(df2);
+    */
+
+    //---------------------------------------------------------
+    /*
+
+    DataFrame copiadf2 = null;
+
+    copiadf2 = df.clone();
+
+    System.out.println("Copia profunda del DataFrame sin header.");
+
+    CsvPrinter.imprimirColumnar(copiadf2);
+
+    System.out.println("Copia profunda del DataFrame sin header.");
+
+    CsvPrinter.imprimirPorFilas(copiadf2);*/
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    ////  USER STORY 3: concatenación de dos estructuras existentes    // CODIGO A REVISAR
+
+    // Como usuario, quiero la capacidad de generar una nueva estructura tabular a partir de la concatenación de dos estructuras existentes, 
+    // creando así una nueva combinando las filas de la primera y luego las filas de la segunda. 
+    // Esta operación es válida si las columnas de ambas estructuras coinciden.
 
 
-    // Imprime por filas
-    //CsvPrinter.imprimirPorFilas(df);
-    //CsvPrinter.imprimirPorFilas(df2);
+    /* 
+    //CsvPrinter.imprimirColumnar(df3);
+
+    //CsvPrinter.imprimirColumnar(df4);
+
+    System.out.println("Concatenación de dos DataFrames");
+    System.out.println("---------------------------------------------------------------------");
+
+    try {
+        // Verificar que ambos DataFrames tengan las mismas columnas
+
+        if (df3.getAllHeaderColumn().equals(df4.getAllHeaderColumn())) {
+
+        // Concatenar los DataFrames verticalmente
+
+        DataFrame resultado = df3.concatenar(df4);
+
+        // Imprimir el DataFrame resultante
+
+        CsvPrinter.imprimirColumnar(resultado);
+
+        } else {
+
+            System.out.println("Error: Los DataFrames tienen columnas diferentes y no se pueden concatenar.");
+            }
+
+        } catch (IllegalArgumentException e) {
+
+            System.out.println("Error al concatenar: " + e.getMessage());
+        } */
 
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    // ***************************************************************** CONSULTAS DE ESTADOS DE LA TABLA ***********************************************************
 
-    ////  USER STORIE 4 + 5 + 6 : CANTIDAD DE FILAS Y COLUMNAS + ETIQUETAS DE FILAS Y COLUMNAS + TIPO DE DATOS COLUMNA  \\\\ 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    System.out.println("--------------------------------------------------------------------------------------"); 
-    System.out.println("   INFORMACIÓN SOBRE DATAFRAME"); 
-    System.out.println(" "); 
+    ////  USER STORY 4: obtener la cantidad de filas y de columnas en el dataset 
 
+    // Como usuario, quiero poder obtener la cantidad de filas y de columnas en el dataset 
+
+    // Imprimo la columna segun la etiqueta elegida --------------------------------------------------
+
+    Columna columnaNombre = df.getColumnaPorEtiqueta("Columna3");
+
+    if (columnaNombre != null) {
+
+        String nombreColumna = columnaNombre.getEtiqueta(); // obtengo etiqueta de la columna 
+
+        int cantidadDatos = columnaNombre.getCantDatos(); // obtengo la cantidad de datos de la columna  
+
+        String tipoDato = columnaNombre.getTipoDato(); // obtengo el tipo de dato de la columna 
+
+        System.out.println("Nombre de la Columna: " + nombreColumna);
+
+        System.out.println("Tipo de Dato de la Columna " + nombreColumna + ": " + tipoDato);
+
+        System.out.println("Cantidad de Datos en la Columna " + nombreColumna + ": " + cantidadDatos);
     
-    CsvPrinter.info(df); 
-    df.imprimirEtiquetasFilas();
-    System.out.println(" "); 
-    CsvPrinter.info(df2);
-    df2.imprimirEtiquetasFilas();
+        System.out.println("Datos de la Columna "+ nombreColumna + ":");
 
+        for (int i = 0; i < cantidadDatos; i++) {
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            Dato dato3 = columnaNombre.getDato(i);
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            System.out.println(dato3.getDato());
+        }
+    } else {
+                String nombreColumna = df.getHeaderColumn(1);
 
+                System.out.println("La columna "+ nombreColumna + " no existe en el DataFrame.");
+    }
 
-    ////  USER STORIE 6: DATOS DE LAS COLUMNAS  \\\\
+    System.out.println(" ");
+    System.out.println("#--------------------------------------------------------------------------");
 
-    System.out.println("--------------------------------------------------------------------------------------"); 
-    System.out.println("   TIPO DE DATO DE LA COLUMNA"); 
-    System.out.println(" "); 
+ 
+    // imprimo la fila segun la etiqueta elegida ------------------------------------------------
+
+    String etiquetaFila = "2";
     
+    //Fila FilaNombre = df2.getFilaPorEtiqueta(etiquetaFila);
+    Fila FilaNombre = df.getFilaPorEtiqueta(etiquetaFila);
 
-    // Tipo de dato por la posición de columnas
-    String TipoColumna = df.getColumna(0).getTipoDato();
-    String TipoColumna2 = df.getColumna(1).getTipoDato();
+    if (FilaNombre != null) {
 
-    System.out.println("El tipo de dato de la columna seleccionada es: " + TipoColumna);
-    System.out.println("El tipo de dato de la columna seleccionada es: " + TipoColumna2);
+        int cantidadDatos = FilaNombre.getCantDatos(); // obtengo la cantidad de datos de la fila
 
+        System.out.println("Etiqueta de la Fila seleccionada: " + etiquetaFila);
 
-    // Tipo de dato por etiqueta de Columnas
-    Columna columnaNombre = df.getColumnaPorEtiqueta("Columna4");
-    System.out.println("El tipo de dato de la columna seleccionada es: " + columnaNombre.getTipoDato());
+        System.out.println("Cantidad de Datos en la Fila " + etiquetaFila + ": " + cantidadDatos);
 
+        System.out.println("Datos de la Fila "+ etiquetaFila + ":");
 
-    // Tipo de dato a partir de una lista de Columnas (FALTA HACER ESTE)
+        for (int i = 0; i < df2.getNroColumnas(); i++) {
 
+            Object dato4 = FilaNombre.getDato(i);
+
+            System.out.print(dato4+ " ");
+        }
+    } else {
+
+        System.out.println("La fila con etiqueta " + etiquetaFila + " no existe en el DataFrame.");
+    }
+
+    System.out.println(" ");
+    System.out.println("#--------------------------------------------------------------------------");
+
+     // Imprime: Cantidad de Filas, Cantidad de Columnas, Etiqueta a las Filas 
+    // y columnas y muestra el tipo de datos de las columnas. 
+    /*
+    String xx = df.getHeaderColumn(1);
+
+    Dato dato = df.getValorPosicion(2,2);
+    Dato dato2 = df.getValorPosicion(0,2);  
+
+    Columna Col1 = df2.getColumna(2);
+    Columna Col2 = df2.getColumnaPorEtiqueta("3");
+ 
     String[] Listita = {"1","4"};
-    List<Columna> lista2 = df2.getColumnaListaEtiquetas(Listita);
-    System.out.println(lista2);
+    List<Columna> lista2 = df2.getColumnaListaEtiquetas( Listita);
 
+    String fila = "3"; // 
+    String columna = "Columna4"; //
+
+    try {
+        //Dato valor = df2.getValor(fila, columna);
+        Dato valor = df.getValor(fila, columna);
+      
+        if (valor != null) 
+        System.out.println("Valor en la fila " + (fila) + " y columna " + (columna) + ": " + valor.getDato());
+        else 
+        System.out.println("Índices fuera de rango.");
+    }
+    catch (NullPointerException e) {
+        System.out.println("Fila/Columna Inexistente"); 
+    } */
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    ////  USER STORY 5: obtener las etiquetas de las filas y columnas
+
+    // Como usuario, quiero poder obtener las etiquetas de las filas y columnas en el dataset.
+
+
+    System.out.println("Las etiquetas de las filas son:");
+
+    df.imprimirEtiquetasFilas();
+
+    System.out.println(" ");
+    System.out.println("#--------------------------------------------------------------------------");
+
+    System.out.println("Las etiquetas de las columnas son:" + df.getAllHeaderColumn());
+
+    System.out.println(" ");
+    System.out.println("#--------------------------------------------------------------------------");
+
+    //--------------------------------------------------------------------------------------
+
+    // Adicional - acceso indexado a nivel de fila y columna
+
+    // Acceder una fila completa si se selecciona la etiqueta de la fila
+
+    String etiquetaFila = "3";
+
+    Fila fila = df.getFilaPorEtiqueta(etiquetaFila);
+
+    System.out.println("Las fila indexada por la etiqueta :" + etiquetaFila + "contiene los datos" + fila);
+
+    System.out.println(" ");
+    System.out.println("#--------------------------------------------------------------------------");
+
+    // Acceder una columna completa si se selecciona la etiqueta de la columna
+
+    String etiquetaColumna = "Columna3";
+
+    Fila columna = df.getColumnaPorEtiqueta(etiquetaColumna);
+
+    System.out.println("Las fila indexada por la etiqueta :" + etiquetaColumna + "contiene los datos" + columna);
+
+    System.out.println(" ");
+    System.out.println("#--------------------------------------------------------------------------");
+    
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    ////  USER STORY 6: obtener los tipos de datos de las columnas
+
+    // Como usuario, quiero poder obtener los tipos de datos de las columnas en el dataset
+
+
+    // YA IMPLEMENTADO EN USER STORIE 4
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    ////  USER STORY 7: acceder a los datos de la estructura tabular
+
+    // Como usuario, quiero poder acceder a los datos de la estructura tabular a través de un índice de fila y columna.
+
+    //-----------------------------------------------------------------------------------------------------------------
     
-    ////  USER STORIE 7:  BUSCAR DATO SEGÚN FILA Y COLUMNA \\\\
-    
-    // Busqueda por Etiqueta
     System.out.println("--------------------------------------------------------------------------------------"); 
-    System.out.println("   DATO DE CELDA POR ETIQUETA DE FILA Y COLUMNA"); 
+    System.out.println("# Información de la Celda obtenida por Etiqueta de Fila y Columna"); 
     System.out.println(" "); 
 
-    String Fila = "3"; //  
+    String Fila = "3"; // 
+
     String Columna = "Columna4"; 
     //String Columna = "0";
 
 
     try {
-        Dato valor = df.getValor(Fila, Columna);
         //Dato valor = df2.getValor(fila, columna);
+        Dato valor = df.getValor(Fila, Columna);
+            
 
         if (valor != null) 
             System.out.println("Valor en la fila " + (Fila) + " y columna " + (Columna) + ": " + valor.getDato());
@@ -143,273 +329,155 @@ public static void main(String[] args)
         System.out.println("Fila/Columna Inexistente"); 
     }
     
-
-    // Busqueda por posición
-    System.out.println("--------------------------------------------------------------------------------------"); 
-    System.out.println("   DATO DE CELDA POR POSICIÓN DE FILA Y COLUMNA"); 
-    System.out.println(" "); 
-
-    Integer PosFila = 2; 
-    Integer PosColumna = 2; 
-
-    
-    try {
-        Dato dato = df.getValorPosicion( PosFila, PosColumna); // df.getValorPosicion(posFila,posColumna)
-
-        if (dato != null) 
-            System.out.println("Valor en la fila " + (PosFila) + " y columna " + (PosColumna) + ": " + dato);
-        else 
-            System.out.println("Índices fuera de rango.");
-        }
-    catch (NullPointerException e) {
-        System.out.println("Fila/Columna Inexistente"); 
-    }
-
-
-    
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // ****************************************************************** METODOS DE ACCESO ****************************************************************
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    ////  USER STORY 8: GENERAR UNA VISTA REDUCIDA (SLICING)  
 
-    ////  USER STORIE 14: ACCEDER A UNA CELDA Y SETEAR NUEVO VALOR  \\\\
-    // Seteo un valor en el DataFrame definiendo las etiquetas Fila y Columna y asignando un nuevo valor
+    // Como usuario, quiero la capacidad de seleccionar una vista reducida de la estructura tabular a 
+    // través de una lista de etiquetas de índice (slicing).
 
-    String etiquetaFila2 = "3"; 
-    String etiquetaColumna2 = "Columna2"; 
-    //String etiquetaColumna2 = "4";
-
-    // Accede a la celda y establece el nuevo valor
-    df.setValorDataFrame(etiquetaFila2, etiquetaColumna2, 00);
-    //df2.setValorDataFrame(etiquetaFila2, etiquetaColumna2, 00);
-
+    //-----------------------------------------------------------------------------------------------------
+    // GENERAR UNA VISTA REDUCIDA (SLICING) - CORREGIR EL CODIGO
+    //-----------------------------------------------------------------------------------------------------
+    System.out.println("Impresión de una vista reducida del DataFrame (slicing)");
+    System.out.println("---------------------------------------------------------------------");
     
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    DataFrame df6 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_9\\prueba1.csv", ",", "S");
     
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+    // Lista de etiquetas de filas a seleccionar
 
-    ////  USER STORIE 15:  METODO PARA AGREGAR UNA COLUMNA DEL DATAFRAME  \\\\
-    
+    List<String> etiquetasFilas = Arrays.asList("1", "3", "5");
 
-    System.out.println("--------------------------------------------------------------------------------------"); 
-    System.out.println("   AGREGAR UNA COLUMNA A EXISTENTE DEL DATAFRAME"); 
-    System.out.println(" "); 
-    
-    CsvPrinter.imprimirPorFilas(df);
+    // Lista de etiquetas de columnas a seleccionar
 
-    // Tenemos una columna llamada "ColumnaExistente" en tu DataFrame
-    String etiquetaColumnaExistente = "ColumnaBoolean";
-    //String etiquetaColumnaExistente = "Columna1";
-    String etiquetaNuevaColumna = "Columna_Nueva";
-    
-    //df.clonarYAgregarColumna(etiquetaColumnaExistente, etiquetaNuevaColumna, df);
-    
-    // Imprimir el DataFrame
-    CsvPrinter.imprimirColumnar(df);
-    
-    // Supongamos que tienes una columna llamada "ColumnaExistente" en tu DataFrame
-    String etiquetaColumnaExistente2 = "ColumnaNum";
-    //String etiquetaColumnaExistente2 = "Columna2";
-    String etiquetaNuevaColumna2 = "Columna_Nueva_2";
-    
-    //df.clonarYAgregarColumna(etiquetaColumnaExistente2, etiquetaNuevaColumna2, df);
-    
-    CsvPrinter.imprimirColumnar(df);
-    CsvPrinter.imprimirPorFilas(df);
+    List<String> etiquetasColumnas = Arrays.asList("Columna1", "Columna4");
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Llamada al método para seleccionar la vista reducida
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    DataFrame vistaRed = df6.seleccionarVista(etiquetasFilas, etiquetasColumnas);
 
+    // Imprimir el DataFrame resultante (vista reducida)
 
-    ////  USER STORIE 19:  ELIMINAR UNA FILA Y COLUMNA  \\\\
+    CsvPrinter.imprimirPorFilas(vistaRed);
 
-    CsvPrinter.imprimirPorFilas(df);
+    CsvPrinter.imprimirColumnar(vistaRed);
 
-    // Eliminar una fila
-    System.out.println("--------------------------------------------------------------------------------------"); 
-    System.out.println("   ELIMINAR UNA FILA"); 
-    System.out.println(" "); 
+    System.out.println("---------------------------------------------------------------------");
 
-    df2.eliminarFila("3");
-    
-    CsvPrinter.imprimirPorFilas(df2);
-    CsvPrinter.imprimirColumnar(df2);
+    //-------------------------------------------------------------------------------------------------
+    // ESTO ES SOLO UNA IMPRESION POR PANTALLA DE LOS DATOS DADAS LAS ETIQUETAS
 
-
-    // Eliminar una columna
-    System.out.println("--------------------------------------------------------------------------------------"); 
-    System.out.println("   ELIMINAR UNA COLUMNA"); 
-    System.out.println(" "); 
-
-    df2.eliminarColumna("2");
-    CsvPrinter.imprimirPorFilas(df2);
-    CsvPrinter.imprimirColumnar(df2);
-
-
- 
-
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-
-    ////  USER STORIE 8: GENERAR UNA VISTA REDUCIDA (SLICING)  \\\\
-
-    
-    System.out.println("--------------------------------------------------------------------------------------"); 
-    System.out.println("   IMPRESIÓN DE VISTA REDUCIDA (SLICING)"); 
-    System.out.println(" ");
+    System.out.println("Esto es una impresión por pantalla de los datos dadas las etiquetas filas y columnas");
+    System.out.println("------------------------------------------------------------------------------------");
     
     // Lista de etiquetas de filas y columnas a incluir en la vista reducida
+
     List<String> etiquetasFilas = Arrays.asList("1", "2", "3");
+
     List<String> etiquetasColumnas = Arrays.asList("Columna2","Columna3");
 
     CsvPrinter.imprimirVistaReducida(df, etiquetasFilas, etiquetasColumnas);
 
+    //------------------------------------------------------------------------------------------------
     // CASOS ESPECIALES DE VISTA REDUCIDA DEL DF - 
+
     // METODO PARA IMPRIMIR LAS PRIMERAS Y ULTIMAS FILAS
 
     System.out.println("Informacion de las primeras filas del DataFrame (head)");
+
     CsvPrinter.head(df, 2);
 
     System.out.println("Informacion de las ultimas filas del DataFrame (tail)");
+
     CsvPrinter.tail(df, 2);
 
-
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    ////  USER STORY 9: filtro aplicado a los valores de las celdas
+
+    // Como usuario, quiero poder seleccionar una parte de la estructura tabular utilizando un 
+    // filtro aplicado a los valores de las celdas (query).
+
+
+    // CODIGO A IMPLEMETAR
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    ////  USER STORY 10: operaciones sobre él DF
 
-    // Imprimo la columna segun la etiqueta elegida --------------------------------------------------
+    // Como usuario, quiero poder importar un archivo CSV y permitir que el sistema realice 
+    // operaciones sobre él sin errores de lectura.
 
-    if (columnaNombre != null) {
-
-        String nombreColumna = columnaNombre.getEtiqueta(); // obtengo etiqueta de la columna 2
-        int cantidadDatos = columnaNombre.getCantDatos(); // obtengo la cantidad de datos de la columna 2 
-        String tipoDato = columnaNombre.getTipoDato(); // obtengo el tipo de dato de la columna 2
-
-        System.out.println("Nombre de la Columna: " + nombreColumna);
-        System.out.println("Tipo de Dato de la Columna " + nombreColumna + ": " + tipoDato);
-        System.out.println("Cantidad de Datos en la Columna " + nombreColumna + ": " + cantidadDatos);
     
-        System.out.println("Datos de la Columna "+ nombreColumna + ":");
-        for (int i = 0; i < cantidadDatos; i++) {
-            Dato dato3 = columnaNombre.getDato(i);
-            System.out.println(dato3.getDato());
+    // CODIGO A IMPLEMETAR
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    ////  USER STORY 11: exportar los datos de la tabla a otros formatos
+
+    // Como usuario, quiero la opción de exportar los datos de la tabla a otros formatos, como CSV
+
+
+    try {
+
+        CsvExport.exportarComoCSV(df, "C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\archivo.csv");
+
+        System.out.println("Tu nuevo DataFrame se guardó correctamente en la ruta de archivo seleccionada");
+
+    } catch (Exception e) {
+
+        System.out.println("Ocurrió un error al exportar el archivo CSV: " + e.getMessage());
+
         }
-    } else {
-        String nombreColumna = df.getHeaderColumn(1);
-        System.out.println("La columna "+ nombreColumna + " no existe en el DataFrame.");
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    // ********************************************************  METODOS DE VISUALIZACION  ******************************************************************
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	//  Acceder a las Filas utilizando las etiquetas del encabezado --------------------------------
-
+    ////  USER STORY 12: 
     
-	df.imprimirEtiquetasFilas();
-    //df2.imprimirEtiquetasFilas();
-    
-  	String etiquetaFila = "2";
-    
-    //Fila FilaNombre = df2.getFilaPorEtiqueta(etiquetaFila);
-    Fila FilaNombre = df.getFilaPorEtiqueta(etiquetaFila);
-
-    // imprimo la columna segun la etiqueta elegida ------------------------------------------------
-
-    if (FilaNombre != null) {
-
-        int cantidadDatos = FilaNombre.getCantDatos(); // obtengo la cantidad de datos de la columna 2 
-
-        System.out.println("Etiqueta de la Fila seleccionada: " + etiquetaFila);
-        System.out.println("Cantidad de Datos en la Fila " + etiquetaFila + ": " + cantidadDatos);
-        System.out.println("Datos de la Fila "+ etiquetaFila + ":");
-
-        for (int i = 0; i < df2.getNroColumnas(); i++) {
-            Object dato4 = FilaNombre.getDato(i);
-            System.out.print(dato4+ " ");
-        }
-    } else {
-        System.out.println("La fila con etiqueta " + etiquetaFila + " no existe en el DataFrame.");
-    }
-
-    System.out.println(" ");
-    System.out.println("#--------------------------------------------------------------------------");
+    // Como usuario, quiero ver los datos en forma de tabla para comprender la información de manera clara y concisa.
 
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    // COPIA PROFUNDA DE LA ESTRUCTURA COLUMNAR
-
-	DataFrame copiadf2 = null;
-	copiadf2 = df.clone();
- 	System.out.println("Copia profunda del DataFrame sin header.");
-	CsvPrinter.imprimirColumnar(copiadf2);
-    System.out.println("Copia profunda del DataFrame sin header.");
-    CsvPrinter.imprimirPorFilas(copiadf2);
-
-
-
-
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    // METODO PARA ELIMINAR UNA COLUMNA DEL DATAFRAME DE LA COPIA COLUMNA
-
-	System.out.println("eliminar una columna del DataFrame");
-	
-	CsvPrinter.imprimirColumnar(df);
-	
-	df.eliminarColumna("ColumnaPruebas");
-	
-	CsvPrinter.imprimirColumnar(df);
-
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    // IMPRIMO EL DF ORIGINAL Y LA COPIA PROFUNDA
-
-    System.out.println("Las etiquetas de las columnas son:" + df.getAllHeaderColumn());
-    
-    System.out.println("-----------------------------------------------------------");
-    System.out.println("Impresión del DataFrame sin header.");
-    
-    //CsvPrinter.imprimirColumnar(df2);
     CsvPrinter.imprimirColumnar(df);
-
-    System.out.println("Impresión de la Copia profunda del DataFrame sin header.");
-
-    CsvPrinter.imprimirColumnar(copiadf);
+    
+    
+    CsvPrinter.imprimirPorFilas(df);
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    ////  USER STORY 13:
+
+    // Como usuario, quiero que la tabla sea configurable para mostrar las columnas relevantes.
+
+
+    // CODIGO A IMPLEMETAR
+    
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+     ////  USER STORY 14: ordenar los datos en la tabla según una columna específica
 
-    ////  USER STORIE 13: Buscar datos en la tabla  \\\\ 
-    // Llamo al método buscarValor y le paso el valor a buscar
+    // Como usuario, quiero poder ordenar los datos en la tabla según una columna específica.
+
+
+    // METODO IMPLEMENTADO ?
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    ////  USER STORY 15: buscar y filtrar datos en la tabla 
+
+    // Como usuario, quiero la capacidad de buscar y filtrar datos en la tabla para encontrar información específica.
+
+
+    // Buscar datos en la tabla - llamo al método buscarValor y le paso el valor a buscar
 
     System.out.println("Busqueda de un elemento dentro del DataFrame");
     System.out.println("---------------------------------------------------------------------");
@@ -436,149 +504,186 @@ public static void main(String[] args)
     System.out.println("#--------------------------------------------------------------------------");
 
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // FILTRADO CODIGO A IMPLEMETAR EN USER STORY 9
 
-
-    ////  USER STORIE 10: EXPORTAR DF COMO CSV  \\\\ 
-    try {
-        CsvExport.exportarComoCSV(df, "C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_5\\archivo.csv");
-        System.out.println("Tu nuevo DataFrame se guardó correctamente en la ruta de archivo seleccionada");
-
-    } catch (Exception e) {
-        System.out.println("Ocurrió un error al exportar el archivo CSV: " + e.getMessage());
-        }
     
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//-----------------------------------------------------------------------------------------------
-// METODO PARA ELIMINAR UNA COLUMNA DEL DATAFRAME 
+    // **********************************************************  GESTION DE DATOS  **********************************************************************
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    // ////  USER STORY 16: Acceder a una celda t setear nuevo valor  
+
+    // Como usuario, quiero poder acceder directamente a una celda y asignar un nuevo valor para actualizar los datos.
+
+
+    // Seteo un valor en el DataFrame definiendo las etiquetas Fila y Columna y asignando un nuevo valor
+
+    String etiquetaFila2 = "3"; // posición en Fila
+
+    String etiquetaColumna2 = "Columna2"; // posición en Columna
+
+    df.setValorDataFrame(etiquetaFila2, etiquetaColumna2, 0);
+    //df2.setValorDataFrame(etiquetaFila2, etiquetaColumna2, 0);
+
+
+    // IMPRIMO EL DF ORIGINAL CON VALOR SETEADO Y LA COPIA PROFUNDA
+
+    System.out.println("Impresión del DataFrame con valor seteado");
+
+    //CsvPrinter.imprimirColumnar(df2);
+    CsvPrinter.imprimirColumnar(df);
+
+    System.out.println("Impresión de la copia profunda del DataFrame");
+
+    CsvPrinter.imprimirColumnar(copiadf1);
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    ////  USER STORY 17: insertar una nueva columna a partir de otra columna existente
+
+    // Como usuario, quiero poder insertar una nueva columna a partir de otra columna existente.
+
+
+    System.out.println("Agregar una columna ya existente del DataFrame");
+
+    String etiquetaColumnaExistente = "Columna3";
+
+    String etiquetaNuevaColumna = "Columna5";
+    
+    DataFrame df8 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
+
+    CsvPrinter.imprimirPorFilas(df8);
+    
+    df8.clonarYAgregarColumna(etiquetaColumnaExistente, etiquetaNuevaColumna, df8);
+    
+    // Imprimir el DataFrame
+    CsvPrinter.imprimirColumnar(df8);
+    
+    /*
+    String etiquetaColumnaExistente2 = "ColumnaNum";
+
+    String etiquetaNuevaColumna2 = "Columna_Nueva_2";
+    
+    df.clonarYAgregarColumna(etiquetaColumnaExistente2, etiquetaNuevaColumna2, df);
+    
+    // Imprimir el DataFrame
+    CsvPrinter.imprimirColumnar(df);*/
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    ////  USER STORY 18: 
+
+    // Como usuario, quiero que las celdas con datos faltantes sean identificadas y marcadas con un formato "NA".
+
+  
+    // METODO IMPLEMENTADO ?
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // USER STORY 19: 
+
+    // Como usuario, quiero que el sistema realice operaciones sin errores incluso cuando haya datos faltantes marcados como "NA".
+
+
+    // METODO A IMPLEMENTAR
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // *******************************************  GESTION DEL DATASET  *******************************************************
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // USER STORY 20: insertar una nueva columna en el dataset
+
+    // Como usuario, quiero poder insertar una nueva columna en el dataset utilizando una secuencia lineal nativa de Java.
+
+
+    // METODO PARA AGREGAR UNA NUEVA COLUMNA DEL DATAFRAME
+
+    System.out.println("Agregar una columna Nueva al DataFrame");
+    
+    String etiquetaColumnaNueva = "Columna5";
+     
+    DataFrame df5 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
+    
+    String[] datosNuevaColumna = {"Nueva1", "Nueva2","Nueva3", "Nueva4", "Nueva5", "Nueva6"};
+    
+    // Crear un array de Dato
+
+    Dato[] datosArray = new Dato[datosNuevaColumna.length];
+
+    for (int i = 0; i < datosNuevaColumna.length; i++) {
+
+        datosArray[i] = new Dato(datosNuevaColumna[i]);
+    }
+    
+    // Crear la nueva columna
+
+    Columna nuevaColumna = new Columna();
+    
+    nuevaColumna.setColumna(datosArray, "S");
+    
+    df5.AgregarColumnaNueva(etiquetaColumnaNueva, nuevaColumna);
+    
+    // Imprimir el DataFrame
+    CsvPrinter.imprimirColumnar(df5);
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // USER STORY 21: eliminar una columna y/o fila 
+
+    // Como usuario, quiero la capacidad de eliminar una columna y/o fila específica del dataset.
+
+
+    CsvPrinter.imprimirPorFilas(df5);
+
+    // METODO PARA ELIMINAR UNA FILA DEL DATAFRAME
+
+    System.out.println("eliminar una Fila del DataFrame");
+
+    //df.eliminarColumna("ColumnaNum");
+
+    df5.eliminarFila("4");
+
+    CsvPrinter.imprimirPorFilas(df5);
+
+    //---------------------------------------------
+
+    CsvPrinter.imprimirPorFilas(df5);
+
+    //CsvPrinter.imprimirColumnar(df);
+
+    // METODO PARA ELIMINAR UNA FILA DEL DATAFRAME
 
     System.out.println("eliminar una columna del DataFrame");
+
+    df5.eliminarColumna("Columna2");
+
+    CsvPrinter.imprimirColumnar(df5);
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // USER STORY 22: ordenar las filas del dataset según un criterio
     
-    df2.eliminarColumna("Columna2");
-
-    CsvPrinter.imprimirColumnar(df2);
-
+    // Como usuario, quiero poder ordenar las filas del dataset según un criterio, 
+    // ya sea ascendente o descendente, en una o más columnas.
 
 
-//---------------------------------------------------------------
-// METODO PARA AGREGAR UNA NUEVA COLUMNA DEL DATAFRAME
-
-	System.out.println("Agregar una columna Nueva al DataFrame");
-	
-	String etiquetaColumnaNueva = "Columna5";
-	 
-	DataFrame df5 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_9\\prueba1.csv", ",", "S");
-	
-	String[] datosNuevaColumna = {"Nueva1", "Nueva2","Nueva3", "Nueva4", "Nueva5", "Nueva6"};
-	
-	// Crear un array de Dato
-	Dato[] datosArray = new Dato[datosNuevaColumna.length];
-	for (int i = 0; i < datosNuevaColumna.length; i++) {
-	    datosArray[i] = new Dato(datosNuevaColumna[i]);
-	}
-	
-	// Crear la nueva columna
-	Columna nuevaColumna = new Columna();
-	
-	nuevaColumna.setColumna(datosArray, "S");
-	
-	df5.AgregarColumnaNueva(etiquetaColumnaNueva, nuevaColumna);
-	
-	// Imprimir el DataFrame
-	CsvPrinter.imprimirColumnar(df5);
-	
-
-
-//------------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------
-// GENERAR UNA VISTA REDUCIDA (SLICING)
-//-----------------------------------------------------------------
-    System.out.println("Impresión de una vista reducida del DataFrame (slicing)");
-    System.out.println("---------------------------------------------------------------------");
-    
-    DataFrame df6 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_9\\prueba1.csv", ",", "S");
-    
-    // Lista de etiquetas de filas a seleccionar
-    List<String> etiquetasFilas1 = Arrays.asList("1", "3", "5");
-
-    // Lista de etiquetas de columnas a seleccionar
-    List<String> etiquetasColumnas1 = Arrays.asList("Columna1", "Columna4");
-
-    // Llamada al método para seleccionar la vista reducida
-    DataFrame vistaRed = df6.seleccionarVista(etiquetasFilas1, etiquetasColumnas1);
-
-    // Imprimir el DataFrame resultante (vista reducida)
-    CsvPrinter.imprimirPorFilas(vistaRed);
-    CsvPrinter.imprimirColumnar(vistaRed);
-
-    System.out.println("---------------------------------------------------------------------");
-
-//-------------------------------------------------------------------------------------------------
-
-}
-
-}
-
+    // METODO IMPLEMENTADO ?
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //------------------------------------------------------------------------------------------------
-    // METODO PARA AGREGAR UNA COLUMNA DEL DATAFRAME
-    /*
-    System.out.println("Agragar una columna del DataFrame");
+    // USER STORY 23: agrupamiento o groupby
 
-    // Supongamos que tienes una columna llamada "ColumnaExistente" en tu DataFrame
-    String etiquetaNuevaColumna = "Columna5";
-    String etiquetaColumnaExistente = "Columna2";
+    // Como usuario, quiero la capacidad de dividir las filas en diferentes grupos (agrupamiento o groupby) 
+    // según una o más columnas. Luego, quiero aplicar una operación de sumarización estadística a estos grupos.
 
-    // Verificar si la columna existente realmente existe
-    if (df3.getColumnaPorEtiqueta(etiquetaColumnaExistente) != null) {
-        // Obtener la columna existente
-        Columna columnaExistente = df3.getColumnaPorEtiqueta(etiquetaColumnaExistente);
 
-        // Crear la nueva columna y copiar los datos de la columna existente
-        Columna nuevaColumna = new Columna();
-        nuevaColumna.setEtiqueta(etiquetaNuevaColumna);
+    // METODO A IMPLEMENTAR
 
-        // Supongamos que la clase Columna tiene un método para obtener los datos internos
-        // Reemplaza esto con el método real que obtenga los datos internos de la columna
-        Dato[] datosColumnaExistente = columnaExistente.obtenerDatosInternos();
-
-        // Configurar los datos en la nueva columna
-        nuevaColumna.configurarDatosInternos(datosColumnaExistente);
-
-        // Agregar la nueva columna al DataFrame
-        df3.dataColumnar.add(nuevaColumna);
-        df3.ColumnArray.add(etiquetaNuevaColumna);
-        df3.columnMap.put(etiquetaNuevaColumna, nuevaColumna);
-    } else {
-        System.out.println("Error: La columna '" + etiquetaColumnaExistente + "' no existe en el DataFrame.");
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
-
-    CsvPrinter.imprimirColumnar(df3); */
-    //-----------------------------------------------------------------------------------------------
-    /* 
-    //CsvPrinter.imprimirColumnar(df3);
-    //CsvPrinter.imprimirColumnar(df4);
-
-    System.out.println("Concatenación de dos DataFrames");
-    System.out.println("---------------------------------------------------------------------");
-
-    try {
-        // Verificar que ambos DataFrames tengan las mismas columnas
-        if (df3.getAllHeaderColumn().equals(df4.getAllHeaderColumn())) {
-        // Concatenar los DataFrames verticalmente
-        DataFrame resultado = df3.concatenar(df4);
-        // Imprimir el DataFrame resultante
-        CsvPrinter.imprimirColumnar(resultado);
-        } else {
-            System.out.println("Error: Los DataFrames tienen columnas diferentes y no se pueden concatenar.");
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error al concatenar: " + e.getMessage());
-        } */
-    //--------------------------------------------------------------------------------
-    //--------------------------------------------------------------------------------
-    //--------------------------------------------------------------------------------
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
