@@ -143,7 +143,7 @@ public class DataFrame implements Cloneable{
 
 
     //-------------------------------------------------------------
-    // METODO GETTER NRO COLUMNAS
+    // METODO GETTER NRO REGISTROS
 
     public int getNroRegistros() {
         
