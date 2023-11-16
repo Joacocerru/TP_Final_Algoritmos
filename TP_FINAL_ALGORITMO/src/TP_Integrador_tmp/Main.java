@@ -3,8 +3,9 @@ package TP_Integrador_tmp;
 import java.util.Arrays;
 import java.util.List;
 
-public class Main {
-    public static void main(String[] args) 
+public class Main 
+{
+public static void main(String[] args) 
 {
         
     
@@ -448,7 +449,7 @@ public class Main {
     } catch (Exception e) {
         System.out.println("Ocurrió un error al exportar el archivo CSV: " + e.getMessage());
         }
-    }
+    
 
 //-----------------------------------------------------------------------------------------------
 // METODO PARA ELIMINAR UNA COLUMNA DEL DATAFRAME 
@@ -500,13 +501,13 @@ public class Main {
     DataFrame df6 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_9\\prueba1.csv", ",", "S");
     
     // Lista de etiquetas de filas a seleccionar
-    List<String> etiquetasFilas = Arrays.asList("1", "3", "5");
+    List<String> etiquetasFilas1 = Arrays.asList("1", "3", "5");
 
     // Lista de etiquetas de columnas a seleccionar
-    List<String> etiquetasColumnas = Arrays.asList("Columna1", "Columna4");
+    List<String> etiquetasColumnas1 = Arrays.asList("Columna1", "Columna4");
 
     // Llamada al método para seleccionar la vista reducida
-    DataFrame vistaRed = df6.seleccionarVista(etiquetasFilas, etiquetasColumnas);
+    DataFrame vistaRed = df6.seleccionarVista(etiquetasFilas1, etiquetasColumnas1);
 
     // Imprimir el DataFrame resultante (vista reducida)
     CsvPrinter.imprimirPorFilas(vistaRed);
@@ -516,7 +517,7 @@ public class Main {
 
 //-------------------------------------------------------------------------------------------------
 
-
+}
 
 }
 

@@ -1,5 +1,9 @@
 package TP_Integrador_tmp;
+
 import java.lang.Cloneable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Fila implements Comparable,Cloneable
 {
@@ -7,6 +11,7 @@ public class Fila implements Comparable,Cloneable
     //private Object[] rowData; // Almacena los datos de la fila
     private Dato[] rowData; // Almacena los datos de la fila
     private String etiqueta; // Etiqueta de la fila
+    private DataFrame dataFrame; 
 
     public Fila(String etiqueta, Dato[] rowData) {
         this.rowData = rowData;
@@ -129,28 +134,6 @@ public Fila clone()
         }   
 
     }
-
-    public int compareTo(Object o) 
-    {
-       int total = this.rowData.length;
-       int i = 0;
-       Fila x = (Fila) o;
-
-        do 
-        {
-            Dato datoX = this.rowData[i];
-            Dato datoY = x.rowData[i];
-            int tmpCompare = datoX.compareTo(datoY);
-
-            if ( tmpCompare == 0)
-                i++;
-            else
-                return tmpCompare ;
-        } while (i < total);
-
-        return 0;
-    }
-    
     
     public void agregarDatoAlFinal(Dato nuevoDato) 
     {
