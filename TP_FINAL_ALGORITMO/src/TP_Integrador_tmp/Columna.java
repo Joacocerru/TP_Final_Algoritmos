@@ -121,8 +121,26 @@ public class Columna implements Cloneable
         
         return etiqueta;
     }
-
-
+    public void agregarDatoColumna(Dato dato) {
+        // Verificar si la lista de datos es nula
+        if (listaDatos == null) {
+            listaDatos = new Dato[1];
+            // Clonar el dato antes de agregarlo
+            listaDatos[0] = (Dato) dato.clone();
+        } else {
+            // Crear un nuevo array con un tamaño mayor
+            Dato[] nuevoArray = new Dato[listaDatos.length + 1];
+    
+            // Copiar los datos existentes al nuevo array
+            System.arraycopy(listaDatos, 0, nuevoArray, 0, listaDatos.length);
+    
+            // Clonar el dato antes de agregarlo al final del nuevo array
+            nuevoArray[listaDatos.length] = (Dato) dato.clone();
+    
+            // Actualizar la referencia al nuevo array
+            listaDatos = nuevoArray;
+        }
+    }
     //----------------------------------------------------------------------------------------------
     // Implementación del método clone 
     @Override
@@ -197,30 +215,19 @@ public class Columna implements Cloneable
         this._cantDatos--;
     }
 
-    public void agregarDatoColumna(Dato dato) 
-    {
-        // Verificar si la lista de datos es nula
-        if (listaDatos == null) 
-        {
-            listaDatos = new Dato[1];
-            // Clonar el dato antes de agregarlo
-            listaDatos[0] = (Dato) dato.clone();
-        } else 
-        {
-            // Crear un nuevo array con un tamaño mayor
-            Dato[] nuevoArray = new Dato[listaDatos.length + 1];
-    
-            // Copiar los datos existentes al nuevo array
-            System.arraycopy(listaDatos, 0, nuevoArray, 0, listaDatos.length);
-    
-            // Clonar el dato antes de agregarlo al final del nuevo array
-            nuevoArray[listaDatos.length] = (Dato) dato.clone();
-    
-            // Actualizar la referencia al nuevo array
-            listaDatos = nuevoArray;
+    @Override
+    public String toString() {
+    StringBuilder result = new StringBuilder();
+    result.append(": ");
+    for (int i = 0; i < listaDatos.length; i++) {
+        result.append(listaDatos[i]);
+        if (i < listaDatos.length - 1) {
+            result.append(", ");
         }
     }
-
+    result.append(".");
+    return result.toString();
+}
     //----------------------------------------------------------------------------------
 }
 
