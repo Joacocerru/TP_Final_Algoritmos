@@ -189,12 +189,6 @@ public class Columna implements Cloneable
     }
 
     //----------------------------------------------------------------------------------
-    /* 
-    public void agregarDato(Dato nuevoDato) {
-        datos.add(nuevoDato);
-    }
-    */
-
     public void removeFila (int fila){   
 
         //listaDatos
@@ -239,6 +233,6 @@ public class Columna implements Cloneable
     result.append(".");
     return result.toString();
 }
-    //----------------------------------------------------------------------------------
-}
+//----------------------------------------------------------------------------------
 
+}

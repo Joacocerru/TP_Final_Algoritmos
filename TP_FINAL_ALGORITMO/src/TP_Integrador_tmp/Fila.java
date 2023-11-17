@@ -55,6 +55,10 @@ public class Fila implements Comparable,Cloneable {
         return etiqueta;
     }
 
+    public void setEtiqueta (String eti)
+    {
+        this.etiqueta = eti;
+    }
     public int compareTo(Object o) 
     {
        int total = this.rowData.length;
@@ -94,10 +98,7 @@ public class Fila implements Comparable,Cloneable {
 // Implementación del método clone 
 @Override
 public Fila clone() 
-{        
-    //private Dato[] rowData; // Almacena los datos de la fila
-    //private String etiqueta; // Etiqueta de la fila
-    
+{            
     try {  
         // Clona la estructura principal (Columna)
         Fila copia = (Fila) super.clone();
@@ -188,18 +189,20 @@ public Fila clone()
     }
 
     @Override
-    public String toString() {
-    StringBuilder result = new StringBuilder();
-    result.append(": ");
-    for (int i = 0; i < rowData.length; i++) {
-        result.append(rowData[i]);
-        if (i < rowData.length - 1) {
-            result.append(", ");
+    public String toString() 
+    {
+        StringBuilder result = new StringBuilder();
+        result.append(": ");
+        for (int i = 0; i < rowData.length; i++) 
+        {
+            result.append(rowData[i]);
+            if (i < rowData.length - 1) {
+                result.append(", ");
+            }
         }
+        result.append(".");
+        return result.toString();
     }
-    result.append(".");
-    return result.toString();
-}
 //---------------------------------------------------------
 
 }

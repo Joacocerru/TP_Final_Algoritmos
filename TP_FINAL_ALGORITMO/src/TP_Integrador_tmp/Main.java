@@ -33,6 +33,26 @@ public class Main {
     //DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
     //DataFrame dfprueba = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\countries.csv", ",", "S");
 
+
+    CsvPrinter.imprimirPorFilas(df2);
+    //String[] xxx = {"0","1","2"};
+    String[] xxx = {"0"};
+    df2.orderPorColumnas(xxx);
+    CsvPrinter.imprimirPorFilas(df2);
+
+
+
+
+        DataFrame resultado = df.concatenar(df);
+
+        // Imprimir el DataFrame resultante
+
+        CsvPrinter.imprimirColumnar(resultado);
+
+
+
+
+
 /*     
     // Lista de etiquetas de columnas a seleccionar
     List<String> etiquetasColumnas1 = Arrays.asList("ColumnaNum", "ColumnaVarios");

@@ -28,8 +28,6 @@ public class DataFrame implements Cloneable{
     protected Map<String, Fila> rowMap = new HashMap<>();      // HashMap Fila Integer
     //------------------------------------------------------------------------------------------
 
-
-
     private Integer _nroColumnas; // VAR CON CANT. DE COLUMNAS DS
     
     private Integer _nroRegistros; // VAR CON CANT FILAS DEL DS
@@ -201,14 +199,13 @@ public class DataFrame implements Cloneable{
 
     } 
 
-
-
     //-----------------------------------------------------------------------
     // METODO PARA ACCEDER A FILA POR LISTA DE ETIQUETAS 
     //-----------------------------------------------------------------------
 
 
-    public Fila getFilaPorEtiqueta(String etiquetaFila) {
+    public Fila getFilaPorEtiqueta(String etiquetaFila) 
+    {
 
         return this.rowMap.get(etiquetaFila);
     }
@@ -480,6 +477,7 @@ public class DataFrame implements Cloneable{
 
     }
 
+//////////////////////////////////////////////////////////////////////////////
 /*     public void sacarNAs()
     {
         // Recorro todas las columnas
@@ -493,7 +491,7 @@ public class DataFrame implements Cloneable{
         }
     }
 */
-    //--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
     @Override
     public DataFrame clone() {
 
@@ -672,7 +670,7 @@ public class DataFrame implements Cloneable{
         // Realiza una búsqueda binaria en la columna
         // (los datos en la columna deber estar ordenados)
 
-        int izquierda = 0;
+        int izquierda = 0;  
         int derecha = columna.getCantDatos() - 1;
 
         while (izquierda <= derecha) {
@@ -842,14 +840,13 @@ public class DataFrame implements Cloneable{
                 }
     
     //------------------------------------------------------------------------------------------------------------------
-    /* 
+
     // METODO PARA CONCATENAR DOS DATAFRAME
     // Método para concatenar dos DataFrames verticalmente
 
-    public DataFrame concatenar(DataFrame otroDataFrame) {
-        
+    public DataFrame concatenar(DataFrame otroDataFrame) 
+    {    
         // Verificar que ambos DataFrames tengan las mismas columnas
-
         if (!this.getAllHeaderColumn().equals(otroDataFrame.getAllHeaderColumn())) {
 
             throw new IllegalArgumentException("Los DataFrames tienen columnas diferentes y no se pueden concatenar.");
@@ -857,70 +854,94 @@ public class DataFrame implements Cloneable{
 
         // Crear una nueva instancia de DataFrame para almacenar la concatenación
 
-        DataFrame nuevaEstructura = new DataFrame();
-
-        if (this.getNroRegistros() == 0 && otroDataFrame.getNroRegistros() == 0) {
-
+        if (this.getNroRegistros() == 0 && otroDataFrame.getNroRegistros() == 0) 
+        {
             System.out.println("Ambas estructuras están vacías.");
-
-            return nuevaEstructura;  // Retorna una estructura vacía si ambos DataFrames están vacíos
+            return this;  // Retorna una estructura vacía si ambos DataFrames están vacíos
         }
 
-        // Copiar las columnas y etiquetas
+        // clonamos la primera estructura
+        DataFrame nuevaEstructura = this.clone();
 
-        for (String etiqueta : this.getAllHeaderColumn()) {
+        // concatena los datos columnares
+        for (int i = 0; i < otroDataFrame.getNroColumnas(); i++) 
+        {
+            Columna nuevaColumna = otroDataFrame.getColumna(i).clone();
 
-            nuevaEstructura.dataColumnar.add(this.getColumnaPorEtiqueta(etiqueta));
-
-            nuevaEstructura.ColumnArray.add(etiqueta);
-
-            nuevaEstructura.columnMap.put(etiqueta, this.getColumnaPorEtiqueta(etiqueta));
-        }
-
-        // Actualizar el contador de columnas
-
-        nuevaEstructura.contarColumnas();
-
-        // Concatenar las filas del primer DataFrame
-
-        for (int i = 0; i < this.getNroRegistros(); i++) {
-
-            Object[] datosFila = new Object[this.getNroColumnas()];
-
-            for (int j = 0; j < this.getNroColumnas(); j++) {
-
-                datosFila[j] = this.getValorPosicion(i, j);  // No es necesario clonar los valores
-            }
-
-            nuevaEstructura.dataFilas.add(new Fila(Integer.toString(nuevaEstructura.getNroRegistros()), datosFila));
-            nuevaEstructura.rowMap.put(Integer.toString(nuevaEstructura.getNroRegistros() - 1),
-            nuevaEstructura.dataFilas.get(nuevaEstructura.getNroRegistros() - 1));
-            nuevaEstructura.RowArray.add(Integer.toString(nuevaEstructura.getNroRegistros() - 1));
+            for (Dato datoCol: nuevaColumna.listaDatos)
+                nuevaEstructura.dataColumnar.get(i).agregarDatoColumna(datoCol);
+            
+            nuevaEstructura.dataColumnar.get(i).setCantDatos();
+            nuevaEstructura.columnMap.put(nuevaEstructura.dataColumnar.get(i).getEtiqueta(), nuevaEstructura.dataColumnar.get(i));
+            nuevaEstructura.contarRegistros();
+            nuevaEstructura.contarColumnas();
         }
 
         // Concatenar las filas del segundo DataFrame
 
-        for (int i = 0; i < otroDataFrame.getNroRegistros(); i++) {
+        for (int i = 0; i < otroDataFrame.getNroRegistros(); i++) 
+        {
+           //Object[] datosFila = new Object[otroDataFrame.getNroColumnas()];
+            Fila nuevaFila = otroDataFrame.getFila(i).clone();
+            Integer indice =  (nuevaEstructura.dataFilas.size()) + 1;
+            nuevaFila.setEtiqueta(Integer.toString(indice));
 
-            Object[] datosFila = new Object[otroDataFrame.getNroColumnas()];
-
-            for (int j = 0; j < otroDataFrame.getNroColumnas(); j++) {
-
-                datosFila[j] = otroDataFrame.getValorPosicion(i, j);  // No es necesario clonar los valores
-            }
-
-            nuevaEstructura.dataFilas.add(new Fila(Integer.toString(nuevaEstructura.getNroRegistros()), datosFila));
-            nuevaEstructura.rowMap.put(Integer.toString(nuevaEstructura.getNroRegistros() - 1),
-            nuevaEstructura.dataFilas.get(nuevaEstructura.getNroRegistros() - 1));
-            nuevaEstructura.RowArray.add(Integer.toString(nuevaEstructura.getNroRegistros() - 1));
+            nuevaEstructura.dataFilas.add(nuevaFila);
+            nuevaEstructura.rowMap.put(nuevaFila.getEtiqueta(), nuevaFila);
+            nuevaEstructura.RowArray.add(nuevaFila.getEtiqueta());
+            nuevaEstructura.contarRegistros();
+            nuevaEstructura.contarColumnas();
         }
 
-        // Actualizar el contador de registros
-        
+        // Actualizar el contador de registro
         nuevaEstructura.contarRegistros();
+        nuevaEstructura.contarColumnas();
 
         return nuevaEstructura;
-    } */
+    } 
 
 //----------------------------------------------------------------------------------------------------------------
+
+public Fila getFilasColumnasListaEtiquetas(String etiquetasFila, String[] etiquetasColumna) 
+{
+    int totalColumnas = etiquetasColumna.length;
+    Dato[] newDato = new Dato[totalColumnas];
+    for (int x=0; x < totalColumnas; x++)
+    {
+        int posCol = this.getPosicicionColumnaEtiqueta(etiquetasColumna[x]);
+        newDato[x] = (this.getFilaPorEtiqueta(etiquetasFila)).getDato(posCol) ;
+    }
+    Fila newFila = new Fila("0", newDato);
+ 
+    return newFila;
+}
+
+public void orderPorColumnas (String [] ColumnasOrden)
+{
+    int n = this.RowArray.size();
+
+    boolean huboCambio;
+    do {
+    
+        huboCambio = false;
+        for (int i=1; i<n;i++)
+        {
+            String etiquetaPrevia = this.RowArray.get(i-1);
+            String etiquetaActual = this.RowArray.get(i);
+
+            Fila filaPrevia = this.getFilasColumnasListaEtiquetas(etiquetaPrevia, ColumnasOrden);
+            Fila filaActual = this.getFilasColumnasListaEtiquetas(etiquetaActual, ColumnasOrden);
+            int valorCompare = filaPrevia.compareTo(filaActual);
+            //if ( (filaPrevia.compareTo(filaActual)) > 0 )
+            if ( (valorCompare) > 0 )
+            {
+                this.RowArray.set(i-1, etiquetaActual);
+                this.RowArray.set(i, etiquetaPrevia);
+                huboCambio = true;
+            }
+        }
+        n--;
+    } while (huboCambio == true);
+}
+
 }
