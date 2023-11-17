@@ -9,7 +9,6 @@ public class Fila implements Comparable,Cloneable {
     //private Object[] rowData; // Almacena los datos de la fila
     private Dato[] rowData; // Almacena los datos de la fila
     private String etiqueta; // Etiqueta de la fila
-    private DataFrame dataFrame;
 
     public Fila(String etiqueta, Dato[] rowData) {
         this.rowData = rowData;
@@ -25,7 +24,6 @@ public class Fila implements Comparable,Cloneable {
     public Fila(String etiqueta, Dato[] rowData, DataFrame dataFrame) {
         this.etiqueta = etiqueta;
         this.rowData = rowData;
-        this.dataFrame = dataFrame;
     }
 
 

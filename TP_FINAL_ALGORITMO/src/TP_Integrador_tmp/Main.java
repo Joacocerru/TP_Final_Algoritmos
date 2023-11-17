@@ -82,10 +82,10 @@ public class Main {
     
     CsvPrinter.imprimirColumnar(copiadf1);
 
-    //String etiquetaFila = "4";
-    //System.out.println("Se elimina la fila con etiqueta "+etiquetaFila);
-    //df.eliminarFila(etiquetaFila);
-    //copiadf.eliminarFila("2");
+    String etiquetaFila = "4";
+    System.out.println("Se elimina la fila con etiqueta "+etiquetaFila);
+    df.eliminarFila(etiquetaFila);
+    copiadf1.eliminarFila("2");
 
     System.out.println("DataFrame");
     CsvPrinter.imprimirColumnar(df);
