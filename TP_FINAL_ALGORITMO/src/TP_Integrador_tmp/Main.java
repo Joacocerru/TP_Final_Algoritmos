@@ -31,11 +31,11 @@ public class Main {
     // VALEN //
     DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
-    DataFrame dfprueba = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\countries.csv", ",", "S");
+    //DataFrame dfprueba = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\countries.csv", ",", "S");
     
     CsvPrinter.imprimirColumnar(df);
     CsvPrinter.imprimirColumnar(df2);
-    CsvPrinter.imprimirColumnar(dfprueba);
+    //CsvPrinter.imprimirColumnar(dfprueba);
 
 
 
@@ -424,7 +424,7 @@ public class Main {
     String rutaArchivo = "C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\archivoExportado.csv";
     
     try {
-        CsvExport.exportarComoCSV(dfprueba, rutaArchivo);
+        CsvExport.exportarComoCSV(df2, rutaArchivo);
         System.out.println("Tu nuevo DataFrame se guardó correctamente en la ruta de archivo seleccionada");
 
     } catch (Exception e) {
@@ -437,6 +437,8 @@ public class Main {
     CsvPrinter.imprimirPorFilas(dfExportado);
     CsvPrinter.imprimirColumnar(dfExportado);
 
+
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // ********************************************************  METODOS DE VISUALIZACION  ******************************************************************
@@ -447,7 +449,7 @@ public class Main {
     
     // Como usuario, quiero ver los datos en forma de tabla para comprender la información de manera clara y concisa.
 
-    CsvPrinter.imprimirPorFilas(df);
+    CsvPrinter.imprimirPorFilas(df); // ###6 NO DA EL RESULTADO ESPERADO
 
     CsvPrinter.imprimirColumnar(df);
 

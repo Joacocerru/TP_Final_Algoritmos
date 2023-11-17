@@ -15,9 +15,14 @@ public class CsvExport extends CsvPrinter {
         try (FileWriter writer = new FileWriter(rutaArchivo)) {
            
             // Escribir el encabezado
+            int columnCount = df.getNroColumnas();
+            int currentColumn = 0;
             for (String fieldName : df.getAllHeaderColumn()) {
                 writer.append(fieldName);
-                writer.append(","); // ### El error del export esta acá. Tendía que detectar que hay una última letra y a esa no agregarle coma. Se podría utilizar if o while
+                currentColumn++;
+                if (currentColumn < columnCount) {
+                    writer.append(",");
+                }
             }
             
             writer.append("\n");
@@ -26,9 +31,13 @@ public class CsvExport extends CsvPrinter {
             for (String etiqueta : df.rowMap.keySet()) {
                 Fila fila = df.rowMap.get(etiqueta); // Obtener la fila correspondiente
 
-                for (int c = 0; c < df.getNroColumnas(); c++) {
+                currentColumn = 0;
+                for (int c = 0; c < columnCount; c++) {
                     writer.append(fila.getDato(c).toString());
-                    writer.append(","); // ### El error del export esta acá. Tendía que detectar que hay una última letra y a esa no agregarle coma. Se podría utilizar if o while
+                    currentColumn++;
+                    if (currentColumn < columnCount) {
+                        writer.append(",");
+                    }
                 }
                 writer.append("\n");
             }
