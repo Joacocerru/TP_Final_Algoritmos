@@ -18,8 +18,8 @@ public class Main {
     // Como usuario, quiero poder cargar datos desde un archivo .CSV en el software para crear una estructura tabular
 
 
-    DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba9.csv", ",", "S");
-    DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba2.csv", ",", "N");
+    //DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba9.csv", ",", "S");
+    //DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba2.csv", ",", "N");
     
     //DataFrame df =  new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     //DataFrame df1 =  new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
@@ -31,7 +31,6 @@ public class Main {
     // VALEN //
     //DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     //DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
-    //DataFrame dfprueba = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\countries.csv", ",", "S");
 
 
     CsvPrinter.imprimirColumnar(df2);
@@ -43,14 +42,10 @@ public class Main {
 
 
 
-        DataFrame resultado = df.concatenar(df);
+    DataFrame resultado = df.concatenar(df);
 
-        // Imprimir el DataFrame resultante
-
-        CsvPrinter.imprimirColumnar(resultado);
-
-
-
+    // Imprimir el DataFrame resultante
+    CsvPrinter.imprimirColumnar(resultado);
 
 
 /*     
@@ -228,11 +223,9 @@ public class Main {
         
     System.out.println("Información general del Dataframe"); 
     System.out.println(" ");
-    CsvPrinter.info(df);                    // ###1 TIRA UN ERROR
+    CsvPrinter.info(df);                    
     System.out.println(" ");
     CsvPrinter.info(df2); 
-    //CsvPrinter.info(dfprueba);
-    //System.out.println(" ");
 
 
     System.out.println(" ");
@@ -315,9 +308,7 @@ public class Main {
     System.out.println(" ");
 
 
-    df.imprimirEtiquetasFilas();                
-    //df2.imprimirEtiquetasFilas();
-    //dfprueba.imprimirEtiquetasFilas();               
+    df.imprimirEtiquetasFilas();                             
 
     System.out.println(" ");
     System.out.println("#--------------------------------------------------------------------------");
@@ -474,7 +465,6 @@ public class Main {
 
     // ruta a exportar
     String rutaArchivo = "C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\archivoExportado.csv";
-    //String rutaArchivo = "C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\archivoExportado.csv"; 
     
     
     CsvExport.exportarComoCSV(df, rutaArchivo);
@@ -497,7 +487,7 @@ public class Main {
     
     // Como usuario, quiero ver los datos en forma de tabla para comprender la información de manera clara y concisa.
 
-    CsvPrinter.imprimirPorFilas(df); // ###6 NO DA EL RESULTADO ESPERADO
+    CsvPrinter.imprimirPorFilas(df); 
 
     CsvPrinter.imprimirColumnar(df);
 
