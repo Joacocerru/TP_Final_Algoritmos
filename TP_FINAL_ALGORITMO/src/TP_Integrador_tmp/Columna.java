@@ -52,9 +52,15 @@ public class Columna implements Cloneable
     //--------------------------------------------------------------------
     // METODO PARA SETEAR LA ETIQUETA
 
-    public void calcularCantDatos() {
+    public void setCantDatos() {
 
-        this._cantDatos = listaDatos.length;
+        int total = 0;
+        for (int i=0; i< this.listaDatos.length; i++)
+        {
+          if (this.listaDatos[i] != null)
+            total++;
+        }
+        this._cantDatos = total;
     }
 
     public void setEtiqueta(String etiqueta){
@@ -76,6 +82,11 @@ public class Columna implements Cloneable
     public String getTipoDato(){
 
         return this.tipoDato;
+    }
+
+    public void setTipoDatos(String nuevoTipo)
+    {
+        this.tipoDato = nuevoTipo;
     }
 
 
