@@ -31,7 +31,7 @@ public class Main {
     // VALEN //
     DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
-    DataFrame dfprueba = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\countries.csv", ",", "S");
+    //DataFrame dfprueba = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\countries.csv", ",", "S");
     
     CsvPrinter.imprimirColumnar(df);
     CsvPrinter.imprimirColumnar(df2);
@@ -343,7 +343,7 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /*  
+      
 
     ////  USER STORY 8: GENERAR UNA VISTA REDUCIDA (SLICING) - CORREGIR EL CODIGO   //// 
 
@@ -395,7 +395,6 @@ public class Main {
     CsvPrinter.tail(df, 2);
 
 
-    */
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -424,14 +423,9 @@ public class Main {
     //String rutaArchivo = "C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\archivoExportado.csv"; 
     
     
-    try {
-        CsvExport.exportarComoCSV(dfprueba, rutaArchivo);
+    CsvExport.exportarComoCSV(df, rutaArchivo);
         
-    } catch (Exception e) {
-        System.out.println("Ocurrió un error al exportar el archivo CSV: " + e.getMessage());
-    }
-
-
+    
     // Esta opción es para traer el archivo recién exportado y ver si lo imprime bien
     //DataFrame dfExportado =  new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\archivoExportado.csv", ",", "S");
     //CsvPrinter.imprimirPorFilas(dfExportado);
@@ -452,6 +446,7 @@ public class Main {
     CsvPrinter.imprimirPorFilas(df); // ###6 NO DA EL RESULTADO ESPERADO
 
     CsvPrinter.imprimirColumnar(df);
+
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -507,10 +502,6 @@ public class Main {
     System.out.println(resultadoBusquedaString);
     System.out.println("#--------------------------------------------------------------------------");
 
-
-
-    // FILTRADO CODIGO A IMPLEMETAR EN USER STORY 9
-
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -531,7 +522,7 @@ public class Main {
     String etiquetaFila2 = "3"; // posición en Fila
     String etiquetaColumna2 = "Columna2"; // posición en Columna
 
-    df.setValorDataFrame(etiquetaFila2, etiquetaColumna2, 0);
+    df.setValorDataFrame(etiquetaFila2, etiquetaColumna2, 69);
     //df2.setValorDataFrame(etiquetaFila2, etiquetaColumna2, 0);
 
 
@@ -555,19 +546,22 @@ public class Main {
     System.out.println("#-----------------------------------------------------------------------------");
     System.out.println(" ");
 
+    
     System.out.println("Impresión del DataFrame");
     CsvPrinter.imprimirColumnar(df);
-    System.out.println("Agregar una columna ya existente del DataFrame");
 
+    System.out.println("Agregar una columna ya existente del DataFrame");
+ 
     String etiquetaColumnaExistente = "Columna3";
-    String etiquetaNuevaColumna = "Columna5";
+    String etiquetaNuevaColumna = "ColumnaNueva";
     df.clonarYAgregarColumna(etiquetaColumnaExistente, etiquetaNuevaColumna);
     
     // Imprimir el DataFrame
     System.out.println("Impresión del DataFrame con la nueva columna agregada");
-
     CsvPrinter.imprimirColumnar(df);
+
     
+
     /*
     String etiquetaColumnaExistente2 = "ColumnaNum";
 
@@ -606,7 +600,7 @@ public class Main {
 
     // Como usuario, quiero poder insertar una nueva columna en el dataset utilizando una secuencia lineal nativa de Java.
 
-    /* */
+    
     System.out.println("#-----------------------------------------------------------------------------");
     System.out.println("   AGREGAR UNA COLUMNA AL DATAFRAME CON SECUENCIA LINEAL");
     System.out.println("#-----------------------------------------------------------------------------");
@@ -617,8 +611,8 @@ public class Main {
     System.out.println("Agregar una columna Nueva al DataFrame");
     
     String etiquetaColumnaNueva = "Columna5";
-    //DataFrame df5 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
-    DataFrame df5 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
+    DataFrame df5 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
+    //DataFrame df5 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     String[] datosNuevaColumna = {"Nueva1", "Nueva2","Nueva3", "Nueva4", "Nueva5", "Nueva6"};
     
     // Crear un array de Dato
@@ -629,7 +623,6 @@ public class Main {
     }
     
     // Crear la nueva columna
-
     Columna nuevaColumna = new Columna();
     nuevaColumna.setColumna(datosArray, "S");
     df5.AgregarColumnaNueva(etiquetaColumnaNueva, nuevaColumna);
@@ -637,6 +630,8 @@ public class Main {
     // Imprimir el DataFrame
     System.out.println("Impresión del DataFrame con la nueva columna agregada");
     CsvPrinter.imprimirColumnar(df5);
+
+    
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -649,31 +644,29 @@ public class Main {
     System.out.println("#-----------------------------------------------------------------------------");
     System.out.println(" ");    
     
-    System.out.println("Impresión del DataFrame");
-    CsvPrinter.imprimirColumnar(df5);
 
-
+    
     // METODO PARA ELIMINAR UNA FILA DEL DATAFRAME
-    System.out.println("Eliminar una Fila del DataFrame");
-    df5.eliminarFila("4");
-    CsvPrinter.imprimirColumnar(df5);
+    System.out.println("Impresión del DataFrame");
+    CsvPrinter.imprimirColumnar(df);
+
+    System.out.println("Eliminar una Fila específica del DataFrame");
+    System.out.println(" ");
+
+    df.eliminarFila("3");
+    CsvPrinter.imprimirColumnar(df);
+
 
     //---------------------------------------------
-
     // METODO PARA ELIMINAR UNA COLUMNA DEL DATAFRAME
+    System.out.println("Impresión del DataFrame");
+    CsvPrinter.imprimirColumnar(df);
 
-    System.out.println("#-------------------------------------------------");
-    System.out.println("Eliminar una columna específica del dataset");
+    System.out.println("Eliminar una columna específica del DataFrame");
     System.out.println(" "); 
 
-    System.out.println("Impresión del DataFrame");
-    CsvPrinter.imprimirColumnar(df5);
-
-    //CsvPrinter.imprimirColumnar(df);
-
-    System.out.println("Eliminar una columna del DataFrame");
-    df5.eliminarColumna("Columna2");
-    CsvPrinter.imprimirColumnar(df5);
+    df.eliminarColumna("Columna2");
+    CsvPrinter.imprimirColumnar(df);
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
