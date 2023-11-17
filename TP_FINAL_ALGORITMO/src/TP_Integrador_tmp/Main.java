@@ -34,12 +34,12 @@ public class Main {
     //DataFrame dfprueba = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\countries.csv", ",", "S");
 
 
-    CsvPrinter.imprimirPorFilas(df2);
+    CsvPrinter.imprimirColumnar(df2);
     //String[] xxx = {"0","1","2"};
-    String[] xxx = {"0"};
+    String[] xxx = {"0","1","2"};
     df2.orderPorColumnas(xxx);
     CsvPrinter.imprimirPorFilas(df2);
-
+    CsvPrinter.imprimirColumnar(df2);
 
 
 
