@@ -31,7 +31,7 @@ public class Main {
     // VALEN //
     DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
-    //DataFrame dfprueba = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\countries.csv", ",", "S");
+    DataFrame dfprueba = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\countries.csv", ",", "S");
     
     CsvPrinter.imprimirColumnar(df);
     CsvPrinter.imprimirColumnar(df2);
@@ -420,22 +420,22 @@ public class Main {
     System.out.println(" ");
 
     // ruta a exportar
-    //String rutaArchivo = "C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\archivoExportado.csv"; 
     String rutaArchivo = "C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\archivoExportado.csv";
+    //String rutaArchivo = "C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\archivoExportado.csv"; 
+    
     
     try {
-        CsvExport.exportarComoCSV(df2, rutaArchivo);
-        System.out.println("Tu nuevo DataFrame se guardó correctamente en la ruta de archivo seleccionada");
-
+        CsvExport.exportarComoCSV(dfprueba, rutaArchivo);
+        
     } catch (Exception e) {
         System.out.println("Ocurrió un error al exportar el archivo CSV: " + e.getMessage());
     }
 
 
     // Esta opción es para traer el archivo recién exportado y ver si lo imprime bien
-    DataFrame dfExportado =  new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\archivoExportado.csv", ",", "S");
-    CsvPrinter.imprimirPorFilas(dfExportado);
-    CsvPrinter.imprimirColumnar(dfExportado);
+    //DataFrame dfExportado =  new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\archivoExportado.csv", ",", "S");
+    //CsvPrinter.imprimirPorFilas(dfExportado);
+    //CsvPrinter.imprimirColumnar(dfExportado);
 
 
 
