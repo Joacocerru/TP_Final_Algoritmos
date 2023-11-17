@@ -638,38 +638,41 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // USER STORY 21: eliminar una columna y/o fila 
+    //// USER STORY 19: ELIMINAR COLUMNA Y/O FILA  ////
 
     // Como usuario, quiero la capacidad de eliminar una columna y/o fila específica del dataset.
-    System.out.println("eliminar una fila específica del dataset");
+
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println("   ELIMINAR FILA Y/O COLUMNA ");
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println(" ");    
     
     System.out.println("Impresión del DataFrame");
     CsvPrinter.imprimirColumnar(df5);
 
+
     // METODO PARA ELIMINAR UNA FILA DEL DATAFRAME
-
-    System.out.println("eliminar una Fila del DataFrame");
-
-    //df.eliminarColumna("ColumnaNum");
-
+    System.out.println("Eliminar una Fila del DataFrame");
     df5.eliminarFila("4");
-
     CsvPrinter.imprimirColumnar(df5);
 
     //---------------------------------------------
-    System.out.println("eliminar una columna específica del dataset");
-    System.out.println("impresión del DataFrame");
+
+    // METODO PARA ELIMINAR UNA COLUMNA DEL DATAFRAME
+
+    System.out.println("#-------------------------------------------------");
+    System.out.println("Eliminar una columna específica del dataset");
+    System.out.println(" "); 
+
+    System.out.println("Impresión del DataFrame");
     CsvPrinter.imprimirColumnar(df5);
 
     //CsvPrinter.imprimirColumnar(df);
 
-    // METODO PARA ELIMINAR UNA FILA DEL DATAFRAME
-
-    System.out.println("eliminar una columna del DataFrame");
-
+    System.out.println("Eliminar una columna del DataFrame");
     df5.eliminarColumna("Columna2");
-
     CsvPrinter.imprimirColumnar(df5);
+
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -683,7 +686,7 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // USER STORY 23: agrupamiento o groupby
+    //// USER STORY 20: agrupamiento o groupby - METODO A IMPLEMENTAR   ////
 
     // Como usuario, quiero la capacidad de dividir las filas en diferentes grupos (agrupamiento o groupby) 
     // según una o más columnas. Luego, quiero aplicar una operación de sumarización estadística a estos grupos.
@@ -691,7 +694,18 @@ public class Main {
 
     // METODO A IMPLEMENTAR
 
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+    ////  USER STORY 21: MANEJAR EXEPCIONES  - METODO A IMPLEMENTAR ////
+    
+    // Como usuario, quiero que el software maneje errores mediante excepciones, permitiendo la continuidad 
+    // de la ejecución y proporcionando información sobre el tipo de error capturado.
+
+    // METODO A IMPLEMENTAR
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
-    }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+}
+
