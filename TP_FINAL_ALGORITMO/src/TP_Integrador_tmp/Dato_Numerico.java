@@ -13,6 +13,11 @@ public class Dato_Numerico extends Dato {
         super.valor = new Long(s);
     }
 
+    public Dato_Numerico(Long s){
+
+        super.valor = s;
+    }
+
     public Object getDato(){
 
         return this.valor;

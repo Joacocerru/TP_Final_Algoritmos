@@ -40,7 +40,21 @@ public class Main {
     // Como usuario, quiero poder realizar una copia profunda de los elementos de la estructura tabular para generar una nueva 
     // estructura con los mismos valores, pero independiente de la estructura original en memoria
 
+    CsvPrinter.imprimirColumnar(df);
 
+
+    DataFrame filtro1 = df.FiltroPorColumna("ColumnaNum", 0, 5);
+    DataFrame filtro2 = df.FiltroPorColumna("ColumnaNum", -1, 3);
+    DataFrame filtro3 = df.FiltroPorColumna("ColumnaNum", 1, 3);
+    DataFrame filtro4 = df.FiltroPorColumna("ColumnaBoolean", 0, "True");
+    DataFrame filtro5 = df.FiltroPorColumna("ColumnaPruebas", -1, "Prueba4");
+    
+    CsvPrinter.imprimirColumnar(filtro1);
+    CsvPrinter.imprimirColumnar(filtro2);
+    CsvPrinter.imprimirColumnar(filtro3);
+    CsvPrinter.imprimirColumnar(filtro4);
+    CsvPrinter.imprimirColumnar(filtro5);
+    
     DataFrame copiadf1 = null;
 
     copiadf1 = df.clone();

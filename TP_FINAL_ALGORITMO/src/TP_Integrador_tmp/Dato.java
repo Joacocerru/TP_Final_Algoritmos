@@ -4,6 +4,8 @@ import java.lang.Cloneable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import javax.lang.model.util.ElementScanner6;
+
 public class Dato implements Cloneable, Comparable<Dato>{
 
     protected Object valor;    
@@ -15,11 +17,11 @@ public class Dato implements Cloneable, Comparable<Dato>{
         this.valor = new Object();
     }
 
-    public Dato(Object valor) {
-
+    public Dato(Object valor) 
+    {
         this.valor = valor;
-    }
-
+    } 
+    
     //------------------------------------------------------------
 
     public Object getDato(){
@@ -75,10 +77,13 @@ public class Dato implements Cloneable, Comparable<Dato>{
 
 
     @Override
-    public int compareTo(Dato otroDato) {
-
+    public int compareTo(Dato otroDato) 
+    {
         if (otroDato instanceof Dato_NA)
             return 1;
+        
+        if (this instanceof Dato_NA)
+            return -1;
             
             if (this.valor instanceof Number && otroDato.valor instanceof Number) {
                 // Ambos valores son números

@@ -469,6 +469,12 @@ public class DataFrame implements Cloneable{
             this.dataColumnar.get(i).restarCantRegistro();
         }
 
+        for (Columna cols: this.columnMap.values())
+        {
+            cols.removeFila(posicion);
+            cols.restarCantRegistro();
+        }
+        
         this.contarRegistros();
 
     }
@@ -570,30 +576,73 @@ public class DataFrame implements Cloneable{
     }
 
 
-    public void FiltroPorColumna(String Etiquetacolumna, int operacion, Object valorBuscado){// -1 Menor que , 0 igual que, 1 Mayor que 
+    public DataFrame FiltroPorColumna(String Etiquetacolumna, int operacion, Object valorBuscado) // -1 Menor que , 0 igual que, 1 Mayor que 
+    {
         
         if (operacion !=0 && operacion !=-1 && operacion !=1){   
             // exception
         }
+        
+        Boolean buscadoNumerico = false;
+
+        try 
+        {
+                Long x = Long.parseLong(valorBuscado.toString());
+                buscadoNumerico = true;        
+        } 
+        catch (NumberFormatException ex)
+        {
+            buscadoNumerico = false;
+        }
+        
+
+        Dato valorDatoBuscado = new Dato();
+
+        if (buscadoNumerico == true)
+        {
+            Long x = Long.parseLong(valorBuscado.toString());
+            valorDatoBuscado = new Dato_Numerico (x);
+        }
+        else
+        {
+            String valorStr = valorBuscado.toString();
+
+            if (valorStr.equals("NA"))
+            {
+                valorDatoBuscado = new Dato_NA();
+            }
+            else if (valorStr.toUpperCase().equals("TRUE") || valorStr.toUpperCase().equals("FALSE") )
+            {
+                valorDatoBuscado = new Dato_Boolean(valorStr.toUpperCase());
+            }
+            else
+            {
+                valorDatoBuscado = new Dato_String(valorStr);
+            }
+        }
 
         DataFrame copiaDF = this.clone();
+        
+
+        //columna a controlar
         int tmpColumna = this.getPosicicionColumnaEtiqueta(Etiquetacolumna);
 
+        // Se recorren todas las filas
         for (int i = 0; i < this.getNroRegistros(); i++) {
-
             Dato valorEncontrado = this.getValorPosicion(i, tmpColumna);
 
-            if (valorBuscado.getClass() == valorEncontrado.getClass()) {
-
-                if (valorBuscado instanceof Dato)  {
-
-                    Dato valorDatoBuscado = (Dato) valorBuscado;
+            if (valorDatoBuscado.getTipoDato() == valorEncontrado.getTipoDato()) 
+            {
+                if (valorDatoBuscado instanceof Dato) 
+                {
                     int comparacion = valorEncontrado.compareTo(valorDatoBuscado);
-
-                    // if ( comparacion == operacion) 
+                    if ( comparacion != operacion) // elimino la fila
+                        copiaDF.eliminarFila(this.RowArray.get(i)); 
                 } 
             }
         }
+
+        return copiaDF;
     }
 
 
