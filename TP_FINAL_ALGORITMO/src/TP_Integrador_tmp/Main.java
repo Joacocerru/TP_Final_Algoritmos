@@ -221,10 +221,11 @@ public class Main {
     ////  USER STORY 5: obtener las etiquetas de las filas y columnas
 
     // Como usuario, quiero poder obtener las etiquetas de las filas y columnas en el dataset.
-
+    
     System.out.println("#-----------------------------------------------------------------------------");
     System.out.println("   ETIQUETAS DE FILAS Y COLUMNAS");
     System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println(" ");
 
     System.out.println("Las etiquetas de las filas son:");
 
@@ -284,6 +285,7 @@ public class Main {
     System.out.println("#-----------------------------------------------------------------------------");
     System.out.println("   INFORMACIÓN DE LA CELDA OBTENIDA POR ETIQUETA DE FILA Y COLUMNA");
     System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println(" ");
 
 
     String Fila = "3"; // 
@@ -321,9 +323,12 @@ public class Main {
     System.out.println("#-----------------------------------------------------------------------------");
     System.out.println("   IMPRESIÓN DE UNA VISTA REDUCIDA (SLICING)");
     System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println(" ");
     
-    DataFrame df6 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_9\\prueba1.csv", ",", "S");
-    
+    //DataFrame df6 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO_9\\prueba1.csv", ",", "S");
+    DataFrame df6 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
+
+
     // Lista de etiquetas de filas a seleccionar
     List<String> etiquetasFilas = Arrays.asList("1", "3", "5");
 
@@ -344,6 +349,7 @@ public class Main {
 
     System.out.println("Esto es una impresión por pantalla de los datos dadas las etiquetas filas y columnas");
     System.out.println("------------------------------------------------------------------------------------");
+    System.out.println(" ");
     
     // Lista de etiquetas de filas y columnas a incluir en la vista reducida
 
@@ -373,24 +379,22 @@ public class Main {
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ////  USER STORY 10: operaciones sobre él DF - CODIGO A IMPLEMETAR
+    ////  USER STORY 10: EXPORTAR LA TABLA EN CSV
 
-    // Como usuario, quiero poder importar un archivo CSV y permitir que el sistema realice 
-    // operaciones sobre él sin errores de lectura.
+    // Como usuario, quiero la opción de exportar los datos de la tabla a CSV
 
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println("   EXPORTAR DATAFRAME EN CSV");
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println(" ");
+
+    // ruta a exportar
+    String rutaArchivo = "C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\archivo.csv"; 
+    //String rutaArchivo = "C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\archivo.csv";
     
-    // CODIGO A IMPLEMETAR
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    ////  USER STORY 11: exportar los datos de la tabla a otros formatos
-
-    // Como usuario, quiero la opción de exportar los datos de la tabla a otros formatos, como CSV
-
-
     try {
 
-        CsvExport.exportarComoCSV(df, "C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\archivo.csv");
+        CsvExport.exportarComoCSV(df, rutaArchivo);
 
         System.out.println("Tu nuevo DataFrame se guardó correctamente en la ruta de archivo seleccionada");
 
@@ -406,7 +410,7 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ////  USER STORY 12: 
+    ////  USER STORY 11: 
     
     // Como usuario, quiero ver los datos en forma de tabla para comprender la información de manera clara y concisa.
 
@@ -416,34 +420,36 @@ public class Main {
     
     CsvPrinter.imprimirPorFilas(df);
 
-
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ////  USER STORY 13:
-
-    // Como usuario, quiero que la tabla sea configurable para mostrar las columnas relevantes.
-
-
-    // CODIGO A IMPLEMETAR
-    
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-     ////  USER STORY 14: ordenar los datos en la tabla según una columna específica
+    ////  USER STORY 12: ORDENAR DATOS SEGÚN UNA COLUMNA - METODO IMPLEMENTADO ?
 
     // Como usuario, quiero poder ordenar los datos en la tabla según una columna específica.
 
+    /*   
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println("   ORDENAR DATOS SEGÚN UNA COLUMNA");
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println(" ");
+
+
+    */ 
 
     // METODO IMPLEMENTADO ?
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ////  USER STORY 15: buscar y filtrar datos en la tabla 
+    ////  USER STORY 13: BUSCAR Y FILTRAR DATOS EN LA TABLA
 
     // Como usuario, quiero la capacidad de buscar y filtrar datos en la tabla para encontrar información específica.
 
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println("   BUSCAR DATOS ESPECÍFICOS EN EL DATAFRAME");
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println(" ");
+
 
     // Buscar datos en la tabla - llamo al método buscarValor y le paso el valor a buscar
-
     System.out.println("Busqueda de un elemento dentro del DataFrame");
     System.out.println("---------------------------------------------------------------------");
 
@@ -479,13 +485,17 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    // ////  USER STORY 16: Acceder a una celda t setear nuevo valor  
+    // ////  USER STORY 14: ACCEDER A UNA CELDA Y SETEAR NUEVO VALOR 
 
     // Como usuario, quiero poder acceder directamente a una celda y asignar un nuevo valor para actualizar los datos.
 
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println("   ACCEDER A UNA CELDA Y SETEAR NUEVO VALOR");
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println(" ");
+
 
     // Seteo un valor en el DataFrame definiendo las etiquetas Fila y Columna y asignando un nuevo valor
-
     String etiquetaFila2 = "3"; // posición en Fila
 
     String etiquetaColumna2 = "Columna2"; // posición en Columna
@@ -507,9 +517,14 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ////  USER STORY 17: insertar una nueva columna a partir de otra columna existente
+    ////  USER STORY 15: INSERTAR UNA NUEVA COLUMNA A PARTIR DE UNA COLUMNA EXISTENTE
 
     // Como usuario, quiero poder insertar una nueva columna a partir de otra columna existente.
+
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println("   AGREGAR UNA COLUMNA AL DATAFRAME");
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println(" ");
 
 
     System.out.println("Agregar una columna ya existente del DataFrame");
@@ -539,7 +554,7 @@ public class Main {
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ////  USER STORY 18: 
+    ////  USER STORY 16:        CELDAS CON DATOS FALTANTES SEAN IDENTIFICADAS CON NA  -  METODO IMPLEMENTADO 
 
     // Como usuario, quiero que las celdas con datos faltantes sean identificadas y marcadas con un formato "NA".
 
@@ -548,7 +563,7 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // USER STORY 19: 
+    // USER STORY 17: REALIZAR OPERACIONES SIN ERRORES EN CASO DE TENER NA - METODO A IMPLEMENTAR
 
     // Como usuario, quiero que el sistema realice operaciones sin errores incluso cuando haya datos faltantes marcados como "NA".
 
@@ -561,13 +576,17 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // USER STORY 20: insertar una nueva columna en el dataset
+    // USER STORY 18: INSERTAR UNA NUEVA COLUMNA UTILIZANDO SECUENCIA LINEAL NATIVA  - A REVISAR
 
     // Como usuario, quiero poder insertar una nueva columna en el dataset utilizando una secuencia lineal nativa de Java.
 
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println("   AGREGAR UNA COLUMNA AL DATAFRAME CON SECUENCIA LINEAL");
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println(" ");
+
 
     // METODO PARA AGREGAR UNA NUEVA COLUMNA DEL DATAFRAME
-
     System.out.println("Agregar una columna Nueva al DataFrame");
     
     String etiquetaColumnaNueva = "Columna5";
@@ -598,50 +617,40 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // USER STORY 21: eliminar una columna y/o fila 
+    // USER STORY 19: ELIMINAR COLUMNA Y/O FILA 
 
     // Como usuario, quiero la capacidad de eliminar una columna y/o fila específica del dataset.
 
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println("   ELIMINAR FILA Y/O COLUMNA ");
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println(" ");
 
     CsvPrinter.imprimirPorFilas(df5);
 
     // METODO PARA ELIMINAR UNA FILA DEL DATAFRAME
-
-    System.out.println("eliminar una Fila del DataFrame");
-
-    //df.eliminarColumna("ColumnaNum");
+    System.out.println("Eliminar una Fila del DataFrame");
 
     df5.eliminarFila("4");
+    //df.eliminarColumna("ColumnaNum");
 
     CsvPrinter.imprimirPorFilas(df5);
 
     //---------------------------------------------
 
-    CsvPrinter.imprimirPorFilas(df5);
-
+    //CsvPrinter.imprimirPorFilas(df5);
     //CsvPrinter.imprimirColumnar(df);
 
-    // METODO PARA ELIMINAR UNA FILA DEL DATAFRAME
-
-    System.out.println("eliminar una columna del DataFrame");
+    // METODO PARA ELIMINAR UNA COLUMNA DEL DATAFRAME
+    System.out.println("Eliminar una columna del DataFrame");
 
     df5.eliminarColumna("Columna2");
 
     CsvPrinter.imprimirColumnar(df5);
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // USER STORY 22: ordenar las filas del dataset según un criterio
-    
-    // Como usuario, quiero poder ordenar las filas del dataset según un criterio, 
-    // ya sea ascendente o descendente, en una o más columnas.
-
-
-    // METODO IMPLEMENTADO ?
-
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // USER STORY 23: agrupamiento o groupby
+    // USER STORY 20: agrupamiento o groupby - METODO A IMPLEMENTAR
 
     // Como usuario, quiero la capacidad de dividir las filas en diferentes grupos (agrupamiento o groupby) 
     // según una o más columnas. Luego, quiero aplicar una operación de sumarización estadística a estos grupos.
@@ -651,6 +660,16 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    // USER STORY 21: MANEJAR EXEPCIONES  - METODO A IMPLEMENTAR
+    
+    // Como usuario, quiero que el software maneje errores mediante excepciones, permitiendo la continuidad 
+    // de la ejecución y proporcionando información sobre el tipo de error capturado.
+
+    // METODO A IMPLEMENTAR
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 }
 }
