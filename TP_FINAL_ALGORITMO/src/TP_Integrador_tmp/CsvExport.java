@@ -17,7 +17,7 @@ public class CsvExport extends CsvPrinter {
             // Escribir el encabezado
             for (String fieldName : df.getAllHeaderColumn()) {
                 writer.append(fieldName);
-                writer.append(",");
+                writer.append(","); // ### El error del export esta acá. Tendía que detectar que hay una última letra y a esa no agregarle coma. Se podría utilizar if o while
             }
             
             writer.append("\n");
@@ -28,7 +28,7 @@ public class CsvExport extends CsvPrinter {
 
                 for (int c = 0; c < df.getNroColumnas(); c++) {
                     writer.append(fila.getDato(c).toString());
-                    writer.append(",");
+                    writer.append(","); // ### El error del export esta acá. Tendía que detectar que hay una última letra y a esa no agregarle coma. Se podría utilizar if o while
                 }
                 writer.append("\n");
             }

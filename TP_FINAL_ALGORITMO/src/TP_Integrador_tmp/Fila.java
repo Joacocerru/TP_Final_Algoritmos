@@ -133,26 +133,7 @@ public Fila clone()
 
     }
 
-    public int compareTo(Object o) 
-    {
-       int total = this.rowData.length;
-       int i = 0;
-       Fila x = (Fila) o;
-
-        do 
-        {
-            Dato datoX = this.rowData[i];
-            Dato datoY = x.rowData[i];
-            int tmpCompare = datoX.compareTo(datoY);
-
-            if ( tmpCompare == 0)
-                i++;
-            else
-                return tmpCompare ;
-        } while (i < total);
-
-        return 0;
-    }
+   
     
     
     public void agregarDatoAlFinal(Dato nuevoDato) 

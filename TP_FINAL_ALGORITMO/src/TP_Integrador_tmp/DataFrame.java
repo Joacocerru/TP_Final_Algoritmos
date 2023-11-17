@@ -577,7 +577,7 @@ public class DataFrame implements Cloneable{
         }
 
         DataFrame copiaDF = this.clone();
-        int tmpColumna = this.getPosicicionColumnaEtiqueta(Etiquetacolumna);
+        Integer tmpColumna = this.getPosicicionColumnaEtiqueta(Etiquetacolumna);
 
         for (int i = 0; i < this.getNroRegistros(); i++) {
 

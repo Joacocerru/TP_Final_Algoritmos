@@ -31,6 +31,13 @@ public class Main {
     // VALEN //
     DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
+    DataFrame dfprueba = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\countries.csv", ",", "S");
+    
+    CsvPrinter.imprimirColumnar(df);
+    CsvPrinter.imprimirColumnar(df2);
+    CsvPrinter.imprimirColumnar(dfprueba);
+
+
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -57,9 +64,9 @@ public class Main {
     
     CsvPrinter.imprimirColumnar(copiadf1);
 
-    String etiquetaFila = "4";
-    System.out.println("Se elimina la fila con etiqueta "+etiquetaFila);
-    df.eliminarFila(etiquetaFila);
+    //String etiquetaFila = "4";
+    //System.out.println("Se elimina la fila con etiqueta "+etiquetaFila);
+    //df.eliminarFila(etiquetaFila);
     //copiadf.eliminarFila("2");
 
     System.out.println("DataFrame");
@@ -164,65 +171,71 @@ public class Main {
     System.out.println("#-----------------------------------------------------------------------------");
     System.out.println(" ");
 
-    //CsvPrinter.info(df);
-    //CsvPrinter.info(df2); 
+        
+    System.out.println("Información general del Dataframe"); 
+    System.out.println(" ");
+    CsvPrinter.info(df);                    // ###1 TIRA UN ERROR
+    System.out.println(" ");
+    CsvPrinter.info(df2); 
+    //CsvPrinter.info(dfprueba);
+    //System.out.println(" ");
 
-    // Imprimo la columna segun la etiqueta elegida --------------------------------------------------
-    Columna columnaNombre = df.getColumnaPorEtiqueta("Columna3");
+
+    System.out.println(" ");
+    System.out.println("#--------------------------------------------------------------------------");
+
+
+    // Imprimo info de la columna elegida segun la etiqueta elegida 
+    String etiquetaColumna3 = "Columna3";
+    Columna columnaNombre = df.getColumnaPorEtiqueta( etiquetaColumna3);
+
+    System.out.println("Información sobre la columna elegida");
+    System.out.println(" ");
 
     if (columnaNombre != null) {
 
         String nombreColumna = columnaNombre.getEtiqueta(); // obtengo etiqueta de la columna 
-
         int cantidadDatos = columnaNombre.getCantDatos(); // obtengo la cantidad de datos de la columna  
-
         String tipoDato = columnaNombre.getTipoDato(); // obtengo el tipo de dato de la columna 
-
+         
         System.out.println("Etiqueta de la Columna selecionada: " + nombreColumna);
-
         System.out.println("Tipo de Dato de la Columna " + nombreColumna + ": " + tipoDato);
-
         System.out.println("Cantidad de Datos en la Columna " + nombreColumna + ": " + cantidadDatos);
-    
         System.out.println("Datos de la Columna "+ nombreColumna + ":");
 
         for (int i = 0; i < cantidadDatos; i++) {
-
             Dato dato3 = columnaNombre.getDato(i);
-
             System.out.println(dato3.getDato());
         }
     } else {
                 String nombreColumna = df.getHeaderColumn(1);
-
                 System.out.println("La columna "+ nombreColumna + " no existe en el DataFrame.");
     }
+
 
     System.out.println(" ");
     System.out.println("#--------------------------------------------------------------------------");
 
  
-    // imprimo la fila segun la etiqueta elegida ------------------------------------------------
-
+    // Imprimo info de la fila elegida segun la etiqueta elegida 
     String etiquetaFila3 = "2";
-    
-    //Fila FilaNombre = df2.getFilaPorEtiqueta(etiquetaFila);
     Fila FilaNombre = df.getFilaPorEtiqueta(etiquetaFila3);
+
+    System.out.println("Información sobre la fila elegida");
+    System.out.println(" ");
+    
 
     if (FilaNombre != null) {
 
         int cantidadDatos = FilaNombre.getCantDatos(); // obtengo la cantidad de datos de la fila
 
         System.out.println("Etiqueta de la Fila seleccionada: " + etiquetaFila3);
-
         System.out.println("Cantidad de Datos en la Fila " + etiquetaFila3 + ": " + cantidadDatos);
+        System.out.println("Datos de la Fila "+ etiquetaFila3 + ":");     /// ###2  DA UN RESULTADO QUE NO DEBERIA 
 
-        System.out.println("Datos de la Fila "+ etiquetaFila3 + ":");
-
-        for (int i = 0; i < df2.getNroColumnas(); i++) {
+        for (int i = 0; i <= df2.getNroColumnas(); i++) {
 
             Object dato4 = FilaNombre.getDato(i);
-
             System.out.print(dato4+ " ");
         }
     } else {
@@ -247,40 +260,38 @@ public class Main {
     System.out.println("#-----------------------------------------------------------------------------");
     System.out.println(" ");
 
-    System.out.println("Las etiquetas de las filas son: ");
 
-    df.imprimirEtiquetasFilas();
+    df.imprimirEtiquetasFilas();                
+    //df2.imprimirEtiquetasFilas();
+    //dfprueba.imprimirEtiquetasFilas();               
 
     System.out.println(" ");
     System.out.println("#--------------------------------------------------------------------------");
-
     System.out.println("Las etiquetas de las columnas son: " + df.getAllHeaderColumn());
-
+    //System.out.println("Las etiquetas de las columnas son: " + df2.getAllHeaderColumn());
+    //System.out.println("Las etiquetas de las columnas son: " + dfprueba.getAllHeaderColumn());
     System.out.println(" ");
     System.out.println("#--------------------------------------------------------------------------");
+
 
     //--------------------------------------------------------------------------------------
-
     // Adicional - acceso indexado a nivel de fila y columna
 
     // Acceder una fila completa si se selecciona la etiqueta de la fila
-
-    String etiquetaFila4 = "3";
-
+    String etiquetaFila4 = "4";
     Fila fila = df.getFilaPorEtiqueta(etiquetaFila4);
 
-    System.out.println("Las fila indexada por la etiqueta " + etiquetaFila4 + " contiene los datos " + fila);
-
+    System.out.println("Las fila indexada por la etiqueta '" + etiquetaFila4 + "' contiene los datos " + fila);
     System.out.println(" ");
     System.out.println("#--------------------------------------------------------------------------");
 
+
+
     // Acceder una columna completa si se selecciona la etiqueta de la columna
-
     String etiquetaColumna1 = "Columna3";
-
     Columna columna = df.getColumnaPorEtiqueta(etiquetaColumna1);
 
-    System.out.println("Las fila indexada por la etiqueta: " + etiquetaColumna1 + " contiene los datos " + columna);
+    System.out.println("Las columna indexada por la etiqueta '" + etiquetaColumna1 + "' contiene los datos " + columna);  
     System.out.println(" ");
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -306,14 +317,14 @@ public class Main {
     System.out.println(" ");
 
 
-    String Fila = "3"; // 
-    String Columna = "Columna4"; 
+    String Fila = "4"; // 
+    String Columna = "Columna1"; 
     //String Columna = "0";
 
 
     try {
-        //Dato valor = df2.getValor(fila, columna);
         Dato valor = df.getValor(Fila, Columna);
+        //Dato valor = df2.getValor(Fila, Columna);
             
         if (valor != null) 
             System.out.println("Valor en la fila " + (Fila) + " y columna " + (Columna) + ": " + valor.getDato());
@@ -321,7 +332,7 @@ public class Main {
             System.out.println("Índices fuera de rango.");
         }
     catch (NullPointerException e) {
-        System.out.println("Fila/Columna Inexistente"); 
+        System.out.println("EXEPCIÓN: Fila y/o Columna Inexistente. Por favor, vuelva a corroborar los datos ingresados..."); 
     }
     System.out.println("---------------------------------------------------------------------");
 
@@ -332,6 +343,7 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /*  
 
     ////  USER STORY 8: GENERAR UNA VISTA REDUCIDA (SLICING) - CORREGIR EL CODIGO   //// 
 
@@ -344,26 +356,18 @@ public class Main {
     System.out.println("#-----------------------------------------------------------------------------");
     System.out.println(" ");
     
-    //DataFrame df6 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
-    DataFrame df6 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
-
     
-    // Lista de etiquetas de filas a seleccionar
-
-    List<String> etiquetasFilas = Arrays.asList("1", "3", "5");
-
     // Lista de etiquetas de columnas a seleccionar
-
     List<String> etiquetasColumnas = Arrays.asList("Columna1", "Columna4");
 
-    // Llamada al método para seleccionar la vista reducida
+    // Lista de etiquetas de filas a seleccionar
+    List<String> etiquetasFilas = Arrays.asList("1", "3", "5");
 
-    DataFrame vistaRed = df6.seleccionarVista(etiquetasFilas, etiquetasColumnas);
+    // Llamada al método para seleccionar la vista reducida
+    DataFrame vistaRed = df.seleccionarVista(etiquetasFilas, etiquetasColumnas);
 
     // Imprimir el DataFrame resultante (vista reducida)
-
     CsvPrinter.imprimirPorFilas(vistaRed);
-
     CsvPrinter.imprimirColumnar(vistaRed);
 
     System.out.println("---------------------------------------------------------------------");
@@ -375,29 +379,23 @@ public class Main {
     System.out.println("------------------------------------------------------------------------------------");
     
     // Lista de etiquetas de filas y columnas a incluir en la vista reducida
-
     List<String> etiquetasFilas5 = Arrays.asList("1", "2", "3");
-
     List<String> etiquetasColumnas5 = Arrays.asList("Columna2","Columna3");
-
     CsvPrinter.imprimirVistaReducida(df, etiquetasFilas5, etiquetasColumnas5);
 
     System.out.println("------------------------------------------------------------------------------------");
 
     //------------------------------------------------------------------------------------------------
-    // CASOS ESPECIALES DE VISTA REDUCIDA DEL DF - 
-
-    // METODO PARA IMPRIMIR LAS PRIMERAS Y ULTIMAS FILAS
+    // CASOS ESPECIALES DE VISTA REDUCIDA DEL DF - METODO PARA IMPRIMIR LAS PRIMERAS Y ULTIMAS FILAS
 
     System.out.println("Vistas especiales: primeras y ultimas filas");
-
     System.out.println("Informacion de las primeras filas del DataFrame (head)");
-
     CsvPrinter.head(df, 2);
-
     System.out.println("Informacion de las ultimas filas del DataFrame (tail)");
-
     CsvPrinter.tail(df, 2);
+
+
+    */
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -422,21 +420,22 @@ public class Main {
     System.out.println(" ");
 
     // ruta a exportar
-    //String rutaArchivo = "C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\archivo.csv"; 
-    String rutaArchivo = "C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\archivo.csv";
+    //String rutaArchivo = "C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\archivoExportado.csv"; 
+    String rutaArchivo = "C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\archivoExportado.csv";
     
     try {
-
-        CsvExport.exportarComoCSV(df2, rutaArchivo);
-
+        CsvExport.exportarComoCSV(dfprueba, rutaArchivo);
         System.out.println("Tu nuevo DataFrame se guardó correctamente en la ruta de archivo seleccionada");
 
     } catch (Exception e) {
-
         System.out.println("Ocurrió un error al exportar el archivo CSV: " + e.getMessage());
-
     }
 
+
+    // Esta opción es para traer el archivo recién exportado y ver si lo imprime bien
+    DataFrame dfExportado =  new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\archivoExportado.csv", ",", "S");
+    CsvPrinter.imprimirPorFilas(dfExportado);
+    CsvPrinter.imprimirColumnar(dfExportado);
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -540,9 +539,7 @@ public class Main {
 
     System.out.println("Impresión del DataFrame");
     CsvPrinter.imprimirColumnar(df);
-
     System.out.println("Impresión de la copia profunda del DataFrame");
-
     CsvPrinter.imprimirColumnar(copiadf1);
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -557,15 +554,11 @@ public class Main {
     System.out.println(" ");
 
     System.out.println("Impresión del DataFrame");
-
     CsvPrinter.imprimirColumnar(df);
-
     System.out.println("Agregar una columna ya existente del DataFrame");
 
     String etiquetaColumnaExistente = "Columna3";
-
     String etiquetaNuevaColumna = "Columna5";
-
     df.clonarYAgregarColumna(etiquetaColumnaExistente, etiquetaNuevaColumna);
     
     // Imprimir el DataFrame
@@ -622,27 +615,21 @@ public class Main {
     System.out.println("Agregar una columna Nueva al DataFrame");
     
     String etiquetaColumnaNueva = "Columna5";
-     
     //DataFrame df5 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     DataFrame df5 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
-    
     String[] datosNuevaColumna = {"Nueva1", "Nueva2","Nueva3", "Nueva4", "Nueva5", "Nueva6"};
     
     // Crear un array de Dato
-
     Dato[] datosArray = new Dato[datosNuevaColumna.length];
 
     for (int i = 0; i < datosNuevaColumna.length; i++) {
-
         datosArray[i] = new Dato(datosNuevaColumna[i]);
     }
     
     // Crear la nueva columna
 
     Columna nuevaColumna = new Columna();
-    
     nuevaColumna.setColumna(datosArray, "S");
-    
     df5.AgregarColumnaNueva(etiquetaColumnaNueva, nuevaColumna);
     
     // Imprimir el DataFrame
