@@ -27,10 +27,10 @@ public class CsvPrinter {
 
         // Imprimir el encabezado
         System.out.println("#-----------------------------------------------------------------------------");
-        System.out.println("   IMPRESIÓN DF POR FILAS");
+        System.out.println("# Impresión por Filas");
         System.out.println("#-----------------------------------------------------------------------------");
 
-
+        
         for (String fieldName: df.getAllHeaderColumn()) {
             System.out.print("\t");
             System.out.print(fieldName);
@@ -51,7 +51,7 @@ public class CsvPrinter {
 
         if (Orden == "A"){
             
-            for (int i=0; i <= limite; i++){
+            for (int i=0; i < limite; i++){
                 //for (String etiqueta : df.getAllHeaderRows())
                 String etiqueta = df.getHeaderRows(i); 
                 System.out.print(etiqueta +" |"+"\t"); // Imprimir etiqueta de fila       
@@ -106,7 +106,7 @@ public class CsvPrinter {
         int numRows = df.isEmpty() ? 0 : df.getNroRegistros(); // Número de filas
     
         System.out.println("#-----------------------------------------------------------------------------");
-        System.out.println("   IMPRESIÓN POR COLUMNAS");
+        System.out.println("# Impresión por Columnas");
         System.out.println("#-----------------------------------------------------------------------------");
         
 
@@ -175,7 +175,7 @@ public class CsvPrinter {
             System.out.print(df.getColumna(i).getTipoDato() + "\t");
         }
 
-        System.out.println(" ");
+        System.out.println();
 
     }
 

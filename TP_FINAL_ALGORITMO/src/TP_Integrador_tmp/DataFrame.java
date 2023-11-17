@@ -143,7 +143,7 @@ public class DataFrame implements Cloneable{
 
 
     //-------------------------------------------------------------
-    // METODO GETTER NRO REGISTROS
+    // METODO GETTER NRO COLUMNAS
 
     public int getNroRegistros() {
         
@@ -636,11 +636,11 @@ public class DataFrame implements Cloneable{
 
     //----------------------------------------------------------------------------------------------------------------
     // METODO PARA AGREGAR UNA COLUMNA DEL DATAFRAME
-    public void clonarYAgregarColumna(String etiquetaColumnaExistente, String etiquetaNuevaColumna, DataFrame df) {
+    public void clonarYAgregarColumna(String etiquetaColumnaExistente, String etiquetaNuevaColumna) {
         
         // Verificar si la columna existente realmente existe
 
-        Columna columnaExistente = getColumnaPorEtiqueta(etiquetaColumnaExistente);
+        Columna columnaExistente = this.getColumnaPorEtiqueta(etiquetaColumnaExistente);
         int posicion = this.getPosicicionColumnaEtiqueta(etiquetaColumnaExistente);
 
         if (columnaExistente != null) {
@@ -680,8 +680,7 @@ public class DataFrame implements Cloneable{
     //-----------------------------------------------------------------------------------
     // METODO PARA AGREGAR UNA COLUMNA NUEVA AL DATAFRAME
 
-    public void AgregarColumnaNueva(String etiquetaNuevaColumna, Columna columnaNueva) 
-    {
+    public void AgregarColumnaNueva(String etiquetaNuevaColumna, Columna columnaNueva) {
         
         // Verificar si la columna existente realmente existe
         //Columna columnaExistente = columnaNueva;
@@ -710,72 +709,66 @@ public class DataFrame implements Cloneable{
         }
     }
 
-    // METODO PARA GENERAR UNA VISTA REDUCIDA (SLICING)
-    public DataFrame seleccionarVista(List<String> etiquetasFilas, List<String> etiquetasColumnas) 
-    {
-        // Crear un nuevo DataFrame para la vista reducida
-        DataFrame vistaRed = new DataFrame();
-    
-        // Copiar las columnas seleccionadas y actualizar etiquetasColumnas
-        for (String etiquetaColumna : etiquetasColumnas) 
-        {
-            Columna columnaOriginal = getColumnaPorEtiqueta(etiquetaColumna);
-            if (columnaOriginal != null) 
-            {
-                // Crear una nueva columna para la vista reducida
-                Columna columnaNueva = new Columna();
-    
-                // Configurar la etiqueta de la nueva columna
-                columnaNueva.setEtiqueta(etiquetaColumna);
-    
-                // Obtener los datos relevantes de las filas seleccionadas
-                for (String etiquetaFila : etiquetasFilas) 
-                {
-                    Fila filaOriginal = getFilaPorEtiqueta(etiquetaFila);
-                    if (filaOriginal != null) 
-                    {
-                        // Obtener el dato de la fila original y agregarlo a la nueva columna
-                        Dato dato = filaOriginal.getDato(etiquetaColumna, this);
-                        columnaNueva.agregarDatoColumna(dato);
-                    }
-                }
-    
-                // Agregar la nueva columna al DataFrame
-                vistaRed.dataColumnar.add(columnaNueva);
-                vistaRed.ColumnArray.add(etiquetaColumna);
-                vistaRed.columnMap.put(etiquetaColumna, columnaNueva);
-            }
-        }
-        vistaRed.contarColumnas(); // Actualizar el contador de columnas
-    
-        // Copiar las filas seleccionadas y actualizar etiquetasFilas
-        for (String etiquetaFila : etiquetasFilas) {
-            Fila filaOriginal = rowMap.get(etiquetaFila);
-            if (filaOriginal != null) {
-                // Crear una nueva fila para la vista reducida
-                Fila filaNueva = new Fila(etiquetaFila);
-    
-                // Obtener los datos relevantes de las columnas seleccionadas
-                for (String etiquetaColumna : etiquetasColumnas) {
-                    // Obtener el dato de la columna original y agregarlo a la nueva fila
-                    Dato dato = filaOriginal.getDato(etiquetaColumna, this);
-                    filaNueva.agregarDatoNuevaFila(dato);
-                }
-    
-                // Agregar la nueva fila al DataFrame
-                vistaRed.dataFilas.add(filaNueva);
-                vistaRed.RowArray.add(etiquetaFila);
-                vistaRed.rowMap.put(etiquetaFila, filaNueva);
-            }
-        }
-                vistaRed.contarRegistros(); // Actualizar el contador de registros
-    
-        return vistaRed;
-    }
+		// METODO PARA GENERAR UNA VISTA REDUCIDA (SLICING)
+		public DataFrame seleccionarVista(List<String> etiquetasFilas, List<String> etiquetasColumnas) {
+		    // Crear un nuevo DataFrame para la vista reducida
+		    DataFrame vistaRed = new DataFrame();
+		
+		    // Copiar las columnas seleccionadas y actualizar etiquetasColumnas
+		    for (String etiquetaColumna : etiquetasColumnas) {
+		        Columna columnaOriginal = getColumnaPorEtiqueta(etiquetaColumna);
+		        if (columnaOriginal != null) {
+		            // Crear una nueva columna para la vista reducida
+		            Columna columnaNueva = new Columna();
+		
+		            // Configurar la etiqueta de la nueva columna
+		            columnaNueva.setEtiqueta(etiquetaColumna);
+		
+		            // Obtener los datos relevantes de las filas seleccionadas
+		            for (String etiquetaFila : etiquetasFilas) {
+		                Fila filaOriginal = getFilaPorEtiqueta(etiquetaFila);
+		                if (filaOriginal != null) {
+		                    // Obtener el dato de la fila original y agregarlo a la nueva columna
+		                    Dato dato = filaOriginal.getDato(etiquetaColumna, this);
+		                    columnaNueva.agregarDatoColumna(dato);
+		                }
+		            }
+		
+		            // Agregar la nueva columna al DataFrame
+		            vistaRed.dataColumnar.add(columnaNueva);
+		            vistaRed.ColumnArray.add(etiquetaColumna);
+		            vistaRed.columnMap.put(etiquetaColumna, columnaNueva);
+		        }
+		    }
+		    vistaRed.contarColumnas(); // Actualizar el contador de columnas
+		
+		    // Copiar las filas seleccionadas y actualizar etiquetasFilas
+		    for (String etiquetaFila : etiquetasFilas) {
+		        Fila filaOriginal = rowMap.get(etiquetaFila);
+		        if (filaOriginal != null) {
+		            // Crear una nueva fila para la vista reducida
+		            Fila filaNueva = new Fila(etiquetaFila);
+		
+		            // Obtener los datos relevantes de las columnas seleccionadas
+		            for (String etiquetaColumna : etiquetasColumnas) {
+		                // Obtener el dato de la columna original y agregarlo a la nueva fila
+		                Dato dato = filaOriginal.getDato(etiquetaColumna, this);
+		                filaNueva.agregarDatoNuevaFila(dato);
+		            }
+		
+		            // Agregar la nueva fila al DataFrame
+		            vistaRed.dataFilas.add(filaNueva);
+		            vistaRed.RowArray.add(etiquetaFila);
+		            vistaRed.rowMap.put(etiquetaFila, filaNueva);
+		        }
+		    }
+		            vistaRed.contarRegistros(); // Actualizar el contador de registros
+		
+		    return vistaRed;
+		}
 
 
     //------------------------------------------------------------------------------------------------------------------
-
     /* 
     // METODO PARA CONCATENAR DOS DATAFRAME
     // Método para concatenar dos DataFrames verticalmente
@@ -783,33 +776,46 @@ public class DataFrame implements Cloneable{
     public DataFrame concatenar(DataFrame otroDataFrame) {
         
         // Verificar que ambos DataFrames tengan las mismas columnas
+
         if (!this.getAllHeaderColumn().equals(otroDataFrame.getAllHeaderColumn())) {
+
             throw new IllegalArgumentException("Los DataFrames tienen columnas diferentes y no se pueden concatenar.");
         }
 
         // Crear una nueva instancia de DataFrame para almacenar la concatenación
+
         DataFrame nuevaEstructura = new DataFrame();
 
         if (this.getNroRegistros() == 0 && otroDataFrame.getNroRegistros() == 0) {
+
             System.out.println("Ambas estructuras están vacías.");
+
             return nuevaEstructura;  // Retorna una estructura vacía si ambos DataFrames están vacíos
         }
 
         // Copiar las columnas y etiquetas
+
         for (String etiqueta : this.getAllHeaderColumn()) {
+
             nuevaEstructura.dataColumnar.add(this.getColumnaPorEtiqueta(etiqueta));
+
             nuevaEstructura.ColumnArray.add(etiqueta);
+
             nuevaEstructura.columnMap.put(etiqueta, this.getColumnaPorEtiqueta(etiqueta));
         }
 
         // Actualizar el contador de columnas
+
         nuevaEstructura.contarColumnas();
 
         // Concatenar las filas del primer DataFrame
+
         for (int i = 0; i < this.getNroRegistros(); i++) {
+
             Object[] datosFila = new Object[this.getNroColumnas()];
 
             for (int j = 0; j < this.getNroColumnas(); j++) {
+
                 datosFila[j] = this.getValorPosicion(i, j);  // No es necesario clonar los valores
             }
 
@@ -820,10 +826,13 @@ public class DataFrame implements Cloneable{
         }
 
         // Concatenar las filas del segundo DataFrame
+
         for (int i = 0; i < otroDataFrame.getNroRegistros(); i++) {
+
             Object[] datosFila = new Object[otroDataFrame.getNroColumnas()];
 
             for (int j = 0; j < otroDataFrame.getNroColumnas(); j++) {
+
                 datosFila[j] = otroDataFrame.getValorPosicion(i, j);  // No es necesario clonar los valores
             }
 
@@ -834,13 +843,11 @@ public class DataFrame implements Cloneable{
         }
 
         // Actualizar el contador de registros
+        
         nuevaEstructura.contarRegistros();
 
         return nuevaEstructura;
-    } 
-
-    */
-
+    } */
 
 //----------------------------------------------------------------------------------------------------------------
 }
