@@ -12,7 +12,8 @@ public class Main {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // USER STORY 1: cargar datos desde un archivo .CSV
+
+    //// USER STORY 1: CARGAR DATOS DESDE ARCHIVO .CSV   ////
 
     // Como usuario, quiero poder cargar datos desde un archivo .CSV en el software para crear una estructura tabular
 
@@ -28,16 +29,19 @@ public class Main {
     //DataFrame df4 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "S");
     
     // VALEN //
-
     DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ////  USER STORY 2: Copia profunda de los elementos de la estructura tabular
+    ////  USER STORY 2: COPIA PROFUNDA DE LOS ELEMENTOS DE LA ESTRUCTURA TABULAR ////
 
     // Como usuario, quiero poder realizar una copia profunda de los elementos de la estructura tabular para generar una nueva 
     // estructura con los mismos valores, pero independiente de la estructura original en memoria
+
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println("   COPIA PROFUNDA");
+    System.out.println("#-----------------------------------------------------------------------------");
 
     System.out.println("DataFrame");
     CsvPrinter.imprimirColumnar(df);
@@ -102,7 +106,7 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ////  USER STORY 3: concatenación de dos estructuras existentes    // CODIGO A REVISAR
+    ////  USER STORY 3: CONCATENACIÓN DE DOS ESTRUCTURAS EXISTENTES  - CODIGO A REVISAR ////
 
     // Como usuario, quiero la capacidad de generar una nueva estructura tabular a partir de la concatenación de dos estructuras existentes, 
     // creando así una nueva combinando las filas de la primera y luego las filas de la segunda. 
@@ -145,7 +149,7 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ////  USER STORY 4: obtener la cantidad de filas y de columnas en el dataset 
+    ////  USER STORY 4: OBTENER CANTIDAD DE FILAS Y COLUMNAS //// 
 
     // Como usuario, quiero poder obtener la cantidad de filas y de columnas en el dataset 
 
@@ -252,7 +256,7 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ////  USER STORY 5: obtener las etiquetas de las filas y columnas
+    ////  USER STORY 5: OBTENER ETIQUETAS DE FILAS Y COLUMNAS ////
 
     // Como usuario, quiero poder obtener las etiquetas de las filas y columnas en el dataset.
 
@@ -300,7 +304,7 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ////  USER STORY 7: acceder a los datos de la estructura tabular
+    ////  USER STORY 7: ACCEDER A LOS DATOS A TRAVES DE FILA Y COLUMNA //// 
 
     // Como usuario, quiero poder acceder a los datos de la estructura tabular a través de un índice de fila y columna.
 
@@ -336,15 +340,12 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ////  USER STORY 8: GENERAR UNA VISTA REDUCIDA (SLICING)  
+    ////  USER STORY 8: GENERAR UNA VISTA REDUCIDA (SLICING) - CORREGIR EL CODIGO   //// 
 
     // Como usuario, quiero la capacidad de seleccionar una vista reducida de la estructura tabular a 
     // través de una lista de etiquetas de índice (slicing).
 
-    //-----------------------------------------------------------------------------------------------------
-    // GENERAR UNA VISTA REDUCIDA (SLICING) - CORREGIR EL CODIGO
-    //-----------------------------------------------------------------------------------------------------
-     
+
     System.out.println("Impresión de una vista reducida del DataFrame (slicing)");
     System.out.println("---------------------------------------------------------------------");
     
@@ -403,7 +404,7 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ////  USER STORY 9: filtro aplicado a los valores de las celdas
+    ////  USER STORY 9: FILTRO APLICADO A LOS VALORES DE LAS CELDAS (QUERY) - CODIGO A IMPLEMETAR   ////
 
     // Como usuario, quiero poder seleccionar una parte de la estructura tabular utilizando un 
     // filtro aplicado a los valores de las celdas (query).
@@ -413,19 +414,10 @@ public class Main {
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ////  USER STORY 10: operaciones sobre él DF
-
-    // Como usuario, quiero poder importar un archivo CSV y permitir que el sistema realice 
-    // operaciones sobre él sin errores de lectura.
-
     
-    // NO SE IMPLEMENTA 
+    ////  USER STORY 10: EXPORTAR TABLA COMO CSV ////
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    ////  USER STORY 11: exportar los datos de la tabla a otros formatos
-
-    // Como usuario, quiero la opción de exportar los datos de la tabla a otros formatos, como CSV
+    // Como usuario, quiero la opción de exportar los datos de la tabla  como CSV
 
     try {
 
@@ -445,7 +437,7 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ////  USER STORY 12: 
+    ////  USER STORY 11: IMPRIMIR LOS DATOS EN FORMA DE TABLA  //// 
     
     // Como usuario, quiero ver los datos en forma de tabla para comprender la información de manera clara y concisa.
 
@@ -455,25 +447,25 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ////  USER STORY 13:
-
-    // Como usuario, quiero que la tabla sea configurable para mostrar las columnas relevantes.
-
-
-    // CODIGO A IMPLEMETAR
-    
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-     ////  USER STORY 14: ordenar los datos en la tabla según una columna específica
+    ////  USER STORY 12: ORDENAR DATOS SEGÚN UNA COLUMNA - METODO IMPLEMENTADO ?  ////
 
     // Como usuario, quiero poder ordenar los datos en la tabla según una columna específica.
+
+
+    /*   
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println("   ORDENAR DATOS SEGÚN UNA COLUMNA");
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println(" ");
+
+    */ 
 
 
     // METODO IMPLEMENTADO ?
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ////  USER STORY 15: buscar y filtrar datos en la tabla 
+    ////  USER STORY 13: BUSCAR Y FILTRAR DATOS EN LA TABLA  //// 
 
     // Como usuario, quiero la capacidad de buscar y filtrar datos en la tabla para encontrar información específica.
 
@@ -514,7 +506,7 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    // ////  USER STORY 16: Acceder a una celda t setear nuevo valor  
+    // ////  USER STORY 14: ACCEDER A CELDA Y SETEAR NUEVO VALOR ////
 
     // Como usuario, quiero poder acceder directamente a una celda y asignar un nuevo valor para actualizar los datos.
 
@@ -545,7 +537,7 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ////  USER STORY 17: insertar una nueva columna a partir de otra columna existente
+    ////  USER STORY 15: INSERTAR UNA NUEVA COLUMNA A PARTIR DE UNA COLUMNA EXISTENTE ////
 
     // Como usuario, quiero poder insertar una nueva columna a partir de otra columna existente.
 
@@ -578,7 +570,7 @@ public class Main {
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ////  USER STORY 18: 
+    ////  USER STORY 16: CELDAS CON DATOS FALTANTES SEAN IDENTIFICADAS CON NA  -  METODO IMPLEMENTADO ////
 
     // Como usuario, quiero que las celdas con datos faltantes sean identificadas y marcadas con un formato "NA".
 
@@ -587,7 +579,7 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // USER STORY 19: 
+    //// USER STORY 17: REALIZAR OPERACIONES SIN ERRORES EN CASO DE TENER NA - METODO A IMPLEMENTAR ////
 
     // Como usuario, quiero que el sistema realice operaciones sin errores incluso cuando haya datos faltantes marcados como "NA".
 
@@ -600,7 +592,7 @@ public class Main {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // USER STORY 20: insertar una nueva columna en el dataset
+    // USER STORY 18: INSERTAR UNA NUEVA COLUMNA UTILIZANDO SECUENCIA LINEAL NATIVA  - A REVISAR  ////
 
     // Como usuario, quiero poder insertar una nueva columna en el dataset utilizando una secuencia lineal nativa de Java.
 
@@ -674,19 +666,9 @@ public class Main {
     CsvPrinter.imprimirColumnar(df5);
 
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // USER STORY 22: ordenar las filas del dataset según un criterio
-    
-    // Como usuario, quiero poder ordenar las filas del dataset según un criterio, 
-    // ya sea ascendente o descendente, en una o más columnas.
-
-
-    // METODO IMPLEMENTADO ?
-
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //// USER STORY 20: agrupamiento o groupby - METODO A IMPLEMENTAR   ////
+    //// USER STORY 20: AGRUPAMIENTO O GROUP BY - METODO A IMPLEMENTAR   ////
 
     // Como usuario, quiero la capacidad de dividir las filas en diferentes grupos (agrupamiento o groupby) 
     // según una o más columnas. Luego, quiero aplicar una operación de sumarización estadística a estos grupos.
