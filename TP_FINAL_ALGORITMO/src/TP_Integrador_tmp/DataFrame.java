@@ -263,7 +263,10 @@ public class DataFrame implements Cloneable{
 
     public Dato getValor(String etiquetafila, String etiquetaColumna) {
     
+        //Calcula la columna desde ColumnMap con la etiqueta
         Columna tmpColumna = getColumnaPorEtiqueta(etiquetaColumna);
+        
+        // Calcula la posicion de la fila mirando la ubicacion en rowArray
         Integer posFila = this.getPosicionFilaEtiqueta(etiquetafila);
         
         if ( tmpColumna == null || posFila == null)
@@ -274,8 +277,9 @@ public class DataFrame implements Cloneable{
 
 
     public Dato getValorPosicion(Integer posFila, Integer posColumna) {
-
+        //Calcula la etiqueta mirando ColumArray
         String tmpEtiquetaColumna = this.getColumna(posColumna).getEtiqueta();
+        //Calcula etiqueta mirando RowArray
         String tmpEtiquetaFila = this.getFila(posFila).getEtiqueta();
         
         return this.getValor(tmpEtiquetaFila, tmpEtiquetaColumna);

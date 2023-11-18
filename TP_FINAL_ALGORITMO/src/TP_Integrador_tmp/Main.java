@@ -38,6 +38,8 @@ public class Main {
     //CsvPrinter.imprimirColumnar(df2);
     
     //String[] xxx = {"0","1","2"};
+
+    CsvPrinter.imprimirColumnar(df2);
     String[] xxx = {"0","1","2"};
     df2.orderPorColumnas(xxx);
     //df2.eliminarFila ("1");
