@@ -39,10 +39,11 @@ public class Main {
     
     //String[] xxx = {"0","1","2"};
 
-    CsvPrinter.imprimirColumnar(df2);
+    //CsvPrinter.imprimirColumnar(df2);
     String[] xxx = {"0","1","2"};
     df2.orderPorColumnas(xxx);
     //df2.eliminarFila ("1");
+    /*
     CsvPrinter.imprimirColumnar(df2);
     CsvPrinter.imprimirPorFilas(df2);
 
@@ -52,12 +53,17 @@ public class Main {
 
     CsvPrinter.imprimirColumnar(df2);
     CsvPrinter.imprimirPorFilas(df2);
+    */
+
+    CsvPrinter.imprimirColumnar(df2);
+
+    DataFrame copiadf2 = null;
+    copiadf2 = df2.clone();
+
+    CsvPrinter.imprimirColumnar(copiadf2);
 
 
 
-
-
-    
 
     DataFrame resultado = df.concatenar(df);
 

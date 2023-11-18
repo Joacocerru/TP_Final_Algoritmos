@@ -488,21 +488,7 @@ public class DataFrame implements Cloneable{
         */
         this.contarRegistros();
     }
-
-//////////////////////////////////////////////////////////////////////////////
-/*     public void sacarNAs()
-    {
-        // Recorro todas las columnas
-        for (int i=0; i < this.getNroColumnas(); i++)
-        {
-            Integer posicionColumna = i;
-            String etiquetaColumna = this.ColumnArray.get(i);
-            Columna ColActual = this.columnMap.get(etiquetaColumna);
-
-   
-        }
-    }
-*/
+    
 //--------------------------------------------------------------------------------
     @Override
     public DataFrame clone() {
@@ -960,5 +946,35 @@ public void orderPorColumnas (String [] ColumnasOrden)
         n--;
     } while (huboCambio == true);
 }
+
+//////////////////////////////////////////////////////////////////////////////
+public int CantidadNA ()
+{
+    int cantNA = 0;
+    for (int i=0; i< this._nroColumnas;i++)
+    {
+        Columna columna = this.dataColumnar.get(i);
+        for (Dato datos: columna.listaDatos)
+        {
+            if (datos.isNA())
+                cantNA++;
+        }
+    }
+    return cantNA;
+}
+/*     public void sacarNAs()
+    {
+        // Recorro todas las columnas
+        for (int i=0; i < this.getNroColumnas(); i++)
+        {
+            Integer posicionColumna = i;
+            String etiquetaColumna = this.ColumnArray.get(i);
+            Columna ColActual = this.columnMap.get(etiquetaColumna);
+
+   
+        }
+    }
+*/
+
 
 }
