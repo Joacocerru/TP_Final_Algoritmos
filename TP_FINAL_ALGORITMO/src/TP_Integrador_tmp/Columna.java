@@ -125,6 +125,18 @@ public class Columna implements Cloneable
         }
     }
 
+    public void reemplazaDato (Integer indice, Object Valor) throws IndiceFueraDeRangoException{
+        
+        if (indice >= 0 && indice < listaDatos.length) {
+            
+            listaDatos[indice] = (Dato) Valor;
+        } 
+        else {
+
+            // Lanza una excepción con un mensaje personalizado.
+            throw new IndiceFueraDeRangoException("Índice fuera de rango: " + indice);
+        }
+    }
 
     //-------------------------------------------------------------------------------------
     // METODO PARA OBTENER ETIQUETA

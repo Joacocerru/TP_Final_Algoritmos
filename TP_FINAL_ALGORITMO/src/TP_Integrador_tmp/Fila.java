@@ -39,6 +39,10 @@ public class Fila implements Comparable,Cloneable {
         this.rowData = NewrowData;
     }
 
+    public void reemplazarDato(Integer posicion, Dato nuevoDato)
+    {
+        this.rowData[posicion] = nuevoDato;
+    }
 
     public Dato getDato(int columna) 
     {

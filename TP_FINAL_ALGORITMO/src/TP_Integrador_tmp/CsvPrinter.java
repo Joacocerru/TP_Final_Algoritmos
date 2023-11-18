@@ -183,6 +183,8 @@ public class CsvPrinter {
             System.out.print(df.getColumna(i).getTipoDato() + "\t");
         }
         System.out.println(" ");
+        System.out.print("Cantidad de dato NA: " + (df.CantidadNA()) );
+        System.out.println();
     }
 
     public static void ImprimirFila (Object[] fila){

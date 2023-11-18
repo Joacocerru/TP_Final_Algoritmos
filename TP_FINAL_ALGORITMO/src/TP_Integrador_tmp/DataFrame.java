@@ -488,7 +488,7 @@ public class DataFrame implements Cloneable{
         */
         this.contarRegistros();
     }
-    
+
 //--------------------------------------------------------------------------------
     @Override
     public DataFrame clone() {
@@ -962,19 +962,66 @@ public int CantidadNA ()
     }
     return cantNA;
 }
-/*     public void sacarNAs()
-    {
-        // Recorro todas las columnas
-        for (int i=0; i < this.getNroColumnas(); i++)
-        {
-            Integer posicionColumna = i;
-            String etiquetaColumna = this.ColumnArray.get(i);
-            Columna ColActual = this.columnMap.get(etiquetaColumna);
 
-   
+public void sacarNAs(int defaultNum)
+{
+    for (int xFila=0; xFila < this._nroRegistros; xFila++)
+    {
+        Fila filaActual = this.dataFilas.get(xFila);
+        for (int xColumna=0; xColumna < this._nroColumnas;xColumna++)
+        {
+            Columna columnaActual = this.dataColumnar.get(xColumna); 
+            Dato datoActual = filaActual.getDato(xColumna);
+
+            if (datoActual.isNA())
+            {
+                if (columnaActual.getTipoDato() == "Numerica")
+                {
+                    Dato nuevoDato = new Dato_Numerico(defaultNum);
+                    try
+                    {
+                        this.dataColumnar.get(xColumna).reemplazaDato(xFila, nuevoDato);
+                    } catch (IndiceFueraDeRangoException e) 
+                        {
+                            System.err.println("Error al establecer el valor: " + e.getMessage());
+                        }
+                
+                    this.dataFilas.get(xFila).reemplazarDato(xColumna, nuevoDato);;
+                }
+            }
         }
-    }
-*/
+    }   
+}
+
+public void sacarNAs(String defaultStr)
+{
+    for (int xFila=0; xFila < this._nroRegistros; xFila++)
+    {
+        Fila filaActual = this.dataFilas.get(xFila);
+        for (int xColumna=0; xColumna < this._nroColumnas;xColumna++)
+        {
+            Columna columnaActual = this.dataColumnar.get(xColumna); 
+            Dato datoActual = filaActual.getDato(xColumna);
+
+            if (datoActual.isNA())
+            {
+                if (columnaActual.getTipoDato() == "String")
+                {
+                    Dato nuevoDato = new Dato_String(defaultStr);
+                    try
+                    {
+                        this.dataColumnar.get(xColumna).reemplazaDato(xFila, nuevoDato);
+                    } catch (IndiceFueraDeRangoException e) 
+                        {
+                            System.err.println("Error al establecer el valor: " + e.getMessage());
+                        }
+                
+                    this.dataFilas.get(xFila).reemplazarDato(xColumna, nuevoDato);;
+                }
+            }
+        }
+    }   
+}
 
 
 }

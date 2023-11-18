@@ -31,8 +31,21 @@ public class Main {
     // VALEN //
     //DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     //DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
-
-    //CsvPrinter.imprimirColumnar(df2);
+    
+    String[] xxx = {"0","1","2"};
+    df2.orderPorColumnas(xxx);
+    CsvPrinter.imprimirColumnar(df2);
+    CsvPrinter.info(df2);
+    df2.sacarNAs(0);
+    CsvPrinter.imprimirColumnar(df2);
+    CsvPrinter.info(df2);
+    
+    CsvPrinter.imprimirColumnar(df);
+    CsvPrinter.info(df);
+    df.sacarNAs(-1);
+    CsvPrinter.info(df);
+    CsvPrinter.imprimirColumnar(df);
+    
     //int resultado1 = df2.buscarBinariaEnColumna("0", 11);
 
     //CsvPrinter.imprimirColumnar(df2);
@@ -40,7 +53,7 @@ public class Main {
     //String[] xxx = {"0","1","2"};
 
     //CsvPrinter.imprimirColumnar(df2);
-    String[] xxx = {"0","1","2"};
+    String[] xxxx = {"0","1","2"};
     df2.orderPorColumnas(xxx);
     //df2.eliminarFila ("1");
     /*
@@ -62,6 +75,9 @@ public class Main {
 
     CsvPrinter.imprimirColumnar(copiadf2);
 
+    CsvPrinter.imprimirColumnar(df);
+    CsvPrinter.info(df); 
+    CsvPrinter.info(df2);    
 
 
 
