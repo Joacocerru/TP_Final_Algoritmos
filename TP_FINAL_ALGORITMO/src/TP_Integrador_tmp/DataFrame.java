@@ -17,7 +17,7 @@ public class DataFrame implements Cloneable{
      
     protected List<String> ColumnArray = new ArrayList<>(); // Array de Etiquetas de columnas
     protected List<String> RowArray = new ArrayList<>(); // Array de Etiquetas de columnas
-
+    protected List<String> OriginalRowColumnArray = new ArrayList<>(); // Array de Etiquetas de columnas
 
     //------------------------------------------------------------------------------------------
     // HashMap llamado columnMap y rowMap para mapear 
@@ -37,12 +37,13 @@ public class DataFrame implements Cloneable{
     // Constructor sin parámetros
 
 
-    public DataFrame() {
-
+    public DataFrame() 
+    {
         this.dataColumnar = new ArrayList<>();
         this.dataFilas = new ArrayList<>();
         this.ColumnArray = new ArrayList<>();
         this.RowArray = new ArrayList<>();
+        this.OriginalRowColumnArray = new ArrayList<>();
         this.columnMap = new HashMap<>();
         this.rowMap = new HashMap<>();
         this._nroColumnas = 0;
@@ -53,7 +54,8 @@ public class DataFrame implements Cloneable{
     //-------------------------------------------------------------------------------
     // CONSTRUCTOR - CON LECTURA CSV
 
-    public DataFrame(String csvFile, String csvDelimiter, String headerSN) {
+    public DataFrame(String csvFile, String csvDelimiter, String headerSN) 
+    {
         List<String[]> data = new ArrayList<>(); // ArrayList para los datos - Registros
         List<String> header = new ArrayList<>(); // ArrayList para el encabezado
 
@@ -76,7 +78,6 @@ public class DataFrame implements Cloneable{
         this.contarColumnas();
         this.contarRegistros();
 
-
         //------------------------------------------------------------------------------------
         // Genera Instancias de filas y las mapea con el HASHMAP de FILAS -
         for (int rowIndex = 0; rowIndex < this.getNroRegistros(); rowIndex++) {
@@ -95,8 +96,8 @@ public class DataFrame implements Cloneable{
 
             rowMap.put(etiqueta, fila);
             this.RowArray.add(etiqueta);
+            this.OriginalRowColumnArray.add(etiqueta);
         }
-
 
         //------------------------------------------------------------------------------------
         // crea instancias de Columna y las mapea utilizando las etiquetas 
@@ -230,6 +231,18 @@ public class DataFrame implements Cloneable{
 
     }
 
+    public Integer getPosAbsolutaFilaEtiqueta (String etiquetaFila)
+    {
+        Integer posicion = null;
+
+        for (int i=0; i<this.getNroRegistros(); i++)
+        {       
+            if ( this.OriginalRowColumnArray.get(i).equals(etiquetaFila))
+            posicion = i;
+        }
+
+        return posicion;
+    }
 
     public Integer getPosicionFilaEtiqueta (String etiquetaFila){
         
@@ -440,19 +453,18 @@ public class DataFrame implements Cloneable{
 
         // Obtener la posición de la fila
         int posicion = getPosicionFilaEtiqueta(etiquetaFila);
+        int posicionAbs = this.getPosAbsolutaFilaEtiqueta(etiquetaFila);
 
         // Eliminar la fila de dataFilas y RowArray
-        dataFilas.remove(posicion);
-        RowArray.remove(etiquetaFila);
-
-        // Actualizar el rowMap
-        rowMap.remove(etiquetaFila);
+        this.dataFilas.remove(posicionAbs);
+        this.RowArray.remove(etiquetaFila);
+        this.OriginalRowColumnArray.remove(etiquetaFila);
 
         // Actualizar la posición de las filas restantes en rowMap
-        rowMap.clear();
+        this.rowMap.clear();
 
         for (int i = 0; i < cantidadFilas-1; i++) {   
-            String etiquetaActual = RowArray.get(i);
+            String etiquetaActual = dataFilas.get(i).getEtiqueta();
             rowMap.put(etiquetaActual, dataFilas.get(i));
         }
 
@@ -461,20 +473,19 @@ public class DataFrame implements Cloneable{
 
         // Actualiza los datos de columna de las filas
      
-        for (int i=0; i < this.getNroColumnas(); i++){
-
-            this.dataColumnar.get(i).removeFila(posicion);
+        for (int i=0; i < this.getNroColumnas(); i++)
+        {
+            this.dataColumnar.get(i).removeFila(posicionAbs);
             this.dataColumnar.get(i).restarCantRegistro();
         }
 
         for (Columna cols: this.columnMap.values())
         {
-            cols.removeFila(posicion);
+            cols.removeFila(posicionAbs);
             cols.restarCantRegistro();
         }
         
         this.contarRegistros();
-
     }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -659,9 +670,13 @@ public class DataFrame implements Cloneable{
     }
 
 
-    public int buscarBinariaEnColumna(String Etiquetacolumna, Object valor) {
-
+    public int buscarBinariaEnColumna(String Etiquetacolumna, Object valor) 
+    {
         Columna tmpColumna = this.getColumnaPorEtiqueta(Etiquetacolumna);
+        String[] parametro = new String[1];
+        parametro[0] = tmpColumna.getEtiqueta();
+        this.orderPorColumnas(parametro);
+        CsvPrinter.imprimirPorFilas(this);
         return this.buscarNBinariaEnColumna(tmpColumna, valor);
     }
 
@@ -678,7 +693,8 @@ public class DataFrame implements Cloneable{
 
             Dato datoMedio = columna.getDato(medio);
 
-            if (datoMedio.equals(valor)) {
+            if (datoMedio.equals(valor)) 
+            {
                 return medio;
             }
 
@@ -698,8 +714,8 @@ public class DataFrame implements Cloneable{
 
     //----------------------------------------------------------------------------------------------------------------
     // METODO PARA AGREGAR UNA COLUMNA DEL DATAFRAME
-    public void clonarYAgregarColumna(String etiquetaColumnaExistente, String etiquetaNuevaColumna) {
-        
+    public void clonarYAgregarColumna(String etiquetaColumnaExistente, String etiquetaNuevaColumna) 
+    {    
         // Verificar si la columna existente realmente existe
 
         Columna columnaExistente = this.getColumnaPorEtiqueta(etiquetaColumnaExistente);
@@ -771,73 +787,73 @@ public class DataFrame implements Cloneable{
         }
     }
 
-                // METODO PARA GENERAR UNA VISTA REDUCIDA (SLICING)
-                public DataFrame seleccionarVista(List<String> etiquetasFilas, List<String> etiquetasColumnas) {
-                    // Crear un nuevo DataFrame para la vista reducida
-                    DataFrame vistaRed = new DataFrame();
-                
-                    // Copiar las columnas seleccionadas y actualizar etiquetasColumnas
-                    for (String etiquetaColumna : etiquetasColumnas) 
+    // METODO PARA GENERAR UNA VISTA REDUCIDA (SLICING)
+    public DataFrame seleccionarVista(List<String> etiquetasFilas, List<String> etiquetasColumnas) {
+        // Crear un nuevo DataFrame para la vista reducida
+        DataFrame vistaRed = new DataFrame();
+    
+        // Copiar las columnas seleccionadas y actualizar etiquetasColumnas
+        for (String etiquetaColumna : etiquetasColumnas) 
+        {
+            Columna columnaOriginal = getColumnaPorEtiqueta(etiquetaColumna);
+            if (columnaOriginal != null) 
+            {
+                // Crear una nueva columna para la vista reducida
+                Columna columnaNueva = new Columna();
+    
+                // Configurar la etiqueta de la nueva columna
+                columnaNueva.setEtiqueta(etiquetaColumna);
+                columnaNueva.setTipoDatos(columnaOriginal.getTipoDato());
+    
+                // Obtener los datos relevantes de las filas seleccionadas
+                for (String etiquetaFila : etiquetasFilas) 
+                {
+                    Fila filaOriginal = getFilaPorEtiqueta(etiquetaFila);
+                    if (filaOriginal != null) 
                     {
-                        Columna columnaOriginal = getColumnaPorEtiqueta(etiquetaColumna);
-                        if (columnaOriginal != null) 
-                        {
-                            // Crear una nueva columna para la vista reducida
-                            Columna columnaNueva = new Columna();
-                
-                            // Configurar la etiqueta de la nueva columna
-                            columnaNueva.setEtiqueta(etiquetaColumna);
-                            columnaNueva.setTipoDatos(columnaOriginal.getTipoDato());
-                
-                            // Obtener los datos relevantes de las filas seleccionadas
-                            for (String etiquetaFila : etiquetasFilas) 
-                            {
-                                Fila filaOriginal = getFilaPorEtiqueta(etiquetaFila);
-                                if (filaOriginal != null) 
-                                {
-                                    // Obtener el dato de la fila original y agregarlo a la nueva columna
-                                    Dato dato = filaOriginal.getDato(etiquetaColumna, this);
-                                    columnaNueva.agregarDatoColumna(dato);
-                                }
-                            }
-                
-                            // Agregar la nueva columna al DataFrame
-                            columnaNueva.setCantDatos();
-                            vistaRed.dataColumnar.add(columnaNueva);
-                            vistaRed.ColumnArray.add(etiquetaColumna);
-                            vistaRed.columnMap.put(etiquetaColumna, columnaNueva);
-                        }
+                        // Obtener el dato de la fila original y agregarlo a la nueva columna
+                        Dato dato = filaOriginal.getDato(etiquetaColumna, this);
+                        columnaNueva.agregarDatoColumna(dato);
                     }
-                    vistaRed.contarRegistros();
-                    vistaRed.contarColumnas(); // Actualizar el contador de columnas
-                
-                    // Copiar las filas seleccionadas y actualizar etiquetasFilas
-                    for (String etiquetaFila : etiquetasFilas) 
-                    {
-                        Fila filaOriginal = rowMap.get(etiquetaFila);
-                        if (filaOriginal != null) 
-                        {
-                            // Crear una nueva fila para la vista reducida
-                            Fila filaNueva = new Fila(etiquetaFila);
-                
-                            // Obtener los datos relevantes de las columnas seleccionadas
-                            for (String etiquetaColumna : etiquetasColumnas) 
-                            {
-                                // Obtener el dato de la columna original y agregarlo a la nueva fila
-                                Dato dato = filaOriginal.getDato(etiquetaColumna, this);
-                                filaNueva.agregarDatoNuevaFila(dato);
-                            }
-                
-                            // Agregar la nueva fila al DataFrame
-                            vistaRed.dataFilas.add(filaNueva);
-                            vistaRed.RowArray.add(etiquetaFila);
-                            vistaRed.rowMap.put(etiquetaFila, filaNueva);
-                        }
-                    }
-                            vistaRed.contarRegistros(); // Actualizar el contador de registros
-                
-                    return vistaRed;
                 }
+    
+                // Agregar la nueva columna al DataFrame
+                columnaNueva.setCantDatos();
+                vistaRed.dataColumnar.add(columnaNueva);
+                vistaRed.ColumnArray.add(etiquetaColumna);
+                vistaRed.columnMap.put(etiquetaColumna, columnaNueva);
+            }
+        }
+        vistaRed.contarRegistros();
+        vistaRed.contarColumnas(); // Actualizar el contador de columnas
+    
+        // Copiar las filas seleccionadas y actualizar etiquetasFilas
+        for (String etiquetaFila : etiquetasFilas) 
+        {
+            Fila filaOriginal = rowMap.get(etiquetaFila);
+            if (filaOriginal != null) 
+            {
+                // Crear una nueva fila para la vista reducida
+                Fila filaNueva = new Fila(etiquetaFila);
+    
+                // Obtener los datos relevantes de las columnas seleccionadas
+                for (String etiquetaColumna : etiquetasColumnas) 
+                {
+                    // Obtener el dato de la columna original y agregarlo a la nueva fila
+                    Dato dato = filaOriginal.getDato(etiquetaColumna, this);
+                    filaNueva.agregarDatoNuevaFila(dato);
+                }
+    
+                // Agregar la nueva fila al DataFrame
+                vistaRed.dataFilas.add(filaNueva);
+                vistaRed.RowArray.add(etiquetaFila);
+                vistaRed.rowMap.put(etiquetaFila, filaNueva);
+            }
+        }
+                vistaRed.contarRegistros(); // Actualizar el contador de registros
+    
+        return vistaRed;
+    }
     
     //------------------------------------------------------------------------------------------------------------------
 

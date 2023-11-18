@@ -33,21 +33,28 @@ public class Main {
     //DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
     //DataFrame dfprueba = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\countries.csv", ",", "S");
 
+    //CsvPrinter.imprimirColumnar(df2);
+    //int resultado1 = df2.buscarBinariaEnColumna("0", 11);
 
-    CsvPrinter.imprimirColumnar(df2);
+    //CsvPrinter.imprimirColumnar(df2);
+    
     //String[] xxx = {"0","1","2"};
     String[] xxx = {"0","1","2"};
     df2.orderPorColumnas(xxx);
+    //df2.eliminarFila ("1");
+    CsvPrinter.imprimirColumnar(df2);
+
+
     CsvPrinter.imprimirPorFilas(df2);
     CsvPrinter.imprimirColumnar(df2);
 
 
 
-        DataFrame resultado = df.concatenar(df);
+    DataFrame resultado = df.concatenar(df);
 
-        // Imprimir el DataFrame resultante
+    // Imprimir el DataFrame resultante
 
-        CsvPrinter.imprimirColumnar(resultado);
+    CsvPrinter.imprimirColumnar(resultado);
 
 
 

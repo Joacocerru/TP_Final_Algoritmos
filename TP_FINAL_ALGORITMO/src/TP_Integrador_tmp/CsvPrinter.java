@@ -109,7 +109,7 @@ public class CsvPrinter {
         System.out.println("# Impresión por Columnas");
         System.out.println("#-----------------------------------------------------------------------------");
         
-
+        // IMPRIME HEADER
         for (String fieldName: df.getAllHeaderColumn()) {
             
             System.out.print("\t");
@@ -120,23 +120,27 @@ public class CsvPrinter {
         System.out.println();
         System.out.println("--------------------------------------------------------------------------------");
 
-        for (int f = 0; f < numRows; f++) {
-            
-            if (f == 0) {
+        for (int f = 0; f < numRows; f++) // Recorre Filas 
+        {    
+            if (f == 0) 
+            {
                 for (int c = 0; c < df.getNroColumnas(); c++) {
                     System.out.print(""+"\t");
                     //System.out.print("Col " + (c) + ":");
                 }
-            
                 System.out.println(""); 
-
             } 
 
-            Fila fila = df.dataFilas.get(f); // Accede a la fila directamente
+            // ACCESO ORDERNADO A LAS FILAS
+            Fila fila = df.rowMap.get( df.RowArray.get(f) ); // Fila Segun orden Actual
+                //Fila fila = df.dataFilas.get(f); // Accede a la fila directamente
             String etiqueta = fila.getEtiqueta();
+
             System.out.print(etiqueta + " |"+"\t"); // Imprimir el índice de fila y la etiqueta
 
-            for (int c = 0; c < df.getNroColumnas() ; c++) {   
+            for (int c = 0; c < df.getNroColumnas() ; c++) 
+            {   
+                //String tmpEtiCol = df.ColumnArray.get(c);
 
                 System.out.print( df.getValorPosicion(f, c).printValor() );
                 System.out.print("\t"+"\t");

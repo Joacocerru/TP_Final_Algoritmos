@@ -92,8 +92,8 @@ public class Columna implements Cloneable
 
     //---------------------------------------------------------------------
     // METODO PARA OBTENER DATO DE LA COLUMNA POR POSICION
-    public Dato getDato (Integer indice){
-
+    public Dato getDato (Integer indice)
+    {
         return this.listaDatos[indice];
     }
     
