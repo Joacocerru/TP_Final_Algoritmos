@@ -40,12 +40,19 @@ public class Main {
     CsvPrinter.imprimirColumnar(df2);
     CsvPrinter.info(df2);
     
+    DataFrame dfx = df.clone();
+        /* 
     CsvPrinter.imprimirColumnar(df);
     CsvPrinter.info(df);
-    df.sacarNAs(-1);
+    df.sacarNAs("defStr");
     CsvPrinter.info(df);
     CsvPrinter.imprimirColumnar(df);
-    
+        */
+    CsvPrinter.info(dfx);
+    dfx.sacarNAs(-9, "nullStr", false);
+    CsvPrinter.info(dfx);
+    CsvPrinter.imprimirColumnar(dfx);
+
     //int resultado1 = df2.buscarBinariaEnColumna("0", 11);
 
     //CsvPrinter.imprimirColumnar(df2);

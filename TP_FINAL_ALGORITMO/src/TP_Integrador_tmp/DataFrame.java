@@ -963,6 +963,18 @@ public int CantidadNA ()
     return cantNA;
 }
 
+public void sacarNAs(int defaultNum, String defaultStr, Boolean defaultBool)
+{
+    this.sacarNAs(defaultBool);
+    this.sacarNAs(defaultStr);
+    this.sacarNAs(defaultNum);
+}
+
+public void sacarNAs(int defaultNum, String defaultStr)
+{
+    this.sacarNAs(defaultStr);
+    this.sacarNAs(defaultNum);
+}
 public void sacarNAs(int defaultNum)
 {
     for (int xFila=0; xFila < this._nroRegistros; xFila++)
@@ -1022,6 +1034,36 @@ public void sacarNAs(String defaultStr)
         }
     }   
 }
+
+public void sacarNAs(Boolean defaultBool)
+{
+    for (int xFila=0; xFila < this._nroRegistros; xFila++)
+    {
+        Fila filaActual = this.dataFilas.get(xFila);
+        for (int xColumna=0; xColumna < this._nroColumnas;xColumna++)
+        {
+            Columna columnaActual = this.dataColumnar.get(xColumna); 
+            Dato datoActual = filaActual.getDato(xColumna);
+
+            if (datoActual.isNA())
+            {
+                if (columnaActual.getTipoDato() == "Boolean")
+                {
+                    Dato nuevoDato = new Dato_Boolean(defaultBool);
+                    try
+                    {
+                        this.dataColumnar.get(xColumna).reemplazaDato(xFila, nuevoDato);
+                    } catch (IndiceFueraDeRangoException e) 
+                        {
+                            System.err.println("Error al establecer el valor: " + e.getMessage());
+                        }                
+                    this.dataFilas.get(xFila).reemplazarDato(xColumna, nuevoDato);;
+                }
+            }
+        }
+    }   
+}
+
 
 
 }
