@@ -189,21 +189,18 @@ public class Columna implements Cloneable
     }
 
     //----------------------------------------------------------------------------------
-    public void removeFila (int fila){   
-
+    public void removeFila (int fila)
+    {   
         //listaDatos
+        Dato[] tmpColData = new Dato[ this.getCantDatos()-1];
 
-        Dato[] tmpColData = new Dato[ this.getCantDatos()];
-
-        for(int i=0, k=0; i<this.getCantDatos(); i++){
-            
+        for(int i=0, k=0; i<this.getCantDatos(); i++)
+        {    
             if(i!= fila){
-
                 tmpColData[k] = this.listaDatos[i];
                 k++;
             }
         }
-        
         this.listaDatos = tmpColData;
     }
 

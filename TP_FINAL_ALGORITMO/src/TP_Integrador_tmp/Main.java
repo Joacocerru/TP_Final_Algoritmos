@@ -55,6 +55,10 @@ public class Main {
 
 
 
+
+
+    
+
     DataFrame resultado = df.concatenar(df);
 
     // Imprimir el DataFrame resultante

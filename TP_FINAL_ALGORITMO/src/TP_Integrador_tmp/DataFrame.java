@@ -473,9 +473,6 @@ public class DataFrame implements Cloneable{
             rowMap.put(etiquetaActual, dataFilas.get(i));
         }
 
-        // Actualizar el número de filas
-        this.contarRegistros();
-
         // Actualiza los datos de columna de las filas
      
         for (int i=0; i < this.getNroColumnas(); i++)
@@ -484,12 +481,11 @@ public class DataFrame implements Cloneable{
             this.dataColumnar.get(i).restarCantRegistro();
         }
 
-        for (Columna cols: this.columnMap.values())
+        /*for (Columna cols: this.columnMap.values())
         {
             cols.removeFila(posicionAbs);
-            cols.restarCantRegistro();
         }
-        
+        */
         this.contarRegistros();
     }
 
