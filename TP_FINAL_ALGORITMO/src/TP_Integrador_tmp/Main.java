@@ -32,66 +32,45 @@ public class Main {
     //DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     //DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
     
+
+    //  PRUEBA FINAL //
+
+    // Busqueda binaria
+    
+    CsvPrinter.imprimirColumnar(df2);
+    //int resultado1 = df2.buscarBinariaEnColumna("2", 53);
+
+    // clonado + ordenar x 3 campos + eliminar 2 filas y 1 columna
+    DataFrame df3 = df2.clone();
     String[] xxx = {"0","1","2"};
-    df2.orderPorColumnas(xxx);
-    CsvPrinter.imprimirColumnar(df2);
-    CsvPrinter.info(df2);
-    df2.sacarNAs(0);
-    CsvPrinter.imprimirColumnar(df2);
-    CsvPrinter.info(df2);
+    df3.orderPorColumnas(xxx);
+
+    CsvPrinter.imprimirColumnar(df3);
     
-    DataFrame dfx = df.clone();
-        /* 
-    CsvPrinter.imprimirColumnar(df);
-    CsvPrinter.info(df);
-    df.sacarNAs("defStr");
-    CsvPrinter.info(df);
-    CsvPrinter.imprimirColumnar(df);
-        */
-    CsvPrinter.info(dfx);
-    dfx.sacarNAs(-9, "nullStr", false);
-    CsvPrinter.info(dfx);
-    CsvPrinter.imprimirColumnar(dfx);
-
-    //int resultado1 = df2.buscarBinariaEnColumna("0", 11);
-
-    //CsvPrinter.imprimirColumnar(df2);
+    df3.eliminarFila ("6");
+    df3.eliminarColumna("2");
+    df3.eliminarFila ("2");
     
-    //String[] xxx = {"0","1","2"};
+    CsvPrinter.imprimirColumnar(df3);
+    CsvPrinter.imprimirPorFilas(df3);
 
-    //CsvPrinter.imprimirColumnar(df2);
-    String[] xxxx = {"0","1","2"};
-    df2.orderPorColumnas(xxx);
-    //df2.eliminarFila ("1");
-    /*
-    CsvPrinter.imprimirColumnar(df2);
-    CsvPrinter.imprimirPorFilas(df2);
+    //------------------------------
+    // PRUEBA SACAR-NA con parametros x default
+    DataFrame df4 = df.clone();
 
-    df2.eliminarFila ("6");
-    df2.eliminarColumna("2");
-    df2.eliminarFila ("2");
+    CsvPrinter.imprimirColumnar(df4);
+    CsvPrinter.info(df4);
+    
+    // Valores -> -9 numericos, nullStr para Strings, false para los boolean
+    df4.sacarNAs(-9, "nullStr", false);
+    
+    CsvPrinter.info(df4);
+    CsvPrinter.imprimirColumnar(df4);
 
-    CsvPrinter.imprimirColumnar(df2);
-    CsvPrinter.imprimirPorFilas(df2);
-    */
-
-    CsvPrinter.imprimirColumnar(df2);
-
-    DataFrame copiadf2 = null;
-    copiadf2 = df2.clone();
-
-    CsvPrinter.imprimirColumnar(copiadf2);
-
-    CsvPrinter.imprimirColumnar(df);
-    CsvPrinter.info(df); 
-    CsvPrinter.info(df2);    
-
-
-
+    
     DataFrame resultado = df.concatenar(df);
 
     // Imprimir el DataFrame resultante
-
     CsvPrinter.imprimirColumnar(resultado);
 
     // Imprimir el DataFrame resultante

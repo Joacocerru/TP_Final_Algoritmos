@@ -497,41 +497,34 @@ public class DataFrame implements Cloneable{
             // Clonar el objeto en sí
             DataFrame copiaEstructura = (DataFrame) super.clone();
 
-
             // Realizar una copia profunda de las columnas
             copiaEstructura.dataColumnar = new ArrayList<>();
+            copiaEstructura.columnMap = new HashMap<>();
+            copiaEstructura.OriginalRowColumnArray = new ArrayList<>(); // Array de Etiquetas de columnas
 
+            for (int i=0; i < this.OriginalRowColumnArray.size(); i++)
+            {
+                String tmp = this.OriginalRowColumnArray.get(i);
+                copiaEstructura.OriginalRowColumnArray.add(tmp); 
+            }
+            
             for (Columna columna : this.dataColumnar) 
             {
                 Columna columnaCopia = columna.clone();
                 copiaEstructura.dataColumnar.add(columnaCopia);
-            }
-
-            copiaEstructura.columnMap = new HashMap<>(this.columnMap);
-            
-            for (String keys: this.columnMap.keySet())
-            {
-                Columna columnacopia = this.columnMap.get(keys).clone();
-                copiaEstructura.columnMap.put(keys, columnacopia);
-            }
-            
+                copiaEstructura.columnMap.put(columnaCopia.getEtiqueta(), columnaCopia);
+            }           
 
             // Realizar una copia profunda de las columnas
             copiaEstructura.dataFilas = new ArrayList<>();
+            copiaEstructura.rowMap = new HashMap<>();
 
-            for (Fila filas : this.dataFilas) {
+            for (Fila filas : this.dataFilas) 
+            {
                 Fila filaCopia = filas.clone();
                 copiaEstructura.dataFilas.add(filaCopia);
+                copiaEstructura.rowMap.put(filaCopia.getEtiqueta(), filaCopia);
             }
-
-            copiaEstructura.rowMap = new HashMap<>();
-            
-            for (String keys: this.rowMap.keySet())
-            {
-                Fila filaCopia = this.rowMap.get(keys).clone();
-                copiaEstructura.rowMap.put(keys, filaCopia);
-            }
-
 
             // Clonar el columnMap y los arrays de etiquetas
             copiaEstructura.ColumnArray = new ArrayList<>(this.ColumnArray);
@@ -540,7 +533,6 @@ public class DataFrame implements Cloneable{
             copiaEstructura.contarColumnas();
             copiaEstructura.contarRegistros();
             return copiaEstructura;
-
         } 
         catch (CloneNotSupportedException e) {
             
@@ -663,7 +655,7 @@ public class DataFrame implements Cloneable{
         String[] parametro = new String[1];
         parametro[0] = tmpColumna.getEtiqueta();
         this.orderPorColumnas(parametro);
-        CsvPrinter.imprimirPorFilas(this);
+        //CsvPrinter.imprimirPorFilas(this);
         return this.buscarNBinariaEnColumna(tmpColumna, valor);
     }
 
