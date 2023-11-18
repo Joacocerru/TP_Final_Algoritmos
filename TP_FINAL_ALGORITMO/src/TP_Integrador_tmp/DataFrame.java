@@ -265,9 +265,10 @@ public class DataFrame implements Cloneable{
     
         //Calcula la columna desde ColumnMap con la etiqueta
         Columna tmpColumna = getColumnaPorEtiqueta(etiquetaColumna);
-        
+
         // Calcula la posicion de la fila mirando la ubicacion en rowArray
-        Integer posFila = this.getPosicionFilaEtiqueta(etiquetafila);
+        //Integer posFila = this.getPosicionFilaEtiqueta(etiquetafila);
+        Integer posFila = this.getPosAbsolutaFilaEtiqueta(etiquetafila);
         
         if ( tmpColumna == null || posFila == null)
             throw new NullPointerException ("Fila/Columna inexistente");

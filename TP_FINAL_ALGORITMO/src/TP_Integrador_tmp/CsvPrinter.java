@@ -9,7 +9,7 @@ public class CsvPrinter {
     
     public static void imprimirPorFilas (DataFrame df){
 
-        imprimirPorFilasGral(df, df.getNroRegistros()-1, "A");
+        imprimirPorFilasGral(df, df.getNroRegistros(), "A");
     }
 
     private static void imprimirPorFilasGral(DataFrame df, Integer tope, String Orden){ // Orden -> A (Ascend) D (Desc)
@@ -141,8 +141,8 @@ public class CsvPrinter {
             for (int c = 0; c < df.getNroColumnas() ; c++) 
             {   
                 //String tmpEtiCol = df.ColumnArray.get(c);
-
-                System.out.print( df.getValorPosicion(f, c).printValor() );
+                Dato tmp = df.getValorPosicion(f, c);
+                System.out.print( tmp.printValor() );
                 System.out.print("\t"+"\t");
             } 
 

@@ -44,10 +44,14 @@ public class Main {
     df2.orderPorColumnas(xxx);
     //df2.eliminarFila ("1");
     CsvPrinter.imprimirColumnar(df2);
-
-
     CsvPrinter.imprimirPorFilas(df2);
+
+    df2.eliminarFila ("6");
+    df2.eliminarColumna("2");
+    df2.eliminarFila ("2");
+
     CsvPrinter.imprimirColumnar(df2);
+    CsvPrinter.imprimirPorFilas(df2);
 
 
 
