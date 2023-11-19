@@ -1,7 +1,7 @@
 package TP_Integrador_tmp;
 
-//import java.util.Arrays;
-//import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Presentacion {
     public static void main(String[] args) {
@@ -16,7 +16,7 @@ public class Presentacion {
 
     ////  USER STORY 2: COPIA PROFUNDA DE LOS ELEMENTOS DE LA ESTRUCTURA TABULAR ////////////////////////////
 
-    ////  USER STORY 3: CONCATENACIÓN DE DOS ESTRUCTURAS EXISTENTES  - CODIGO A REVISAR ////////////////////////////
+    ////  USER STORY 3: CONCATENACIÓN DE DOS ESTRUCTURAS EXISTENTES   ////////////////////////////
 
     ////  USER STORY 4: CANTIDAD DE FILAS Y COLUMNAS ////////////////////////////
     
@@ -52,9 +52,16 @@ public class Presentacion {
     CsvPrinter.infoFila(df, "2"); 
 
     ////  USER STORY 8: GENERAR UNA VISTA REDUCIDA (SLICING)  ////////////////////////////
-    // Slicing Random
+    DataFrame.muestreo(df, new ArrayList<>(Arrays.asList("Columna1", "Columna4")), new ArrayList<>(Arrays.asList("1", "3", "5"))); 
+    
+    // Random Sciling
+    DataFrame.muestreoAleatorio(df, 20); // porcentaje de 
+    
+
+
 
     ////  USER STORY 9: FILTRO APLICADO A LOS VALORES DE LAS CELDAS (QUERY)  ////////////////////////////
+
     
     ////  USER STORY 10: EXPORTAR TABLA COMO CSV ////////////////////////////
     CsvExport.exportarComoCSV(df, "C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\archivoExportado.csv");
@@ -89,9 +96,8 @@ public class Presentacion {
     df.eliminarFila("2");
     //CsvPrinter.imprimirColumnar(df);
 
-
-
     //// USER STORY 20: AGRUPAMIENTO O GROUP BY - METODO A IMPLEMENTAR   //////////////////////////// 
+
     ////  USER STORY 21: MANEJAR EXEPCIONES  - METODO A IMPLEMENTAR ////////////////////////////
 
 

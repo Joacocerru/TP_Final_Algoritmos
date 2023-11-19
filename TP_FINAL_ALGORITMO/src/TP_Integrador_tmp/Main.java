@@ -31,24 +31,43 @@ public class Main {
     // VALEN //
     DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
+    DataFrame df3 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
+
     
-
-    ////  MUESTREO ALEATORIO (SLICING) ///////////////////////////////////////////////////////////
-
+    
+    
+    
     System.out.println(" ");
     System.out.println("#-----------------------------------------------------------------------------");
-    System.out.println("   MUESTREO ALEATORIO (SLICING)");
+    System.out.println("   CONCATENACIÓN DE DOS DATAFRAMES");
     System.out.println("#-----------------------------------------------------------------------------");
     System.out.println(" ");
-   
-    CsvPrinter.imprimirColumnar(df);
 
-    System.out.println("Una selección aleatoria de filas según un porcentaje del total de la estructura");
-    
-    // Llama a la función para seleccionar filas aleatorias con un 50% del total
-    DataFrame dfSeleccionado = df.seleccionarFilasAleatorias(0.5);
-    
-    CsvPrinter.imprimirColumnar(dfSeleccionado); // ####
+    try {
+        // Verificar que ambos DataFrames tengan las mismas columnas
+
+        if (df2.getAllHeaderColumn().equals(df3.getAllHeaderColumn())) {
+
+        // Concatenar los DataFrames verticalmente
+
+        DataFrame resultado3 = df2.concatenar(df3);
+
+        // Imprimir el DataFrame resultante
+
+        CsvPrinter.imprimirColumnar(resultado3);
+
+        } else {
+
+            System.out.println("Error: Los DataFrames tienen columnas diferentes y no se pueden concatenar.");
+            }
+
+        } catch (IllegalArgumentException e) {
+
+            System.out.println("Error al concatenar: " + e.getMessage());
+        }
+
+
+
 
     ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -184,35 +203,6 @@ public class Main {
     
     
     
-    System.out.println(" ");
-    System.out.println("#-----------------------------------------------------------------------------");
-    System.out.println("   CONCATENACIÓN DE DOS DATAFRAMES");
-    System.out.println("#-----------------------------------------------------------------------------");
-    System.out.println(" ");
-
-    try {
-        // Verificar que ambos DataFrames tengan las mismas columnas
-
-        if (df3.getAllHeaderColumn().equals(df4.getAllHeaderColumn())) {
-
-        // Concatenar los DataFrames verticalmente
-
-        DataFrame resultado3 = df3.concatenar(df4);
-
-        // Imprimir el DataFrame resultante
-
-        CsvPrinter.imprimirColumnar(resultado3);
-
-        } else {
-
-            System.out.println("Error: Los DataFrames tienen columnas diferentes y no se pueden concatenar.");
-            }
-
-        } catch (IllegalArgumentException e) {
-
-            System.out.println("Error al concatenar: " + e.getMessage());
-        }
-
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -405,7 +395,7 @@ public class Main {
     // Como usuario, quiero la capacidad de seleccionar una vista reducida de la estructura tabular a 
     // través de una lista de etiquetas de índice (slicing).
 
-
+    System.out.println(" ");
     System.out.println("#-----------------------------------------------------------------------------");
     System.out.println("   IMPRESIÓN DE UNA VISTA REDUCIDA (SLICING)");
     System.out.println("#-----------------------------------------------------------------------------");
@@ -423,23 +413,10 @@ public class Main {
 
     // Imprimir el DataFrame resultante (vista reducida)
     CsvPrinter.imprimirPorFilas(vistaRed);
-    CsvPrinter.imprimirColumnar(vistaRed);
+    //CsvPrinter.imprimirColumnar(vistaRed);
 
     System.out.println("---------------------------------------------------------------------");
     
-    //-------------------------------------------------------------------------------------------------
-    // ESTO ES SOLO UNA IMPRESION POR PANTALLA DE LOS DATOS DADAS LAS ETIQUETAS
-
-    System.out.println("Impresión por pantalla de los datos dadas las etiquetas filas y columnas");
-    System.out.println("------------------------------------------------------------------------------------");
-    
-    // Lista de etiquetas de filas y columnas a incluir en la vista reducida
-    List<String> etiquetasFilas5 = Arrays.asList("1", "2", "3");
-    List<String> etiquetasColumnas5 = Arrays.asList("Columna2","Columna3");
-    CsvPrinter.imprimirVistaReducida(df, etiquetasFilas5, etiquetasColumnas5);
-
-    System.out.println("------------------------------------------------------------------------------------");
-
     //------------------------------------------------------------------------------------------------
     // CASOS ESPECIALES DE VISTA REDUCIDA DEL DF - METODO PARA IMPRIMIR LAS PRIMERAS Y ULTIMAS FILAS
 
@@ -450,9 +427,22 @@ public class Main {
     CsvPrinter.tail(df, 2);
 
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////  MUESTREO ALEATORIO (SLICING) ///////////////////////////////////////////////////////////
 
-      
+    System.out.println(" ");
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println("   MUESTREO ALEATORIO (SLICING)");
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println(" ");
+   
+    CsvPrinter.imprimirColumnar(df);
+
+    System.out.println("Una selección aleatoria de filas según un porcentaje del total de la estructura");
+    
+    // Llama a la función para seleccionar filas aleatorias con un 50% del total
+    DataFrame dfSeleccionado = df.seleccionarFilasAleatorias(20);
+    //CsvPrinter.imprimirColumnar(dfSeleccionado); 
+    CsvPrinter.imprimirPorFilas(dfSeleccionado);
 
   
 
@@ -634,7 +624,7 @@ public class Main {
 
 
     // METODO A IMPLEMENTAR
-    
+
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -647,6 +637,7 @@ public class Main {
     // Como usuario, quiero poder insertar una nueva columna en el dataset utilizando una secuencia lineal nativa de Java.
 
     
+
     System.out.println("#-----------------------------------------------------------------------------");
     System.out.println("   AGREGAR UNA COLUMNA AL DATAFRAME CON SECUENCIA LINEAL");
     System.out.println("#-----------------------------------------------------------------------------");
@@ -657,8 +648,6 @@ public class Main {
     System.out.println("Agregar una columna Nueva al DataFrame");
     
     String etiquetaColumnaNueva = "Columna5";
-    DataFrame df5 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
-    //DataFrame df5 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     String[] datosNuevaColumna = {"Nueva1", "Nueva2","Nueva3", "Nueva4", "Nueva5", "Nueva6"};
     
     // Crear un array de Dato
@@ -671,11 +660,12 @@ public class Main {
     // Crear la nueva columna
     Columna nuevaColumna = new Columna();
     nuevaColumna.setColumna(datosArray, "S");
-    DataFrame.AgregarColumnaNueva(df5, etiquetaColumnaNueva, nuevaColumna);
+    df.AgregarColumnaNueva(etiquetaColumnaNueva, nuevaColumna);
     
     // Imprimir el DataFrame
     System.out.println("Impresión del DataFrame con la nueva columna agregada");
-    CsvPrinter.imprimirColumnar(df5);
+    CsvPrinter.imprimirColumnar(df);
+
 
     
 
