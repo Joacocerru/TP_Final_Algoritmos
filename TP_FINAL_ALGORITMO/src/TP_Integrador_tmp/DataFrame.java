@@ -17,16 +17,15 @@ public class DataFrame implements Cloneable{
     protected List<Columna> dataColumnar = new ArrayList<>(); // ArrayList para los datos - Array de columnas
     protected List<Fila> dataFilas = new ArrayList<>();     // Array de filas
      
-    protected static List<String> ColumnArray = new ArrayList<>(); // Array de Etiquetas de columnas
+    protected List<String> ColumnArray = new ArrayList<>(); // Array de Etiquetas de columnas
     protected List<String> RowArray = new ArrayList<>(); // Array de Etiquetas de columnas
     protected List<String> OriginalRowColumnArray = new ArrayList<>(); // Array de Etiquetas de columnas
-
     //------------------------------------------------------------------------------------------
     // HashMap llamado columnMap y rowMap para mapear 
     // las etiquetas de las columnas y Filas a las instancias de Columna y Fila
 
 
-    protected static Map<String, Columna> columnMap = new HashMap<>();   // Indice para las columnas
+    protected Map<String, Columna> columnMap = new HashMap<>();   // Indice para las columnas
     protected Map<String, Fila> rowMap = new HashMap<>();      // HashMap Fila Integer
     //------------------------------------------------------------------------------------------
 
@@ -813,10 +812,10 @@ public class DataFrame implements Cloneable{
         }
     }
 
-
+    /* 
     // METODO PARA AGREGAR UNA COLUMNA CON SECUENCIA LINEAL
 
-    public void agregarColumnaSecuencia(String[] datosNuevaColumna,String etiquetaColumnaNueva, String tipoDato){
+    public static agregarColumnaSecuencia(String[] datosNuevaColumna,String etiquetaColumnaNueva, String tipoDato){
 
         System.out.println(" ");
         System.out.println("#-----------------------------------------------------------------------------");
@@ -840,15 +839,15 @@ public class DataFrame implements Cloneable{
         System.out.println("Agregamos la columna Nueva '" + etiquetaColumnaNueva+ "' al final del DataFrame.");
 
 
-
-
     }
+
+    
 
 
     //-----------------------------------------------------------------------------------
     // METODO PARA AGREGAR UNA COLUMNA NUEVA AL DATAFRAME
 
-    public static void AgregarColumnaNueva( String etiquetaNuevaColumna, Columna columnaNueva) {
+    public  AgregarColumnaNueva( String etiquetaNuevaColumna, Columna columnaNueva) {
         
         // Verificar si la columna existente realmente existe
         //Columna columnaExistente = columnaNueva;
@@ -875,7 +874,9 @@ public class DataFrame implements Cloneable{
         else {
             System.out.println("Error: La columna '" + etiquetaNuevaColumna + "' no existe en el DataFrame.");
         }
+
     }
+    */
 
     // METODO PARA GENERAR UNA VISTA REDUCIDA (SLICING)
     public DataFrame seleccionarVista(List<String> etiquetasFilas, List<String> etiquetasColumnas) {

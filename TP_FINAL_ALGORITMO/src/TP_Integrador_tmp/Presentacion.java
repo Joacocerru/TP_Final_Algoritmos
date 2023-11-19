@@ -19,18 +19,14 @@ public class Presentacion {
     ////  USER STORY 3: CONCATENACIÓN DE DOS ESTRUCTURAS EXISTENTES   ////////////////////////////
 
     ////  USER STORY 4: CANTIDAD DE FILAS Y COLUMNAS ////////////////////////////
-    
     // Info general del dataframe
     CsvPrinter.info(df);                   
-    //CsvPrinter.imprimirColumnar(df);
 
     // Info de columna elegida
     CsvPrinter.infoColumna(df, "Columna3"); // busca por etiqueta            
-    //CsvPrinter.imprimirColumnar(df);
 
     // Info de fila elegida
     CsvPrinter.infoFila(df, "2"); // busca por etiqueta            
-    //CsvPrinter.imprimirColumnar(df);
     
 
     ////  USER STORY 5: OBTENER ETIQUETAS DE FILAS Y COLUMNAS ////////////////////////////
@@ -73,19 +69,19 @@ public class Presentacion {
 
     ////  USER STORY 13: BUSCAR Y FILTRAR DATOS EN LA TABLA  ////////////////////////////
 
+
     ////  USER STORY 14: ACCEDER A CELDA Y SETEAR NUEVO VALOR ////////////////////////////
     df.setValorDataFrame("3", "Columna2", 69);
-    //CsvPrinter.imprimirColumnar(df);
 
     ////  USER STORY 15: INSERTAR UNA NUEVA COLUMNA A PARTIR DE UNA COLUMNA EXISTENTE ////////////////////////////
     df.clonarYAgregarColumna("Columna2", "ColumnaNueva");
-    //CsvPrinter.imprimirColumnar(df);
 
     ////  USER STORY 16: CELDAS CON DATOS FALTANTES SEAN IDENTIFICADAS CON NA  ////////////////////////////
 
     //// USER STORY 17: REALIZAR OPERACIONES SIN ERRORES EN CASO DE TENER NA  ////////////////////////////
 
     //// USER STORY 18: INSERTAR UNA NUEVA COLUMNA UTILIZANDO SECUENCIA LINEAL NATIVA  ////////////////////////////
+    
     //String[] datosNuevaColumna = {"Nueva1", "Nueva2","Nueva3", "Nueva4", "Nueva5", "Nueva6"};
     //df.agregarColumnaSecuencia(datosNuevaColumna,"Columna5", "S"); // "S" = String 
 
@@ -94,7 +90,7 @@ public class Presentacion {
     // que pasa si quiero eliminar un rango? 
     df.eliminarColumna("Columna2");
     df.eliminarFila("2");
-    //CsvPrinter.imprimirColumnar(df);
+
 
     //// USER STORY 20: AGRUPAMIENTO O GROUP BY - METODO A IMPLEMENTAR   //////////////////////////// 
 

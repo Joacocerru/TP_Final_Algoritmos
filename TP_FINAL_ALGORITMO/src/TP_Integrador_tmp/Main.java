@@ -32,6 +32,9 @@ public class Main {
     DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
 
+
+
+    
     ///////////////////////////////////////////////////////////////////////////////////////////
 
     //  PRUEBA FINAL //
@@ -55,7 +58,7 @@ public class Main {
     CsvPrinter.imprimirColumnar(df3);
     CsvPrinter.imprimirPorFilas(df3);
 
-
+          
     //------------------------------
     // PRUEBA SACAR-NA con parametros x default
     DataFrame df4 = df.clone();
@@ -73,10 +76,10 @@ public class Main {
     DataFrame resultado = df.concatenar(df);
 
     // Imprimir el DataFrame resultante
-    CsvPrinter.imprimirColumnar(resultado);  // ####
+    //CsvPrinter.imprimirColumnar(resultado);  // ####
 
     // Imprimir el DataFrame resultante
-   CsvPrinter.imprimirColumnar(resultado);  // ####
+    //CsvPrinter.imprimirColumnar(resultado);  // ####
 
 
      
@@ -98,7 +101,7 @@ public class Main {
     CsvPrinter.imprimirColumnar(df);
     CsvPrinter.imprimirColumnar(df2);
 
-
+       
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -628,8 +631,8 @@ public class Main {
 
     // Como usuario, quiero poder insertar una nueva columna en el dataset utilizando una secuencia lineal nativa de Java.
 
+    /* 
     
-
     System.out.println("#-----------------------------------------------------------------------------");
     System.out.println("   AGREGAR UNA COLUMNA AL DATAFRAME CON SECUENCIA LINEAL");
     System.out.println("#-----------------------------------------------------------------------------");
@@ -658,7 +661,7 @@ public class Main {
     System.out.println("Impresión del DataFrame con la nueva columna agregada");
     CsvPrinter.imprimirColumnar(df);
 
-
+    */
     
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
