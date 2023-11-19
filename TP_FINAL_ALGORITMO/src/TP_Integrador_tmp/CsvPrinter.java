@@ -161,18 +161,17 @@ public class CsvPrinter {
         System.out.println("#-----------------------------------------------------------------------------");
         System.out.println("   INFORMACIÓN GENERAL SOBRE EL DATAFRAME");
         System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");
         
 
         System.out.print("Cantidad de filas: " + (df.getNroRegistros()) );
         System.out.print("Cantidad de columnas: " + (df.getNroColumnas()) );
-        df.getEtiquetasFilas();
 
-        System.out.print("Etiquetas de las columnas: " );
-        for (String fieldName : df.getAllHeaderColumn()) {
-            System.out.print(fieldName + "\t");
-        }
+        df.getEtiquetasFilas(); // Etiquetas de las filas
+        df.getEtiquetasColumnas(); // Etiquetas de las columnas
+    
 
-        System.out.println();
+    
         System.out.print("Tipo de datos de las columnas: " );
         for (int i= 0; i < df.getNroColumnas(); i++){
 

@@ -31,43 +31,6 @@ public class Main {
     // VALEN //
     DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
-    DataFrame df3 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
-
-    
-    
-    
-    
-    System.out.println(" ");
-    System.out.println("#-----------------------------------------------------------------------------");
-    System.out.println("   CONCATENACIÓN DE DOS DATAFRAMES");
-    System.out.println("#-----------------------------------------------------------------------------");
-    System.out.println(" ");
-
-    try {
-        // Verificar que ambos DataFrames tengan las mismas columnas
-
-        if (df2.getAllHeaderColumn().equals(df3.getAllHeaderColumn())) {
-
-        // Concatenar los DataFrames verticalmente
-
-        DataFrame resultado3 = df2.concatenar(df3);
-
-        // Imprimir el DataFrame resultante
-
-        CsvPrinter.imprimirColumnar(resultado3);
-
-        } else {
-
-            System.out.println("Error: Los DataFrames tienen columnas diferentes y no se pueden concatenar.");
-            }
-
-        } catch (IllegalArgumentException e) {
-
-            System.out.println("Error al concatenar: " + e.getMessage());
-        }
-
-
-
 
     ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -200,6 +163,39 @@ public class Main {
     // Como usuario, quiero la capacidad de generar una nueva estructura tabular a partir de la concatenación de dos estructuras existentes, 
     // creando así una nueva combinando las filas de la primera y luego las filas de la segunda. 
     // Esta operación es válida si las columnas de ambas estructuras coinciden.
+
+    
+    
+    System.out.println(" ");
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println("   CONCATENACIÓN DE DOS DATAFRAMES");
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println(" ");
+
+    try {
+        // Verificar que ambos DataFrames tengan las mismas columnas
+
+        if (df2.getAllHeaderColumn().equals(df3.getAllHeaderColumn())) {
+
+        // Concatenar los DataFrames verticalmente
+
+        DataFrame resultado3 = df2.concatenar(df3);
+
+        // Imprimir el DataFrame resultante
+
+        CsvPrinter.imprimirColumnar(resultado3);
+
+        } else {
+
+            System.out.println("Error: Los DataFrames tienen columnas diferentes y no se pueden concatenar.");
+            }
+
+        } catch (IllegalArgumentException e) {
+
+            System.out.println("Error al concatenar: " + e.getMessage());
+        }
+
+
     
     
     

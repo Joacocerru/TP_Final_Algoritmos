@@ -383,6 +383,20 @@ public class DataFrame implements Cloneable{
         System.out.println(" ");
     }
 
+    // Método para obtener todas las etiquetas de las columnas
+
+    public void getEtiquetasColumnas() {
+
+        System.out.print("Etiquetas de las Columnas: ");
+
+        for (String etiqueta : columnMap.keySet()) {
+
+            System.out.print(etiqueta + " ");
+        }
+
+        System.out.println(" ");
+    }
+
     //-----------------------------------------------------------------------------
     // Método para imprimir etiquetas de las filas 
 
@@ -411,11 +425,8 @@ public class DataFrame implements Cloneable{
 
         System.out.print("Etiquetas de las Columnas: ");
 
-        for (String etiqueta : columnMap.keySet()) {
-
-            System.out.print(etiqueta + " ");
-        }
-
+        getEtiquetasColumnas(); 
+    
         System.out.println(" ");
     }
 
