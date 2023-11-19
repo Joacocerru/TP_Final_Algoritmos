@@ -2,6 +2,7 @@
 package TP_Integrador_tmp;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -292,6 +293,14 @@ public class DataFrame implements Cloneable{
 
     public void setValorDataFrame(String etiquetafila, String etiquetaColumna, Object Valor) {
 
+        System.out.println(" ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println("   ACCEDER A UNA CELDA Y SETEAR NUEVO VALOR");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");
+
+        System.err.println("En la columna '" + etiquetaColumna + "' y la fila '" + etiquetafila + "' seteamos por el valor '" + Valor + "'.");
+
         Columna tmpColumna = getColumnaPorEtiqueta(etiquetaColumna);
         Integer posFila = this.getPosicionFilaEtiqueta(etiquetafila);
 
@@ -303,6 +312,7 @@ public class DataFrame implements Cloneable{
         
             System.err.println("Error al establecer el valor: " + e.getMessage());
         }
+        System.out.println(" ");
     }
 
     //-----------------------------------------------------------------------------
@@ -356,14 +366,51 @@ public class DataFrame implements Cloneable{
     }
 
 
-    //-----------------------------------------------------------------------------
-    // Método para imprimir etiquetas de las filas 
 
-    public void imprimirEtiquetasFilas() {
+    //-----------------------------------------------------------------------------
+    // Método para obtener todas las etiquetas de las filas
+
+    public void getEtiquetasFilas() {
 
         System.out.print("Etiquetas de las filas: ");
 
         for (String etiqueta : rowMap.keySet()) {
+
+            System.out.print(etiqueta + " ");
+        }
+
+        System.out.println(" ");
+    }
+
+    //-----------------------------------------------------------------------------
+    // Método para imprimir etiquetas de las filas 
+
+    public void imprimirEtiquetasFilas() {
+        System.out.println(" ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println("   ETIQUETAS DE LAS FILAS");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");
+    
+        getEtiquetasFilas(); // Llamada al método getEtiquetasFilas
+    
+        System.out.println(" ");
+    }
+
+
+    // Método para imprimir etiquetas de las COLUMNAS
+
+    public void imprimirEtiquetasColumnas() {
+
+        System.out.println(" ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println("   ETIQUETAS DE LAS COLUMNAS");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");
+
+        System.out.print("Etiquetas de las Columnas: ");
+
+        for (String etiqueta : columnMap.keySet()) {
 
             System.out.print(etiqueta + " ");
         }
@@ -404,16 +451,22 @@ public class DataFrame implements Cloneable{
     //---------------------------------------------------------------------------------
 
     public void eliminarColumna(String etiquetaColumna) {
+
+        System.out.println(" ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println("   ELIMINA COLUMNA ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");
         
         int cantidadColumnas = getNroColumnas();
     
         // Verificar si la columna existe
         if (!columnMap.containsKey(etiquetaColumna)) {
-            System.out.println("La columna con etiqueta " + etiquetaColumna + " no existe.");
+            System.out.println("La columna con etiqueta " + etiquetaColumna + " no existe. Corroborar los parámetros de entrada...");
             return;
-        }
+        }else {
 
-        // Obtener la posición de la columna
+            // Obtener la posición de la columna
         int posicion = getPosicicionColumnaEtiqueta(etiquetaColumna);
 
         // Eliminar la columna de dataColumnar y ColumnArray
@@ -439,6 +492,11 @@ public class DataFrame implements Cloneable{
 
             this.dataFilas.get(i).removeColumna(posicion);
         }
+        
+        System.out.println("Eliminamos la columna '" + etiquetaColumna + "' del dataframe.");
+
+
+        }
     }
 
 
@@ -448,14 +506,20 @@ public class DataFrame implements Cloneable{
     public void eliminarFila(String etiquetaFila)
     {
 
+        System.out.println(" ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println("   ELIMINA FILA ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");
+
         int cantidadFilas = getNroRegistros();
 
         // Verificar si la fila existe
         if (!rowMap.containsKey(etiquetaFila)) {
-            System.out.println("La fila con etiqueta " + etiquetaFila + " no existe.");
+            System.out.println("La fila con etiqueta " + etiquetaFila + " no existe. Corroborar los parámetros de entrada...");
             return;
-        }
-
+        }else {
+            
         // Obtener la posición de la fila
         int posicion = getPosicionFilaEtiqueta(etiquetaFila);
         int posicionAbs = this.getPosAbsolutaFilaEtiqueta(etiquetaFila);
@@ -480,15 +544,12 @@ public class DataFrame implements Cloneable{
             this.dataColumnar.get(i).removeFila(posicionAbs);
             this.dataColumnar.get(i).restarCantRegistro();
         }
-
-        /*for (Columna cols: this.columnMap.values())
-        {
-            cols.removeFila(posicionAbs);
-        }
-        */
         this.contarRegistros();
-    }
+        System.out.println("Eliminamos la fila '" + etiquetaFila + "' del dataframe.");
 
+
+        }
+    }
 //--------------------------------------------------------------------------------
     @Override
     public DataFrame clone() {
@@ -577,7 +638,7 @@ public class DataFrame implements Cloneable{
     }
 
 
-    public DataFrame FiltroPorColumna(String Etiquetacolumna, int operacion, Object valorBuscado) // -1 Menor que , 0 igual que, 1 Mayor que 
+    public  DataFrame FiltroPorColumna(String Etiquetacolumna, int operacion, Object valorBuscado) // -1 Menor que , 0 igual que, 1 Mayor que 
     {
         
         if (operacion !=0 && operacion !=-1 && operacion !=1){   
@@ -693,10 +754,17 @@ public class DataFrame implements Cloneable{
 
     //----------------------------------------------------------------------------------------------------------------
     // METODO PARA AGREGAR UNA COLUMNA DEL DATAFRAME
-    public void clonarYAgregarColumna(String etiquetaColumnaExistente, String etiquetaNuevaColumna) 
-    {    
-        // Verificar si la columna existente realmente existe
+    public void clonarYAgregarColumna(String etiquetaColumnaExistente, String etiquetaNuevaColumna){
+        
+        System.out.println(" ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println("   AGREGAR UNA COLUMNA AL DATAFRAME");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");
 
+        System.out.println(" Duplicamos la columna existente '" + etiquetaColumnaExistente + "' y la insertamos al final del dataframe. ");
+        
+        // Verificar si la columna existente realmente existe
         Columna columnaExistente = this.getColumnaPorEtiqueta(etiquetaColumnaExistente);
         int posicion = this.getPosicicionColumnaEtiqueta(etiquetaColumnaExistente);
 
@@ -734,10 +802,41 @@ public class DataFrame implements Cloneable{
     }
 
 
+    // METODO PARA AGREGAR UNA COLUMNA CON SECUENCIA LINEAL
+/* 
+    public void agregarColumnaSecuencia(String[] datosNuevaColumna,String etiquetaColumnaNueva, String tipoDato){
+
+        System.out.println(" ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println("   AGREGAR UNA COLUMNA NUEVA CON SECUENCIA LINEAL");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");
+
+        // Crear un array de Dato
+        Dato[] datosArray = new Dato[datosNuevaColumna.length];
+
+        for (int i = 0; i < datosNuevaColumna.length; i++) {
+            datosArray[i] = new Dato(datosNuevaColumna[i]);
+        }
+    
+        // Crear la nueva columna
+        Columna nuevaColumna = new Columna();
+        nuevaColumna.setColumna(datosArray, tipoDato);
+        DataFrame.AgregarColumnaNueva(df, etiquetaColumnaNueva, nuevaColumna);
+
+
+        System.out.println("Agregamos la columna Nueva '" + etiquetaColumnaNueva+ "' al final del DataFrame.");
+
+
+
+
+    }
+    */
+
     //-----------------------------------------------------------------------------------
     // METODO PARA AGREGAR UNA COLUMNA NUEVA AL DATAFRAME
 
-    public void AgregarColumnaNueva(String etiquetaNuevaColumna, Columna columnaNueva) {
+    public static void AgregarColumnaNueva(DataFrame df, String etiquetaNuevaColumna, Columna columnaNueva) {
         
         // Verificar si la columna existente realmente existe
         //Columna columnaExistente = columnaNueva;
@@ -1056,6 +1155,24 @@ public void sacarNAs(Boolean defaultBool)
     }   
 }
 
+public DataFrame seleccionarFilasAleatorias(double porcentaje) {
+    // Obtén la lista de etiquetas de filas completa
+    List<String> todasLasFilas = new ArrayList<>(rowMap.keySet());
 
+    // Calcula cuántas filas seleccionar aleatoriamente
+    int totalFilas = todasLasFilas.size();
+    int filasASeleccionar = (int) Math.ceil(porcentaje * totalFilas);
+
+    // Realiza la selección aleatoria de filas
+    Collections.shuffle(todasLasFilas);
+    
+    List<String> filasSeleccionadas = todasLasFilas.subList(0, filasASeleccionar);
+
+    // Obtén todas las etiquetas de columnas
+    List<String> todasLasColumnas = new ArrayList<>(ColumnArray);
+    
+    // Llama a tu método existente para seleccionar la vista reducida
+    return seleccionarVista(filasSeleccionadas, todasLasColumnas);
+}
 
 }

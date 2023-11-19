@@ -164,12 +164,8 @@ public class CsvPrinter {
         
 
         System.out.print("Cantidad de filas: " + (df.getNroRegistros()) );
-        System.out.println();
-
         System.out.print("Cantidad de columnas: " + (df.getNroColumnas()) );
-        System.out.println();
-
-        df.imprimirEtiquetasFilas();
+        df.getEtiquetasFilas();
 
         System.out.print("Etiquetas de las columnas: " );
         for (String fieldName : df.getAllHeaderColumn()) {
@@ -186,6 +182,76 @@ public class CsvPrinter {
         System.out.print("Cantidad de dato NA: " + (df.CantidadNA()) );
         System.out.println();
     }
+
+    //IMPRIMIR INFO DE COLUMNA ELEGIDA POR ETIQUETA
+    public static void infoColumna(DataFrame df,  String etiquetaColumna){
+
+        System.out.println(" ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println("   INFORMACIÓN SOBRE COLUMNA ELEGIDA");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");    
+
+        Columna columnaNombre = df.getColumnaPorEtiqueta( etiquetaColumna);
+    
+        if (columnaNombre != null) {
+    
+            String nombreColumna = columnaNombre.getEtiqueta(); // obtengo etiqueta de la columna 
+            int cantidadDatos = columnaNombre.getCantDatos(); // obtengo la cantidad de datos de la columna  
+            String tipoDato = columnaNombre.getTipoDato(); // obtengo el tipo de dato de la columna 
+             
+            System.out.println("Etiqueta de la Columna selecionada: " + nombreColumna);
+            System.out.println("Tipo de Dato de la Columna '" + nombreColumna + "': " + tipoDato);
+            System.out.println("Cantidad de Datos en la Columna '" + nombreColumna + "': " + cantidadDatos);
+            System.out.println("Datos de la Columna '"+ nombreColumna + "':");
+    
+            for (int i = 0; i < cantidadDatos; i++) {
+                Dato dato3 = columnaNombre.getDato(i);
+                System.out.println(dato3.getDato());
+            }
+        } else {
+                    String nombreColumna = df.getHeaderColumn(1);
+                    System.out.println("La columna "+ nombreColumna + " no existe en el DataFrame. Corroborar valores ingresados.");
+        }
+
+        System.out.println(" ");
+    
+    }
+
+    //IMPRIMIR INFO DE FILA ELEGIDA POR ETIQUETA
+    public static void infoFila(DataFrame df,  String etiquetaFila){ 
+
+        System.out.println(" ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println("   INFORMACIÓN SOBRE FILA ELEGIDA");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");
+        
+        Fila FilaNombre = df.getFilaPorEtiqueta(etiquetaFila);
+
+        if (FilaNombre != null) {
+
+            int cantidadDatos = FilaNombre.getCantDatos(); // obtengo la cantidad de datos de la fila
+
+            System.out.println("Etiqueta de la Fila seleccionada: " + etiquetaFila);
+            System.out.println("Cantidad de Datos en la 'Fila " + etiquetaFila + "': " + cantidadDatos);
+            System.out.println("Datos de la 'Fila "+ etiquetaFila + "':");     /// ###2  DA UN RESULTADO QUE NO DEBERIA 
+
+            for (int i = 0; i < df.getNroColumnas(); i++) {
+
+                Object dato = FilaNombre.getDato(i);
+                System.out.print(dato+ " ");
+            }
+        } else {
+
+            System.out.println("La fila con etiqueta '" + etiquetaFila + "' no existe en el DataFrame. Corrobore los datos ingresados.");
+        }
+
+        System.out.println(" ");
+
+
+    }
+
 
     public static void ImprimirFila (Object[] fila){
 
