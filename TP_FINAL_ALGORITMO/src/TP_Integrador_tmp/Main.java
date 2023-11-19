@@ -519,10 +519,6 @@ public class Main {
     System.out.println("#-----------------------------------------------------------------------------");
     System.out.println(" ");
 
-    // Buscar datos en la tabla - llamo al método buscarValor y le paso el valor a buscar
-    System.out.println("---------------------------------------------------------------------");
-    System.out.println("Busqueda de un elemento dentro del DataFrame");
-    System.out.println("---------------------------------------------------------------------");
 
     Dato_Numerico valorABuscar = new Dato_Numerico(88); 
     String resultadoBusqueda = df.buscarValor(valorABuscar);
