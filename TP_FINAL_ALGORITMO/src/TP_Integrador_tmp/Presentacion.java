@@ -91,8 +91,8 @@ public class Presentacion {
 
     ////  USER STORY 9: FILTRO APLICADO A LOS VALORES DE LAS CELDAS (QUERY)  ////////////////////////////
  
-    DataFrame filtro = df.FiltroPorColumna("ColumnaNum", 0, 5);  // -1 Menor que , 0 igual que, 1 Mayor que  // ####
-    //DataFrame filtro = df.FiltroPorColumna("ColumnaNum", -1, 3);
+    DataFrame filtro = df.FiltroPorColumna("Columna2", 0, 5);  // -1 Menor que , 0 igual que, 1 Mayor que  // ####
+    DataFrame filtro2 = df.FiltroPorColumna("Columna2", -1, 3);
     //DataFrame filtro = df.FiltroPorColumna("ColumnaNum", 1, 3);
     //DataFrame filtro = df.FiltroPorColumna("ColumnaBoolean", 0, "True");
     //DataFrame filtro = df.FiltroPorColumna("ColumnaPruebas", -1, "Prueba4");
@@ -100,6 +100,7 @@ public class Presentacion {
     CsvPrinter.imprimirColumnar(filtro);
     CsvPrinter.imprimirPorFilas(filtro);
     
+    CsvPrinter.imprimirColumnar(filtro2);
     ////  USER STORY 10: EXPORTAR TABLA COMO CSV ////////////////////////////
     
     CsvExport.exportarComoCSV(df, "C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\archivoExportado.csv");
@@ -117,7 +118,7 @@ public class Presentacion {
 
     ////  USER STORY 12: ORDENAR DATOS SEGÚN UNA COLUMNA  ////////////////////////////
 
-    String[] indices = {"0","1","2"};
+    String[] indices = {"Columna1","Columna2","Columna3"};
     df.orderPorColumnas(indices); // ####
     //CsvPrinter.imprimirColumnar(df);
     CsvPrinter.imprimirPorFilas(df);
