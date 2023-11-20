@@ -994,12 +994,13 @@ public class DataFrame implements Cloneable{
         {
            //Object[] datosFila = new Object[otroDataFrame.getNroColumnas()];
             Fila nuevaFila = otroDataFrame.getFila(i).clone();
-            Integer indice =  (nuevaEstructura.dataFilas.size()) + 1;
+            Integer indice =  (nuevaEstructura.dataFilas.size());
             nuevaFila.setEtiqueta(Integer.toString(indice));
 
             nuevaEstructura.dataFilas.add(nuevaFila);
             nuevaEstructura.rowMap.put(nuevaFila.getEtiqueta(), nuevaFila);
             nuevaEstructura.RowArray.add(nuevaFila.getEtiqueta());
+            nuevaEstructura.OriginalRowColumnArray.add(nuevaFila.getEtiqueta());
             nuevaEstructura.contarRegistros();
             nuevaEstructura.contarColumnas();
         }
