@@ -2,6 +2,8 @@
 package TP_Integrador_tmp;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +20,6 @@ public class DataFrame implements Cloneable{
     protected List<String> ColumnArray = new ArrayList<>(); // Array de Etiquetas de columnas
     protected List<String> RowArray = new ArrayList<>(); // Array de Etiquetas de columnas
     protected List<String> OriginalRowColumnArray = new ArrayList<>(); // Array de Etiquetas de columnas
-
     //------------------------------------------------------------------------------------------
     // HashMap llamado columnMap y rowMap para mapear 
     // las etiquetas de las columnas y Filas a las instancias de Columna y Fila
@@ -292,6 +293,14 @@ public class DataFrame implements Cloneable{
 
     public void setValorDataFrame(String etiquetafila, String etiquetaColumna, Object Valor) {
 
+        System.out.println(" ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println("   ACCEDER A UNA CELDA Y SETEAR NUEVO VALOR");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");
+
+        System.err.println("En la columna '" + etiquetaColumna + "' y la fila '" + etiquetafila + "' seteamos por el valor '" + Valor + "'.");
+
         Columna tmpColumna = getColumnaPorEtiqueta(etiquetaColumna);
         Integer posFila = this.getPosicionFilaEtiqueta(etiquetafila);
 
@@ -303,6 +312,7 @@ public class DataFrame implements Cloneable{
         
             System.err.println("Error al establecer el valor: " + e.getMessage());
         }
+        System.out.println(" ");
     }
 
     //-----------------------------------------------------------------------------
@@ -356,10 +366,11 @@ public class DataFrame implements Cloneable{
     }
 
 
-    //-----------------------------------------------------------------------------
-    // Método para imprimir etiquetas de las filas 
 
-    public void imprimirEtiquetasFilas() {
+    //-----------------------------------------------------------------------------
+    // Método para obtener todas las etiquetas de las filas
+
+    public void getEtiquetasFilas() {
 
         System.out.print("Etiquetas de las filas: ");
 
@@ -368,6 +379,53 @@ public class DataFrame implements Cloneable{
             System.out.print(etiqueta + " ");
         }
 
+        System.out.println(" ");
+    }
+
+    // Método para obtener todas las etiquetas de las columnas
+
+    public void getEtiquetasColumnas() {
+
+        System.out.print("Etiquetas de las Columnas: ");
+
+        for (String etiqueta : columnMap.keySet()) {
+
+            System.out.print(etiqueta + " ");
+        }
+
+        System.out.println(" ");
+    }
+
+    //-----------------------------------------------------------------------------
+    // Método para imprimir etiquetas de las filas 
+
+    public void imprimirEtiquetasFilas() {
+        System.out.println(" ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println("   ETIQUETAS DE LAS FILAS");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");
+    
+        getEtiquetasFilas(); // Llamada al método getEtiquetasFilas
+    
+        System.out.println(" ");
+    }
+
+
+    // Método para imprimir etiquetas de las COLUMNAS
+
+    public void imprimirEtiquetasColumnas() {
+
+        System.out.println(" ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println("   ETIQUETAS DE LAS COLUMNAS");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");
+
+        System.out.print("Etiquetas de las Columnas: ");
+
+        getEtiquetasColumnas(); 
+    
         System.out.println(" ");
     }
 
@@ -404,16 +462,22 @@ public class DataFrame implements Cloneable{
     //---------------------------------------------------------------------------------
 
     public void eliminarColumna(String etiquetaColumna) {
+
+        System.out.println(" ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println("   ELIMINA COLUMNA ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");
         
         int cantidadColumnas = getNroColumnas();
     
         // Verificar si la columna existe
         if (!columnMap.containsKey(etiquetaColumna)) {
-            System.out.println("La columna con etiqueta " + etiquetaColumna + " no existe.");
+            System.out.println("La columna con etiqueta " + etiquetaColumna + " no existe. Corroborar los parámetros de entrada...");
             return;
-        }
+        }else {
 
-        // Obtener la posición de la columna
+            // Obtener la posición de la columna
         int posicion = getPosicicionColumnaEtiqueta(etiquetaColumna);
 
         // Eliminar la columna de dataColumnar y ColumnArray
@@ -439,6 +503,11 @@ public class DataFrame implements Cloneable{
 
             this.dataFilas.get(i).removeColumna(posicion);
         }
+        
+        System.out.println("Eliminamos la columna '" + etiquetaColumna + "' del dataframe.");
+
+
+        }
     }
 
 
@@ -448,14 +517,20 @@ public class DataFrame implements Cloneable{
     public void eliminarFila(String etiquetaFila)
     {
 
+        System.out.println(" ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println("   ELIMINA FILA ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");
+
         int cantidadFilas = getNroRegistros();
 
         // Verificar si la fila existe
         if (!rowMap.containsKey(etiquetaFila)) {
-            System.out.println("La fila con etiqueta " + etiquetaFila + " no existe.");
+            System.out.println("La fila con etiqueta " + etiquetaFila + " no existe. Corroborar los parámetros de entrada...");
             return;
-        }
-
+        }else {
+            
         // Obtener la posición de la fila
         int posicion = getPosicionFilaEtiqueta(etiquetaFila);
         int posicionAbs = this.getPosAbsolutaFilaEtiqueta(etiquetaFila);
@@ -480,15 +555,12 @@ public class DataFrame implements Cloneable{
             this.dataColumnar.get(i).removeFila(posicionAbs);
             this.dataColumnar.get(i).restarCantRegistro();
         }
-
-        /*for (Columna cols: this.columnMap.values())
-        {
-            cols.removeFila(posicionAbs);
-        }
-        */
         this.contarRegistros();
-    }
+        System.out.println("Eliminamos la fila '" + etiquetaFila + "' del dataframe.");
 
+
+        }
+    }
 //--------------------------------------------------------------------------------
     @Override
     public DataFrame clone() {
@@ -577,7 +649,7 @@ public class DataFrame implements Cloneable{
     }
 
 
-    public DataFrame FiltroPorColumna(String Etiquetacolumna, int operacion, Object valorBuscado) // -1 Menor que , 0 igual que, 1 Mayor que 
+    public  DataFrame FiltroPorColumna(String Etiquetacolumna, int operacion, Object valorBuscado) // -1 Menor que , 0 igual que, 1 Mayor que 
     {
         
         if (operacion !=0 && operacion !=-1 && operacion !=1){   
@@ -693,10 +765,17 @@ public class DataFrame implements Cloneable{
 
     //----------------------------------------------------------------------------------------------------------------
     // METODO PARA AGREGAR UNA COLUMNA DEL DATAFRAME
-    public void clonarYAgregarColumna(String etiquetaColumnaExistente, String etiquetaNuevaColumna) 
-    {    
-        // Verificar si la columna existente realmente existe
+    public void clonarYAgregarColumna(String etiquetaColumnaExistente, String etiquetaNuevaColumna){
+        
+        System.out.println(" ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println("   AGREGAR UNA COLUMNA AL DATAFRAME");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");
 
+        System.out.println(" Duplicamos la columna existente '" + etiquetaColumnaExistente + "' y la insertamos al final del dataframe. ");
+        
+        // Verificar si la columna existente realmente existe
         Columna columnaExistente = this.getColumnaPorEtiqueta(etiquetaColumnaExistente);
         int posicion = this.getPosicicionColumnaEtiqueta(etiquetaColumnaExistente);
 
@@ -733,11 +812,42 @@ public class DataFrame implements Cloneable{
         }
     }
 
+    /* 
+    // METODO PARA AGREGAR UNA COLUMNA CON SECUENCIA LINEAL
+
+    public static agregarColumnaSecuencia(String[] datosNuevaColumna,String etiquetaColumnaNueva, String tipoDato){
+
+        System.out.println(" ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println("   AGREGAR UNA COLUMNA NUEVA CON SECUENCIA LINEAL");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");
+
+        // Crear un array de Dato
+        Dato[] datosArray = new Dato[datosNuevaColumna.length];
+
+        for (int i = 0; i < datosNuevaColumna.length; i++) {
+            datosArray[i] = new Dato(datosNuevaColumna[i]);
+        }
+    
+        // Crear la nueva columna
+        Columna nuevaColumna = new Columna();
+        nuevaColumna.setColumna(datosArray, tipoDato);
+        DataFrame.AgregarColumnaNueva(df, etiquetaColumnaNueva, nuevaColumna);
+
+
+        System.out.println("Agregamos la columna Nueva '" + etiquetaColumnaNueva+ "' al final del DataFrame.");
+
+
+    }
+
+    
+
 
     //-----------------------------------------------------------------------------------
     // METODO PARA AGREGAR UNA COLUMNA NUEVA AL DATAFRAME
 
-    public void AgregarColumnaNueva(String etiquetaNuevaColumna, Columna columnaNueva) {
+    public  AgregarColumnaNueva( String etiquetaNuevaColumna, Columna columnaNueva) {
         
         // Verificar si la columna existente realmente existe
         //Columna columnaExistente = columnaNueva;
@@ -764,7 +874,9 @@ public class DataFrame implements Cloneable{
         else {
             System.out.println("Error: La columna '" + etiquetaNuevaColumna + "' no existe en el DataFrame.");
         }
+
     }
+    */
 
     // METODO PARA GENERAR UNA VISTA REDUCIDA (SLICING)
     public DataFrame seleccionarVista(List<String> etiquetasFilas, List<String> etiquetasColumnas) {
@@ -895,167 +1007,214 @@ public class DataFrame implements Cloneable{
         return nuevaEstructura;
     } 
 
-//----------------------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------
 
-public Fila getFilasColumnasListaEtiquetas(String etiquetasFila, String[] etiquetasColumna) 
-{
-    int totalColumnas = etiquetasColumna.length;
-    Dato[] newDato = new Dato[totalColumnas];
-    for (int x=0; x < totalColumnas; x++)
+    public Fila getFilasColumnasListaEtiquetas(String etiquetasFila, String[] etiquetasColumna) 
     {
-        int posCol = this.getPosicicionColumnaEtiqueta(etiquetasColumna[x]);
-        newDato[x] = (this.getFilaPorEtiqueta(etiquetasFila)).getDato(posCol) ;
-    }
-    Fila newFila = new Fila("0", newDato);
- 
-    return newFila;
-}
-
-public void orderPorColumnas (String [] ColumnasOrden)
-{
-    int n = this.RowArray.size();
-
-    boolean huboCambio;
-    do {
+        int totalColumnas = etiquetasColumna.length;
+        Dato[] newDato = new Dato[totalColumnas];
+        for (int x=0; x < totalColumnas; x++)
+        {
+            int posCol = this.getPosicicionColumnaEtiqueta(etiquetasColumna[x]);
+            newDato[x] = (this.getFilaPorEtiqueta(etiquetasFila)).getDato(posCol) ;
+        }
+        Fila newFila = new Fila("0", newDato);
     
-        huboCambio = false;
-        for (int i=1; i<n;i++)
-        {
-            String etiquetaPrevia = this.RowArray.get(i-1);
-            String etiquetaActual = this.RowArray.get(i);
-
-            Fila filaPrevia = this.getFilasColumnasListaEtiquetas(etiquetaPrevia, ColumnasOrden);
-            Fila filaActual = this.getFilasColumnasListaEtiquetas(etiquetaActual, ColumnasOrden);
-            int valorCompare = filaPrevia.compareTo(filaActual);
-            //if ( (filaPrevia.compareTo(filaActual)) > 0 )
-            if ( (valorCompare) > 0 )
-            {
-                this.RowArray.set(i-1, etiquetaActual);
-                this.RowArray.set(i, etiquetaPrevia);
-                huboCambio = true;
-            }
-        }
-        n--;
-    } while (huboCambio == true);
-}
-
-//////////////////////////////////////////////////////////////////////////////
-public int CantidadNA ()
-{
-    int cantNA = 0;
-    for (int i=0; i< this._nroColumnas;i++)
-    {
-        Columna columna = this.dataColumnar.get(i);
-        for (Dato datos: columna.listaDatos)
-        {
-            if (datos.isNA())
-                cantNA++;
-        }
+        return newFila;
     }
-    return cantNA;
-}
 
-public void sacarNAs(int defaultNum, String defaultStr, Boolean defaultBool)
-{
-    this.sacarNAs(defaultBool);
-    this.sacarNAs(defaultStr);
-    this.sacarNAs(defaultNum);
-}
-
-public void sacarNAs(int defaultNum, String defaultStr)
-{
-    this.sacarNAs(defaultStr);
-    this.sacarNAs(defaultNum);
-}
-public void sacarNAs(int defaultNum)
-{
-    for (int xFila=0; xFila < this._nroRegistros; xFila++)
+    public void orderPorColumnas (String [] ColumnasOrden)
     {
-        Fila filaActual = this.dataFilas.get(xFila);
-        for (int xColumna=0; xColumna < this._nroColumnas;xColumna++)
-        {
-            Columna columnaActual = this.dataColumnar.get(xColumna); 
-            Dato datoActual = filaActual.getDato(xColumna);
+        int n = this.RowArray.size();
 
-            if (datoActual.isNA())
+        boolean huboCambio;
+        do {
+        
+            huboCambio = false;
+            for (int i=1; i<n;i++)
             {
-                if (columnaActual.getTipoDato() == "Numerica")
+                String etiquetaPrevia = this.RowArray.get(i-1);
+                String etiquetaActual = this.RowArray.get(i);
+
+                Fila filaPrevia = this.getFilasColumnasListaEtiquetas(etiquetaPrevia, ColumnasOrden);
+                Fila filaActual = this.getFilasColumnasListaEtiquetas(etiquetaActual, ColumnasOrden);
+                int valorCompare = filaPrevia.compareTo(filaActual);
+                //if ( (filaPrevia.compareTo(filaActual)) > 0 )
+                if ( (valorCompare) > 0 )
                 {
-                    Dato nuevoDato = new Dato_Numerico(defaultNum);
-                    try
-                    {
-                        this.dataColumnar.get(xColumna).reemplazaDato(xFila, nuevoDato);
-                    } catch (IndiceFueraDeRangoException e) 
-                        {
-                            System.err.println("Error al establecer el valor: " + e.getMessage());
-                        }
-                
-                    this.dataFilas.get(xFila).reemplazarDato(xColumna, nuevoDato);;
+                    this.RowArray.set(i-1, etiquetaActual);
+                    this.RowArray.set(i, etiquetaPrevia);
+                    huboCambio = true;
                 }
             }
-        }
-    }   
-}
+            n--;
+        } while (huboCambio == true);
+    }
 
-public void sacarNAs(String defaultStr)
-{
-    for (int xFila=0; xFila < this._nroRegistros; xFila++)
+    //////////////////////////////////////////////////////////////////////////////
+    public int CantidadNA ()
     {
-        Fila filaActual = this.dataFilas.get(xFila);
-        for (int xColumna=0; xColumna < this._nroColumnas;xColumna++)
+        int cantNA = 0;
+        for (int i=0; i< this._nroColumnas;i++)
         {
-            Columna columnaActual = this.dataColumnar.get(xColumna); 
-            Dato datoActual = filaActual.getDato(xColumna);
-
-            if (datoActual.isNA())
+            Columna columna = this.dataColumnar.get(i);
+            for (Dato datos: columna.listaDatos)
             {
-                if (columnaActual.getTipoDato() == "String")
-                {
-                    Dato nuevoDato = new Dato_String(defaultStr);
-                    try
-                    {
-                        this.dataColumnar.get(xColumna).reemplazaDato(xFila, nuevoDato);
-                    } catch (IndiceFueraDeRangoException e) 
-                        {
-                            System.err.println("Error al establecer el valor: " + e.getMessage());
-                        }
-                
-                    this.dataFilas.get(xFila).reemplazarDato(xColumna, nuevoDato);;
-                }
+                if (datos.isNA())
+                    cantNA++;
             }
         }
-    }   
-}
+        return cantNA;
+    }
 
-public void sacarNAs(Boolean defaultBool)
-{
-    for (int xFila=0; xFila < this._nroRegistros; xFila++)
+    public void sacarNAs(int defaultNum, String defaultStr, Boolean defaultBool)
     {
-        Fila filaActual = this.dataFilas.get(xFila);
-        for (int xColumna=0; xColumna < this._nroColumnas;xColumna++)
-        {
-            Columna columnaActual = this.dataColumnar.get(xColumna); 
-            Dato datoActual = filaActual.getDato(xColumna);
+        this.sacarNAs(defaultBool);
+        this.sacarNAs(defaultStr);
+        this.sacarNAs(defaultNum);
+    }
 
-            if (datoActual.isNA())
+    public void sacarNAs(int defaultNum, String defaultStr)
+    {
+        this.sacarNAs(defaultStr);
+        this.sacarNAs(defaultNum);
+    }
+    public void sacarNAs(int defaultNum)
+    {
+        for (int xFila=0; xFila < this._nroRegistros; xFila++)
+        {
+            Fila filaActual = this.dataFilas.get(xFila);
+            for (int xColumna=0; xColumna < this._nroColumnas;xColumna++)
             {
-                if (columnaActual.getTipoDato() == "Boolean")
+                Columna columnaActual = this.dataColumnar.get(xColumna); 
+                Dato datoActual = filaActual.getDato(xColumna);
+
+                if (datoActual.isNA())
                 {
-                    Dato nuevoDato = new Dato_Boolean(defaultBool);
-                    try
+                    if (columnaActual.getTipoDato() == "Numerica")
                     {
-                        this.dataColumnar.get(xColumna).reemplazaDato(xFila, nuevoDato);
-                    } catch (IndiceFueraDeRangoException e) 
+                        Dato nuevoDato = new Dato_Numerico(defaultNum);
+                        try
                         {
-                            System.err.println("Error al establecer el valor: " + e.getMessage());
-                        }                
-                    this.dataFilas.get(xFila).reemplazarDato(xColumna, nuevoDato);;
+                            this.dataColumnar.get(xColumna).reemplazaDato(xFila, nuevoDato);
+                        } catch (IndiceFueraDeRangoException e) 
+                            {
+                                System.err.println("Error al establecer el valor: " + e.getMessage());
+                            }
+                    
+                        this.dataFilas.get(xFila).reemplazarDato(xColumna, nuevoDato);;
+                    }
                 }
             }
-        }
-    }   
-}
+        }   
+    }
 
+    public void sacarNAs(String defaultStr)
+    {
+        for (int xFila=0; xFila < this._nroRegistros; xFila++)
+        {
+            Fila filaActual = this.dataFilas.get(xFila);
+            for (int xColumna=0; xColumna < this._nroColumnas;xColumna++)
+            {
+                Columna columnaActual = this.dataColumnar.get(xColumna); 
+                Dato datoActual = filaActual.getDato(xColumna);
 
+                if (datoActual.isNA())
+                {
+                    if (columnaActual.getTipoDato() == "String")
+                    {
+                        Dato nuevoDato = new Dato_String(defaultStr);
+                        try
+                        {
+                            this.dataColumnar.get(xColumna).reemplazaDato(xFila, nuevoDato);
+                        } catch (IndiceFueraDeRangoException e) 
+                            {
+                                System.err.println("Error al establecer el valor: " + e.getMessage());
+                            }
+                    
+                        this.dataFilas.get(xFila).reemplazarDato(xColumna, nuevoDato);;
+                    }
+                }
+            }
+        }   
+    }
 
+    public void sacarNAs(Boolean defaultBool)
+    {
+        for (int xFila=0; xFila < this._nroRegistros; xFila++)
+        {
+            Fila filaActual = this.dataFilas.get(xFila);
+            for (int xColumna=0; xColumna < this._nroColumnas;xColumna++)
+            {
+                Columna columnaActual = this.dataColumnar.get(xColumna); 
+                Dato datoActual = filaActual.getDato(xColumna);
+
+                if (datoActual.isNA())
+                {
+                    if (columnaActual.getTipoDato() == "Boolean")
+                    {
+                        Dato nuevoDato = new Dato_Boolean(defaultBool);
+                        try
+                        {
+                            this.dataColumnar.get(xColumna).reemplazaDato(xFila, nuevoDato);
+                        } catch (IndiceFueraDeRangoException e) 
+                            {
+                                System.err.println("Error al establecer el valor: " + e.getMessage());
+                            }                
+                        this.dataFilas.get(xFila).reemplazarDato(xColumna, nuevoDato);;
+                    }
+                }
+            }
+        }   
+    }
+
+    
+    public static void  muestreo (DataFrame df, List<String> etiquetasColumnas, List<String> etiquetasFilas ){
+
+        System.out.println(" ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println("   IMPRESIÓN DE UNA VISTA REDUCIDA (SLICING)");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");
+
+        DataFrame vistaRed = df.seleccionarVista(etiquetasFilas, etiquetasColumnas);
+        CsvPrinter.imprimirPorFilas(vistaRed);
+        //CsvPrinter.imprimirColumnar(vistaRed);
+
+    }
+
+    public DataFrame seleccionarFilasAleatorias(double porcentaje) {
+        // Obtén la lista de etiquetas de filas completa
+        List<String> todasLasFilas = new ArrayList<>(rowMap.keySet());
+
+        // Calcula cuántas filas seleccionar aleatoriamente
+        int totalFilas = todasLasFilas.size();
+        int filasASeleccionar = (int) Math.ceil((porcentaje / 100) * totalFilas);
+
+        // Realiza la selección aleatoria de filas
+        Collections.shuffle(todasLasFilas);
+        
+        List<String> filasSeleccionadas = todasLasFilas.subList(0, filasASeleccionar);
+
+        // Obtén todas las etiquetas de columnas
+        List<String> todasLasColumnas = new ArrayList<>(ColumnArray);
+        
+        // Llama a tu método existente para seleccionar la vista reducida
+        return seleccionarVista(filasSeleccionadas, todasLasColumnas);
+    }
+
+    public static void muestreoAleatorio(DataFrame df, double porcentaje){
+
+        System.out.println(" ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println("   IMPRESIÓN DE UNA VISTA REDUCIDA ALEATORIA (RANDOM SLICING)");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");
+
+        DataFrame dfSeleccionado = df.seleccionarFilasAleatorias(porcentaje);
+
+        //CsvPrinter.imprimirColumnar(dfSeleccionado); 
+        CsvPrinter.imprimirPorFilas(dfSeleccionado);
+
+    }
 }

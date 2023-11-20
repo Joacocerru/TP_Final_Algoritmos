@@ -18,8 +18,8 @@ public class Main {
     // Como usuario, quiero poder cargar datos desde un archivo .CSV en el software para crear una estructura tabular
 
 
-    DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba9.csv", ",", "S");
-    DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba2.csv", ",", "N");
+    //DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba9.csv", ",", "S");
+    //DataFrame df2 = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\PrimerActividadJava\\TP_Integrador\\src\\TP_Integrador\\prueba2.csv", ",", "N");
     
     //DataFrame df =  new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     //DataFrame df1 =  new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
@@ -29,16 +29,20 @@ public class Main {
     //DataFrame df4 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "S");
     
     // VALEN //
-    //DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
-    //DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
+    DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
+    DataFrame df2 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba2.csv", ",", "N");
+
+
+
     
+    ///////////////////////////////////////////////////////////////////////////////////////////
 
     //  PRUEBA FINAL //
 
     // Busqueda binaria
     
     CsvPrinter.imprimirColumnar(df2);
-    //int resultado1 = df2.buscarBinariaEnColumna("2", 53);
+    
 
     // clonado + ordenar x 3 campos + eliminar 2 filas y 1 columna
     DataFrame df3 = df2.clone();
@@ -54,6 +58,7 @@ public class Main {
     CsvPrinter.imprimirColumnar(df3);
     CsvPrinter.imprimirPorFilas(df3);
 
+          
     //------------------------------
     // PRUEBA SACAR-NA con parametros x default
     DataFrame df4 = df.clone();
@@ -71,13 +76,13 @@ public class Main {
     DataFrame resultado = df.concatenar(df);
 
     // Imprimir el DataFrame resultante
-    CsvPrinter.imprimirColumnar(resultado);
+    //CsvPrinter.imprimirColumnar(resultado);  // ####
 
     // Imprimir el DataFrame resultante
-    CsvPrinter.imprimirColumnar(resultado);
+    //CsvPrinter.imprimirColumnar(resultado);  // ####
 
 
-/*     
+     
     // Lista de etiquetas de columnas a seleccionar
     List<String> etiquetasColumnas1 = Arrays.asList("ColumnaNum", "ColumnaVarios");
 
@@ -95,9 +100,8 @@ public class Main {
 
     CsvPrinter.imprimirColumnar(df);
     CsvPrinter.imprimirColumnar(df2);
-    //CsvPrinter.imprimirColumnar(dfprueba);
 
-*/
+       
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -107,12 +111,12 @@ public class Main {
     // estructura con los mismos valores, pero independiente de la estructura original en memoria
 
 
-// PRUEBAS DE FILTRADO
-
+    // PRUEBAS DE FILTRADO
+    
     CsvPrinter.imprimirColumnar(df);
 
 
-    DataFrame filtro1 = df.FiltroPorColumna("ColumnaNum", 0, 5);
+    DataFrame filtro1 = df.FiltroPorColumna("ColumnaNum", 0, 5);   // ####
     DataFrame filtro2 = df.FiltroPorColumna("ColumnaNum", -1, 3);
     DataFrame filtro3 = df.FiltroPorColumna("ColumnaNum", 1, 3);
     DataFrame filtro4 = df.FiltroPorColumna("ColumnaBoolean", 0, "True");
@@ -153,42 +157,7 @@ public class Main {
     System.out.println("Copia profunda del DataFrame");
     CsvPrinter.imprimirColumnar(copiadf1);
 
-    /* -----------------------------------------------------
-    DataFrame copiadf = null;
-
-    copiadf = df.clone();
-
-    CsvPrinter.imprimirColumnar(copiadf);
-
-    CsvPrinter.imprimirColumnar(df);
-
-    df.eliminarFila("4");
-
-    CsvPrinter.imprimirColumnar(copiadf);
-
-    CsvPrinter.imprimirColumnar(df);
-
-    df.eliminarColumna("ColumnaPruebas");
-
-    CsvPrinter.imprimirColumnar(copiadf);
-
-    CsvPrinter.imprimirColumnar(df);
-    */
-
-    //---------------------------------------------------------
-    /*
-
-    DataFrame copiadf2 = null;
-
-    copiadf2 = df.clone();
-
-    System.out.println("Copia profunda del DataFrame sin header.");
-
-    CsvPrinter.imprimirColumnar(copiadf2);
-
-    System.out.println("Copia profunda del DataFrame sin header.");
-
-    CsvPrinter.imprimirPorFilas(copiadf2);*/
+    
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -197,12 +166,10 @@ public class Main {
     // Como usuario, quiero la capacidad de generar una nueva estructura tabular a partir de la concatenación de dos estructuras existentes, 
     // creando así una nueva combinando las filas de la primera y luego las filas de la segunda. 
     // Esta operación es válida si las columnas de ambas estructuras coinciden.
-    
-    /* 
-    
-    //CsvPrinter.imprimirColumnar(df3);
-    //CsvPrinter.imprimirColumnar(df4);
 
+    
+    
+    System.out.println(" ");
     System.out.println("#-----------------------------------------------------------------------------");
     System.out.println("   CONCATENACIÓN DE DOS DATAFRAMES");
     System.out.println("#-----------------------------------------------------------------------------");
@@ -211,15 +178,15 @@ public class Main {
     try {
         // Verificar que ambos DataFrames tengan las mismas columnas
 
-        if (df3.getAllHeaderColumn().equals(df4.getAllHeaderColumn())) {
+        if (df2.getAllHeaderColumn().equals(df3.getAllHeaderColumn())) {
 
         // Concatenar los DataFrames verticalmente
 
-        DataFrame resultado = df3.concatenar(df4);
+        DataFrame resultado3 = df2.concatenar(df3);
 
         // Imprimir el DataFrame resultante
 
-        CsvPrinter.imprimirColumnar(resultado);
+        CsvPrinter.imprimirColumnar(resultado3);
 
         } else {
 
@@ -229,8 +196,12 @@ public class Main {
         } catch (IllegalArgumentException e) {
 
             System.out.println("Error al concatenar: " + e.getMessage());
-        }*/
+        }
 
+
+    
+    
+    
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -242,7 +213,6 @@ public class Main {
 
     // Como usuario, quiero poder obtener la cantidad de filas y de columnas en el dataset 
 
-    
 
     System.out.println("#-----------------------------------------------------------------------------");
     System.out.println("   INFORMACIÓN SOBRE DATAFRAMES");
@@ -393,7 +363,7 @@ public class Main {
 
     String Fila = "4"; // 
     String Columna = "Columna1"; 
-    //String Columna = "0";
+
 
 
     try {
@@ -424,7 +394,7 @@ public class Main {
     // Como usuario, quiero la capacidad de seleccionar una vista reducida de la estructura tabular a 
     // través de una lista de etiquetas de índice (slicing).
 
-
+    System.out.println(" ");
     System.out.println("#-----------------------------------------------------------------------------");
     System.out.println("   IMPRESIÓN DE UNA VISTA REDUCIDA (SLICING)");
     System.out.println("#-----------------------------------------------------------------------------");
@@ -442,23 +412,10 @@ public class Main {
 
     // Imprimir el DataFrame resultante (vista reducida)
     CsvPrinter.imprimirPorFilas(vistaRed);
-    CsvPrinter.imprimirColumnar(vistaRed);
+    //CsvPrinter.imprimirColumnar(vistaRed);
 
     System.out.println("---------------------------------------------------------------------");
     
-    //-------------------------------------------------------------------------------------------------
-    // ESTO ES SOLO UNA IMPRESION POR PANTALLA DE LOS DATOS DADAS LAS ETIQUETAS
-
-    System.out.println("Impresión por pantalla de los datos dadas las etiquetas filas y columnas");
-    System.out.println("------------------------------------------------------------------------------------");
-    
-    // Lista de etiquetas de filas y columnas a incluir en la vista reducida
-    List<String> etiquetasFilas5 = Arrays.asList("1", "2", "3");
-    List<String> etiquetasColumnas5 = Arrays.asList("Columna2","Columna3");
-    CsvPrinter.imprimirVistaReducida(df, etiquetasFilas5, etiquetasColumnas5);
-
-    System.out.println("------------------------------------------------------------------------------------");
-
     //------------------------------------------------------------------------------------------------
     // CASOS ESPECIALES DE VISTA REDUCIDA DEL DF - METODO PARA IMPRIMIR LAS PRIMERAS Y ULTIMAS FILAS
 
@@ -467,6 +424,31 @@ public class Main {
     CsvPrinter.head(df, 2);
     System.out.println("Informacion de las ultimas filas del DataFrame (tail)");
     CsvPrinter.tail(df, 2);
+
+
+    ////  MUESTREO ALEATORIO (SLICING) ///////////////////////////////////////////////////////////
+
+    System.out.println(" ");
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println("   MUESTREO ALEATORIO (SLICING)");
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println(" ");
+   
+    CsvPrinter.imprimirColumnar(df);
+
+    System.out.println("Una selección aleatoria de filas según un porcentaje del total de la estructura");
+    
+    // Llama a la función para seleccionar filas aleatorias con un 50% del total
+    DataFrame dfSeleccionado = df.seleccionarFilasAleatorias(20);
+    //CsvPrinter.imprimirColumnar(dfSeleccionado); 
+    CsvPrinter.imprimirPorFilas(dfSeleccionado);
+
+  
+
+
+
+
+
 
 
 
@@ -495,17 +477,8 @@ public class Main {
     // ruta a exportar
     String rutaArchivo = "C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\archivoExportado.csv";
     
-    
     CsvExport.exportarComoCSV(df, rutaArchivo);
         
-    
-    // Esta opción es para traer el archivo recién exportado y ver si lo imprime bien
-    //DataFrame dfExportado =  new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\archivoExportado.csv", ",", "S");
-    //CsvPrinter.imprimirPorFilas(dfExportado);
-    //CsvPrinter.imprimirColumnar(dfExportado);
-
-
-
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // ********************************************************  METODOS DE VISUALIZACION  ******************************************************************
@@ -517,7 +490,6 @@ public class Main {
     // Como usuario, quiero ver los datos en forma de tabla para comprender la información de manera clara y concisa.
 
     CsvPrinter.imprimirPorFilas(df); 
-
     CsvPrinter.imprimirColumnar(df);
 
 
@@ -550,10 +522,6 @@ public class Main {
     System.out.println("#-----------------------------------------------------------------------------");
     System.out.println(" ");
 
-    // Buscar datos en la tabla - llamo al método buscarValor y le paso el valor a buscar
-    System.out.println("---------------------------------------------------------------------");
-    System.out.println("Busqueda de un elemento dentro del DataFrame");
-    System.out.println("---------------------------------------------------------------------");
 
     Dato_Numerico valorABuscar = new Dato_Numerico(88); 
     String resultadoBusqueda = df.buscarValor(valorABuscar);
@@ -596,12 +564,11 @@ public class Main {
     String etiquetaColumna2 = "Columna2"; // posición en Columna
 
     df.setValorDataFrame(etiquetaFila2, etiquetaColumna2, 69);
-    //df2.setValorDataFrame(etiquetaFila2, etiquetaColumna2, 0);
+    
 
 
     // IMPRIMO EL DF ORIGINAL CON VALOR SETEADO Y LA COPIA PROFUNDA
 
-    //CsvPrinter.imprimirColumnar(df2);
 
     System.out.println("Impresión del DataFrame");
     CsvPrinter.imprimirColumnar(df);
@@ -633,17 +600,6 @@ public class Main {
     System.out.println("Impresión del DataFrame con la nueva columna agregada");
     CsvPrinter.imprimirColumnar(df);
 
-    
-
-    /*
-    String etiquetaColumnaExistente2 = "ColumnaNum";
-
-    String etiquetaNuevaColumna2 = "Columna_Nueva_2";
-    
-    df.clonarYAgregarColumna(etiquetaColumnaExistente2, etiquetaNuevaColumna2, df);
-    
-    // Imprimir el DataFrame
-    CsvPrinter.imprimirColumnar(df);*/
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -654,6 +610,7 @@ public class Main {
   
     // METODO IMPLEMENTADO ?
 
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //// USER STORY 17: REALIZAR OPERACIONES SIN ERRORES EN CASO DE TENER NA - METODO A IMPLEMENTAR ////
@@ -662,6 +619,7 @@ public class Main {
 
 
     // METODO A IMPLEMENTAR
+
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -673,6 +631,7 @@ public class Main {
 
     // Como usuario, quiero poder insertar una nueva columna en el dataset utilizando una secuencia lineal nativa de Java.
 
+    /* 
     
     System.out.println("#-----------------------------------------------------------------------------");
     System.out.println("   AGREGAR UNA COLUMNA AL DATAFRAME CON SECUENCIA LINEAL");
@@ -684,8 +643,6 @@ public class Main {
     System.out.println("Agregar una columna Nueva al DataFrame");
     
     String etiquetaColumnaNueva = "Columna5";
-    DataFrame df5 = new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
-    //DataFrame df5 = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     String[] datosNuevaColumna = {"Nueva1", "Nueva2","Nueva3", "Nueva4", "Nueva5", "Nueva6"};
     
     // Crear un array de Dato
@@ -698,12 +655,13 @@ public class Main {
     // Crear la nueva columna
     Columna nuevaColumna = new Columna();
     nuevaColumna.setColumna(datosArray, "S");
-    df5.AgregarColumnaNueva(etiquetaColumnaNueva, nuevaColumna);
+    df.AgregarColumnaNueva(etiquetaColumnaNueva, nuevaColumna);
     
     // Imprimir el DataFrame
     System.out.println("Impresión del DataFrame con la nueva columna agregada");
-    CsvPrinter.imprimirColumnar(df5);
+    CsvPrinter.imprimirColumnar(df);
 
+    */
     
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
