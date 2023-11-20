@@ -210,7 +210,7 @@ public class CsvPrinter {
             }
         } else {
                     String nombreColumna = df.getHeaderColumn(1);
-                    System.out.println("La columna "+ nombreColumna + " no existe en el DataFrame. Corroborar valores ingresados.");
+                    System.out.println("La columna "+ etiquetaColumna + " no existe en el DataFrame. Corroborar valores ingresados.");
         }
 
         System.out.println(" ");
