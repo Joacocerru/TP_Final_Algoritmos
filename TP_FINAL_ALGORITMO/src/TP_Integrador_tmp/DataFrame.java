@@ -463,13 +463,8 @@ public class DataFrame implements Cloneable{
 
     //---------------------------------------------------------------------------------
 
-    public void eliminarColumna(String etiquetaColumna) {
-
-        System.out.println(" ");
-        System.out.println("#-----------------------------------------------------------------------------");
-        System.out.println("   ELIMINA COLUMNA ");
-        System.out.println("#-----------------------------------------------------------------------------");
-        System.out.println(" ");
+    public void eliminarColumna(String etiquetaColumna) 
+    {
         
         int cantidadColumnas = getNroColumnas();
     
@@ -506,9 +501,6 @@ public class DataFrame implements Cloneable{
             this.dataFilas.get(i).removeColumna(posicion);
         }
         
-        System.out.println("Eliminamos la columna '" + etiquetaColumna + "' del dataframe.");
-
-
         }
         CsvPrinter.imprimirColumnar(this);
     }
@@ -519,12 +511,6 @@ public class DataFrame implements Cloneable{
     
     public void eliminarFila(String etiquetaFila)
     {
-
-        System.out.println(" ");
-        System.out.println("#-----------------------------------------------------------------------------");
-        System.out.println("   ELIMINA FILA ");
-        System.out.println("#-----------------------------------------------------------------------------");
-        System.out.println(" ");
 
         int cantidadFilas = getNroRegistros();
 
@@ -559,11 +545,9 @@ public class DataFrame implements Cloneable{
             this.dataColumnar.get(i).restarCantRegistro();
         }
         this.contarRegistros();
-        System.out.println("Eliminamos la fila '" + etiquetaFila + "' del dataframe.");
-
 
         }
-        CsvPrinter.imprimirColumnar(this);
+        
     }
 //--------------------------------------------------------------------------------      
     @Override
@@ -816,9 +800,11 @@ public class DataFrame implements Cloneable{
             
 
         } 
-        else {
+        else 
+        {
             System.out.println("Error: La columna '" + etiquetaColumnaExistente + "' no existe en el DataFrame.");
         }
+        CsvPrinter.imprimirColumnar(this);
     }
 
 
@@ -846,9 +832,7 @@ public class DataFrame implements Cloneable{
 
 
         System.out.println("Agregamos la columna Nueva '" + etiquetaColumnaNueva+ "' al final del DataFrame.");
-
-
-
+        CsvPrinter.imprimirColumnar(this);
 
     }
 
