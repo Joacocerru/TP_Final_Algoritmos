@@ -313,7 +313,8 @@ public class DataFrame implements Cloneable{
         
             System.err.println("Error al establecer el valor: " + e.getMessage());
         }
-        System.out.println(" ");
+        //System.out.println(" ");
+        CsvPrinter.imprimirColumnar(this);
     }
 
     //-----------------------------------------------------------------------------
@@ -509,6 +510,7 @@ public class DataFrame implements Cloneable{
 
 
         }
+        CsvPrinter.imprimirColumnar(this);
     }
 
 
@@ -561,6 +563,7 @@ public class DataFrame implements Cloneable{
 
 
         }
+        CsvPrinter.imprimirColumnar(this);
     }
 //--------------------------------------------------------------------------------      
     @Override
@@ -1222,4 +1225,55 @@ public class DataFrame implements Cloneable{
         CsvPrinter.imprimirPorFilas(dfSeleccionado);
 
     }
+
+    public  void valorBuscado(Object valorBuscado) { 
+
+        System.out.println(" ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println("   BUSCANDO UN VALOR EN EL DATAFRAME");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");
+        
+        Boolean buscadoNumerico = false;
+
+        try 
+        {
+            Long x = Long.parseLong(valorBuscado.toString());
+
+            buscadoNumerico = true;        
+        } 
+        catch (NumberFormatException ex)
+        {
+            buscadoNumerico = false;
+        }
+        
+        Dato valorDatoBuscado = new Dato();
+
+        if (buscadoNumerico == true)
+        {
+            Long x = Long.parseLong(valorBuscado.toString());
+
+            valorDatoBuscado = new Dato_Numerico (x);
+        }
+        else
+        {
+            String valorStr = valorBuscado.toString();
+
+            if (valorStr.equals("NA"))
+            {
+                valorDatoBuscado = new Dato_NA();
+            }
+            else if (valorStr.toUpperCase().equals("TRUE") || valorStr.toUpperCase().equals("FALSE") )
+            {
+                valorDatoBuscado = new Dato_Boolean(valorStr.toUpperCase());
+            }
+            else
+            {
+                valorDatoBuscado = new Dato_String(valorStr);
+            }
+        }
+
+        System.out.println(this.buscarValor(valorDatoBuscado));
+    }
+    //------------------------------------------------------------------------------------------------------------------------------
 }

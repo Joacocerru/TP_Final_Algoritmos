@@ -19,7 +19,6 @@ public class Presentacion {
     DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\TP_Final\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     //DataFrame df =  new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     
-    CsvPrinter.imprimirColumnar(df);
 
     ////  USER STORY 2: COPIA PROFUNDA DE LOS ELEMENTOS DE LA ESTRUCTURA TABULAR ////////////////////////////
 
@@ -123,19 +122,14 @@ public class Presentacion {
     //CsvPrinter.imprimirColumnar(df);
     CsvPrinter.imprimirPorFilas(df);
 
-    ////  USER STORY 13: BUSCAR Y FILTRAR DATOS EN LA TABLA  ////////////////////////////
+     ////  USER STORY 13: BUSCAR Y FILTRAR DATOS EN LA TABLA  ////////////////////////////
     
-    Dato_Numerico valorABuscarNumerico = new Dato_Numerico(5);  // ####
-    String resultadoBusquedaNumerica = df.buscarValor(valorABuscarNumerico);
-    System.out.println(resultadoBusquedaNumerica);
-
-    Dato_Boolean valorABuscarBoolean = new Dato_Boolean(true);
-    String resultadoBusquedaBoolean = df.buscarValor(valorABuscarBoolean);
-    System.out.println(resultadoBusquedaBoolean);
-
-    Dato_String valorABuscarString = new Dato_String("Prueba2"); 
-    String resultadoBusquedaString = df.buscarValor(valorABuscarString);
-    System.out.println(resultadoBusquedaString);
+    //    Object valorABuscar = 5;
+    Object valorABuscar = true;
+    //    Object valorABuscar = "Prueba2";
+    //    Object valorABuscar = 88;
+                        
+          df.valorBuscado(valorABuscar);
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -146,12 +140,10 @@ public class Presentacion {
     ////  USER STORY 14: ACCEDER A CELDA Y SETEAR NUEVO VALOR ////////////////////////////
     
     df.setValorDataFrame("3", "Columna2", 69);
-    CsvPrinter.imprimirColumnar(df);
 
     ////  USER STORY 15: INSERTAR UNA NUEVA COLUMNA A PARTIR DE UNA COLUMNA EXISTENTE ////////////////////////////
     
     df.clonarYAgregarColumna("Columna2", "ColumnaNueva");
-    CsvPrinter.imprimirColumnar(df);
 
     ////  USER STORY 16: CELDAS CON DATOS FALTANTES SEAN IDENTIFICADAS CON NA  ////////////////////////////
 
@@ -178,15 +170,14 @@ public class Presentacion {
     
     String[] datosNuevaColumna = {"Nueva1", "Nueva2","Nueva3", "Nueva4", "Nueva5", "Nueva6"};
     df.agregarColumnaSecuencia(df, datosNuevaColumna,"Columna5", "S"); // "S" = String 
-    CsvPrinter.imprimirColumnar(df);
 
     //// USER STORY 19: ELIMINAR COLUMNA Y/O FILA  ////////////////////////////  
     // que pasa si quiero eliminar un rango?
 
     df.eliminarColumna("Columna2");
-    CsvPrinter.imprimirColumnar(df);
+
     df.eliminarFila("2");
-    CsvPrinter.imprimirColumnar(df);
+
 
     //// USER STORY 20: AGRUPAMIENTO O GROUP BY - METODO A IMPLEMENTAR   //////////////////////////// 
 
