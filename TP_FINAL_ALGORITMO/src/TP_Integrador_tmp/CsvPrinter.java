@@ -96,8 +96,8 @@ public class CsvPrinter {
 
     // IMPRESION DF POR COLUMNAS -  Método para imprimir la visión columna --------------------
 
-
-    public static void imprimirColumnar(DataFrame df) {
+   
+    public static void imprimirColumnar(DataFrame df) { // ####
         if (df.isEmpty()) {
             System.out.println("No hay datos para imprimir en la visión columnar.");
             return;
@@ -141,7 +141,7 @@ public class CsvPrinter {
             for (int c = 0; c < df.getNroColumnas() ; c++) 
             {   
                 //String tmpEtiCol = df.ColumnArray.get(c);
-                Dato tmp = df.getValorPosicion(f, c);
+                Dato tmp = df.getValorPosicion(f, c); // ####
                 System.out.print( tmp.printValor() );
                 System.out.print("\t"+"\t");
             } 
@@ -154,18 +154,63 @@ public class CsvPrinter {
         System.out.println("");
         System.out.println("");
     }
+     
+    /*  
+    public static void imprimirColumnas(DataFrame df) {
+        if (df.isEmpty()) {
+            System.out.println("No hay datos para imprimir en la visión columnar.");
+            return;
+        }
+        int numRows = df.isEmpty() ? 0 : df.getNroRegistros(); // Número de filas
+    
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println("# Impresión por Columnas");
+        System.out.println("#-----------------------------------------------------------------------------");
+        
+        for (String fieldName: df.getAllHeaderColumn()) {
+                System.out.print("\t");
+                System.out.print(fieldName);
+            }
+            System.out.println();
+            System.out.println("--------------------------------------------------------------------------------");
+        
+        for (int f = 0; f < numRows; f++) {
+            
+            if (f == 0) {
+                for (int c = 0; c < df.getNroColumnas(); c++) {
+                    System.out.print(""+"\t");
+                    //System.out.print("Col " + (c) + ":");
+                }
+                System.out.println(""); 
+            } 
+
+                Fila fila = df.dataFilas.get(f); // Accede a la fila directamente
+                String etiqueta = fila.getEtiqueta();
+                System.out.print(etiqueta + " |"+"\t"); // Imprimir el índice de fila y la etiqueta
+
+            for (int c = 0; c < df.getNroColumnas() ; c++) 
+            {   
+                System.out.print( df.getValorPosicion(f, c).printValor() );
+                System.out.print("\t"+"\t");
+            }   
+            System.out.println();
+        }
+        System.out.println("#--------------------------------------------------------------------------");
+    }
+     */
+
 
     public static void info(DataFrame df) {
         
         System.out.println(" ");
         System.out.println("#-----------------------------------------------------------------------------");
-        System.out.println("   INFORMACIÓN GENERAL SOBRE EL DATAFRAME");
+        System.out.println("   INFORMACION GENERAL SOBRE EL DATAFRAME");
         System.out.println("#-----------------------------------------------------------------------------");
         System.out.println(" ");
         
 
-        System.out.print("Cantidad de filas: " + (df.getNroRegistros()) );
-        System.out.print("Cantidad de columnas: " + (df.getNroColumnas()) );
+        System.out.println("Cantidad de filas: " + (df.getNroRegistros()) );
+        System.out.println("Cantidad de columnas: " + (df.getNroColumnas()) );
 
         df.getEtiquetasFilas(); // Etiquetas de las filas
         df.getEtiquetasColumnas(); // Etiquetas de las columnas
@@ -210,7 +255,7 @@ public class CsvPrinter {
             }
         } else {
                     String nombreColumna = df.getHeaderColumn(1);
-                    System.out.println("La columna "+ etiquetaColumna + " no existe en el DataFrame. Corroborar valores ingresados.");
+                    System.out.println("La columna "+ nombreColumna + " no existe en el DataFrame. Corroborar valores ingresados.");
         }
 
         System.out.println(" ");
@@ -274,10 +319,14 @@ public class CsvPrinter {
 
     public static void head (DataFrame df, Integer cant){
 
+        System.out.println("Informacion de las primeras filas del DataFrame (head)");
+
         imprimirPorFilasGral(df, cant,"A");
     }
 
     public static void tail (DataFrame df, Integer cant){
+
+        System.out.println("Informacion de las ultimas filas del DataFrame (tail)");
         
         imprimirPorFilasGral(df, cant,"D");
     }
@@ -288,6 +337,10 @@ public class CsvPrinter {
 
     public static void imprimirVistaReducida(DataFrame df, List<String> etiquetasFilas, List<String> etiquetasColumnas) {
         
+        System.out.println("------------------------------------------------------------------------------------");
+        System.out.println("Impresión por pantalla de los datos dadas las etiquetas filas y columnas");
+        System.out.println("------------------------------------------------------------------------------------");
+
         // Imprimir encabezados de columnas
         for (String etiquetaColumna : etiquetasColumnas) {
             System.out.print("\t"+etiquetaColumna + " ");
@@ -307,6 +360,7 @@ public class CsvPrinter {
             System.out.println();
 
         }
+        System.out.println("------------------------------------------------------------------------------------");
     }
 
 }

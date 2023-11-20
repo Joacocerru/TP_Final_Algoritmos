@@ -20,6 +20,7 @@ public class DataFrame implements Cloneable{
     protected List<String> ColumnArray = new ArrayList<>(); // Array de Etiquetas de columnas
     protected List<String> RowArray = new ArrayList<>(); // Array de Etiquetas de columnas
     protected List<String> OriginalRowColumnArray = new ArrayList<>(); // Array de Etiquetas de columnas
+
     //------------------------------------------------------------------------------------------
     // HashMap llamado columnMap y rowMap para mapear 
     // las etiquetas de las columnas y Filas a las instancias de Columna y Fila
@@ -561,9 +562,15 @@ public class DataFrame implements Cloneable{
 
         }
     }
-//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------      
     @Override
     public DataFrame clone() {
+
+        System.out.println(" ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println("   Copia Profunda del DataFrame ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");
 
         try {
             // Clonar el objeto en sí
@@ -611,7 +618,6 @@ public class DataFrame implements Cloneable{
             throw new AssertionError();
         }
     }
-
     //--------------------------------------------------------------------------------------------------------------
     // METODO PARA DADO UN VALOR BUSCARLO EN LA ESTRUCTURA Y DEVOLVER 
     // SU POSICION (DANDO SUS ETIQUETAS)
@@ -660,8 +666,8 @@ public class DataFrame implements Cloneable{
 
         try 
         {
-                Long x = Long.parseLong(valorBuscado.toString());
-                buscadoNumerico = true;        
+            Long x = Long.parseLong(valorBuscado.toString());
+            buscadoNumerico = true;        
         } 
         catch (NumberFormatException ex)
         {
@@ -704,7 +710,7 @@ public class DataFrame implements Cloneable{
 
         // Se recorren todas las filas
         for (int i = 0; i < this.getNroRegistros(); i++) {
-            Dato valorEncontrado = this.getValorPosicion(i, tmpColumna);
+            Dato valorEncontrado = this.getValorPosicion(i, tmpColumna);  // ####
 
             if (valorDatoBuscado.getTipoDato() == valorEncontrado.getTipoDato()) 
             {
@@ -812,10 +818,10 @@ public class DataFrame implements Cloneable{
         }
     }
 
-    /* 
+
     // METODO PARA AGREGAR UNA COLUMNA CON SECUENCIA LINEAL
 
-    public static agregarColumnaSecuencia(String[] datosNuevaColumna,String etiquetaColumnaNueva, String tipoDato){
+    public void agregarColumnaSecuencia(DataFrame df, String[] datosNuevaColumna,String etiquetaColumnaNueva, String tipoDato){
 
         System.out.println(" ");
         System.out.println("#-----------------------------------------------------------------------------");
@@ -839,15 +845,15 @@ public class DataFrame implements Cloneable{
         System.out.println("Agregamos la columna Nueva '" + etiquetaColumnaNueva+ "' al final del DataFrame.");
 
 
-    }
 
-    
+
+    }
 
 
     //-----------------------------------------------------------------------------------
     // METODO PARA AGREGAR UNA COLUMNA NUEVA AL DATAFRAME
 
-    public  AgregarColumnaNueva( String etiquetaNuevaColumna, Columna columnaNueva) {
+    public static void AgregarColumnaNueva(DataFrame df, String etiquetaNuevaColumna, Columna columnaNueva) {
         
         // Verificar si la columna existente realmente existe
         //Columna columnaExistente = columnaNueva;
@@ -860,23 +866,21 @@ public class DataFrame implements Cloneable{
             columnaNueva.setEtiqueta(etiquetaNuevaColumna);
 
             // Agregar la nueva columna al DataFrame
-            dataColumnar.add(columnaNueva);
+            df.dataColumnar.add(columnaNueva);
 
             // Actualizar ColumnArray
-            ColumnArray.add(etiquetaNuevaColumna);
+            df.ColumnArray.add(etiquetaNuevaColumna);
 
             // Actualizar columnMap
-            columnMap.put(etiquetaNuevaColumna, columnaNueva);
+            df.columnMap.put(etiquetaNuevaColumna, columnaNueva);
             
-            this.contarColumnas();
+            df.contarColumnas();
 
         } 
         else {
             System.out.println("Error: La columna '" + etiquetaNuevaColumna + "' no existe en el DataFrame.");
         }
-
     }
-    */
 
     // METODO PARA GENERAR UNA VISTA REDUCIDA (SLICING)
     public DataFrame seleccionarVista(List<String> etiquetasFilas, List<String> etiquetasColumnas) {
@@ -1036,7 +1040,7 @@ public class DataFrame implements Cloneable{
                 String etiquetaPrevia = this.RowArray.get(i-1);
                 String etiquetaActual = this.RowArray.get(i);
 
-                Fila filaPrevia = this.getFilasColumnasListaEtiquetas(etiquetaPrevia, ColumnasOrden);
+                Fila filaPrevia = this.getFilasColumnasListaEtiquetas(etiquetaPrevia, ColumnasOrden); // ####
                 Fila filaActual = this.getFilasColumnasListaEtiquetas(etiquetaActual, ColumnasOrden);
                 int valorCompare = filaPrevia.compareTo(filaActual);
                 //if ( (filaPrevia.compareTo(filaActual)) > 0 )
@@ -1169,17 +1173,18 @@ public class DataFrame implements Cloneable{
     }
 
     
-    public static void  muestreo (DataFrame df, List<String> etiquetasColumnas, List<String> etiquetasFilas ){
+    public static void  vistaReducida (DataFrame df, List<String> etiquetasColumnas, List<String> etiquetasFilas ){
 
         System.out.println(" ");
         System.out.println("#-----------------------------------------------------------------------------");
-        System.out.println("   IMPRESIÓN DE UNA VISTA REDUCIDA (SLICING)");
+        System.out.println("   IMPRESION DE UNA VISTA REDUCIDA (SLICING)");
         System.out.println("#-----------------------------------------------------------------------------");
         System.out.println(" ");
 
         DataFrame vistaRed = df.seleccionarVista(etiquetasFilas, etiquetasColumnas);
-        CsvPrinter.imprimirPorFilas(vistaRed);
+
         //CsvPrinter.imprimirColumnar(vistaRed);
+        CsvPrinter.imprimirPorFilas(vistaRed);
 
     }
 
@@ -1189,8 +1194,7 @@ public class DataFrame implements Cloneable{
 
         // Calcula cuántas filas seleccionar aleatoriamente
         int totalFilas = todasLasFilas.size();
-        int filasASeleccionar = (int) Math.ceil((porcentaje / 100) * totalFilas);
-
+        int filasASeleccionar = (int) Math.ceil((porcentaje ) * totalFilas);
         // Realiza la selección aleatoria de filas
         Collections.shuffle(todasLasFilas);
         
@@ -1207,7 +1211,7 @@ public class DataFrame implements Cloneable{
 
         System.out.println(" ");
         System.out.println("#-----------------------------------------------------------------------------");
-        System.out.println("   IMPRESIÓN DE UNA VISTA REDUCIDA ALEATORIA (RANDOM SLICING)");
+        System.out.println("   IMPRESION DE UNA VISTA REDUCIDA ALEATORIA (RANDOM SLICING)");
         System.out.println("#-----------------------------------------------------------------------------");
         System.out.println(" ");
 
