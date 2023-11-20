@@ -8,8 +8,10 @@ public class Presentacion {
     
 
     // USER STORY 1: CARGAR DATOS DESDE ARCHIVO .CSV   ////////////////////////////
-    DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
+    //DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
+    DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\TP_Final\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     //DataFrame iris = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\iris.csv", ",", "S");
+    DataFrame iris = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\TP_Final\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\iris.csv", ",", "S");
 
     CsvPrinter.imprimirColumnar(df);
 
@@ -60,7 +62,7 @@ public class Presentacion {
 
     
     ////  USER STORY 10: EXPORTAR TABLA COMO CSV ////////////////////////////
-    CsvExport.exportarComoCSV(df, "C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\archivoExportado.csv");
+    CsvExport.exportarComoCSV(df, "C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\TP_Final\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\archivoExportado.csv");
 
     ////  USER STORY 11: IMPRIMIR LOS DATOS EN FORMA DE TABLA  ////////////////////////////
     CsvPrinter.imprimirColumnar(df);
