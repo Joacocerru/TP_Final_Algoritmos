@@ -125,7 +125,8 @@ public class CsvPrinter {
             if (f == 0) 
             {
                 for (int c = 0; c < df.getNroColumnas(); c++) {
-                    System.out.print(""+"\t");
+                    //System.out.print(""+"\t");
+                    System.out.print(" ");
                     //System.out.print("Col " + (c) + ":");
                 }
                 System.out.println(""); 
@@ -136,14 +137,16 @@ public class CsvPrinter {
                 //Fila fila = df.dataFilas.get(f); // Accede a la fila directamente
             String etiqueta = fila.getEtiqueta();
 
-            System.out.print(etiqueta + " |"+"\t"); // Imprimir el índice de fila y la etiqueta
+            //System.out.print(etiqueta + " |"+"\t"); // Imprimir el índice de fila y la etiqueta
+            System.out.print(etiqueta + " |");
 
             for (int c = 0; c < df.getNroColumnas() ; c++) 
             {   
                 //String tmpEtiCol = df.ColumnArray.get(c);
                 Dato tmp = df.getValorPosicion(f, c); // ####
                 System.out.print( tmp.printValor() );
-                System.out.print("\t"+"\t");
+                //System.out.print("\t"+"\t");
+                System.out.print(" ");
             } 
 
             System.out.println();
@@ -267,7 +270,7 @@ public class CsvPrinter {
 
         System.out.println(" ");
         System.out.println("#-----------------------------------------------------------------------------");
-        System.out.println("   INFORMACIÓN SOBRE FILA ELEGIDA");
+        System.out.println("   INFORMACION SOBRE FILA ELEGIDA");
         System.out.println("#-----------------------------------------------------------------------------");
         System.out.println(" ");
         
@@ -364,5 +367,3 @@ public class CsvPrinter {
     }
 
 }
-
-

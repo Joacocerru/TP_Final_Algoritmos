@@ -7,6 +7,7 @@ import java.util.List;
 public class Presentacion {
     public static void main(String[] args) {
     
+        
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // ************************************* CONSTRUCTORES *************************************************************************************
@@ -15,8 +16,8 @@ public class Presentacion {
     
     // USER STORY 1: CARGAR DATOS DESDE ARCHIVO .CSV   ////////////////////////////
      
-    //DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
-    DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\TP_Final\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
+    DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_FINAL_ALGORITMO\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
+    //DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\TP_Final\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     //DataFrame df =  new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     
 
@@ -32,13 +33,7 @@ public class Presentacion {
 
     CsvPrinter.imprimirColumnar(resultado);
     CsvPrinter.imprimirPorFilas(resultado);
-    
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // ******************************* CONSULTAS DE ESTADOS DE LA TABLA ***********************************************************
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+      
     ////  USER STORY 4: CANTIDAD DE FILAS Y COLUMNAS ////////////////////////////
     
     // Info general del dataframe
@@ -58,13 +53,7 @@ public class Presentacion {
     
     CsvPrinter.infoColumna(df, "Columna3"); 
     CsvPrinter.infoFila(df, "2"); 
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // ******************************** METODOS DE ACCESO ****************************************************************
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+ 
     ////  USER STORY 8: GENERAR UNA VISTA REDUCIDA (SLICING)  ////////////////////////////
     
     // impresión por pantalla de una vista reducida
@@ -104,13 +93,6 @@ public class Presentacion {
     
     CsvExport.exportarComoCSV(df, "C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\archivoExportado.csv");
 
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // ********************************************************  METODOS DE VISUALIZACION  ******************************************************************
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
     ////  USER STORY 11: IMPRIMIR LOS DATOS EN FORMA DE TABLA  ////////////////////////////
     
     CsvPrinter.imprimirColumnar(df);
@@ -122,21 +104,15 @@ public class Presentacion {
     //CsvPrinter.imprimirColumnar(df);
     CsvPrinter.imprimirPorFilas(df);
 
-     ////  USER STORY 13: BUSCAR Y FILTRAR DATOS EN LA TABLA  ////////////////////////////
+    
+    ////  USER STORY 13: BUSCAR Y FILTRAR DATOS EN LA TABLA  ////////////////////////////
     
     //    Object valorABuscar = 5;
     Object valorABuscar = true;
     //    Object valorABuscar = "Prueba2";
-    //    Object valorABuscar = 88;
-                        
-          df.valorBuscado(valorABuscar);
+    //    Object valorABuscar = 88;         
+    df.valorBuscado(valorABuscar);
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // **********************************************************  GESTION DE DATOS  **********************************************************************
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
     ////  USER STORY 14: ACCEDER A CELDA Y SETEAR NUEVO VALOR ////////////////////////////
     
     df.setValorDataFrame("3", "Columna2", 69);
@@ -159,13 +135,7 @@ public class Presentacion {
     ////  USER STORY 17: REALIZAR OPERACIONES SIN ERRORES EN CASO DE TENER NA  ////////////////////////////
 
     // xxxxxxx
- 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // *******************************************  GESTION DEL DATASET  *******************************************************
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
     //// USER STORY 18: INSERTAR UNA NUEVA COLUMNA UTILIZANDO SECUENCIA LINEAL NATIVA  ////////////////////////////
     
     String[] datosNuevaColumna = {"Nueva1", "Nueva2","Nueva3", "Nueva4", "Nueva5", "Nueva6"};
