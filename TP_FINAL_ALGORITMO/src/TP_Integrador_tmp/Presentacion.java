@@ -16,7 +16,9 @@ public class Presentacion {
     
     // USER STORY 1: CARGAR DATOS DESDE ARCHIVO .CSV   ////////////////////////////
      
-    DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_FINAL_ALGORITMO\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
+    //DataFrame df = new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_FINAL_ALGORITMO\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
+    DataFrame df =  new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\TP_Final\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba8.csv", ",", "S");
+    DataFrame df1 =  new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\TP_Final\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba8.csv", ",", "S");
     //DataFrame df = new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\TP_Final\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     //DataFrame df =  new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\prueba1.csv", ",", "S");
     
@@ -65,8 +67,10 @@ public class Presentacion {
     //-------------------------------------------
     
     // vista reducida del DataFrame original
-    
-    DataFrame.vistaReducida(df, new ArrayList<>(Arrays.asList("Columna1", "Columna4")), new ArrayList<>((Arrays.asList("1", "3", "5")))); 
+ 
+    List<String> etiquetasColumnas = Arrays.asList("Columna2", "Columna3");
+    List<String> etiquetasFilas = Arrays.asList("1", "3", "5"); 
+    DataFrame.vistaReducida(df, etiquetasColumnas, etiquetasFilas); // con header
     
     // vistas especiales------------------------
 
@@ -79,16 +83,23 @@ public class Presentacion {
 
     ////  USER STORY 9: FILTRO APLICADO A LOS VALORES DE LAS CELDAS (QUERY)  ////////////////////////////
  
-    DataFrame filtro = df.FiltroPorColumna("Columna2", 0, 5);  // -1 Menor que , 0 igual que, 1 Mayor que  // ####
-    DataFrame filtro2 = df.FiltroPorColumna("Columna2", -1, 3);
-    //DataFrame filtro = df.FiltroPorColumna("ColumnaNum", 1, 3);
-    //DataFrame filtro = df.FiltroPorColumna("ColumnaBoolean", 0, "True");
-    //DataFrame filtro = df.FiltroPorColumna("ColumnaPruebas", -1, "Prueba4");
+    DataFrame filtro = df1.FiltroPorColumna("Columna2", 0, 3);  // -1 Menor que , 0 igual que, 1 Mayor que  // con header
+    //DataFrame filtro = df1.FiltroPorColumna("1", 0, 3);  // -1 Menor que , 0 igual que, 1 Mayor que  // sin header
+    
+    //DataFrame filtro = df1.FiltroPorColumna("Columna2", -1, 3); // con header
+    //DataFrame filtro = df1.FiltroPorColumna("1", -1, 3); // sin header
+    
+    //DataFrame filtro = df1.FiltroPorColumna("Columna2", 1, 3); // con header
+    //DataFrame filtro = df1.FiltroPorColumna("1", 1, 3); // sin header
+
+    //DataFrame filtro = df1.FiltroPorColumna("Columna1", 0, "True"); // con header
+    //DataFrame filtro = df1.FiltroPorColumna("0", 0, "True"); // sin header
+
+    //DataFrame filtro = df1.FiltroPorColumna("Columna3", -1, "Prueba4"); // con header
+    //DataFrame filtro = df1.FiltroPorColumna("2", -1, "Prueba4"); // sin header
     
     CsvPrinter.imprimirColumnar(filtro);
-    CsvPrinter.imprimirPorFilas(filtro);
-    
-    CsvPrinter.imprimirColumnar(filtro2);
+
     ////  USER STORY 10: EXPORTAR TABLA COMO CSV ////////////////////////////
     
     CsvExport.exportarComoCSV(df, "C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\archivoExportado.csv");
@@ -99,10 +110,12 @@ public class Presentacion {
 
     ////  USER STORY 12: ORDENAR DATOS SEGÚN UNA COLUMNA  ////////////////////////////
 
-    String[] indices = {"Columna1","Columna2","Columna3"};
-    df.orderPorColumnas(indices); // ####
-    //CsvPrinter.imprimirColumnar(df);
-    CsvPrinter.imprimirPorFilas(df);
+    String[] indices = {"Columna2","Columna3","Columna4"}; // con header
+    //String[] indices = {"2","1","3"}; // sin header
+
+    df.orderPorColumnas(indices); 
+
+    CsvPrinter.imprimirColumnar(df);
 
     
     ////  USER STORY 13: BUSCAR Y FILTRAR DATOS EN LA TABLA  ////////////////////////////
@@ -115,11 +128,13 @@ public class Presentacion {
 
     ////  USER STORY 14: ACCEDER A CELDA Y SETEAR NUEVO VALOR ////////////////////////////
     
-    df.setValorDataFrame("3", "Columna2", 69);
+    df.setValorDataFrame("3", "Columna2", 69); // con header
+    //df.setValorDataFrame("3", "2", 69); // sin header
 
     ////  USER STORY 15: INSERTAR UNA NUEVA COLUMNA A PARTIR DE UNA COLUMNA EXISTENTE ////////////////////////////
     
-    df.clonarYAgregarColumna("Columna2", "ColumnaNueva");
+    df.clonarYAgregarColumna("Columna2", "ColumnaNueva"); // con header
+    //df.clonarYAgregarColumna("1", "ColumnaNueva"); // sin header
 
     ////  USER STORY 16: CELDAS CON DATOS FALTANTES SEAN IDENTIFICADAS CON NA  ////////////////////////////
 
@@ -138,21 +153,50 @@ public class Presentacion {
 
     //// USER STORY 18: INSERTAR UNA NUEVA COLUMNA UTILIZANDO SECUENCIA LINEAL NATIVA  ////////////////////////////
     
-    String[] datosNuevaColumna = {"Nueva1", "Nueva2","Nueva3", "Nueva4", "Nueva5", "Nueva6"};
-    df.agregarColumnaSecuencia(df, datosNuevaColumna,"Columna5", "S"); // "S" = String 
-
+    String[] datosNuevaColumna = {  "Nueva1", "Nueva2","Nueva3", "Nueva4", "Nueva5", "Nueva6",
+                                    "Nueva7", "Nueva8","Nueva9", "Nueva10", "Nueva11", "Nueva12",
+                                    "Nueva13", "Nueva14","Nueva15", "Nueva16", "Nueva17", "Nueva18",
+                                    "Nueva19", "Nueva20","Nueva21", "Nueva22", "Nueva23", "Nueva24"};
+    
+    //String[] datosNuevaColumna = {  "Nueva1", "Nueva2","Nueva3", "Nueva4", "Nueva5", "Nueva6"};
+    
+    df.agregarColumnaSecuencia(df, datosNuevaColumna,"NuevaColumna", "S"); // "S" = String // con header
+    //df.agregarColumnaSecuencia(df, datosNuevaColumna,"NuevaColumna", "S"); // "S" = String // sin header
+    
     //// USER STORY 19: ELIMINAR COLUMNA Y/O FILA  ////////////////////////////  
-    // que pasa si quiero eliminar un rango?
 
-    df.eliminarColumna("Columna2");
+    System.out.println(" ");
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println("   ELIMINA COLUMNA ");
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println(" ");
+    
+    //String etiquetaColumna = "Columna2"; // con header
+    String etiquetaColumna = "Columna2"; // sin header
+    
+    df.eliminarColumna(etiquetaColumna);
 
-    df.eliminarFila("2");
+    System.out.println("Eliminamos la columna '" + etiquetaColumna + "' del dataframe.");
 
+    CsvPrinter.imprimirColumnar(df);
 
+    System.out.println(" ");
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println("   ELIMINA FILA ");
+    System.out.println("#-----------------------------------------------------------------------------");
+    System.out.println(" ");
+
+    String etiquetaFila = "2";
+    
+    df.eliminarFila(etiquetaFila);
+
+    System.out.println("Eliminamos la fila '" + etiquetaFila + "' del dataframe.");
+
+    CsvPrinter.imprimirColumnar(df);
+    
     //// USER STORY 20: AGRUPAMIENTO O GROUP BY - METODO A IMPLEMENTAR   //////////////////////////// 
 
     ////  USER STORY 21: MANEJAR EXEPCIONES  - METODO A IMPLEMENTAR ////////////////////////////
-
-
 }
+//-----------------------------------------------------------------------------------------------------------
 }
