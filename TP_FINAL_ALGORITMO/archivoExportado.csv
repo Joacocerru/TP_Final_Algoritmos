@@ -1,7 +1,21 @@
-Columna1,Columna2,Columna3,Columna4
-true,1,Prueba1,PruebaA
-true,2,Prueba2,True
-false,3,Prueba3,PruebaC
-false,4,Prueba4,False
-false,5,Prueba5,False
-true,4,Prueba4,true
+Jugador,Nacionalidad,Goles,Asistencias,Worldchampion
+Kylian Mbappe,Francia,41,10,True
+Erling Haaland,Noruega,52,9,False
+Kevin De Bruyne,Belgica,23,31,False
+Karim Benzema,Francia,4,-9,False
+Vinicius Junior,Brasil,23,19,nullStr
+Julian Alvarez,Argentina,17,5,True
+Bernardo Silva,nullStr,7,6,Talse
+Emiliano Martinez,Argentina,-9,0,True
+Antoine Griezmann,Francia,23,18,True
+Diego Maradona,Argentina,32,32,True
+Kylian Mbappe,Francia,41,10,True
+Erling Haaland,Noruega,52,9,False
+Kevin De Bruyne,Belgica,23,31,False
+Karim Benzema,Francia,4,-9,False
+Vinicius Junior,Brasil,23,19,nullStr
+Julian Alvarez,Argentina,17,5,True
+Bernardo Silva,nullStr,7,6,Talse
+Emiliano Martinez,Argentina,-9,0,True
+Antoine Griezmann,Francia,23,18,True
+Leonel Messi,Argentina,32,32,True
