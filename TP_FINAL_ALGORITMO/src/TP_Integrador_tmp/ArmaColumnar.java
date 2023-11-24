@@ -28,7 +28,7 @@ public class ArmaColumnar {
                 String[] rowData = new String [_nroColumnas];
                 rowData = data.get(f);
                 String celda = rowData[c];
-                String celda2 = celda.toUpperCase();
+                String celda2 = celda.toUpperCase().trim();
 
                 if (celda.equals("")){
 
