@@ -8,13 +8,7 @@ import java.nio.file.Paths;
 
 public class CsvExport extends CsvPrinter {
 
-    public static void exportarComoCSV(DataFrame df, String NombreArchivo, String rutaArchivo) {
-
-        System.out.println(" ");
-        System.out.println("#-----------------------------------------------------------------------------");
-        System.out.println("   EXPORTAR CSV ");
-        System.out.println("#-----------------------------------------------------------------------------");
-        System.out.println(" ");
+    public static void exportarComoCSV(DataFrame df, String rutaArchivo) {
 
         if (df.isEmpty()) { // Verifica si el df esta vacio
             System.out.println("No hay datos dentro del DataFrame para exportar.");
@@ -25,9 +19,8 @@ public class CsvExport extends CsvPrinter {
         if (!Files.exists(path)) {
             System.out.println("La ruta de archivo no es válida.");
             return;
-
         } else {
-            try (FileWriter writer = new FileWriter(rutaArchivo+"\\"+NombreArchivo)) { // Usamos FileWriter
+            try (FileWriter writer = new FileWriter(rutaArchivo)) { // Usamos FileWriter
            
             // Escribir el encabezado
             int columnCount = df.getNroColumnas();
