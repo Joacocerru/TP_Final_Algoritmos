@@ -12,6 +12,9 @@ import TP_Integrador_tmp.Columna.IndiceFueraDeRangoException;
 
 import java.lang.Cloneable;
 
+    
+
+
 public class DataFrame implements Cloneable{
 
     protected List<Columna> dataColumnar = new ArrayList<>(); // ArrayList para los datos - Array de columnas
@@ -67,52 +70,67 @@ public class DataFrame implements Cloneable{
         //-------------------------------------------------------------------------------------
         // Carga la informacion de CSV en Data y genera los Headers
 
-        if (headerSN.equals("S") )
-        { CargarCsv.cargarDatosDesdeCsvConHead(header, data, csvFile, csvDelimiter);}
-        else
-        { CargarCsv.cargarDatosDesdeCsvSinHead(header, data, csvFile, csvDelimiter);}
-        
+        try {
 
-        //------------------------------------------------------------------------------------
-        // Arma la estructura columnar en dataColumnar
-        ArmaColumnar.armaDataColumnar(header, data, this.dataColumnar);
-
-        this.contarColumnas();
-        this.contarRegistros();
-
-        //------------------------------------------------------------------------------------
-        // Genera Instancias de filas y las mapea con el HASHMAP de FILAS -
-        for (int rowIndex = 0; rowIndex < this.getNroRegistros(); rowIndex++) {
-
-            Dato[] rowData = new Dato[ this.getNroColumnas()];
-            
-            for ( int colIndex = 0; colIndex < this.getNroColumnas(); colIndex++){
-
-                //Object[] rowData = data.get(rowIndex);
-                rowData[colIndex] = this.dataColumnar.get(colIndex).listaDatos[rowIndex];
+            if (headerSN.equals("S") ) { 
+            CargarCsv.cargarDatosDesdeCsvConHead(header, data, csvFile, csvDelimiter);
             }
-        
-            String etiqueta = Integer.toString(rowIndex); // Establece una etiqueta para la fila
-            Fila fila = new Fila(etiqueta, rowData); 
-            dataFilas.add(fila);
+            else{
+                CargarCsv.cargarDatosDesdeCsvSinHead(header, data, csvFile, csvDelimiter);
+            }
+            
 
-            rowMap.put(etiqueta, fila);
-            this.RowArray.add(etiqueta);
-            this.OriginalRowColumnArray.add(etiqueta);
-        }
+            //------------------------------------------------------------------------------------
+            // Arma la estructura columnar en dataColumnar
+            ArmaColumnar.armaDataColumnar(header, data, this.dataColumnar);
 
-        //------------------------------------------------------------------------------------
-        // crea instancias de Columna y las mapea utilizando las etiquetas 
-        // Crea el array de etiquetas y el maps de columnas 
+            this.contarColumnas();
+            this.contarRegistros();
 
-        for (int i = 0; i < header.size(); i++) {
+            //------------------------------------------------------------------------------------
+            // Genera Instancias de filas y las mapea con el HASHMAP de FILAS -
+            for (int rowIndex = 0; rowIndex < this.getNroRegistros(); rowIndex++) {
 
-            String etiqueta = header.get(i);
-            Columna columna = dataColumnar.get(i) ;
+                Dato[] rowData = new Dato[ this.getNroColumnas()];
+                
+                for ( int colIndex = 0; colIndex < this.getNroColumnas(); colIndex++){
 
-            columna.setEtiqueta(etiqueta);
-            columnMap.put(etiqueta, columna);
-            this.ColumnArray.add(etiqueta);
+                    //Object[] rowData = data.get(rowIndex);
+                    rowData[colIndex] = this.dataColumnar.get(colIndex).listaDatos[rowIndex];
+                }
+            
+                String etiqueta = Integer.toString(rowIndex); // Establece una etiqueta para la fila
+                Fila fila = new Fila(etiqueta, rowData); 
+                dataFilas.add(fila);
+
+                rowMap.put(etiqueta, fila);
+                this.RowArray.add(etiqueta);
+                this.OriginalRowColumnArray.add(etiqueta);
+            }
+
+            //------------------------------------------------------------------------------------
+            // crea instancias de Columna y las mapea utilizando las etiquetas 
+            // Crea el array de etiquetas y el maps de columnas 
+
+            for (int i = 0; i < header.size(); i++) {
+
+                String etiqueta = header.get(i);
+                Columna columna = dataColumnar.get(i) ;
+
+                columna.setEtiqueta(etiqueta);
+                columnMap.put(etiqueta, columna);
+                this.ColumnArray.add(etiqueta);
+            }
+
+            System.out.println("");
+            System.err.println("Se pudo cargar correctamente el dataset.");
+            System.out.println("");
+            
+        } catch (Exception e) {
+            // Manejar cualquier excepción 
+            System.out.println("");
+            System.err.println("Error al llevar a cabo la construcción del dataset. El error es " + e.getMessage());
+            System.out.println("");
         }
 
     }
@@ -313,8 +331,7 @@ public class DataFrame implements Cloneable{
         
             System.err.println("Error al establecer el valor: " + e.getMessage());
         }
-        //System.out.println(" ");
-        CsvPrinter.imprimirColumnar(this);
+        System.out.println(" ");
     }
 
     //-----------------------------------------------------------------------------
@@ -424,8 +441,6 @@ public class DataFrame implements Cloneable{
         System.out.println("#-----------------------------------------------------------------------------");
         System.out.println(" ");
 
-        System.out.print("Etiquetas de las Columnas: ");
-
         getEtiquetasColumnas(); 
     
         System.out.println(" ");
@@ -463,8 +478,7 @@ public class DataFrame implements Cloneable{
 
     //---------------------------------------------------------------------------------
 
-    public void eliminarColumna(String etiquetaColumna) 
-    {
+    public void eliminarColumna(String etiquetaColumna) {
         
         int cantidadColumnas = getNroColumnas();
     
@@ -500,9 +514,31 @@ public class DataFrame implements Cloneable{
 
             this.dataFilas.get(i).removeColumna(posicion);
         }
-        
+
         }
-        CsvPrinter.imprimirColumnar(this);
+
+    }
+
+
+    public void imprimirEliminarColumna(String etiquetaColumna) {
+        
+        System.out.println(" ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println("   ELIMINAR COLUMNA ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");
+        
+        try {
+            eliminarColumna(etiquetaColumna);
+
+            System.out.println("Eliminamos la columna '" + etiquetaColumna + "' del dataframe.");
+            System.out.println(" ");
+        }catch (Exception e) {
+            // Manejar cualquier excepción 
+            System.out.println("");
+            System.err.println("Ha ocurrido un error" + e.getMessage() + "a la hora de ejecutar el método. Por favor corroborar que los parámetros ingresados sean correctos....");
+            System.out.println("");
+        }
     }
 
 
@@ -511,7 +547,6 @@ public class DataFrame implements Cloneable{
     
     public void eliminarFila(String etiquetaFila)
     {
-
         int cantidadFilas = getNroRegistros();
 
         // Verificar si la fila existe
@@ -549,14 +584,38 @@ public class DataFrame implements Cloneable{
         }
         
     }
+
+
+     public void imprimirEliminarFila(String etiquetaFila) {
+        
+        System.out.println(" ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println("   ELIMINAR FILA ");
+        System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");
+        
+        try {
+            eliminarFila(etiquetaFila);
+
+            System.out.println("Eliminamos la Fila '" + etiquetaFila + "' del dataframe.");
+            System.out.println(" ");
+        }catch (Exception e) {
+            // Manejar cualquier excepción 
+            System.out.println("");
+            System.err.println("Ha ocurrido un error" + e.getMessage() + "a la hora de ejecutar el método. Por favor corroborar que los parámetros ingresados sean correctos....");
+            System.out.println("");
+        }
+    }
+
+
 //--------------------------------------------------------------------------------      
     @Override
     public DataFrame clone() {
 
         System.out.println(" ");
-        System.out.println("#-----------------------------------------------------------------------------");
-        System.out.println("   Copia Profunda del DataFrame ");
-        System.out.println("#-----------------------------------------------------------------------------");
+        //System.out.println("#-----------------------------------------------------------------------------");
+        //System.out.println( "COPIA PROFUNDA");
+        //System.out.println("#-----------------------------------------------------------------------------");
         System.out.println(" ");
 
         try {
@@ -644,11 +703,10 @@ public class DataFrame implements Cloneable{
 
     public  DataFrame FiltroPorColumna(String Etiquetacolumna, int operacion, Object valorBuscado) // -1 Menor que , 0 igual que, 1 Mayor que 
     {
-        
-        if (operacion !=0 && operacion !=-1 && operacion !=1){   
-            // exception
-        }
-        
+        System.out.println( "#----------------------------------------------------------");
+        System.out.println( "FILTRO SEGUN CONDICION");
+        System.out.println( "#----------------------------------------------------------");
+
         Boolean buscadoNumerico = false;
 
         try 
@@ -689,8 +747,6 @@ public class DataFrame implements Cloneable{
 
         DataFrame copiaDF = this.clone();    
 
-        //columna a controlar
-        //int tmpColumna = this.getPosicicionColumnaEtiqueta(Etiquetacolumna);
 
         Integer tmpColumna = this.getPosicicionColumnaEtiqueta(Etiquetacolumna);
 
@@ -800,11 +856,9 @@ public class DataFrame implements Cloneable{
             
 
         } 
-        else 
-        {
+        else {
             System.out.println("Error: La columna '" + etiquetaColumnaExistente + "' no existe en el DataFrame.");
         }
-        CsvPrinter.imprimirColumnar(this);
     }
 
 
@@ -818,22 +872,31 @@ public class DataFrame implements Cloneable{
         System.out.println("#-----------------------------------------------------------------------------");
         System.out.println(" ");
 
-        // Crear un array de Dato
-        Dato[] datosArray = new Dato[datosNuevaColumna.length];
+        try {
+            // Crear un array de Dato
+            Dato[] datosArray = new Dato[datosNuevaColumna.length];
 
-        for (int i = 0; i < datosNuevaColumna.length; i++) {
-            datosArray[i] = new Dato(datosNuevaColumna[i]);
+            for (int i = 0; i < datosNuevaColumna.length; i++) {
+                datosArray[i] = new Dato(datosNuevaColumna[i]);
+            }
+        
+            // Crear la nueva columna
+            Columna nuevaColumna = new Columna();
+            nuevaColumna.setColumna(datosArray, tipoDato);
+            DataFrame.AgregarColumnaNueva(df, etiquetaColumnaNueva, nuevaColumna);
+
+
+            System.out.println("Agregamos la columna Nueva '" + etiquetaColumnaNueva+ "' al final del DataFrame.");
+
+            CsvPrinter.imprimirColumnar(this);
         }
-    
-        // Crear la nueva columna
-        Columna nuevaColumna = new Columna();
-        nuevaColumna.setColumna(datosArray, tipoDato);
-        DataFrame.AgregarColumnaNueva(df, etiquetaColumnaNueva, nuevaColumna);
+        catch (Exception e) {
+            // Manejar cualquier excepción 
+            System.out.println("");
+            System.err.println("Ha ocurrido un error" + e.getMessage() + "a la hora de ejecutar el método. Por favor corroborar que los parámetros ingresados sean correctos....");
+            System.out.println("");
 
-
-        System.out.println("Agregamos la columna Nueva '" + etiquetaColumnaNueva+ "' al final del DataFrame.");
-        CsvPrinter.imprimirColumnar(this);
-
+        }
     }
 
 
@@ -944,19 +1007,22 @@ public class DataFrame implements Cloneable{
 
     public DataFrame concatenar(DataFrame otroDataFrame) 
     {    
+
+        
         // Verificar que ambos DataFrames tengan las mismas columnas
         if (!this.getAllHeaderColumn().equals(otroDataFrame.getAllHeaderColumn())) {
 
-            throw new IllegalArgumentException("Los DataFrames tienen columnas diferentes y no se pueden concatenar.");
+            throw new IllegalArgumentException("Ha ocurrido un error. Los DataFrames tienen columnas diferentes y no se pueden concatenar.");
         }
 
         // Crear una nueva instancia de DataFrame para almacenar la concatenación
 
         if (this.getNroRegistros() == 0 && otroDataFrame.getNroRegistros() == 0) 
         {
-            System.out.println("Ambas estructuras están vacías.");
+            System.out.println("Ha ocurrido un error.Ambas estructuras están vacías.");
             return this;  // Retorna una estructura vacía si ambos DataFrames están vacíos
         }
+
 
         // clonamos la primera estructura
         DataFrame nuevaEstructura = this.clone();
@@ -1169,13 +1235,21 @@ public class DataFrame implements Cloneable{
         System.out.println("#-----------------------------------------------------------------------------");
         System.out.println(" ");
 
-        DataFrame vistaRed = df.seleccionarVista(etiquetasFilas, etiquetasColumnas);
+        try {
 
-        //CsvPrinter.imprimirColumnar(vistaRed);
-        CsvPrinter.imprimirPorFilas(vistaRed);
+            DataFrame vistaRed = df.seleccionarVista(etiquetasFilas, etiquetasColumnas);
 
+            //CsvPrinter.imprimirColumnar(vistaRed);
+            CsvPrinter.imprimirPorFilas(vistaRed);
+
+        }
+        catch (Exception e) {
+            // Manejar cualquier excepción 
+            System.out.println("");
+            System.err.println("Ha ocurrido un error" + e.getMessage() + "a la hora de ejecutar el método. Por favor corroborar que los parámetros ingresados sean correctos....");
+            System.out.println("");
+        }
     }
-
     public DataFrame seleccionarFilasAleatorias(double porcentaje) {
         // Obtén la lista de etiquetas de filas completa
         List<String> todasLasFilas = new ArrayList<>(rowMap.keySet());
@@ -1203,61 +1277,85 @@ public class DataFrame implements Cloneable{
         System.out.println("#-----------------------------------------------------------------------------");
         System.out.println(" ");
 
-        DataFrame dfSeleccionado = df.seleccionarFilasAleatorias(porcentaje);
+        
+        try { 
 
-        //CsvPrinter.imprimirColumnar(dfSeleccionado); 
-        CsvPrinter.imprimirPorFilas(dfSeleccionado);
+            DataFrame dfSeleccionado = df.seleccionarFilasAleatorias(porcentaje);
+            
+            //CsvPrinter.imprimirColumnar(dfSeleccionado); 
+            CsvPrinter.imprimirPorFilas(dfSeleccionado);
+           
+        }
+        catch (Exception e) {
+            // Manejar cualquier excepción 
+            System.out.println("");
+            System.err.println("Ha ocurrido un error" + e.getMessage() + "a la hora de ejecutar el método. Por favor corroborar que los parámetros ingresados sean correctos....");
+            System.out.println("");
+           
+        }
 
     }
-
+    
     public  void valorBuscado(Object valorBuscado) { 
 
         System.out.println(" ");
         System.out.println("#-----------------------------------------------------------------------------");
-        System.out.println("   BUSCANDO UN VALOR EN EL DATAFRAME");
+        System.out.println("   BUSQUEDA DE UN VALOR EN EL DATAFRAME");
         System.out.println("#-----------------------------------------------------------------------------");
         System.out.println(" ");
         
         Boolean buscadoNumerico = false;
 
-        try 
-        {
-            Long x = Long.parseLong(valorBuscado.toString());
+        try {
 
-            buscadoNumerico = true;        
-        } 
-        catch (NumberFormatException ex)
-        {
-            buscadoNumerico = false;
-        }
-        
-        Dato valorDatoBuscado = new Dato();
-
-        if (buscadoNumerico == true)
-        {
-            Long x = Long.parseLong(valorBuscado.toString());
-
-            valorDatoBuscado = new Dato_Numerico (x);
-        }
-        else
-        {
-            String valorStr = valorBuscado.toString();
-
-            if (valorStr.equals("NA"))
+            try 
             {
-                valorDatoBuscado = new Dato_NA();
+                Long x = Long.parseLong(valorBuscado.toString());
+
+                buscadoNumerico = true;        
+            } 
+            catch (NumberFormatException ex)
+            {
+                buscadoNumerico = false;
             }
-            else if (valorStr.toUpperCase().equals("TRUE") || valorStr.toUpperCase().equals("FALSE") )
+            
+            Dato valorDatoBuscado = new Dato();
+
+            if (buscadoNumerico == true)
             {
-                valorDatoBuscado = new Dato_Boolean(valorStr.toUpperCase());
+                Long x = Long.parseLong(valorBuscado.toString());
+
+                valorDatoBuscado = new Dato_Numerico (x);
             }
             else
             {
-                valorDatoBuscado = new Dato_String(valorStr);
-            }
-        }
+                String valorStr = valorBuscado.toString();
 
-        System.out.println(this.buscarValor(valorDatoBuscado));
+                if (valorStr.equals("NA"))
+                {
+                    valorDatoBuscado = new Dato_NA();
+                }
+                else if (valorStr.toUpperCase().equals("TRUE") || valorStr.toUpperCase().equals("FALSE") )
+                {
+                    valorDatoBuscado = new Dato_Boolean(valorStr.toUpperCase());
+                }
+                else
+                {
+                    valorDatoBuscado = new Dato_String(valorStr);
+                }
+            }
+
+            System.out.println(this.buscarValor(valorDatoBuscado));
+        } 
+        catch (Exception e) {
+            // Manejar cualquier excepción 
+            System.out.println("");
+            System.err.println("Ha ocurrido un error" + e.getMessage() + "a la hora de ejecutar el método. Por favor corroborar que los parámetros ingresados sean correctos....");
+            System.out.println("");
+
+        }
+ 
     }
-    //------------------------------------------------------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------------------------------------------------------------
 }

@@ -11,198 +11,149 @@ public class CsvPrinter {
 
         imprimirPorFilasGral(df, df.getNroRegistros(), "A");
     }
-
-    private static void imprimirPorFilasGral(DataFrame df, Integer tope, String Orden){ // Orden -> A (Ascend) D (Desc)
-        
+    public static void imprimirPorFilasGral(DataFrame df, Integer tope, String Orden){
+    
         if (df.isEmpty()) {
             System.out.println("No hay datos para imprimir en la visión por filas.");
             return;
         }
-
-
+    
         if (tope > df.getNroRegistros()) {
             System.out.println("Error: La cantidad de filas a imprimir es mayor que la cantidad total de filas en el DataFrame.");
             return;
         }
-
+    
         // Imprimir el encabezado
-        System.out.println("#-----------------------------------------------------------------------------");
-        System.out.println("# Impresión por Filas");
-        System.out.println("#-----------------------------------------------------------------------------");
-
         
-        for (String fieldName: df.getAllHeaderColumn()) {
-            System.out.print("\t");
-            System.out.print(fieldName);
+        System.out.print("   ");
+    
+        for (String fieldName : df.getAllHeaderColumn()) {
+            System.out.print(String.format("%-" + (fieldName.length() + 2) + "s", fieldName));
         }
-        
-
+    
         System.out.println();
         System.out.println("--------------------------------------------------------------------------------");
     
-        
         // Imprimir los datos
-            
         Integer limite = 0;
         if (tope > df.getNroRegistros())
             limite = df.getNroRegistros();
         else
             limite = tope;
-
-        if (Orden == "A"){
-            
-            for (int i=0; i < limite; i++){
-                //for (String etiqueta : df.getAllHeaderRows())
-                String etiqueta = df.getHeaderRows(i); 
-                System.out.print(etiqueta +" |"+"\t"); // Imprimir etiqueta de fila       
-                Fila fila = df.getFilaPorEtiqueta(etiqueta); // Obtener la fila correspondiente
-                
-                
+    
+        if (Orden.equals("A")){
+            for (int i = 0; i < limite; i++) {
+                String etiqueta = df.getHeaderRows(i);
+                System.out.print(etiqueta + " |" + " ");
+                Fila fila = df.getFilaPorEtiqueta(etiqueta);
+    
                 for (int c = 0; c < df.getNroColumnas(); c++) {
-                    System.out.print(fila.getDato(c) +"\t"+"\t");
+                    String dato = fila.getDato(c).printValor();
+                    String etiquetaColumna = df.getAllHeaderColumn().get(c);
+                    int espacio = Math.max(etiquetaColumna.length(), dato.length()) + 3;
+                    System.out.print(String.format("%-" + espacio + "s", dato));
                 }
-                
-
+    
                 System.out.println();
-            }          
-        
-
-            System.out.println("#-------------------------------------------------------------------------------");
-
-        }
-        else{
-            limite = df.getNroRegistros()-tope;
-                
-
-            for (int i=limite; i < df.getNroRegistros(); i++){
-                //for (String etiqueta : df.getAllHeaderRows()) 
-                String etiqueta = df.getHeaderRows(i); 
-                System.out.print(etiqueta +" |"+"\t"); // Imprimir etiqueta de fila       
-                Fila fila = df.getFilaPorEtiqueta(etiqueta); // Obtener la fila correspondiente  
-                
-                
-                for (int c = 0; c < df.getNroColumnas(); c++) {
-                    System.out.print(fila.getDato(c) +"\t");
-                }
-
-                System.out.println();
-
             }
-
+    
             System.out.println("#-------------------------------------------------------------------------------");
-
-        }
-    }
-
-    // IMPRESION DF POR COLUMNAS -  Método para imprimir la visión columna --------------------
-
-   
-    public static void imprimirColumnar(DataFrame df) { // ####
-        if (df.isEmpty()) {
-            System.out.println("No hay datos para imprimir en la visión columnar.");
-            return;
-        }
-
-        int numRows = df.isEmpty() ? 0 : df.getNroRegistros(); // Número de filas
+        } else {
+            limite = df.getNroRegistros() - tope;
     
-        System.out.println("#-----------------------------------------------------------------------------");
-        System.out.println("# Impresión por Columnas");
-        System.out.println("#-----------------------------------------------------------------------------");
-        
-        // IMPRIME HEADER
-        for (String fieldName: df.getAllHeaderColumn()) {
-            
-            System.out.print("\t");
-            System.out.print(fieldName);
-        
-        }
-        
-        System.out.println();
-        System.out.println("--------------------------------------------------------------------------------");
-
-        for (int f = 0; f < numRows; f++) // Recorre Filas 
-        {    
-            if (f == 0) 
-            {
+            for (int i = limite; i < df.getNroRegistros(); i++) {
+                String etiqueta = df.getHeaderRows(i);
+                System.out.print(etiqueta + " |" + " ");
+                Fila fila = df.getFilaPorEtiqueta(etiqueta);
+    
                 for (int c = 0; c < df.getNroColumnas(); c++) {
-                    //System.out.print(""+"\t");
-                    System.out.print(" ");
-                    //System.out.print("Col " + (c) + ":");
+                    String dato = fila.getDato(c).printValor();
+                    String etiquetaColumna = df.getAllHeaderColumn().get(c);
+                    int espacio = Math.max(etiquetaColumna.length(), dato.length()) + 3;
+                    System.out.print(String.format("%-" + espacio + "s", dato));
                 }
-                System.out.println(""); 
-            } 
-
-            // ACCESO ORDERNADO A LAS FILAS
-            Fila fila = df.rowMap.get( df.RowArray.get(f) ); // Fila Segun orden Actual
-                //Fila fila = df.dataFilas.get(f); // Accede a la fila directamente
-            String etiqueta = fila.getEtiqueta();
-
-            //System.out.print(etiqueta + " |"+"\t"); // Imprimir el índice de fila y la etiqueta
-            System.out.print(etiqueta + " |");
-
-            for (int c = 0; c < df.getNroColumnas() ; c++) 
-            {   
-                //String tmpEtiCol = df.ColumnArray.get(c);
-                Dato tmp = df.getValorPosicion(f, c); // ####
-                System.out.print( tmp.printValor() );
-                //System.out.print("\t"+"\t");
-                System.out.print(" ");
-            } 
-
-            System.out.println();
-
+    
+                System.out.println();
+            }
+    
+            System.out.println("#-------------------------------------------------------------------------------");
         }
-
-        System.out.println("#--------------------------------------------------------------------------");
-        System.out.println("");
-        System.out.println("");
     }
-     
-    /*  
-    public static void imprimirColumnas(DataFrame df) {
+
+    public static void imprimirColumnar(DataFrame df) {
         if (df.isEmpty()) {
             System.out.println("No hay datos para imprimir en la visión columnar.");
             return;
         }
-        int numRows = df.isEmpty() ? 0 : df.getNroRegistros(); // Número de filas
     
+        int numRows = df.isEmpty() ? 0 : df.getNroRegistros(); // Número de filas
+        //System.out.println("#-----------------------------------------------------------------------------");
+        System.out.println(" ");
         System.out.println("#-----------------------------------------------------------------------------");
-        System.out.println("# Impresión por Columnas");
-        System.out.println("#-----------------------------------------------------------------------------");
-        
-        for (String fieldName: df.getAllHeaderColumn()) {
+    
+        try {
+            // Obtener la longitud máxima de cada columna
+            int[] maxLengths = new int[df.getNroColumnas()];
+            for (int c = 0; c < df.getNroColumnas(); c++) {
+                int maxLength = df.getAllHeaderColumn().get(c).length();
+                for (int f = 0; f < numRows; f++) {
+                    Dato tmp = df.getValorPosicion(f, c);
+                    String value = (tmp != null) ? tmp.printValor() : "Valor nulo";
+                    maxLength = Math.max(maxLength, value.length());
+                }
+                maxLengths[c] = maxLength;
+            }
+    
+            // IMPRIME HEADER
+            for (int c = 0; c < df.getNroColumnas(); c++) {
+                String fieldName = df.getAllHeaderColumn().get(c);
+                if (c == 0){
+                System.out.print("     ");
+                }
+                System.out.print(String.format("%-" + (maxLengths[c] + 1) + "s", fieldName));
                 System.out.print("\t");
-                System.out.print(fieldName);
             }
+    
             System.out.println();
             System.out.println("--------------------------------------------------------------------------------");
-        
-        for (int f = 0; f < numRows; f++) {
-            
-            if (f == 0) {
-                for (int c = 0; c < df.getNroColumnas(); c++) {
-                    System.out.print(""+"\t");
-                    //System.out.print("Col " + (c) + ":");
-                }
-                System.out.println(""); 
-            } 
-
-                Fila fila = df.dataFilas.get(f); // Accede a la fila directamente
+    
+            for (int f = 0; f < numRows; f++) // Recorre Filas
+            {
+                // ACCESO ORDERNADO A LAS FILAS
+                Fila fila = df.rowMap.get(df.RowArray.get(f)); // Fila Segun orden Actual
+    
                 String etiqueta = fila.getEtiqueta();
-                System.out.print(etiqueta + " |"+"\t"); // Imprimir el índice de fila y la etiqueta
-
-            for (int c = 0; c < df.getNroColumnas() ; c++) 
-            {   
-                System.out.print( df.getValorPosicion(f, c).printValor() );
-                System.out.print("\t"+"\t");
-            }   
-            System.out.println();
+                if (f < 10){
+                System.out.print(String.format("%s  | ", etiqueta)); // Imprimir el índice de fila y la etiqueta
+                }else{
+                System.out.print(String.format("%s | ", etiqueta)); //
+                }
+                for (int c = 0; c < df.getNroColumnas(); c++) {
+                    Dato tmp = df.getValorPosicion(f, c);
+                    String value = (tmp != null) ? tmp.printValor() : "Valor nulo";
+                    /* 
+                    if (df.getAllHeaderColumn().get(c).equals("Worldchampion")) {
+                        System.out.print("\t");
+                        System.out.print(String.format("%-" + (maxLengths[c] + 1) + "s", value));
+                        System.out.print("\t");
+                    } else {
+                        System.out.print(String.format("%-" + (maxLengths[c] + 1) + "s", value));
+                        System.out.print("\t");
+                    }*/
+                    System.out.print(String.format("%-" + (maxLengths[c] + 1) + "s", value));
+                    System.out.print("\t");
+                }
+    
+                System.out.println();
+            }
+        } catch (Exception e) {
+            // Manejar cualquier excepción
+            System.out.println("");
+            System.err.println("Ha ocurrido un error a la hora de ejecutar el método. Por favor corroborar que los parámetros ingresados sean correctos....");
+            System.out.println("");
         }
-        System.out.println("#--------------------------------------------------------------------------");
     }
-     */
-
-
+     
     public static void info(DataFrame df) {
         
         System.out.println(" ");
@@ -210,24 +161,31 @@ public class CsvPrinter {
         System.out.println("   INFORMACION GENERAL SOBRE EL DATAFRAME");
         System.out.println("#-----------------------------------------------------------------------------");
         System.out.println(" ");
+
+
+        try {
+
+            System.out.println("Cantidad de filas: " + (df.getNroRegistros()) );
+            System.out.println("Cantidad de columnas: " + (df.getNroColumnas()) );
+
+            df.getEtiquetasFilas(); // Etiquetas de las filas
+            df.getEtiquetasColumnas(); // Etiquetas de las columnas
         
+            System.out.print("Tipo de datos de las columnas: " );
+            for (int i= 0; i < df.getNroColumnas(); i++){
 
-        System.out.println("Cantidad de filas: " + (df.getNroRegistros()) );
-        System.out.println("Cantidad de columnas: " + (df.getNroColumnas()) );
-
-        df.getEtiquetasFilas(); // Etiquetas de las filas
-        df.getEtiquetasColumnas(); // Etiquetas de las columnas
-    
-
-    
-        System.out.print("Tipo de datos de las columnas: " );
-        for (int i= 0; i < df.getNroColumnas(); i++){
-
-            System.out.print(df.getColumna(i).getTipoDato() + "\t");
+                System.out.print(df.getColumna(i).getTipoDato() + "\t");
+            }
+            System.out.println(" ");
+            System.out.print("Cantidad de dato NA: " + (df.CantidadNA()) );
+            System.out.println();
+        } 
+        catch (Exception e) {
+            // Manejar cualquier excepción 
+            System.out.println("");
+            System.err.println("Ha ocurrido un error" + e.getMessage() + "a la hora de ejecutar el método. Por favor corroborar que los parámetros ingresados sean correctos....");
+            System.out.println("");
         }
-        System.out.println(" ");
-        System.out.print("Cantidad de dato NA: " + (df.CantidadNA()) );
-        System.out.println();
     }
 
     //IMPRIMIR INFO DE COLUMNA ELEGIDA POR ETIQUETA
@@ -235,31 +193,44 @@ public class CsvPrinter {
 
         System.out.println(" ");
         System.out.println("#-----------------------------------------------------------------------------");
-        System.out.println("   INFORMACIÓN SOBRE COLUMNA ELEGIDA");
+        System.out.println("   INFORMACION SOBRE COLUMNA ELEGIDA");
         System.out.println("#-----------------------------------------------------------------------------");
         System.out.println(" ");    
 
-        Columna columnaNombre = df.getColumnaPorEtiqueta( etiquetaColumna);
-    
-        if (columnaNombre != null) {
-    
-            String nombreColumna = columnaNombre.getEtiqueta(); // obtengo etiqueta de la columna 
-            int cantidadDatos = columnaNombre.getCantDatos(); // obtengo la cantidad de datos de la columna  
-            String tipoDato = columnaNombre.getTipoDato(); // obtengo el tipo de dato de la columna 
-             
-            System.out.println("Etiqueta de la Columna selecionada: " + nombreColumna);
-            System.out.println("Tipo de Dato de la Columna '" + nombreColumna + "': " + tipoDato);
-            System.out.println("Cantidad de Datos en la Columna '" + nombreColumna + "': " + cantidadDatos);
-            System.out.println("Datos de la Columna '"+ nombreColumna + "':");
-    
-            for (int i = 0; i < cantidadDatos; i++) {
-                Dato dato3 = columnaNombre.getDato(i);
-                System.out.println(dato3.getDato());
+        try {
+
+            Columna columnaNombre = df.getColumnaPorEtiqueta( etiquetaColumna);
+        
+            if (columnaNombre != null) {
+                
+                String nombreColumna = columnaNombre.getEtiqueta(); // obtengo etiqueta de la columna 
+                int cantidadDatos = columnaNombre.getCantDatos(); // obtengo la cantidad de datos de la columna  
+                String tipoDato = columnaNombre.getTipoDato(); // obtengo el tipo de dato de la columna           
+
+                System.out.println("Etiqueta de la Columna selecionada: " + nombreColumna);
+                System.out.println("Tipo de Dato de la Columna '" + nombreColumna + "': " + tipoDato);
+                System.out.println("Cantidad de Datos en la Columna '" + nombreColumna + "': " + cantidadDatos);
+                System.out.println("Datos de la Columna '"+ nombreColumna + "':");
+        
+                for (int i = 0; i < cantidadDatos; i++) {
+                    Dato dato3 = columnaNombre.getDato(i);
+                    System.out.print(dato3.getDato()+", ");
+                }
+
+            } else {
+                        String nombreColumna = df.getHeaderColumn(1);
+                        System.out.println("La columna "+ nombreColumna + " no existe en el DataFrame. Corroborar valores ingresados.");
             }
-        } else {
-                    String nombreColumna = df.getHeaderColumn(1);
-                    System.out.println("La columna "+ nombreColumna + " no existe en el DataFrame. Corroborar valores ingresados.");
+
+
+        } catch (Exception e) {
+            // Manejar cualquier excepción 
+            System.out.println("");
+            System.err.println("Ha ocurrido un error" + e.getMessage() + "a la hora de ejecutar el método. Por favor corroborar que los parámetros ingresados sean correctos....");
+            System.out.println("");
+
         }
+
 
         System.out.println(" ");
     
@@ -273,6 +244,8 @@ public class CsvPrinter {
         System.out.println("   INFORMACION SOBRE FILA ELEGIDA");
         System.out.println("#-----------------------------------------------------------------------------");
         System.out.println(" ");
+
+        try {
         
         Fila FilaNombre = df.getFilaPorEtiqueta(etiquetaFila);
 
@@ -293,6 +266,16 @@ public class CsvPrinter {
 
             System.out.println("La fila con etiqueta '" + etiquetaFila + "' no existe en el DataFrame. Corrobore los datos ingresados.");
         }
+
+        }
+        catch (Exception e) {
+            // Manejar cualquier excepción 
+            System.out.println("");
+            System.err.println("Ha ocurrido un error" + e.getMessage() + "a la hora de ejecutar el método. Por favor corroborar que los parámetros ingresados sean correctos....");
+            System.out.println("");
+
+        }
+
 
         System.out.println(" ");
 
@@ -322,14 +305,18 @@ public class CsvPrinter {
 
     public static void head (DataFrame df, Integer cant){
 
-        System.out.println("Informacion de las primeras filas del DataFrame (head)");
+        System.out.println(" ");
 
+        System.out.println("Informacion de las primeras filas (head)");
+        System.out.println("#-------------------------------------------------------");
         imprimirPorFilasGral(df, cant,"A");
     }
 
     public static void tail (DataFrame df, Integer cant){
 
-        System.out.println("Informacion de las ultimas filas del DataFrame (tail)");
+        System.out.println(" ");
+        System.out.println("#-------------------------------------------------------");
+        System.out.println("Informacion de las ultimas filas (tail)");
         
         imprimirPorFilasGral(df, cant,"D");
     }
@@ -341,29 +328,54 @@ public class CsvPrinter {
     public static void imprimirVistaReducida(DataFrame df, List<String> etiquetasFilas, List<String> etiquetasColumnas) {
         
         System.out.println("------------------------------------------------------------------------------------");
-        System.out.println("Impresión por pantalla de los datos dadas las etiquetas filas y columnas");
+        System.out.println("Impresión por pantalla de los datos dadas las etiquetas fila y columna");
         System.out.println("------------------------------------------------------------------------------------");
-
-        // Imprimir encabezados de columnas
-        for (String etiquetaColumna : etiquetasColumnas) {
-            System.out.print("\t"+etiquetaColumna + " ");
+ 
+    try {
+        // Obtener la longitud máxima de cada columna
+        int[] maxLengths = new int[etiquetasColumnas.size()];
+        for (int c = 0; c < etiquetasColumnas.size(); c++) {
+            int maxLength = etiquetasColumnas.get(c).length();
+            for (String etiquetaFila : etiquetasFilas) {
+                Dato tmp = df.getValor(etiquetaFila, etiquetasColumnas.get(c));
+                String value = (tmp != null) ? tmp.printValor() : "Valor nulo";
+                maxLength = Math.max(maxLength, value.length());
+            }
+            maxLengths[c] = maxLength;
         }
 
-        System.out.println();
+        // Imprimir encabezados de columnas
+        for (int c = 0; c < etiquetasColumnas.size(); c++) {
+            String etiquetaColumna = etiquetasColumnas.get(c);
+            System.out.print(String.format("%-" + (maxLengths[c] + 1) + "s", "    " + etiquetaColumna));
+        }
+        
+        System.out.println(); // Agrega un salto de línea después de imprimir las etiquetas de las columnas
 
         // Imprimir filas
         for (String etiquetaFila : etiquetasFilas) {
-            System.out.print(etiquetaFila + " |"+"\t");
+            System.out.print(String.format("%s |", etiquetaFila));
 
-            for (String etiquetaColumna : etiquetasColumnas) {
-                Dato valor = df.getValor(etiquetaFila, etiquetaColumna);
-                System.out.print(valor + "\t"+ "\t");
+            for (int c = 0; c < etiquetasColumnas.size(); c++) {
+                Dato valor = df.getValor(etiquetaFila, etiquetasColumnas.get(c));
+                String value = (valor != null) ? valor.printValor() : "Valor nulo";
+                System.out.print(String.format("%-" + (maxLengths[c] + 1) + "s", value));
+                System.out.print("\t");
             }
 
             System.out.println();
-
         }
+
         System.out.println("------------------------------------------------------------------------------------");
+
+    } catch (Exception e) {
+        // Manejar cualquier excepción 
+        System.out.println("");
+        System.err.println("Ha ocurrido un error" + e.getMessage() + "a la hora de ejecutar el método. Por favor corroborar que los parámetros ingresados sean correctos....");
+        System.out.println("");
     }
+}
 
 }
+
+
