@@ -76,6 +76,8 @@ public class Presentacion {
 
     DataFrame.muestreoAleatorio(df, 0.5);  
 
+///-----------------------------------------------------------------------------------------------------------
+///-----------------------------------------------------------------------------------------------------------
     ////  USER STORY 9: FILTRO APLICADO A LOS VALORES DE LAS CELDAS (QUERY)  /////////////////////////////////////////////////////////////////////////////////////
  
     DataFrame filtro = df.FiltroPorColumna("Goles", 0, 23);  // -1 Menor que , 0 igual que, 1 Mayor que  // con header   ####
@@ -83,6 +85,9 @@ public class Presentacion {
     
     DataFrame filtro1 = df1.FiltroPorColumna("Asistencias", -1, 15);  // -1 Menor que , 0 igual que, 1 Mayor que  // sin header
     CsvPrinter.imprimirColumnar(filtro1);
+
+    DataFrame filtro2 = df1.FiltroPorColumna("Worldchampion", 0, "True");  // -1 Menor que , 0 igual que, 1 Mayor que  // sin header
+    CsvPrinter.imprimirColumnar(filtro2);
 
     ////  USER STORY 13: BUSCAR Y FILTRAR DATOS EN LA TABLA  /////////////////////////////////////////////////////////////////////////////////////
     
