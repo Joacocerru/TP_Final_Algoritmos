@@ -12,9 +12,9 @@ public class Presentacion {
     
     //DataFrame df =  new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_FINAL_ALGORITMO\\TP_FINAL_ALGORITMO\\jugadores.csv", ",", "S");
     //DataFrame df1 =  new DataFrame("C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_FINAL_ALGORITMO\\TP_FINAL_ALGORITMO\\jugadores2.csv", ",", "S");
-    DataFrame df =  new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\jugadores.csv", ",", "S");
-    DataFrame df1 =  new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\jugadores2.csv", ",", "S");
-    DataFrame df2 =  new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\jugadores2.csv", ",", "S");
+    DataFrame df =  new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\TP_Final\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\jugadores.csv", ",", "S");
+    DataFrame df1 =  new DataFrame("C:\\Documentos\\n67745\\Unsam\\Algoritmos 1\\Java\\TP_Final\\TP_Final_Algoritmos\\TP_FINAL_ALGORITMO\\jugadores2.csv", ",", "S");
+    //DataFrame df2 =  new DataFrame("C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\jugadores2.csv", ",", "S");
     
     ////  USER STORY 11: IMPRIMIR LOS DATOS EN FORMA DE TABLA  /////////////////////////////////////////////////////////////////////////////////////
     
@@ -76,6 +76,7 @@ public class Presentacion {
 
     DataFrame.muestreoAleatorio(df, 0.5);  
 
+    ////--------------------------------------------------------------------------------------------------
     ////  USER STORY 9: FILTRO APLICADO A LOS VALORES DE LAS CELDAS (QUERY)  /////////////////////////////////////////////////////////////////////////////////////
  
     DataFrame filtro = df.FiltroPorColumna("Goles", 0, 23);  // -1 Menor que , 0 igual que, 1 Mayor que  // con header   ####
