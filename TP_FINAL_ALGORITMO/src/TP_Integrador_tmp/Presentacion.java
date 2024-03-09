@@ -149,7 +149,7 @@ public class Presentacion {
     
     ////  USER STORY 10: EXPORTAR TABLA COMO CSV /////////////////////////////////////////////////////////////////////////////////////
     
-    CsvExport.exportarComoCSV(df4,"archivoExportado.csv","C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\");
+    CsvExport.exportarComoCSV(df4,"archivoExportadoNuevo.csv","C:\\Users\\Hernan\\Desktop\\TP_FINAL_ALGORITMO\\");
     //CsvExport.exportarComoCSV(df, "C:\\Users\\Valentín\\OneDrive\\ESTUDIOS\\UNSAM\\ALGORITMOS\\TP_FINAL_ALGORITMO\\TP_FINAL_ALGORITMO\\archivoExportado.csv");
 
     ////  USER STORY 12: ORDENAR DATOS SEGÚN UNA COLUMNA  /////////////////////////////////////////////////////////////////////////////////////
